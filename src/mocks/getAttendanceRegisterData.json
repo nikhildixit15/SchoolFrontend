@@ -1,0 +1,294 @@
+[
+    {
+        "id": 1,
+        "studentId": "234",
+        "name": "Asheesh Tiwari",
+        "fatherName": "Vinod Tiwari",
+        "motherName": "Kusum Tiwari",
+        "adarNo": "42143546456456",
+        "class": "||-A",
+        "dob": "28-03-1992",
+        "sex": "MALE",
+        "address": "Saraymeera, Kannauj",
+        "userName": "asheesh",
+        "password": "1234",
+        "rollNumber": "11",
+        "mobileNumber": "9897931122",
+        "attendanceArr": [
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "holiday",
+                "absentType": "Holiday"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "sunday",
+                "absentType": "Sunday"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "absent",
+                "absentType": "leave"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "absent",
+                "absentType": "leave"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            }
+        ],
+        "totalWorking": 22,
+        "totalAttendance": 19,
+        "pm": 0,
+        "gt": 19
+    },
+    {
+        "id": 1,
+        "studentId": "456",
+        "name": "Vinay Kumar",
+        "fatherName": "Vineet Kumar",
+        "motherName": "Bavita Kumari",
+        "adarNo": "42143546456456",
+        "class": "||-A",
+        "dob": "28-03-1992",
+        "sex": "MALE",
+        "address": "Saraymeera, Kannauj",
+        "userName": "asheesh",
+        "password": "1234",
+        "rollNumber": "11",
+        "mobileNumber": "9897931122",
+        "attendanceArr": [
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "holiday",
+                "absentType": "Holiday"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "sunday",
+                "absentType": "Sunday"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "absent",
+                "absentType": "leave"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            },
+            {
+                "attendanceStatus": "absent",
+                "absentType": "leave"
+            },
+            {
+                "attendanceStatus": "present",
+                "absentType": "NA"
+            }
+        ],
+        "totalWorking": 22,
+        "totalAttendance": 19,
+        "pm": 0,
+        "gt": 19
+    }
+]

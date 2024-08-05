@@ -8,6 +8,8 @@ import departmentList from "./getDepartmentList.json";
 import studentAttendanceList from "./getStudentAttendance.json";
 import classwiseAttendanceList from "./getClasswiseAttendance.json";
 import datewiseAttendanceList from "./getDatewiseAttendance.json";
+import attendanceRegisterData from "./getAttendanceRegisterData.json";
+import eventList from "./getEventList.json";
 
 export {
   profileData,
@@ -19,4 +21,6 @@ export {
   studentAttendanceList,
   classwiseAttendanceList,
   datewiseAttendanceList,
+  attendanceRegisterData,
+  eventList
 };

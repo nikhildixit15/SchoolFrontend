@@ -77,7 +77,37 @@ function MMSNavbar() {
                 <Link href="/pages/staff/staffStrength">Absence Logs</Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link href="/pages/staff/staffStrength">Student Register</Link>
+                <Link href="/pages/attendance/stu/attendanceRegister">
+                  Student Register
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+
+            <NavDropdown title="Academic" id="collapsible-nav-dropdown">
+              <NavDropdown.Item>
+                <Link href="/pages/academic/activities">Activities</Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/attendance/stu/attendanceClasswise">
+                  Attendance ClassWise
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/attendance/stu/attendanceDatewise">
+                  Attendance DateWise
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/staff/staffStrength">Absence Logs</Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/attendance/stu/attendanceRegister">
+                  Student Register
+                </Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">

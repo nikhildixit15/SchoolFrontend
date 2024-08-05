@@ -1,3 +1,40 @@
+export const months = {
+  jan: "January",
+  feb: "February",
+  mar: "March",
+  Apr: "April",
+  may: "May",
+  Jun: "June",
+  jul: "July",
+  aug: "August",
+  sep: "September",
+  oct: "October",
+  nov: "November",
+  dec: "December",
+};
+
+export const monthList = [
+  { monthName: "January", monthCount: 0 },
+  { monthName: "February", monthCount: 1 },
+  { monthName: "March", monthCount: 2 },
+  { monthName: "April", monthCount: 3 },
+  { monthName: "May", monthCount: 4 },
+  { monthName: "June", monthCount: 5 },
+  { monthName: "July", monthCount: 6 },
+  { monthName: "August", monthCount: 7 },
+  { monthName: "September", monthCount: 8 },
+  { monthName: "October", monthCount: 9 },
+  { monthName: "November", monthCount: 10 },
+  { monthName: "December", monthCount: 11 },
+];
+
+export const attendanceStatus = {
+  present: "P",
+  absent: "A",
+  holiday: "H",
+  sunday: "S",
+};
+
 export const departmentFilterOptions = [
   {
     label: "Admin",

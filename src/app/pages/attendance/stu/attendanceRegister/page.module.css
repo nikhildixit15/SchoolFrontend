@@ -1,0 +1,14 @@
+.present {
+  background-color: rgb(134, 177, 229) !important;
+}
+.absent {
+  background-color: rgb(168, 45, 23) !important;
+}
+
+.holiday {
+  background-color: aqua !important;
+}
+
+.sunday {
+  background-color: aqua !important;
+}

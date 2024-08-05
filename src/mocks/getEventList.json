@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "description": "Mahavir Jayanti",
+        "classes": [
+            "Class-|",
+            "Class-||",
+            "Class-|||",
+            "Class-|V",
+            "Class-V"
+        ],
+        "eventDate": "04-04-2024"
+    },
+    {
+        "id": 2,
+        "description": "Ambedkar Jayanti",
+        "classes": [
+            "Class-|",
+            "Class-||",
+            "Class-|||",
+            "Class-|V",
+            "Class-V"
+        ],
+        "eventDate": "11-04-2024"
+    },
+    {
+        "id": 3,
+        "description": "Buddha Purnima",
+        "classes": [
+            "Class-|",
+            "Class-||",
+            "Class-|||",
+            "Class-|V",
+            "Class-V"
+        ],
+        "eventDate": "05-05-2024"
+    }
+]
