@@ -1,0 +1,17 @@
+.description {
+  font-size: 0.85rem;
+  max-width: var(--max-width);
+  width: 100%;
+  z-index: 2;
+  font-family: var(--font-mono);
+}
+
+.profileContainer {
+  background-color: antiquewhite;
+  min-width: 35%;
+}
+
+.userProfileRowItem {
+  margin-left: 20px;
+  margin-right: 20px;
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "className": "Play Group",
+    "sec": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 2,
+    "className": "Class 1",
+    "sec": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 3,
+    "className": "Class 2",
+    "sec": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 4,
+    "className": "Class 3",
+    "sec": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 5,
+    "className": "Class 4",
+    "sec": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 6,
+    "className": "Class 5",
+    "sec": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": 7,
+    "className": "Class 6",
+    "sec": [
+      "A",
+      "B"
+    ]
+  }
+]

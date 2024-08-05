@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "studentId": "234",
+        "name": "Asheesh Tiwari",
+        "fatherName": "Vinod Tiwari",
+        "motherName": "Kusum Tiwari",
+        "adarNo": "42143546456456",
+        "class": "||-A",
+        "dob": "28-03-1992",
+        "sex": "MALE",
+        "address": "Saraymeera, Kannauj",
+        "userName": "asheesh",
+        "password": "1234",
+        "rollNumber": "11",
+        "mobileNumber": "9897931122"
+    }
+]

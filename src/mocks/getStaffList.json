@@ -1,0 +1,47 @@
+[
+    {
+        "empCode": 119,
+        "name": "Vijay Kumar",
+        "department": "Teaching",
+        "designation": "PRT",
+        "qualification": "MCA",
+        "classes": "||-A",
+        "classTeacher": "11",
+        "dob": "28-03-1992",
+        "sex": "MALE",
+        "address": "Saraymeera, Kannauj",
+        "userName": "asheesh",
+        "password": "1234",
+        "mobileNumber": "989722122"
+    },
+    {
+        "empCode": 120,
+        "name": "Vinay Kumar",
+        "department": "Admin",
+        "designation": "PRT",
+        "qualification": "Bed",
+        "classes": "||-A",
+        "classTeacher": "11",
+        "dob": "28-03-1992",
+        "sex": "MALE",
+        "address": "Saraymeera, Kannauj",
+        "userName": "asheesh",
+        "password": "1234",
+        "mobileNumber": "9892131122"
+    },
+    {
+        "empCode": 121,
+        "name": "Vivek Kumar",
+        "department": "Teaching",
+        "designation": "PRT",
+        "qualification": "Msc",
+        "classes": "||-A",
+        "classTeacher": "11",
+        "dob": "28-03-1992",
+        "sex": "MALE",
+        "address": "Saraymeera, Kannauj",
+        "userName": "asheesh",
+        "password": "1234",
+        "mobileNumber": "989793002"
+    }
+]

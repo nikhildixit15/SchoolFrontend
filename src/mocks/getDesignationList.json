@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "TGT Maths",
+        "departmentName": "Teaching"
+    },
+    {
+        "id": 2,
+        "name": "TGT Physics",
+        "departmentName": "Teaching"
+    },
+    {
+        "id": 3,
+        "name": "Music Teacher",
+        "departmentName": "Admin"
+    },
+    {
+        "id": 4,
+        "name": "TGT English",
+        "departmentName": "Teaching"
+    },
+    {
+        "id": 5,
+        "name": "TGT Hindi",
+        "departmentName": "Teaching"
+    },
+    {
+        "id": 5,
+        "name": "Principal",
+        "departmentName": "Admin"
+    }
+]
