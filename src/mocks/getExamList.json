@@ -1,0 +1,62 @@
+[
+    {
+        "id": "234",
+        "examDate": "2024-05-13",
+        "class": "|",
+        "section": "A",
+        "subject": "Hindi",
+        "examType": "Periodic Assessment |",
+        "teacherName": "Anil",
+        "syllabus": "Full"
+    },
+    {
+        "id": "809",
+        "examDate": "2024-05-15",
+        "class": "|",
+        "section": "A",
+        "subject": "English",
+        "teacherName": "Amar",
+        "examType": "Periodic Assessment |",
+        "syllabus": "Full"
+    },
+    {
+        "id": "765",
+        "examDate": "2024-05-13",
+        "class": "|",
+        "section": "A",
+        "subject": "Math",
+        "teacherName": "Akhilesh",
+        "examType": "Periodic Assessment |",
+        "syllabus": "Full"
+    },
+    {
+        "id": "347",
+        "examDate": "2024-05-17",
+        "class": "|",
+        "section": "A",
+        "subject": "EVMS",
+        "teacherName": "Aditi",
+        "examType": "Periodic Assessment |",
+        "syllabus": "Full"
+    },
+    {
+        "id": "890",
+        "examDate": "2024-05-21",
+        "class": "|",
+        "section": "A",
+        "subject": "Physics",
+        "teacherName": "Abhi",
+        "examType": "Periodic Assessment |",
+        "syllabus": "Full"
+    },
+    {
+        "id": "756",
+        "examDate": "2024-05-08",
+        "class": "|",
+        "section": "A",
+        "subject": "Hindi",
+        "teacherName": "Alakh",
+        "examType": "Periodic Assessment |",
+        "syllabus": "Full"
+    }
+]

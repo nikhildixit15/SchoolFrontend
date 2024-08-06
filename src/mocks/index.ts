@@ -10,6 +10,9 @@ import classwiseAttendanceList from "./getClasswiseAttendance.json";
 import datewiseAttendanceList from "./getDatewiseAttendance.json";
 import attendanceRegisterData from "./getAttendanceRegisterData.json";
 import eventList from "./getEventList.json";
+import examList from "./getExamList.json";
+import subjectList from "./getSubjectList.json";
+import examTypeList from "./getExamList.json";
 
 export {
   profileData,
@@ -22,5 +25,8 @@ export {
   classwiseAttendanceList,
   datewiseAttendanceList,
   attendanceRegisterData,
-  eventList
+  eventList,
+  examList,
+  subjectList,
+  examTypeList
 };

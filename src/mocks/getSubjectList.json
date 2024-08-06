@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Math",
+        "departmentName": "Science"
+    },
+    {
+        "id": 2,
+        "name": "Physics",
+        "departmentName": "Science"
+    },
+    {
+        "id": 3,
+        "name": "Music",
+        "departmentName": "Art"
+    },
+    {
+        "id": 4,
+        "name": "English",
+        "departmentName": "Art"
+    },
+    {
+        "id": 5,
+        "name": "Hindi",
+        "departmentName": "Art"
+    },
+    {
+        "id": 6,
+        "name": "EVMS",
+        "departmentName": "Science"
+    }
+]

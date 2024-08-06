@@ -92,9 +92,7 @@ function MMSNavbar() {
                 <Link href="/pages/academic/activities">Activities</Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link href="/pages/attendance/stu/attendanceClasswise">
-                  Attendance ClassWise
-                </Link>
+                <Link href="/pages/academic/dateSheet">Date Sheet</Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
                 <Link href="/pages/attendance/stu/attendanceDatewise">
