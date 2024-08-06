@@ -2,11 +2,9 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import ExamTable from "./examTable";
 import { addExam, getExamList } from "@/app/services/academic/academicService";
-import AddNewExamView from "./AddNewExamView";
 
-export default function DateSheet() {
+export default function TeacherWise() {
   const [examList, setExamList] = useState<any>();
   const [filteredList, setFilteredList] = useState<any>();
 
@@ -28,12 +26,7 @@ export default function DateSheet() {
   return (
     <>
       <main>
-        <div>
-          <AddNewExamView addData={onAddExamBtnClicked}></AddNewExamView>
-        </div>
-        <div>
-          <ExamTable listData={examList}></ExamTable>
-        </div>
+        <div>This is teacher's time table page</div>
       </main>
     </>
   );

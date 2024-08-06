@@ -4,14 +4,20 @@ export const classSlice = createSlice({
   name: "class",
   initialState: {
     classes: [],
+    examTypeList: [],
+    subjectList: [],
+    teacherList: [],
   },
   reducers: {
-    setClasses: (state, action) => {
-      state.classes = action.payload;
+    setMasterData: (state, action) => {
+      state.classes = action.payload.classes;
+      state.examTypeList = action.payload.examTypeList;
+      state.subjectList = action.payload.subjectList;
+      state.teacherList = action.payload.teacherList;
     },
   },
 });
 
-export const { setClasses } = classSlice.actions;
+export const { setMasterData } = classSlice.actions;
 
 export default classSlice.reducer;

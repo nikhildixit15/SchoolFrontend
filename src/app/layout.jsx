@@ -1,15 +1,11 @@
 "use client";
 // import type { Metadata } from "next";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import MMSNavbar from "./components/navbar/navbar";
-import Footer from "./components/footer/footer";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-
-const inter = Inter({ subsets: ["latin"] });
+import App from "./App";
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -20,17 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <Provider store={store}>
       {/* <PersistGate persistor={persistor}> */}
-      <html lang="en">
-        <body className={inter.className}>
-          <header>
-            <MMSNavbar></MMSNavbar>
-          </header>
-          {children}
-          <footer>
-            <Footer></Footer>
-          </footer>
-        </body>
-      </html>
+      <App children={children}></App>
       {/* </PersistGate> */}
     </Provider>
   );

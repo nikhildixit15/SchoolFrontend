@@ -94,22 +94,23 @@ function MMSNavbar() {
               <NavDropdown.Item>
                 <Link href="/pages/academic/dateSheet">Date Sheet</Link>
               </NavDropdown.Item>
+            </NavDropdown>
+
+            <NavDropdown title="Time Table" id="collapsible-nav-dropdown">
               <NavDropdown.Item>
-                <Link href="/pages/attendance/stu/attendanceDatewise">
-                  Attendance DateWise
+                <Link href="/pages/timeTable/teacherWise">
+                  Teacher’s time table
                 </Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link href="/pages/staff/staffStrength">Absence Logs</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/attendance/stu/attendanceRegister">
-                  Student Register
+                <Link href="/pages/academic/dateSheet">
+                  Day wise time table
                 </Link>
               </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              <NavDropdown.Item>
+                <Link href="/pages/academic/dateSheet">
+                  Class wise time table
+                </Link>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

@@ -4,29 +4,53 @@ import styles from "./page.module.css";
 import { useSelector } from "react-redux";
 
 export default function AddNewExamView({ addData }) {
+  const [examDate, setExamDate] = useState();
+  const [syllabus, setSyllabus] = useState();
+
   const [className, setClassName] = useState();
   const [sectionName, setSectionName] = useState();
+  const [selectedSubject, setSelectedSubject] = useState();
+  const [selectedExamType, setSelectedExamType] = useState();
   const [classOptionList, setClassOptionList] = useState();
   const [sectionOptionList, setSectionOptionList] = useState();
+  const [subjectOptionList, setSubjectOptionList] = useState();
+  const [examTypesOptionList, setExamTypesOptionList] = useState();
 
-  const classes = useSelector((state) => state.class.classes);
+  const { classes, examTypeList, subjectList } = useSelector((state) => {
+    const { classes, examTypeList, subjectList } = state.class;
+    return { classes, examTypeList, subjectList };
+  });
+  console.log("####23454657", examTypeList);
 
   useEffect(() => {
     console.log(classes);
-    createOptionList();
-  }, [classes]);
+    createClassOptionList();
+    createExamTypeOptionList();
+    createSubjectOptionList();
+  }, [classes, examTypeList, subjectList]);
 
-  function createOptionList() {
+  function createClassOptionList() {
     const list = [];
-    classes.map((item) => {
-      list.push({
-        id: item.id,
-        value: item.className,
-        label: item.className,
-        sec: item.sec,
-      });
+    classes?.map((item) => {
+      list.push({ ...item, value: item.className, label: item.className });
     });
     setClassOptionList(list);
+  }
+
+  function createExamTypeOptionList() {
+    const list = [];
+    examTypeList?.map((item) => {
+      list.push({ ...item, value: item.name, label: item.name });
+    });
+    setExamTypesOptionList(list);
+  }
+
+  function createSubjectOptionList() {
+    const list = [];
+    subjectList?.map((item) => {
+      list.push({ ...item, value: item.name, label: item.name });
+    });
+    setSubjectOptionList(list);
   }
 
   function handleClassSelect(value) {
@@ -36,6 +60,14 @@ export default function AddNewExamView({ addData }) {
 
   function handleSectionSelect(value) {
     setSectionName(value);
+  }
+
+  function handleExamTypeSelect(value) {
+    setSelectedExamType(value);
+  }
+
+  function handleSubjectSelect(value) {
+    setSelectedSubject(value);
   }
 
   function createSectionOptionList(value) {
@@ -49,7 +81,11 @@ export default function AddNewExamView({ addData }) {
   }
 
   function onDatedSelected(event) {
-    console.log("onDatedSelected", event.target.value);
+    setExamDate(event.target.value);
+  }
+
+  function onSyllabusChanged(event) {
+    setSyllabus(event.target.value);
   }
 
   return (
@@ -82,9 +118,9 @@ export default function AddNewExamView({ addData }) {
           <span>Select Subject:</span>
           <Select
             className={styles.classDropdown}
-            value={sectionName}
-            onChange={handleSectionSelect}
-            options={sectionOptionList}
+            value={selectedSubject}
+            onChange={handleSubjectSelect}
+            options={subjectOptionList}
           />
         </div>
 
@@ -92,16 +128,32 @@ export default function AddNewExamView({ addData }) {
           <span>Select Test:</span>
           <Select
             className={styles.classDropdown}
-            value={sectionName}
-            onChange={handleSectionSelect}
-            options={sectionOptionList}
+            value={selectedExamType}
+            onChange={handleExamTypeSelect}
+            options={examTypesOptionList}
           />
         </div>
 
-        <input type="input" name="syllabus"></input>
+        <span>Write Syllabus:</span>
+
+        <input
+          type="input"
+          name="syllabus"
+          value={syllabus}
+          onInput={onSyllabusChanged}
+        ></input>
 
         <button
-          onClick={() => getStudentData({ className, sectionName })}
+          onClick={() =>
+            addData({
+              class: className.label,
+              section: sectionName.label,
+              examType: selectedExamType.label,
+              subject: selectedSubject.label,
+              examDate,
+              syllabus,
+            })
+          }
           className={styles.btn}
         >
           Add Test

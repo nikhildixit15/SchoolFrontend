@@ -12,7 +12,8 @@ import attendanceRegisterData from "./getAttendanceRegisterData.json";
 import eventList from "./getEventList.json";
 import examList from "./getExamList.json";
 import subjectList from "./getSubjectList.json";
-import examTypeList from "./getExamList.json";
+import examTypeList from "./getExamTypeList.json";
+import teacherList from "./getTeacherList.json";
 
 export {
   profileData,
@@ -28,5 +29,6 @@ export {
   eventList,
   examList,
   subjectList,
-  examTypeList
+  examTypeList,
+  teacherList,
 };

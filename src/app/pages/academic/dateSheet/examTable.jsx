@@ -26,6 +26,7 @@ function ExamTable({ listData }) {
             <td>{item.section}</td>
             <td>{item.subject}</td>
             <td>{item.examType}</td>
+            <td>{"View"}</td>
           </tr>
         ))}
       </tbody>
