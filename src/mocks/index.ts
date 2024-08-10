@@ -14,6 +14,9 @@ import examList from "./getExamList.json";
 import subjectList from "./getSubjectList.json";
 import examTypeList from "./getExamTypeList.json";
 import teacherList from "./getTeacherList.json";
+import teacherWiseTimeTable from "./getTeacherWiseTimeTable.json";
+import classWiseTimeTable from "./geClassWiseTimeTable.json";
+import dayWiseTimeTable from "./geDayWiseTimeTable.json";
 
 export {
   profileData,
@@ -31,4 +34,7 @@ export {
   subjectList,
   examTypeList,
   teacherList,
+  teacherWiseTimeTable,
+  classWiseTimeTable,
+  dayWiseTimeTable,
 };

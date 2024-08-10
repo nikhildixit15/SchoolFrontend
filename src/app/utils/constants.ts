@@ -28,6 +28,16 @@ export const monthList = [
   { monthName: "December", monthCount: 11 },
 ];
 
+export const daysList = [
+  { dayName: "Sunday", dayCount: 0 },
+  { dayName: "Monday", dayCount: 1 },
+  { dayName: "Tuesday", dayCount: 2 },
+  { dayName: "Wednesday", dayCount: 3 },
+  { dayName: "Thursday", dayCount: 4 },
+  { dayName: "Friday", dayCount: 5 },
+  { dayName: "Saturday", dayCount: 6 },
+];
+
 export const attendanceStatus = {
   present: "P",
   absent: "A",

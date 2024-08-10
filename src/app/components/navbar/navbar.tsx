@@ -103,12 +103,10 @@ function MMSNavbar() {
                 </Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link href="/pages/academic/dateSheet">
-                  Day wise time table
-                </Link>
+                <Link href="/pages/timeTable/dayWise">Day wise time table</Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link href="/pages/academic/dateSheet">
+                <Link href="/pages/timeTable/classWise">
                   Class wise time table
                 </Link>
               </NavDropdown.Item>
