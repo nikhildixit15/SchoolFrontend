@@ -17,6 +17,8 @@ import teacherList from "./getTeacherList.json";
 import teacherWiseTimeTable from "./getTeacherWiseTimeTable.json";
 import classWiseTimeTable from "./geClassWiseTimeTable.json";
 import dayWiseTimeTable from "./geDayWiseTimeTable.json";
+import categoryList from "./getCategoryList.json";
+import templateList from "./getTemplateList.json";
 
 export {
   profileData,
@@ -37,4 +39,6 @@ export {
   teacherWiseTimeTable,
   classWiseTimeTable,
   dayWiseTimeTable,
+  categoryList,
+  templateList
 };

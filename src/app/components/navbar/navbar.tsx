@@ -111,6 +111,22 @@ function MMSNavbar() {
                 </Link>
               </NavDropdown.Item>
             </NavDropdown>
+
+            <NavDropdown title="Message" id="collapsible-nav-dropdown">
+              <NavDropdown.Item>
+                <Link href="/pages/message/messageTemplate">
+                  Message Templates
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/timeTable/dayWise">Day wise time table</Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/timeTable/classWise">
+                  Class wise time table
+                </Link>
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
           <Nav>
             <Nav.Link href="/pages/login">Logout</Nav.Link>

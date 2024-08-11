@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "name": "Diwali",
+        "descriptionList": [
+            {
+                "id": 1,
+                "message": "Happy Diwali everyone."
+            },
+            {
+                "id": 2,
+                "message": "Happy and prosperous Diwali everyone."
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "any query",
+        "descriptionList": [
+            {
+                "id": 1,
+                "message": "Happy Diwali everyone."
+            },
+            {
+                "id": 2,
+                "message": "Happy and prosperous Diwali everyone."
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Bus fees",
+        "descriptionList": [
+            {
+                "id": 1,
+                "message": "Happy Diwali everyone."
+            },
+            {
+                "id": 2,
+                "message": "Happy and prosperous Diwali everyone."
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "OTP for Login",
+        "descriptionList": [
+            {
+                "id": 1,
+                "message": "Happy Diwali everyone."
+            },
+            {
+                "id": 2,
+                "message": "Happy and prosperous Diwali everyone."
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "School fee",
+        "descriptionList": [
+            {
+                "id": 1,
+                "message": "Happy Diwali everyone."
+            },
+            {
+                "id": 2,
+                "message": "Happy and prosperous Diwali everyone."
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Absent msg",
+        "descriptionList": [
+            {
+                "id": 1,
+                "message": "Happy Diwali everyone."
+            },
+            {
+                "id": 2,
+                "message": "Happy and prosperous Diwali everyone."
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "New holiday",
+        "descriptionList": [
+            {
+                "id": 1,
+                "message": "Happy Diwali everyone."
+            },
+            {
+                "id": 2,
+                "message": "Happy and prosperous Diwali everyone."
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "fee submission",
+        "descriptionList": [
+            {
+                "id": 1,
+                "message": "Happy Diwali everyone."
+            },
+            {
+                "id": 2,
+                "message": "Happy and prosperous Diwali everyone."
+            }
+        ]
+    }
+]
