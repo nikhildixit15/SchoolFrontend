@@ -14,7 +14,7 @@ export default function StudentDetails({ searchParams }) {
   const [students, setStudents] = useState();
 
   useEffect(() => {
-    //getStudentData({});
+    getStudentData({});
   }, []);
 
   async function getStudentData(data) {

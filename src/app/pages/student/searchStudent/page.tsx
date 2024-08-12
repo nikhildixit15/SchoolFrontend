@@ -53,6 +53,9 @@ export default function SearchStudent() {
           <StudentTable students={filteredList}></StudentTable>
 
           <Link href={"/pages/login"}>Got to Login</Link>
+          <br/>
+          <button><Link href={"./nikhilStudent"}>Class wise Strength</Link></button>
+           {/* Or Path/pages/student/nikhilStudent */}
         </div>
       </main>
     </>
