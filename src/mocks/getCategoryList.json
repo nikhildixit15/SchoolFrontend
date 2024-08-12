@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "Diwali"
+    },
+    {
+        "id": 2,
+        "name": "any query"
+    },
+    {
+        "id": 3,
+        "name": "Bus fees"
+    },
+    {
+        "id": 4,
+        "name": "OTP for Login"
+    },
+    {
+        "id": 5,
+        "name": "School fee"
+    },
+    {
+        "id": 6,
+        "name": "Absent msg"
+    },
+    {
+        "id": 7,
+        "name": "New holiday"
+    },
+    {
+        "id": 8,
+        "name": "fee submission"
+    }
+]

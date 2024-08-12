@@ -1,0 +1,284 @@
+[
+    {
+        "id": 119,
+        "className": "I-A",
+        "dayName": "monday",
+        "periods": {
+            "p1": {
+                "teacherName": "Vikash",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p2": {
+                "teacherName": "Vivek",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p3": {
+                "teacherName": "Vishal",
+                "className": "II-A",
+                "subject": "Science"
+            },
+            "p4": {
+                "teacherName": "Mukesh",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p5": {
+                "teacherName": "Vineet",
+                "className": "III-A",
+                "subject": "Science"
+            },
+            "p6": {
+                "teacherName": "Abhi",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p7": {
+                "teacherName": "Naveen",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p8": {
+                "teacherName": "Arav",
+                "className": "IV-A",
+                "subject": "Science"
+            }
+        }
+    },
+    {
+        "id": 119,
+        "className": "II-A",
+        "dayName": "tuesday",
+        "periods": {
+            "p1": {
+                "teacherName": "Vikash",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p2": {
+                "teacherName": "Vivek",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p3": {
+                "teacherName": "Vishal",
+                "className": "II-A",
+                "subject": "Science"
+            },
+            "p4": {
+                "teacherName": "Mukesh",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p5": {
+                "teacherName": "Vineet",
+                "className": "III-A",
+                "subject": "Science"
+            },
+            "p6": {
+                "teacherName": "Abhi",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p7": {
+                "teacherName": "Naveen",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p8": {
+                "teacherName": "Arav",
+                "className": "IV-A",
+                "subject": "Science"
+            }
+        }
+    },
+    {
+        "id": 119,
+        "className": "III-A",
+        "dayName": "wednesday",
+        "periods": {
+            "p1": {
+                "teacherName": "Vikash",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p2": {
+                "teacherName": "Vivek",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p3": {
+                "teacherName": "Vishal",
+                "className": "II-A",
+                "subject": "Science"
+            },
+            "p4": {
+                "teacherName": "Mukesh",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p5": {
+                "teacherName": "Vineet",
+                "className": "III-A",
+                "subject": "Science"
+            },
+            "p6": {
+                "teacherName": "Abhi",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p7": {
+                "teacherName": "Naveen",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p8": {
+                "teacherName": "Arav",
+                "className": "IV-A",
+                "subject": "Science"
+            }
+        }
+    },
+    {
+        "id": 119,
+        "className": "IV-A",
+        "dayName": "thursday",
+        "periods": {
+            "p1": {
+                "teacherName": "Vikash",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p2": {
+                "teacherName": "Vivek",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p3": {
+                "teacherName": "Vishal",
+                "className": "II-A",
+                "subject": "Science"
+            },
+            "p4": {
+                "teacherName": "Mukesh",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p5": {
+                "teacherName": "Vineet",
+                "className": "III-A",
+                "subject": "Science"
+            },
+            "p6": {
+                "teacherName": "Abhi",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p7": {
+                "teacherName": "Naveen",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p8": {
+                "teacherName": "Arav",
+                "className": "IV-A",
+                "subject": "Science"
+            }
+        }
+    },
+    {
+        "id": 119,
+        "className": "V-A",
+        "dayName": "friday",
+        "periods": {
+            "p1": {
+                "teacherName": "Vikash",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p2": {
+                "teacherName": "Vivek",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p3": {
+                "teacherName": "Vishal",
+                "className": "II-A",
+                "subject": "Science"
+            },
+            "p4": {
+                "teacherName": "Mukesh",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p5": {
+                "teacherName": "Vineet",
+                "className": "III-A",
+                "subject": "Science"
+            },
+            "p6": {
+                "teacherName": "Abhi",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p7": {
+                "teacherName": "Naveen",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p8": {
+                "teacherName": "Arav",
+                "className": "IV-A",
+                "subject": "Science"
+            }
+        }
+    },
+    {
+        "id": 119,
+        "dayName": "saturday",
+        "className": "VI-A",
+        "periods": {
+            "p1": {
+                "teacherName": "Vikash",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p2": {
+                "teacherName": "Vivek",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p3": {
+                "teacherName": "Vishal",
+                "className": "II-A",
+                "subject": "Science"
+            },
+            "p4": {
+                "teacherName": "Mukesh",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p5": {
+                "teacherName": "Vineet",
+                "className": "III-A",
+                "subject": "Science"
+            },
+            "p6": {
+                "teacherName": "Abhi",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p7": {
+                "teacherName": "Naveen",
+                "className": "I-A",
+                "subject": "Science"
+            },
+            "p8": {
+                "teacherName": "Arav",
+                "className": "IV-A",
+                "subject": "Science"
+            }
+        }
+    }
+]
