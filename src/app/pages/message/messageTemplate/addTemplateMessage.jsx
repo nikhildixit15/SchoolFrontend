@@ -16,7 +16,7 @@ export default function addTemplateMessage({ tableData }) {
     getTemplateMessages()
   }, [tableData]);
 
-  async function loadCategoryOptionList() {
+   function loadCategoryOptionList() {
     const results = tableData?.map((item) => {
       return { ...item, value: item.name, label: item.name };
     });

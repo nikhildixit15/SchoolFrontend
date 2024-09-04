@@ -119,13 +119,26 @@ function MMSNavbar() {
                 </Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link href="/pages/timeTable/dayWise">Day wise time table</Link>
+                <Link href="/pages/message/smartMessage">Smart Message</Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link href="/pages/timeTable/classWise">
-                  Class wise time table
+                <Link href="/pages/message/defaulters">
+                Defaulters Message
                 </Link>
               </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/message/messageToStaff">
+                  Message To Staff
+                </Link>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item>
+                <Link href="/pages/message/commonMessage">
+                Common Message
+                </Link>
+              </NavDropdown.Item>
+
+              
             </NavDropdown>
           </Nav>
           <Nav>

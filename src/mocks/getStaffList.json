@@ -2,6 +2,7 @@
     {
         "empCode": 119,
         "name": "Vijay Kumar",
+        "fatherName": "Ajit Kumar",
         "department": "Teaching",
         "designation": "PRT",
         "qualification": "MCA",
@@ -17,6 +18,7 @@
     {
         "empCode": 120,
         "name": "Vinay Kumar",
+        "fatherName": "Vishal Kumar",
         "department": "Admin",
         "designation": "PRT",
         "qualification": "Bed",
@@ -32,6 +34,7 @@
     {
         "empCode": 121,
         "name": "Vivek Kumar",
+        "fatherName": "Vinay Kumar",
         "department": "Teaching",
         "designation": "PRT",
         "qualification": "Msc",

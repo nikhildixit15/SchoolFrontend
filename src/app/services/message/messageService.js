@@ -44,6 +44,14 @@ export async function deleteTemplateMessage(data) {
     return await axiosClient.get("/templateMessageList");
   }
 
+  export async function sendMessage(data) {
+    if (isMock) {
+      return true;
+    }
+    return await axiosClient.post("/sendMessage");
+  }
+  
+
 
   
 

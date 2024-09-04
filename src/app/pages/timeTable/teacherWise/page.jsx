@@ -13,7 +13,6 @@ export default function TeacherWise() {
   const [teacherOptionList, setTeacherOptionList] = useState();
 
   const teacherList = useSelector((state) => {
-    console.log("###teacherList", teacherList);
 
     return state.class.teacherList;
   });
