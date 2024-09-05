@@ -137,10 +137,20 @@ function MMSNavbar() {
                 <Link href="/pages/message/commonMessage">
                 Common Message
                 </Link>
-              </NavDropdown.Item>
-
-              
+              </NavDropdown.Item>      
             </NavDropdown>
+
+            <NavDropdown title="Home Work" id="collapsible-nav-dropdown">
+              <NavDropdown.Item>
+                <Link href="/pages/homeWork/assignHomeWork">
+                  Assign HW
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/homeWork/viewHomeWork">View HW</Link>
+              </NavDropdown.Item>
+            </NavDropdown>
+
           </Nav>
           <Nav>
             <Nav.Link href="/pages/login">Logout</Nav.Link>

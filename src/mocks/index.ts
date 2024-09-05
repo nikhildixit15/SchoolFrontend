@@ -20,7 +20,7 @@ import dayWiseTimeTable from "./geDayWiseTimeTable.json";
 import categoryList from "./getCategoryList.json";
 import templateList from "./getTemplateList.json";
 import defaulterStudents from "./getDefaulterStudents.json";
-
+import homeWorkList from "./getHomeWorkList.json";
 
 export {
   profileData,
@@ -43,5 +43,6 @@ export {
   dayWiseTimeTable,
   categoryList,
   templateList,
-  defaulterStudents
+  defaulterStudents,
+  homeWorkList,
 };

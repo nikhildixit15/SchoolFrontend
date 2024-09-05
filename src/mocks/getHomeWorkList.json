@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "name": "Math",
+        "departmentName": "Science",
+        "textHW": "this is your HOme work",
+        "attachments": [
+            {
+                "name": "url1"
+            },
+            {
+                "name": "url2"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Physics",
+        "departmentName": "Science",
+        "textHW": "this is your HOme work",
+        "attachments": [
+            {
+                "name": "url1"
+            },
+            {
+                "name": "url2"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Music",
+        "departmentName": "Art",
+        "textHW": "this is your HOme work",
+        "attachments": [
+            {
+                "name": "url1"
+            },
+            {
+                "name": "url2"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "English",
+        "departmentName": "Art",
+        "textHW": "this is your HOme work",
+        "attachments": [
+            {
+                "name": "url1"
+            },
+            {
+                "name": "url2"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Hindi",
+        "departmentName": "Art",
+        "textHW": "this is your HOme work",
+        "attachments": [
+            {
+                "name": "url1"
+            },
+            {
+                "name": "url2"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "EVMS",
+        "departmentName": "Science",
+        "textHW": "this is your HOme work",
+        "attachments": [
+            {
+                "name": "url1"
+            },
+            {
+                "name": "url2"
+            }
+        ]
+    }
+]
