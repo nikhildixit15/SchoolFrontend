@@ -21,6 +21,10 @@ import categoryList from "./getCategoryList.json";
 import templateList from "./getTemplateList.json";
 import defaulterStudents from "./getDefaulterStudents.json";
 import homeWorkList from "./getHomeWorkList.json";
+import feeDetailsByMonthAndClass from "./getFeeDetailsByMonthAndClass.json";
+import student from "./getStudentById.json";
+import studentFeeSummary from "./getStudentFeeSummary.json";
+import studentMessages from "./getStudentMessagesById.json";
 
 export {
   profileData,
@@ -45,4 +49,8 @@ export {
   templateList,
   defaulterStudents,
   homeWorkList,
+  feeDetailsByMonthAndClass,
+  student,
+  studentFeeSummary,
+  studentMessages,
 };

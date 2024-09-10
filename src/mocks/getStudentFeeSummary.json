@@ -1,0 +1,71 @@
+{
+    "duePaymentInfo": {
+        "id": 1,
+        "duesList": [
+            {
+                "name": "1st quarter fee",
+                "amount": "2000"
+            },
+            {
+                "name": "Dress fee",
+                "amount": "3000"
+            },
+            {
+                "name": "School Trip fee",
+                "amount": "3000"
+            }
+        ],
+        "paidAmount": "0",
+        "userName": "asheesh",
+        "dueAmount": "2000.00",
+        "depositDate": "12-09-2023"
+    },
+    "paymentHistory": [
+        {
+            "id": "34532",
+            "title": "1st quarter fee",
+            "collectedBy": "Vijay Kumar",
+            "paymentMode": "Online",
+            "paymentDate": "14-09-2023",
+            "dueAmount": "500",
+            "paidAmount": "1500",
+            "remarks": "Remaining will paid on next week"
+        },
+        {
+            "title": "1st quarter fee",
+            "collectedBy": "Vijay Kumar",
+            "paymentMode": "Online",
+            "paymentDate": "14-09-2023",
+            "dueAmount": "500",
+            "paidAmount": "1500",
+            "remarks": "Remaining will paid on next week"
+        },
+        {
+            "title": "1st quarter fee",
+            "collectedBy": "Vijay Kumar",
+            "paymentMode": "Online",
+            "paymentDate": "14-09-2023",
+            "dueAmount": "0",
+            "paidAmount": "2000",
+            "remarks": "Remaining will paid on next week"
+        },
+        {
+            "title": "1st quarter fee",
+            "collectedBy": "Dinesh Kumar",
+            "paymentMode": "Online",
+            "paymentDate": "14-09-2023",
+            "dueAmount": "500",
+            "paidAmount": "1500",
+            "remarks": "Remaining will paid on next week"
+        },
+        {
+            "title": "1st quarter fee",
+            "collectedBy": "Abhi Kumar",
+            "paymentMode": "cash",
+            "paymentDate": "14-09-2023",
+            "dueAmount": "0",
+            "paidAmount": "1500",
+            "remarks": "Remaining will paid on next week"
+        }
+    ]
+}

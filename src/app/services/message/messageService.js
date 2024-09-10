@@ -1,4 +1,9 @@
-import { profileData, categoryList, templateList } from "@/mocks";
+import {
+  profileData,
+  categoryList,
+  templateList,
+  studentMessages,
+} from "@/mocks";
 import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
@@ -31,27 +36,29 @@ export async function getTemplateMessageList() {
 }
 
 export async function deleteTemplateMessage(data) {
-    if (isMock) {
-      return true;
-    }
-    return await axiosClient.get("/templateMessageList");
+  if (isMock) {
+    return true;
   }
+  return await axiosClient.get("/templateMessageList");
+}
 
-  export async function addMessageInTemplate(data) {
-    if (isMock) {
-      return true;
-    }
-    return await axiosClient.get("/templateMessageList");
+export async function addMessageInTemplate(data) {
+  if (isMock) {
+    return true;
   }
+  return await axiosClient.get("/templateMessageList");
+}
 
-  export async function sendMessage(data) {
-    if (isMock) {
-      return true;
-    }
-    return await axiosClient.post("/sendMessage");
+export async function sendMessage(data) {
+  if (isMock) {
+    return true;
   }
-  
+  return await axiosClient.post("/sendMessage");
+}
 
-
-  
-
+export async function getStudentMessagesById(data) {
+  if (isMock) {
+    return studentMessages;
+  }
+  return await axiosClient.get("/studentMessages");
+}

@@ -1,3 +1,5 @@
+import FeeSummary from "@/app/components/feeSummary/feeSummary";
+import StudentMessageList from "@/app/components/studentMessageList/studentMessageList";
 import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -19,7 +21,10 @@ function StudentTabbedPage() {
         Tab content for Attendance
       </Tab>
       <Tab eventKey="message" title="Message">
-        Tab content for Message
+        <StudentMessageList></StudentMessageList>
+      </Tab>
+      <Tab eventKey="fee" title="Fee">
+        <FeeSummary></FeeSummary>
       </Tab>
     </Tabs>
   );

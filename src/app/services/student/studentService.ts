@@ -1,4 +1,4 @@
-import { studentListByClass, defaulterStudents  } from "@/mocks";
+import { studentListByClass, defaulterStudents, student } from "@/mocks";
 import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
@@ -16,3 +16,16 @@ export async function getDefaulterStudents(data: any) {
   return await axiosClient.get("/student");
 }
 
+export async function getStudentById(data: any) {
+  if (isMock) {
+    return student;
+  }
+  return await axiosClient.get("/student");
+}
+
+export async function getStudentBasicInfo(data: any) {
+  if (isMock) {
+    return student;
+  }
+  return await axiosClient.get("/student");
+}

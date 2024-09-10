@@ -17,7 +17,7 @@ function MMSNavbar() {
               <NavDropdown.Item href="/pages/student/createStud">
                 <Link href={"/pages/student/createStud"}>Create Student</Link>
               </NavDropdown.Item>
-             
+
               <NavDropdown.Item href="/pages/student/studentList">
                 <Link href={"/pages/student/studentList"}>Student List</Link>
               </NavDropdown.Item>
@@ -123,9 +123,7 @@ function MMSNavbar() {
                 <Link href="/pages/message/smartMessage">Smart Message</Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link href="/pages/message/defaulters">
-                Defaulters Message
-                </Link>
+                <Link href="/pages/message/defaulters">Defaulters Message</Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
                 <Link href="/pages/message/messageToStaff">
@@ -134,23 +132,27 @@ function MMSNavbar() {
               </NavDropdown.Item>
 
               <NavDropdown.Item>
-                <Link href="/pages/message/commonMessage">
-                Common Message
-                </Link>
-              </NavDropdown.Item>      
+                <Link href="/pages/message/commonMessage">Common Message</Link>
+              </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Home Work" id="collapsible-nav-dropdown">
               <NavDropdown.Item>
-                <Link href="/pages/homeWork/assignHomeWork">
-                  Assign HW
-                </Link>
+                <Link href="/pages/homeWork/assignHomeWork">Assign HW</Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
                 <Link href="/pages/homeWork/viewHomeWork">View HW</Link>
               </NavDropdown.Item>
             </NavDropdown>
 
+            <NavDropdown title="Fee" id="collapsible-nav-dropdown">
+              <NavDropdown.Item>
+                <Link href="/pages/fees/submitFee">SubmitFee</Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/fees/feeDetails">Fee Details</Link>
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
           <Nav>
             <Nav.Link href="/pages/login">Logout</Nav.Link>

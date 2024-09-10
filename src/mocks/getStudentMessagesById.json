@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "sender": "Manish Kumar",
+        "messageType": "Information",
+        "message": "Science workshop will happen in 21st Aug. Please come on time."
+    },
+    {
+        "id": 2,
+        "sender": "Manish Kumar",
+        "messageType": "Suggestion",
+        "message": "Science workshop will happen in 21st Aug. Please come on time."
+    },
+    {
+        "id": 3,
+        "sender": "Manish Kumar",
+        "messageType": "Complain",
+        "message": "Science workshop will happen in 21st Aug. Please come on time."
+    }
+]

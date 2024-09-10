@@ -29,8 +29,6 @@ function StudentTable({ students, sendMessage }) {
    const newList = studentList.map((item)=>item)
    setStudentList(newList);
 
-   console.log("###selectedStudents", selectedStudents.length == studentList.length)
-
   }
 
   function onHeaderCheckboxSelected(){

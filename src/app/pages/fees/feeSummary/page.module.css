@@ -1,0 +1,21 @@
+.description {
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+}
+
+.listItem {
+  padding: 15px;
+  border-bottom: 1px solid #b8b9c0;
+  border-bottom-width: 3px;
+}
+
+.subjectTitle {
+  width: 200px;
+  vertical-align: top;
+}
+
+.subject {
+}
+
+.hwRow {
+}
