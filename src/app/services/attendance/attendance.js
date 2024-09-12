@@ -3,6 +3,7 @@ import {
   classwiseAttendanceList,
   datewiseAttendanceList,
   attendanceRegisterData,
+  studentAttendances,
 } from "@/mocks";
 import * as axiosClient from "../axiosClient/axiosClient";
 
@@ -33,4 +34,11 @@ export async function getAttendanceRegisterData(data) {
     return attendanceRegisterData;
   }
   return await axiosClient.get("/datewiseAttendanceList");
+}
+
+export async function getStudentAttendanceById(data) {
+  if (isMock) {
+    return studentAttendances;
+  }
+  return await axiosClient.get("/studentAttendance");
 }

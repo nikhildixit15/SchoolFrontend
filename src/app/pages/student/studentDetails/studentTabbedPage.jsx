@@ -1,5 +1,7 @@
 import FeeSummary from "@/app/components/feeSummary/feeSummary";
+import StudentAttendanceList from "@/app/components/studentAttendanceList/studentAttendanceList";
 import StudentMessageList from "@/app/components/studentMessageList/studentMessageList";
+import StudentProfileSummary from "@/app/components/studentProfileSummary/studentProfileSummary";
 import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -15,10 +17,10 @@ function StudentTabbedPage() {
       className="mb-3"
     >
       <Tab eventKey="summary" title="Summary">
-        Tab content for Summary
+        <StudentProfileSummary></StudentProfileSummary>
       </Tab>
       <Tab eventKey="attendance" title="Attendance">
-        Tab content for Attendance
+        <StudentAttendanceList></StudentAttendanceList>
       </Tab>
       <Tab eventKey="message" title="Message">
         <StudentMessageList></StudentMessageList>

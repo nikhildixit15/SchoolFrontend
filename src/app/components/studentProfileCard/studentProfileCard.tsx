@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import styles from "./studentProfile.module.css";
+import styles from "./studentProfileCard.module.css";
 import { useEffect } from "react";
 import { classList } from "@/mocks";
 
-export default function StudentProfile({ studentData }: any) {
+export default function StudentProfileCard({ studentData }: any) {
   const dispatch = useDispatch();
 
   console.log("###studentData", studentData);

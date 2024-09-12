@@ -1,0 +1,36 @@
+.listRowContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 8px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.listRowContainerSingle {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.listRow {
+  flex: 1;
+}
+.listRowSingle {
+}
+
+.divider {
+  border-right: 2px solid #7f7b7bdb;
+  margin-right: 12px;
+}
+
+.rowItemText {
+  margin-right: 8px;
+}
+
+.rowItemValue {
+  margin-left: 8px;
+}

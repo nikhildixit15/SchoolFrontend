@@ -25,6 +25,7 @@ import feeDetailsByMonthAndClass from "./getFeeDetailsByMonthAndClass.json";
 import student from "./getStudentById.json";
 import studentFeeSummary from "./getStudentFeeSummary.json";
 import studentMessages from "./getStudentMessagesById.json";
+import studentAttendances from "./getStudentAttendanceById.json";
 
 export {
   profileData,
@@ -53,4 +54,5 @@ export {
   student,
   studentFeeSummary,
   studentMessages,
+  studentAttendances,
 };

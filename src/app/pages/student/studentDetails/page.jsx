@@ -3,8 +3,8 @@
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import { getStudentBasicInfo } from "@/app/services/student/studentService";
-import StudentProfile from "@/app/components/studentProfile/studentProfile";
 import StudentTabbedPage from "./studentTabbedPage";
+import StudentProfileCard from "@/app/components/studentProfileCard/studentProfileCard";
 
 export default function StudentDetails({ searchParams }) {
   console.log("###searchParams", searchParams);
@@ -31,8 +31,8 @@ export default function StudentDetails({ searchParams }) {
     <>
       <main>
         <div className={styles.container}>
-          <StudentProfile studentData={stdBasicInfo}></StudentProfile>
-          <div>
+          <StudentProfileCard studentData={stdBasicInfo}></StudentProfileCard>
+          <div className={styles.tabContainer}>
             <StudentTabbedPage></StudentTabbedPage>
           </div>
         </div>

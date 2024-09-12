@@ -1,0 +1,107 @@
+[
+    {
+        "id": 1,
+        "departmentName": "Science",
+        "monthName": "January",
+        "month": 1,
+        "year": "2023",
+        "holidays": [
+            {
+                "date": 11,
+                "holidayName": "public"
+            },
+            {
+                "date": 19,
+                "holidayName": "public"
+            },
+            {
+                "date": 15,
+                "holidayName": "public"
+            }
+        ],
+        "leaves": [
+            {
+                "date": 7,
+                "reason": "personal"
+            },
+            {
+                "date": 3,
+                "reason": "personal"
+            },
+            {
+                "date": 23,
+                "reason": "personal"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "departmentName": "Science",
+        "monthName": "February",
+        "month": 2,
+        "year": "2023",
+        "holidays": [
+            {
+                "date": 24,
+                "holidayName": "public"
+            },
+            {
+                "date": 29,
+                "holidayName": "public"
+            },
+            {
+                "date": 28,
+                "holidayName": "public"
+            }
+        ],
+        "leaves": [
+            {
+                "date": 8,
+                "reason": "personal"
+            },
+            {
+                "date": 9,
+                "reason": "personal"
+            },
+            {
+                "date": 13,
+                "reason": "personal"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "departmentName": "Science",
+        "monthName": "March",
+        "month": 3,
+        "year": "2023",
+        "holidays": [
+            {
+                "date": 14,
+                "holidayName": "public"
+            },
+            {
+                "date": 29,
+                "holidayName": "public"
+            },
+            {
+                "date": 21,
+                "holidayName": "public"
+            }
+        ],
+        "leaves": [
+            {
+                "date": 7,
+                "reason": "public"
+            },
+            {
+                "date": 19,
+                "reason": "public"
+            },
+            {
+                "date": 16,
+                "reason": "public"
+            }
+        ]
+    }
+]

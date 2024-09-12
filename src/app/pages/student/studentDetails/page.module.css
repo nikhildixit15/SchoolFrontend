@@ -9,3 +9,7 @@
 .container {
   display: flex;
 }
+
+.tabContainer {
+  flex: 1;
+}
