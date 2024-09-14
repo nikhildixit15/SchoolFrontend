@@ -15,7 +15,9 @@ function MMSNavbar() {
           <Nav className="me-auto">
             <NavDropdown title="Student" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="/pages/student/createStud">
-                <Link href={"/pages/student/createStud"}>Create Student</Link>
+                <Link href={"/pages/student/createStudent"}>
+                  Create Student
+                </Link>
               </NavDropdown.Item>
 
               <NavDropdown.Item href="/pages/student/studentList">
