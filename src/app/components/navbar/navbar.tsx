@@ -42,6 +42,10 @@ function MMSNavbar() {
                   Department Master
                 </Link>
               </NavDropdown.Item>
+
+              <NavDropdown.Item>
+                <Link href="/pages/staff/createStaff">Create Staff</Link>
+              </NavDropdown.Item>
               <NavDropdown.Item>
                 <Link href="/pages/staff/staffList">Staff list</Link>
               </NavDropdown.Item>
