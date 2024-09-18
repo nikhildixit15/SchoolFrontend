@@ -3,8 +3,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store";
-import { PersistGate } from "redux-persist/integration/react";
+import { store } from "./redux/store";
 import App from "./App";
 
 // export const metadata: Metadata = {

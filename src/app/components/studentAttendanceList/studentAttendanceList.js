@@ -1,9 +1,10 @@
-import Link from "next/link";
-import Table from "react-bootstrap/Table";
 import styles from "./studentAttendanceList.module.css";
 import { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { getStudentAttendanceById } from "@/app/services/attendance/attendance";
+import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
+import MMSCalender from "../MMSCalender/MMSCalender";
+
 function StudentAttendanceList({ userName }) {
   const [messageList, setMessageList] = useState();
   useEffect(() => {
@@ -18,26 +19,27 @@ function StudentAttendanceList({ userName }) {
     setMessageList(result);
   }
 
+  function demoList() {
+    const currentMonth = new Date();
+
+    const monthStart = startOfMonth(currentMonth);
+    const monthEnd = endOfMonth(monthStart);
+    const startDate = startOfWeek(monthStart);
+    const endDate = endOfWeek(monthEnd);
+
+    console.log("monthStart", monthStart);
+    console.log("monthEnd", monthEnd);
+    console.log("startDate", startDate);
+    console.log("endDate", endDate);
+  }
+
   return (
     <div className={styles.container}>
-      <div className={styles.header}>Student Attendance List</div>
+      <button className={styles.header} onClick={demoList}>
+        Student Attendance List
+      </button>
       {messageList?.map((item, index) => {
-        return (
-          <Accordion className={styles.accordion} defaultActiveKey="0">
-            <Accordion.Item eventKey={index}>
-              <Accordion.Header>
-                <div>
-                  <div className={styles.messageType}>{item.messageType}</div>
-                  <div className={styles.senderRow}>
-                    <label className={styles.senderText}>{"Sender"}</label>
-                    <label className={styles.senderValue}>{item.sender}</label>
-                  </div>
-                </div>
-              </Accordion.Header>
-              <Accordion.Body>{item.message}</Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        );
+        return <MMSCalender></MMSCalender>;
       })}
     </div>
   );
