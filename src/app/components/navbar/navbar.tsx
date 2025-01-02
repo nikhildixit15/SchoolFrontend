@@ -159,6 +159,24 @@ function MMSNavbar() {
                 <Link href="/pages/fees/feeDetails">Fee Details</Link>
               </NavDropdown.Item>
             </NavDropdown>
+
+            <NavDropdown title="Admin" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="/pages/student/createStud">
+                <Link href={"/pages/admin/addClass"}>
+                  Add Class
+                </Link>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item href="/pages/student/studentList">
+                <Link href={"/pages/student/studentList"}>Add Section</Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href={"/pages/admin/addSubject"}>
+                  Add Subject
+                </Link>
+              </NavDropdown.Item>
+        
+            </NavDropdown>
           </Nav>
           <Nav>
             <Nav.Link href="/pages/login">Logout</Nav.Link>

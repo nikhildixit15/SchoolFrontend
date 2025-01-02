@@ -24,10 +24,19 @@ export default function CreateStaff() {
 
   return (
     <div className={styles.mainContainer}>
+      <label>Employee Information</label>
+
       <div className={styles.container}>
+        <div className={styles.halfRow}>
+          <label className={styles.titleLabel}>{"Emp ID"}</label>
+          <input
+            className={styles.inputValue}
+            placeholder={"Enter Designation"}
+          ></input>
+        </div>
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
-            <label>Student Details</label>
+            <label>Personal Information</label>
           </div>
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
@@ -88,6 +97,23 @@ export default function CreateStaff() {
 
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Religion"}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Religion"}
+              ></input>
+            </div>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Category"}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Category"}
+              ></input>
+            </div>
+          </div>
+
+          <div className={styles.fullRow}>
+            <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"ADAR No."}</label>
               <input
                 className={styles.inputValue}
@@ -99,6 +125,42 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter blood group"}
+              ></input>
+            </div>
+          </div>
+
+          <div className={styles.fullRow}>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"PAN No."}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter PAN number"}
+              ></input>
+            </div>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Email "}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter email address"}
+              ></input>
+            </div>
+          </div>
+
+          <div className={styles.fullRow}>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Mobile Number"}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Mobile Number"}
+              ></input>
+            </div>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>
+                {"Alternate Mobile Number"}
+              </label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Alternate Mobile Number"}
               ></input>
             </div>
           </div>
@@ -127,70 +189,17 @@ export default function CreateStaff() {
 
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Father Occupation"}</label>
+              <label className={styles.titleLabel}>{"Marital Status"}</label>
               <input
                 className={styles.inputValue}
-                placeholder={"Enter Occupation"}
+                placeholder={"Enter Marital Status"}
               ></input>
             </div>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Father Occupation"}</label>
+              <label className={styles.titleLabel}>{"Spouse Name"}</label>
               <input
                 className={styles.inputValue}
-                placeholder={"Enter Occupation"}
-              ></input>
-            </div>
-          </div>
-
-          <div className={styles.fullRow}>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Father Income"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Father Income"}
-              ></input>
-            </div>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Mother Income"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Mother Income"}
-              ></input>
-            </div>
-          </div>
-
-          <div className={styles.fullRow}>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Religion"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Religion"}
-              ></input>
-            </div>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Category"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Category"}
-              ></input>
-            </div>
-          </div>
-
-          <div className={styles.fullRow}>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Mobile Number"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Mobile Number"}
-              ></input>
-            </div>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>
-                {"Alternate Mobile Number"}
-              </label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Alternate Mobile Number"}
+                placeholder={"Enter Spouse Name"}
               ></input>
             </div>
           </div>
@@ -198,7 +207,7 @@ export default function CreateStaff() {
 
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
-            <label>Student Address</label>
+            <label>Employee Address</label>
           </div>
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
@@ -237,22 +246,90 @@ export default function CreateStaff() {
 
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
-            <label>Previous School Details</label>
+            <label>Employee Profile Details</label>
           </div>
 
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"School Name"}</label>
+              <label className={styles.titleLabel}>{"Department"}</label>
               <textarea
                 className={styles.inputValue}
-                placeholder={"Enter School Name"}
+                placeholder={"Enter Department"}
               ></textarea>
             </div>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Passout Year"}</label>
+              <label className={styles.titleLabel}>{"Designation"}</label>
               <input
                 className={styles.inputValue}
-                placeholder={"Enter Passout Year"}
+                placeholder={"Enter Designation"}
+              ></input>
+            </div>
+          </div>
+
+          <div className={styles.fullRow}>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Date Of Joining"}</label>
+              <textarea
+                className={styles.inputValue}
+                placeholder={"Enter Date Of Joining"}
+              ></textarea>
+            </div>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Trained/Untrained"}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Designation"}
+              ></input>
+            </div>
+          </div>
+
+          <div className={styles.fullRow}>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Class Teacher"}</label>
+              <textarea
+                className={styles.inputValue}
+                placeholder={"Enter Class"}
+              ></textarea>
+            </div>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Section"}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Section"}
+              ></input>
+            </div>
+          </div>
+
+          <div className={styles.fullRow}>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Profile Pic"}</label>
+              <textarea
+                className={styles.inputValue}
+                placeholder={"Enter Class"}
+              ></textarea>
+            </div>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Resume"}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Section"}
+              ></input>
+            </div>
+          </div>
+
+          <div className={styles.fullRow}>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Pan Card"}</label>
+              <textarea
+                className={styles.inputValue}
+                placeholder={"Enter Class"}
+              ></textarea>
+            </div>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"AADAR Card"}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Section"}
               ></input>
             </div>
           </div>

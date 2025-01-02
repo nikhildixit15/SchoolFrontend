@@ -1,9 +1,14 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://api.example.com";
+axios.defaults.baseURL = "http://localhost:8000";
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-axios.defaults.headers.post["Content-Type"] =
-  "application/x-www-form-urlencoded";
+
+  axios.defaults.headers.post["Content-Type"] =
+  "application/json; charset=utf-8";
+
+  axios.defaults.headers.post['Accept'] =
+  "application/json"; 
+  
 
 export async function get(url: string, params?: any) {
   try {
@@ -23,4 +28,13 @@ export async function post(url: string, data: any) {
   }
 }
 
-export function put() {}
+export async function put(url: string, data: any) {
+  try {
+    const response = await axios.put(url, data);
+    console.log("###response1242142412421", response)
+    return response;
+  } catch (error) {
+    alert(error);
+  }
+
+}
