@@ -2,23 +2,42 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import { getStudentBasicInfo } from "@/app/services/student/studentService";
+import { getStudentBasicInfo, saveStudentInfo, getStudentInfo } from "@/app/services/student/studentService";
 import { Form } from "react-bootstrap";
 
 export default function CreateStudent() {
-  const [stdBasicInfo, setStdBasicInfo] = useState();
+  const [stdBasicInfo, setStdBasicInfo] = useState({});
+  const [stuAddress, setStuAddress] = useState({});
+  const [stuFamilyDetails, setStuFamilyDetails] = useState({});
+  const [previousSchoolInfo, setPreviousSchoolInfo] = useState({});
 
   useEffect(() => {
     fetchStudentBasicInfo();
   }, []);
 
   async function fetchStudentBasicInfo(data) {
-    const result = await getStudentBasicInfo(data);
-    setStdBasicInfo(result);
+    const result = await getStudentInfo(data);
+    setStdBasicInfo(result.stdBasicInfo);
+    setStdBasicInfo(result.stuAddress);
+    setStdBasicInfo(result.stuFamilyDetails);
+    setStdBasicInfo(result.previousSchoolInfo);
     console.log("####", result);
   }
 
+  async function postStudentData() {
+    // await validateStudentData()
+    const payload = {
+      stdBasicInfo,
+      stuAddress,
+      stuFamilyDetails,
+      previousSchoolInfo
+    }
+    await saveStudentInfo(payload)
+  }
+  
+
   function onSaveBtnClicked() {
+    postStudentData()
     alert("Data saved successfully");
   }
 
@@ -35,6 +54,9 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter First Name"}
+                value={stdBasicInfo?.fName}
+                required={true}
+                onInput={(event)=>setStdBasicInfo({...stdBasicInfo, fName:event.target.value})}
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -42,6 +64,9 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Last Name"}
+                value={stdBasicInfo?.lName}
+                required={true}
+                onInput={(event)=>setStdBasicInfo({...stdBasicInfo, lName:event.target.value})}
               ></input>
             </div>
           </div>
@@ -53,6 +78,9 @@ export default function CreateStudent() {
                 className={styles.inputValue}
                 type={"date"}
                 placeholder={"Enter DOB"}
+                value={stdBasicInfo?.dob}
+                required={true}
+                onInput={(event)=>setStdBasicInfo({...stdBasicInfo, dob:event.target.value})}
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -64,6 +92,8 @@ export default function CreateStudent() {
                   label="Female"
                   name="group1"
                   type={"radio"}
+                  value={stdBasicInfo?.gender}
+                  onInput={(event)=>setStdBasicInfo({...stdBasicInfo, gender:event.target.value})}
                 />
               </Form>
             </div>
@@ -75,6 +105,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter class name"}
+                value={stdBasicInfo?.class}
+                onInput={(event)=>setStdBasicInfo({...stdBasicInfo, class:event.target.value})}              
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -82,6 +114,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter stream"}
+                value={stdBasicInfo?.stream}
+                onInput={(event)=>setStdBasicInfo({...stdBasicInfo, stream:event.target.value})}  
               ></input>
             </div>
           </div>
@@ -92,6 +126,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter ADAR number"}
+                value={stdBasicInfo?.adarNo}
+                onInput={(event)=>setStdBasicInfo({...stdBasicInfo, adarNo:event.target.value})}  
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -99,6 +135,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter blood group"}
+                value={stdBasicInfo?.bloodGroup}
+                onInput={(event)=>setStdBasicInfo({...stdBasicInfo, bloodGroup:event.target.value})}  
               ></input>
             </div>
           </div>
@@ -114,6 +152,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Father Name"}
+                value={stuFamilyDetails?.fatherName}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, fatherName:event.target.value})}  
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -121,6 +161,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Mother Name"}
+                value={stuFamilyDetails?.motherName}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, motherName:event.target.value})}  
               ></input>
             </div>
           </div>
@@ -131,6 +173,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Occupation"}
+                value={stuFamilyDetails?.motherOccupation}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, motherOccupation:event.target.value})}  
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -138,6 +182,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Occupation"}
+                value={stuFamilyDetails?.fatherOccupation}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, fatherOccupation:event.target.value})}  
               ></input>
             </div>
           </div>
@@ -148,6 +194,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Father Income"}
+                value={stuFamilyDetails?.fatherIncome}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, fatherIncome:event.target.value})}  
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -155,6 +203,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Mother Income"}
+                value={stuFamilyDetails?.motherIncome}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, motherIncome:event.target.value})}  
               ></input>
             </div>
           </div>
@@ -165,6 +215,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Religion"}
+                value={stuFamilyDetails?.religion}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, religion:event.target.value})}  
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -172,6 +224,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Category"}
+                value={stuFamilyDetails?.category}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, category:event.target.value})}  
               ></input>
             </div>
           </div>
@@ -182,6 +236,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Mobile Number"}
+                value={stuFamilyDetails?.mobileNumber}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, mobileNumber:event.target.value})}  
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -191,6 +247,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Alternate Mobile Number"}
+                value={stuFamilyDetails?.altMobileNumber}
+                onInput={(event)=>setStuFamilyDetails({...stuFamilyDetails, altMobileNumber:event.target.value})}  
               ></input>
             </div>
           </div>
@@ -206,6 +264,8 @@ export default function CreateStudent() {
               <textarea
                 className={styles.inputValue}
                 placeholder={"Enter Permanent Address"}
+                value={stuAddress?.permanentAddress}
+                onInput={(event)=>setStuAddress({...stuAddress, permanentAddress:event.target.value})}  
               ></textarea>
             </div>
             <div className={styles.halfRow}>
@@ -213,6 +273,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter PinCode"}
+                value={stuAddress?.permanentPinCode}
+                onInput={(event)=>setStuAddress({...stuAddress, permanentPinCode:event.target.value})}  
               ></input>
             </div>
           </div>
@@ -223,6 +285,8 @@ export default function CreateStudent() {
               <textarea
                 className={styles.inputValue}
                 placeholder={"Enter Current Address"}
+                value={stuAddress?.currentAddress}
+                onInput={(event)=>setStuAddress({...stuAddress, currentAddress:event.target.value})}  
               ></textarea>
             </div>
             <div className={styles.halfRow}>
@@ -230,6 +294,8 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter PinCode"}
+                value={stuAddress?.currentPinCode}
+                onInput={(event)=>setStuAddress({...stuAddress, currentPinCode:event.target.value})}  
               ></input>
             </div>
           </div>
@@ -246,13 +312,17 @@ export default function CreateStudent() {
               <textarea
                 className={styles.inputValue}
                 placeholder={"Enter School Name"}
+                value={previousSchoolInfo?.previousSchoolName}
+                onInput={(event)=>setPreviousSchoolInfo({...previousSchoolInfo, previousSchoolName:event.target.value})}  
               ></textarea>
             </div>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Passout Year"}</label>
+              <label className={styles.titleLabel}>{"PassOut Year"}</label>
               <input
                 className={styles.inputValue}
-                placeholder={"Enter Passout Year"}
+                placeholder={"Enter PassOut Year"}
+                value={previousSchoolInfo?.previousSchoolPassOut}
+                onInput={(event)=>setPreviousSchoolInfo({...previousSchoolInfo, previousSchoolPassOut:event.target.value})}  
               ></input>
             </div>
           </div>

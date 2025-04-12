@@ -29,3 +29,19 @@ export async function getStudentBasicInfo(data: any) {
   }
   return await axiosClient.get("/student");
 }
+
+export async function getStudentInfo(data: any) {
+  if (isMock) {
+    return student;
+  }
+  return await axiosClient.get("/student");
+}
+
+
+export async function saveStudentInfo(data: any) {
+  if (isMock) {
+    return student;
+  }
+  return await axiosClient.post("/student", data);
+}
+

@@ -2,10 +2,6 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import {
-  addDepartment,
-  addDesignation,
-} from "@/app/services/staff/staffService";
 import AddClass from "./addClass";
 import AddSection from "./addSection";
 import { addClass, getClassList, updateClass } from "@/app/services/amin/adminService";
