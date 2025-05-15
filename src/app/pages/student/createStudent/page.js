@@ -531,11 +531,11 @@ export default function CreateStudent() {
               <textarea
                 className={styles.inputValue}
                 placeholder={"Enter School Name"}
-                value={previousSchoolInfo?.previousSchoolName}
+                value={previousSchoolInfo?.schoolName}
                 onInput={(event) =>
                   setPreviousSchoolInfo({
                     ...previousSchoolInfo,
-                    previousSchoolName: event.target.value,
+                    schoolName: event.target.value,
                   })
                 }
               ></textarea>
@@ -545,11 +545,11 @@ export default function CreateStudent() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter PassOut Year"}
-                value={previousSchoolInfo?.previousSchoolPassOut}
+                value={previousSchoolInfo?.passOutYear}
                 onInput={(event) =>
                   setPreviousSchoolInfo({
                     ...previousSchoolInfo,
-                    previousSchoolPassOut: event.target.value,
+                    passOutYear: event.target.value,
                   })
                 }
               ></input>
