@@ -101,6 +101,9 @@ function MMSNavbar() {
               <NavDropdown.Item>
                 <Link href="/pages/academic/dateSheet">Date Sheet</Link>
               </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/academic/dateSheet">Holidays</Link>
+              </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Time Table" id="collapsible-nav-dropdown">

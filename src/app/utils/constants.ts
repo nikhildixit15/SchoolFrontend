@@ -89,3 +89,125 @@ export const attendanceTypeList = [
     id: 4,
   },
 ];
+
+export const religionList = [
+  {
+    label: "Hindu",
+    value: "Hindu",
+    id: 1,
+  },
+ {
+    label: "Jain",
+    value: "Jain",
+    id: 2,
+  },  {
+    label: "Buddhism",
+    value: "Buddhism",
+    id: 3,
+  },  {
+    label: "Sikh",
+    value: "Sikh",
+    id: 4,
+  },  {
+    label: "Muslim",
+    value: "Muslim",
+    id: 5,
+  },
+  {
+    label: "Christian",
+    value: "Christian",
+    id: 6,
+  }, 
+];
+
+export const bloodGroups = [
+
+ {
+    label: "A+",
+    value: "A+",
+    id: 1,
+  },  {
+    label: "A-",
+    value: "A-",
+    id: 2,
+  },
+   {
+    label: "B+",
+    value: "B+",
+    id: 3,
+  }, 
+   {
+    label: "B-",
+    value: "B-",
+    id: 4,
+  },
+  {
+    label: "AB+",
+    value: "AB+",
+    id: 5,
+  },
+  {
+    label: "AB-",
+    value: "AB-",
+    id: 6,
+  },
+  {
+    label: "O+",
+    value: "O+",
+    id: 7,
+  }, 
+  {
+    label: "O-",
+    value: "O-",
+    id: 8,
+  },
+  {
+    label: "NA",
+    value: "NA",
+    id: 9,
+  },
+];
+
+export const categoryList = [
+  {
+    label: "General",
+    value: "General",
+    id: 1,
+  },  {
+    label: "OBC",
+    value: "OBC",
+    id: 2,
+  },
+   {
+    label: "SC",
+    value: "SC",
+    id: 3,
+  }, 
+   {
+    label: "ST",
+    value: "ST",
+    id: 4,
+  }
+];
+
+export const sectionList = [
+  {
+    label: "A",
+    value: "A",
+    id: 1,
+  },  {
+    label: "B",
+    value: "B",
+    id: 2,
+  },
+   {
+    label: "C",
+    value: "C",
+    id: 3,
+  }, 
+   {
+    label: "D",
+    value: "D",
+    id: 4,
+  }
+];

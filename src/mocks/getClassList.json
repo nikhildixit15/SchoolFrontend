@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Play Group",
+    "className": "Play Group",
     "sec": [
       "A",
       "B"
@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "name": "Class 1",
+    "className": "Class 1",
     "sec": [
       "A",
       "B"
@@ -17,7 +17,7 @@
   },
   {
     "id": 3,
-    "name": "Class 2",
+    "className": "Class 2",
     "sec": [
       "A",
       "B"
@@ -25,7 +25,7 @@
   },
   {
     "id": 4,
-    "name": "Class 3",
+    "className": "Class 3",
     "sec": [
       "A",
       "B"
@@ -33,7 +33,7 @@
   },
   {
     "id": 5,
-    "name": "Class 4",
+    "className": "Class 4",
     "sec": [
       "A",
       "B"
@@ -41,7 +41,7 @@
   },
   {
     "id": 6,
-    "name": "Class 5",
+    "className": "Class 5",
     "sec": [
       "A",
       "B"
@@ -49,7 +49,7 @@
   },
   {
     "id": 7,
-    "name": "Class 6",
+    "className": "Class 6",
     "sec": [
       "A",
       "B"

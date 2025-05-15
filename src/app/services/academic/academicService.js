@@ -16,6 +16,20 @@ export async function addNewEvent(data) {
   return await axiosClient.get("/eventList");
 }
 
+export async function getHolidayList(data) {
+  if (isMock) {
+    return eventList;
+  }
+  return await axiosClient.get("/holiday");
+}
+
+export async function addNewHoliday(data) {
+  if (isMock) {
+    return [...eventList, { ...data, id: eventList.length }];
+  }
+  return await axiosClient.post("/holiday", data);
+}
+
 export async function getEventListByMonth(data) {
   if (isMock) {
     return eventList;
