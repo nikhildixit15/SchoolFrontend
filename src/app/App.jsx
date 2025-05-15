@@ -17,12 +17,13 @@ export default function App({ children }) {
 
   useEffect(() => {
     loadMasterData();
-  });
+  },[]);
 
   async function loadMasterData() {
-    const { classList, examTypeList, subjectList, teacherList } =
-      await getMasterData();
+     const response= await getMasterData();
+    const { classList, examTypeList, subjectList, teacherList } = response.data;
 
+console.log("###classList", classList)
     dispatch(
       setMasterData({
         examTypeList,

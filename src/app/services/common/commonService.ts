@@ -1,7 +1,7 @@
 import { classList, examTypeList, subjectList, teacherList } from "@/mocks";
 import * as axiosClient from "../axiosClient/axiosClient";
 
-const isMock = true;
+const isMock = false;
 export async function getMasterData() {
   if (isMock) {
     return { classList, examTypeList, subjectList, teacherList };

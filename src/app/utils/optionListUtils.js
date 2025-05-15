@@ -4,8 +4,8 @@ export function getClassOptionList(classes=[]) {
     classes.map((item) => {
       list.push({
         id: item.id,
-        value: item.className,
-        label: item.className,
+        value: item.name,
+        label: item.name,
         sec: item.sec,
       });
     });
