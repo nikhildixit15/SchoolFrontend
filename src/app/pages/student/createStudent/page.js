@@ -14,7 +14,7 @@ import { getClassOptionList } from "@/app/utils/optionListUtils";
 import { bloodGroups, categoryList, religionList, sectionList } from "@/app/utils/constants";
 
 export default function CreateStudent() {
-  const [stdBasicInfo, setStdBasicInfo] = useState({firstName:"", lastName:"", adarNo:"", dob:"", class:"", bloodGroup:"", section:""});
+  const [stdBasicInfo, setStdBasicInfo] = useState({firstName:"", lastName:"", adarNo:"", dob:"", className:"", bloodGroup:"", section:""});
   const [stuAddress, setStuAddress] = useState({});
   const [stuFamilyDetails, setStuFamilyDetails] = useState({});
   const [previousSchoolInfo, setPreviousSchoolInfo] = useState({});
@@ -46,7 +46,7 @@ export default function CreateStudent() {
   function classValueChanged(value){
       setStdBasicInfo({
         ...stdBasicInfo,
-        class: value.value,
+        className: value.value,
       })
       setClassValue(value)
   }
@@ -86,57 +86,58 @@ export default function CreateStudent() {
   async function validateStudentData() {
     if(!stdBasicInfo.firstName){
       alert("please enter firstName");
-      return;
+      return false;
     }
     if(!stdBasicInfo.lastName){
       alert("please enter lastName")
-      return;
+      return false;
     }
-    // if(!stdBasicInfo.className){
-    //   alert("please enter className")
-    //   return;
-    // }
+    if(!stdBasicInfo.className){
+      alert("please enter className")
+      return false;
+    }
     if(!stdBasicInfo.section){
       alert("please enter section")
-      return;
+      return false;
     }
     if(!stdBasicInfo.dob){
       alert("please enter dob")
-      return;
+      return false;
     }
     if(!stdBasicInfo.adarNo){
       alert("please enter adarNo")
-      return;
+      return false;
     }
     if(!stuFamilyDetails.fatherName){
       alert("please enter fatherName")
-      return;
+      return false;
     }
     if(!stuFamilyDetails.motherName){
       alert("please enter motherName")
-      return;
+      return false;
     }
     if(!stuFamilyDetails.mobileNumber){
       alert("please enter mobileNumber")
-      return;
+      return false;
     }
     if(!stuAddress.permanentAddress){
       alert("please enter permanentAddress")
-      return;
+      return false;
     }
 
-
+  return true;
   }
 
   async function postStudentData() {
    const isValid = await validateStudentData();
 
     const payload = {
-      stdBasicInfo,
-      stuAddress,
-      stuFamilyDetails,
+      basicInfo:stdBasicInfo,
+      address:stuAddress,
+      familyInfo:stuFamilyDetails,
       previousSchoolInfo,
     };
+
     console.log("###payload", payload)
     if(isValid){
      await saveStudentInfo(payload);

@@ -31,7 +31,7 @@ export async function getStudentBasicInfo(data: any) {
 }
 
 export async function getStudentInfo(data: any) {
-  if (isMock) {
+  if (!isMock) {
     return student;
   }
   return await axiosClient.get("/student");
@@ -39,7 +39,7 @@ export async function getStudentInfo(data: any) {
 
 
 export async function saveStudentInfo(data: any) {
-  if (isMock) {
+  if (!isMock) {
     return student;
   }
   return await axiosClient.post("/student", data);

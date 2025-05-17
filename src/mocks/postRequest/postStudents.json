@@ -1,0 +1,33 @@
+{
+    "basicInfo": {
+        "firstName": "Asheesh",
+        "lastName": "Tiwari",
+        "adarNo": "123214552331",
+        "dob": "2025-05-16",
+        "class": "Class 1",
+        "bloodGroup": "A+",
+        "section": "A"
+    },
+    "address": {
+        "permanentAddress": "Kannauj",
+        "permanentPinCode": "352523",
+        "currentPinCode": "5232452",
+        "currentAddress": "Gurugram"
+    },
+    "familyInfo": {
+        "fatherName": "Vinod Kumar",
+        "motherOccupation": "Bussiness",
+        "fatherIncome": "3403411",
+        "motherIncome": "12412412",
+        "fatherOccupation": "House wife",
+        "motherName": "Kusum Tiwari",
+        "religion": "Hindu",
+        "category": "General",
+        "mobileNumber": "9849327432",
+        "altMobileNumber": "98934234234"
+    },
+    "previousSchoolInfo": {
+        "schoolName": "Abcd",
+        "passOutYear": "2014"
+    }
+}
