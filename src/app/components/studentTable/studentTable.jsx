@@ -36,7 +36,7 @@ function StudentTable({ students }) {
             <td>{item.class}</td>
             <td>{item.dob}</td>
             <td>{item.sex}</td>
-            <td>{item.address}</td>
+            <td>{item.address.permanentAddress}</td>
             <td>{item.userName}</td>
             <td>{item.password}</td>
             <td>{item.mobileNumber}</td>
