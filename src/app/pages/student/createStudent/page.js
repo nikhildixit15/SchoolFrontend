@@ -14,7 +14,7 @@ import { getClassOptionList } from "@/app/utils/optionListUtils";
 import { bloodGroups, categoryList, religionList, sectionList } from "@/app/utils/constants";
 
 export default function CreateStudent() {
-  const [stdBasicInfo, setStdBasicInfo] = useState({firstName:"", lastName:"", adarNo:"", dob:"", className:"", bloodGroup:"", section:""});
+  const [stdBasicInfo, setStdBasicInfo] = useState();
   const [stuAddress, setStuAddress] = useState({});
   const [stuFamilyDetails, setStuFamilyDetails] = useState({});
   const [previousSchoolInfo, setPreviousSchoolInfo] = useState({});

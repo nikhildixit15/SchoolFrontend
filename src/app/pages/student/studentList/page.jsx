@@ -8,12 +8,12 @@ import { getStudents } from "@/app/services/student/studentService";
 import StudentTable from "@/app/components/studentTable/studentTable";
 
 export default function StudentList() {
-  const [students, setStudents] = useState<any>();
+  const [students, setStudents] = useState([]);
 
-  async function getStudentData(data: any) {
+  async function getStudentData(data) {
     const result = await getStudents(data);
     console.log("####", result);
-    setStudents(result);
+    setStudents(result.data);
   }
 
   return (
