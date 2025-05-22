@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Select from "react-select";
+import { getOptionList } from "@/app/utils/optionListUtils";
 
 export default function AddDesignation({
   departmentList,
@@ -18,14 +19,7 @@ export default function AddDesignation({
   }, [departmentList]);
 
   async function loadDesignationList() {
-    const results = departmentList?.map((item) => {
-      return {
-        id: item.id,
-        value: item.name,
-        label: item.name,
-      };
-    });
-
+    const results =  getOptionList(departmentList)
     setDepartmentOptionList(results);
   }
 

@@ -33,10 +33,10 @@ function StudentTable({ students }) {
             <td>{item.adarNo}</td>
             <td>{item.fatherName}</td>
             <td>{item.motherName}</td>
-            <td>{item.class}</td>
+            <td>{item.className?? "" +" "+ item.section}</td>
             <td>{item.dob}</td>
-            <td>{item.sex}</td>
-            <td>{item.address.permanentAddress}</td>
+            <td>{item.gender}</td>
+            <td>{item.address}</td>
             <td>{item.userName}</td>
             <td>{item.password}</td>
             <td>{item.mobileNumber}</td>
@@ -44,7 +44,7 @@ function StudentTable({ students }) {
               <Link
                 href={{
                   pathname: "/pages/student/studentDetails",
-                  query: { student: JSON.stringify(item) },
+                  query: { studentId:item._id },
                 }}
               >
                 view

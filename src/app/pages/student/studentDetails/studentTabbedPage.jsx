@@ -6,7 +6,7 @@ import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
-function StudentTabbedPage() {
+function StudentTabbedPage({student}) {
   const [key, setKey] = useState("summary");
 
   return (
@@ -17,7 +17,7 @@ function StudentTabbedPage() {
       className="mb-3"
     >
       <Tab eventKey="summary" title="Summary">
-        <StudentProfileSummary></StudentProfileSummary>
+        <StudentProfileSummary student={student}></StudentProfileSummary>
       </Tab>
       <Tab eventKey="attendance" title="Attendance">
         <StudentAttendanceList></StudentAttendanceList>

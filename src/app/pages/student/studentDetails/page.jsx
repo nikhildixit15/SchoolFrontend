@@ -2,38 +2,33 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import { getStudentBasicInfo } from "@/app/services/student/studentService";
+import { getStudentById } from "@/app/services/student/studentService";
 import StudentTabbedPage from "./studentTabbedPage";
 import StudentProfileCard from "@/app/components/studentProfileCard/studentProfileCard";
 
 export default function StudentDetails({ searchParams }) {
   console.log("###searchParams", searchParams);
-  const [stdBasicInfo, setStdBasicInfo] = useState();
-
-  const userName = searchParams?.userName;
+  const studentId = searchParams.studentId;
+  const [stdBasicInfo, setStdBasicInfo] = useState({});
+  const [student, setStudent] = useState({});
 
   useEffect(() => {
-    if (userName) {
-      fetchStudentBasicInfo();
-    } else if (searchParams?.student) {
-      const profileData = JSON.parse(searchParams?.student);
-      setStdBasicInfo(profileData);
-    }
+      fetchStudentDetails();
   }, []);
 
-  async function fetchStudentBasicInfo(data) {
-    const result = await getStudentBasicInfo(data);
-    setStdBasicInfo(result);
-    console.log("####", result);
+  async function fetchStudentDetails() {
+    const response = await getStudentById({id:studentId});
+    setStdBasicInfo(response.data);
+    setStudent(response.data)
   }
 
   return (
     <>
       <main>
         <div className={styles.container}>
-          <StudentProfileCard studentData={stdBasicInfo}></StudentProfileCard>
+          <StudentProfileCard student={stdBasicInfo}></StudentProfileCard>
           <div className={styles.tabContainer}>
-            <StudentTabbedPage></StudentTabbedPage>
+            <StudentTabbedPage student={student}></StudentTabbedPage>
           </div>
         </div>
       </main>

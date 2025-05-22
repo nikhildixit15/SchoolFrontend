@@ -16,18 +16,20 @@ export async function getDefaulterStudents(data: any) {
   return await axiosClient.get("/student");
 }
 
-export async function getStudentById(data: any) {
+export async function getStudentBasicInfo(data: any) {
+  const id = data.id;
   if (isMock) {
     return student;
   }
-  return await axiosClient.get("/student");
+  return await axiosClient.get(`/student${id}`);
 }
 
-export async function getStudentBasicInfo(data: any) {
-  if (isMock) {
+export async function getStudentById(data: any) {
+  const id = data.id;
+  if (!isMock) {
     return student;
   }
-  return await axiosClient.get("/student");
+  return await axiosClient.get(`/student/${id}`);
 }
 
 export async function getStudentInfo(data: any) {

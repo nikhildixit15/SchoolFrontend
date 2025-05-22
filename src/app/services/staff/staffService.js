@@ -10,17 +10,17 @@ export async function getStaffList(data) {
 }
 
 export async function getDesignationList(data) {
-  if (isMock) {
+  if (!isMock) {
     return designationList;
   }
-  return await axiosClient.get("/designationList");
+  return await axiosClient.get("/designation");
 }
 
 export async function getDepartmentList(data) {
-  if (isMock) {
+  if (!isMock) {
     return departmentList;
   }
-  return await axiosClient.get("/departmentList");
+  return await axiosClient.get("/department");
 }
 
 export async function addDepartment(data) {

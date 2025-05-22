@@ -1,4 +1,5 @@
 import { months } from "./constants";
+import moment from 'moment'
 
 export function getDaysByMonths(month) {
   switch (month.toLowerCase()) {
@@ -18,4 +19,8 @@ export function getDaysByMonths(month) {
     case months.feb.toLowerCase():
       return 28;
   }
+}
+
+export function getBirthdayFromDOB(dob) {
+  return moment(dob).format('MMMM DD'); // e.g., "May 22"
 }

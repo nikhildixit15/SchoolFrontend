@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux";
 import styles from "./studentProfileSummary.module.css";
 import { useEffect } from "react";
 
-export default function StudentProfileSummary({ studentData }) {
+export default function StudentProfileSummary({ student }) {
   const dispatch = useDispatch();
 
-  console.log("###studentData", studentData);
+  console.log("###studentData1234", student);
 
   useEffect(() => {}, []);
   return (
@@ -19,11 +19,11 @@ export default function StudentProfileSummary({ studentData }) {
           <div className={styles.listRowContainer}>
             <div className={`${styles.listRow}  ${styles.divider}`}>
               <label className={styles.rowItemText}>Form No</label>
-              <label className={styles.rowItemValue}>{"12345"}</label>
+              <label className={styles.rowItemValue}>{student.adminInfo?.admissionNumber}</label>
             </div>
             <div className={styles.listRow}>
               <label className={styles.rowItemText}>D.O.A</label>
-              <label className={styles.rowItemValue}>{"12-10-2023"}</label>
+              <label className={styles.rowItemValue}>{student.basicInfo?.admissionDate}</label>
             </div>
           </div>
         </div>
@@ -35,22 +35,22 @@ export default function StudentProfileSummary({ studentData }) {
           <div className={styles.listRowContainer}>
             <div className={`${styles.listRow}  ${styles.divider}`}>
               <label className={styles.rowItemText}>Father Name</label>
-              <label className={styles.rowItemValue}>{"Ajay kumar"}</label>
+              <label className={styles.rowItemValue}>{student.familyInfo?.fatherName}</label>
             </div>
             <div className={styles.listRow}>
               <label className={styles.rowItemText}>Mother Name</label>
-              <label className={styles.rowItemValue}>{"Nidhi Kumari"}</label>
+              <label className={styles.rowItemValue}>{student.familyInfo?.motherName}</label>
             </div>
           </div>
 
           <div className={styles.listRowContainer}>
             <div className={`${styles.listRow}  ${styles.divider}`}>
               <label className={styles.rowItemText}>Father Occupation</label>
-              <label className={styles.rowItemValue}>{"Businessman"}</label>
+              <label className={styles.rowItemValue}>{student.familyInfo?.fatherOccupation}</label>
             </div>
             <div className={styles.listRow}>
               <label className={styles.rowItemText}>Mother Occupation</label>
-              <label className={styles.rowItemValue}>{"House Wife"}</label>
+              <label className={styles.rowItemValue}>{student.familyInfo?.motherOccupation}</label>
             </div>
           </div>
         </div>
@@ -58,40 +58,40 @@ export default function StudentProfileSummary({ studentData }) {
         <div className={styles.listRowContainer}>
           <div className={`${styles.listRow}  ${styles.divider}`}>
             <label className={styles.rowItemText}>Father Annual Income</label>
-            <label className={styles.rowItemValue}>{"10000000"}</label>
+            <label className={styles.rowItemValue}>{student.familyInfo?.fatherIncome}</label>
           </div>
           <div className={styles.listRow}>
             <label className={styles.rowItemText}>Mother Annual Income</label>
-            <label className={styles.rowItemValue}>{"0"}</label>
+            <label className={styles.rowItemValue}>{student.familyInfo?.motherIncome}</label>
           </div>
         </div>
 
         <div className={styles.listRowContainer}>
           <div className={`${styles.listRow}  ${styles.divider}`}>
             <label className={styles.rowItemText}>Religion</label>
-            <label className={styles.rowItemValue}>{"Hindu"}</label>
+            <label className={styles.rowItemValue}>{student.familyInfo?.religion}</label>
           </div>
           <div className={styles.listRow}>
             <label className={styles.rowItemText}>Category</label>
-            <label className={styles.rowItemValue}>{"Gen"}</label>
+            <label className={styles.rowItemValue}>{student.familyInfo?.category}</label>
           </div>
         </div>
 
         <div className={styles.listRowContainer}>
           <div className={`${styles.listRow}  ${styles.divider}`}>
             <label className={styles.rowItemText}>Guardian Name</label>
-            <label className={styles.rowItemValue}>{"Ajay Kumar"}</label>
+            <label className={styles.rowItemValue}>{student.familyInfo?.guardianName}</label>
           </div>
           <div className={styles.listRow}>
             <label className={styles.rowItemText}>Guardian Contact No.</label>
-            <label className={styles.rowItemValue}>{"8874432123"}</label>
+            <label className={styles.rowItemValue}>{student.familyInfo?.guardianContactNumber}</label>
           </div>
         </div>
 
         <div className={styles.listRowContainer}>
           <div className={`${styles.listRow}`}>
             <label className={styles.rowItemText}>Guardian Relation</label>
-            <label className={styles.rowItemValue}>{"Father"}</label>
+            <label className={styles.rowItemValue}>{student.familyInfo?.guardianRelation}</label>
           </div>
         </div>
       </div>
@@ -103,12 +103,12 @@ export default function StudentProfileSummary({ studentData }) {
           <div className={`${styles.listRowSingle}`}>
             <label className={styles.rowItemText}>Address</label>
             <label className={styles.rowItemValue}>
-              {"H-1239, Vivek Nager, Kanpur, 208019"}
+              {`${student.address?.permanentAddress}, ${student.address?.permanentPinCode}`}
             </label>
           </div>
           <div className={styles.listRowSingle}>
             <label className={styles.rowItemText}>Contact Number</label>
-            <label className={styles.rowItemValue}>{"7563987609"}</label>
+            <label className={styles.rowItemValue}>{student.familyInfo?.mobileNumber}</label>
           </div>
         </div>
       </div>

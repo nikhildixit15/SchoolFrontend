@@ -4,7 +4,6 @@ import Select from "react-select";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import {
-  getStudentBasicInfo,
   saveStudentInfo,
   getStudentInfo,
 } from "@/app/services/student/studentService";
@@ -140,8 +139,12 @@ export default function CreateStudent() {
 
     console.log("###payload", payload)
     if(isValid){
-     await saveStudentInfo(payload);
+     const response = await saveStudentInfo(payload);
+     if(response.data){
       alert("Data saved successfully");
+     }else{
+      alert("Error while saving");
+     }
       
     }
   }
@@ -291,6 +294,38 @@ export default function CreateStudent() {
                 options={bloodGroups}
               />
 
+            </div>
+          </div>
+
+          <div className={styles.fullRow}>
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Admission Date"}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Admission date"}
+                value={stdBasicInfo?.admissionDate}
+                onInput={(event) =>
+                  setStdBasicInfo({
+                    ...stdBasicInfo,
+                    admissionDate: event.target.value,
+                  })
+                }
+              ></input>
+            </div>
+
+            <div className={styles.halfRow}>
+              <label className={styles.titleLabel}>{"Admission Date"}</label>
+              <input
+                className={styles.inputValue}
+                placeholder={"Enter Admission date"}
+                value={stdBasicInfo?.admissionDate}
+                onInput={(event) =>
+                  setStdBasicInfo({
+                    ...stdBasicInfo,
+                    admissionDate: event.target.value,
+                  })
+                }
+              ></input>
             </div>
           </div>
         </div>

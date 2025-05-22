@@ -22,13 +22,13 @@ export default function DepartmentMaster() {
   }, []);
 
   async function loadDesignations() {
-    const list = await getDesignationList();
-    setDesignationList(list);
+    const response = await getDesignationList();
+    setDesignationList(response?.data);
   }
 
   async function loadDepartmentList() {
-    const list = await getDepartmentList();
-    setDepartmentList(list);
+    const response = await getDepartmentList();
+    setDepartmentList(response?.data);
   }
 
   async function addNewDepartment(data) {

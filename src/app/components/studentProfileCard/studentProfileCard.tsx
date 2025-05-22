@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import styles from "./studentProfileCard.module.css";
 import { useEffect } from "react";
 import { classList } from "@/mocks";
+import { getBirthdayFromDOB } from "@/app/utils/dateUtils";
 
-export default function StudentProfileCard({ studentData }: any) {
-  const dispatch = useDispatch();
+export default function StudentProfileCard({ student }: any) {
 
-  console.log("###studentData", studentData);
+  const birthDay = getBirthdayFromDOB(student?.dob)
 
   useEffect(() => {}, []);
   return (
@@ -20,28 +20,28 @@ export default function StudentProfileCard({ studentData }: any) {
       <div className={styles.userName}></div>
 
       <div className={styles.userProfileRow}>
-        <label className={styles.userProfileRowItem}>Admission No.</label>
-        <label className={styles.itemValue}>{studentData?.admissionNo}</label>
+        <label className={styles.userProfileRowItem}>Admission No</label>
+        <label className={styles.itemValue}>{student.adminInfo?.admissionNumber}</label>
       </div>
 
       <div className={styles.userProfileRow}>
         <label className={styles.userProfileRowItem}>Class</label>
-        <label className={styles.itemValue}>{studentData?.class}</label>
+        <label className={styles.itemValue}>{student.basicInfo?.className}</label>
       </div>
 
       <div className={styles.userProfileRow}>
         <label className={styles.userProfileRowItem}>Birthday</label>
-        <label className={styles.itemValue}>{studentData?.dob}</label>
+        <label className={styles.itemValue}>{birthDay}</label>
       </div>
 
       <div className={styles.userProfileRow}>
         <label className={styles.userProfileRowItem}>Username</label>
-        <label className={styles.itemValue}>{studentData?.userName}</label>
+        <label className={styles.itemValue}>{student.adminInfo?.userName}</label>
       </div>
 
       <div className={styles.userProfileRow}>
         <label className={styles.userProfileRowItem}>Password</label>
-        <label className={styles.itemValue}>{studentData?.password}</label>
+        <label className={styles.itemValue}>{student.adminInfo?.password}</label>
       </div>
     </div>
   );

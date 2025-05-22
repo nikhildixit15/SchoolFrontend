@@ -2,7 +2,6 @@
 
 import styles from "./feeSummary.module.css";
 import { useEffect, useMemo, useState } from "react";
-import { getStudentBasicInfo } from "@/app/services/student/studentService";
 import {
   getStudentFeeSummary,
   submitStudentFee,

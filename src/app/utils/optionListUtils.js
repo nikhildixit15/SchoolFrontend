@@ -11,3 +11,16 @@ export function getClassOptionList(classes=[]) {
     });
    return list;;
   }
+
+
+export function getOptionList(classes=[], ) {
+  const list = [];
+  classes.map((item) => {
+    list.push({
+      id: item.id,
+      value: item.name,
+      label: item.name,
+    });
+  });
+ return list;;
+}
