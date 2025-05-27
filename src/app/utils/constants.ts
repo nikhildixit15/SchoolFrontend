@@ -120,6 +120,23 @@ export const religionList = [
   }, 
 ];
 
+export const martialStatusList = [
+  {
+    label: "Married",
+    value: "Married",
+    id: 1,
+  },
+ {
+    label: "Unmarried",
+    value: "Unmarried",
+    id: 2,
+  },  {
+    label: "Divorced",
+    value: "Divorced",
+    id: 3,
+  }
+];
+
 export const bloodGroups = [
 
  {

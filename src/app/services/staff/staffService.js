@@ -36,3 +36,7 @@ export async function addDesignation(data) {
   }
   return await axiosClient.post("/designation", data);
 }
+
+export async function saveStudentInfo(data) {
+  return await axiosClient.post("/staff", data);
+}
