@@ -6,7 +6,7 @@ export async function getStaffList(data) {
   if (isMock) {
     return staffList;
   }
-  return await axiosClient.get("/staffList");
+  return await axiosClient.get("/staff");
 }
 
 export async function getDesignationList(data) {

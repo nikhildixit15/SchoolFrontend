@@ -62,7 +62,7 @@ export default function CreateStaff() {
 
   function religionValueChanged(value){
       setBasicInfo({
-        ...familyInfo,
+        ...basicInfo,
         religion: value.value,
       })
       setReligiousValue(value)
@@ -216,11 +216,13 @@ export default function CreateStaff() {
                 placeholder={"Enter Last Name"}
                 value={basicInfo?.lastName}
                 required={true}
-                onInput={(event) =>
+                onInput={(event) =>{
+                  console.log("###event.target.value", event.target.value)
                   setBasicInfo({
                     ...basicInfo,
                     lastName: event.target.value,
                   })
+                }
                 }
               ></input>
             </div>
@@ -399,11 +401,13 @@ export default function CreateStaff() {
                 className={styles.inputValue}
                 placeholder={"Enter Mobile Number"}
                 value={basicInfo?.mobileNumber}
-                onInput={(event) =>
+                onInput={(event) =>{
+
                   setBasicInfo({
                     ...basicInfo,
                     mobileNumber: event.target.value,
                   })
+                }
                 }
               ></input>
             </div>
