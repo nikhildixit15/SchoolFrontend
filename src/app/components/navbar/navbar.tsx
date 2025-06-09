@@ -178,7 +178,9 @@ function MMSNavbar() {
                   Add Subject
                 </Link>
               </NavDropdown.Item>
-        
+              <NavDropdown.Item>
+                <Link href="/pages/admin/assignedPeriods">Assigned Periods</Link>
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>

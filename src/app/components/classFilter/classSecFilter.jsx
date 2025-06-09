@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./classSecFilter.module.css";
 import { useSelector } from "react-redux";
 import { ClassSection, SelectOption } from "@/app/types/commonTypes";
+import { getClassOptionList } from "@/app/utils/optionListUtils";
 
 export default function ClassSecFilter({ getStudentData }) {
   const [className, setClassName] = useState();
@@ -14,21 +15,9 @@ export default function ClassSecFilter({ getStudentData }) {
 
   useEffect(() => {
     console.log(classes);
-    createOptionList();
+   const list = getClassOptionList(classes);
+   setClassOptionList(list);
   }, [classes]);
-
-  function createOptionList() {
-    const list = [];
-    classes.map((item) => {
-      list.push({
-        id: item.id,
-        value: item.name,
-        label: item.name,
-        sec: item.sec,
-      });
-    });
-    setClassOptionList(list);
-  }
 
   function handleClassSelect(value) {
     setClassName(value);

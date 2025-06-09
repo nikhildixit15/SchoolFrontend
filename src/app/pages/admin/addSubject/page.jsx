@@ -1,60 +1,65 @@
-"use client";
-
-import Link from "next/link";
+"use client" 
+import {  useEffect, useState } from "react";
 import styles from "./page.module.css";
-import { useEffect, useState } from "react";
-import {
-  getDepartmentList,
-  getDesignationList,
-  addDepartment,
-  addDesignation,
-} from "@/app/services/staff/staffService";
-import AddSubject from "./addSubject";
+import { addSubject, deleteSubject as deleteSubjectApi, getSubjectList } from "@/app/services/admin/adminService";
 
-export default function DepartmentMaster() {
-  const [designationList, setDesignationList] = useState();
-  const [departmentList, setDepartmentList] = useState();
+export default function AddSubject() {
+  const [subjectName, setSubjectName] = useState("");
+  const [subjects, setSubjects] = useState([]);
 
   useEffect(() => {
-    loadDesignations();
-    loadDepartmentList();
+    loadSubjects();
   }, []);
 
-  async function loadDesignations() {
-    const list = await getDesignationList();
-    setDesignationList(list);
+  async function loadSubjects() {
+    const response = await getSubjectList();
+    setSubjects(response?.data);
   }
 
-  async function loadDepartmentList() {
-    const list = await getDepartmentList();
-    setDepartmentList(list);
+  async function handleAddSubject() {
+    if (subjectName.trim() === "") return;
+    await addSubject({ subjectName: subjectName });
+    setSubjectName("");
+    loadSubjects();
   }
 
-  async function addNewDepartment(data) {
-    console.log([...departmentList, data]);
-    const list = await addDepartment(data);
-    setDepartmentList([...departmentList, data]);
+  async function handleDeleteSubject(id) {
+    await deleteSubjectApi(id);
+    loadSubjects();
   }
 
-  async function addNewDesignation(data) {
-    const list = await addDesignation(data);
-    setDesignationList([...designationList, data]);
-  }
   return (
-    <>
-      <main>
-        <div>
-          {/* <AddDepartment
-            departmentList={departmentList}
-            addDepartment={addNewDepartment}
-          ></AddDepartment> */}
-          <AddSubject
-            departmentList={departmentList}
-            designationList={designationList}
-            addDesignation={addNewDesignation}
-          ></AddSubject>
-        </div>
-      </main>
-    </>
+    <div className={styles.mainContainer}>
+      <h2 className={styles.heading}>Add Subject</h2>
+      <div className={styles.formRow}>
+        <label className={styles.label}>Subject Name</label>
+        <input
+          className={styles.inputValue}
+          value={subjectName}
+          onChange={e => setSubjectName(e.target.value)}
+          placeholder="Enter Subject Name"
+        />
+        <button className={styles.saveButton} onClick={handleAddSubject}>
+          Add Subject
+        </button>
+      </div>
+      <div className={styles.subjectListSection}>
+        <h4 className={styles.subHeading}>Subjects</h4>
+        <ul className={styles.subjectList}>
+          {subjects?.length === 0 ? (
+            <li className={styles.noSubject}>No subjects found.</li>
+          ) : (
+            subjects?.map((subj, idx) => (
+              <li key={subj.id || idx} className={styles.subjectItem}>
+                <span className={styles.subjectName}>{subj.subjectName}</span>
+                <button className={styles.deleteButton} onClick={() => handleDeleteSubject(subj._id)}>
+                  Delete
+                </button>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
+    </div>
   );
 }

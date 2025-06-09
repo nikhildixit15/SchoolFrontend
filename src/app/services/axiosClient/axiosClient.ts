@@ -38,3 +38,13 @@ export async function put(url: string, data: any) {
   }
 
 }
+
+export async function del(url: string, data?: any) {
+  try {
+    const response = await axios.delete(url, data);
+    return response;
+  } catch (error) {
+    alert(error);
+  }
+}
+

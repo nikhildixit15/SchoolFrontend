@@ -8,3 +8,107 @@
 .departmentInput {
   margin: 15px;
 }
+.mainContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 32px 32px 24px 32px;
+  gap: 24px;
+}
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.formRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+.label {
+  font-weight: 500;
+  margin-bottom: 0;
+  min-width: 110px;
+}
+.inputValue {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.saveButton {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background 0.2s;
+}
+.saveButton:hover {
+  background: #0056b3;
+}
+.subjectListSection {
+  margin-top: 16px;
+}
+.subHeading {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.subjectList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.subjectItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f7f7f7;
+  border-radius: 4px;
+  padding: 8px 14px;
+}
+.subjectName {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.deleteButton {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 12px;
+  transition: background 0.2s;
+}
+.deleteButton:hover {
+  background: #a71d2a;
+}
+.noSubject {
+  color: #888;
+  text-align: center;
+  padding: 12px 0;
+}
+.footer {
+  margin-top: auto;
+  text-align: center;
+  color: #888;
+  font-size: 0.95rem;
+  padding: 16px 0 0 0;
+}

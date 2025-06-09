@@ -1,4 +1,4 @@
-import { classList, departmentList } from "@/mocks";
+import { classList, departmentList, subjectList } from "@/mocks";
 import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
@@ -36,4 +36,27 @@ export async function getSectionList(data) {
     return departmentList;
   }
   return await axiosClient.get("/sections");
+}
+
+
+export async function getSubjectList(data) {
+  if (!isMock) {
+    return subjectList;
+  }
+  return await axiosClient.get("/subject");
+}
+
+
+export async function addSubject(data) {
+  if (!isMock) {
+    return [...subjectList, { ...data, id: subjectList.length }];
+  }
+  return await axiosClient.post("/subject", data);
+}
+
+export async function deleteSubject(id) {
+  if (!isMock) {
+    return subjectList.filter((item) => item.id !== id);
+  }
+  return await axiosClient.del(`/subject/${id}`);
 }

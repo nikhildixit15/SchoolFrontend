@@ -48,7 +48,7 @@ export async function getSubjectList(data) {
   if (isMock) {
     return subjectList;
   }
-  return await axiosClient.get("/subjectList");
+  return await axiosClient.get("/subject");
 }
 
 export async function addExam(data) {

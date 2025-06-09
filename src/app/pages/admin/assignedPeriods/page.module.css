@@ -1,0 +1,34 @@
+.mainContainer {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 32px;
+}
+.formRow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.label {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.input, .css-13cymwt-control {
+  min-height: 38px;
+  font-size: 16px;
+}
+.saveButton {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+.saveButton:hover {
+  background: #0056b3;
+}
