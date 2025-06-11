@@ -3,8 +3,6 @@ import Table from "react-bootstrap/Table";
 import { useRouter } from "next/router";
 
 function StaffTable({ staffList }) {
-  console.log("students", staffList);
-
   return (
     <Table striped bordered hover>
       <thead>
@@ -26,23 +24,31 @@ function StaffTable({ staffList }) {
           <th>Action</th>
         </tr>
       </thead>
-
+      
       <tbody>
         {staffList?.map((item, index) => (
-          <tr>
+          <tr key={item._id || index}>
             <td>{index + 1}</td>
-            <td>{item.empCode}</td>
-            <td>{item.name}</td>
-            <td>{item.department}</td>
-            <td>{item.designation}</td>
+            <td>{item.adminInfo?.employeeId}</td>
+            <td>
+              {item.basicInfo?.firstName} {item.basicInfo?.lastName}
+            </td>
+            <td>{item.profileDetails.department}</td>
+            <td>{item.profileDetails.designation}</td>
             <td>{item.qualification}</td>
             <td>{item.classes}</td>
             <td>{item.classTeacher}</td>
-            <td>{item.dob}</td>
-            <td>{item.sex}</td>
-            <td>{item.address}</td>
-            <td>{item.userName}</td>
-            <td>{item.password}</td>
+            <td>{item.basicInfo?.dob}</td>
+            <td>{item.basicInfo?.gender}</td>
+            <td>
+              {item.address
+                ? `${item.address.permanentAddress || ""} (${
+                    item.address.permanentPinCode || ""
+                  })`
+                : ""}
+            </td>
+            <td>{item.adminInfo?.userName}</td>
+            <td>{item.adminInfo?.password}</td>
             <td>{item.mobileNumber}</td>
             <td>
               <Link

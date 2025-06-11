@@ -21,31 +21,35 @@ export default function StaffFilter({ getData }) {
     loadDepartmentList();
   }, []);
 
-  async function loadDesignationList() {
-    const list = await getDesignationList();
-    const results = list.map((item) => {
-      return {
-        id: item.id,
-        value: item.name,
-        label: item.name,
-      };
-    });
-
-    setDesignationOptionList(results);
-  }
-
   async function loadDepartmentList() {
-    const list = await getDepartmentList();
-    const results = list.map((item) => {
-      return {
-        id: item.id,
-        value: item.name,
-        label: item.name,
-      };
-    });
+  const list = await getDepartmentList();
+  // If your API returns { data: [...] }
+  const departments = Array.isArray(list.data) ? list.data : [];
+  const results = departments.map((item) => {
+    return {
+      id: item.id,
+      value: item.name,
+      label: item.name,
+    };
+  });
 
-    setDepartmentOptionList(results);
-  }
+  setDepartmentOptionList(results);
+}
+
+  async function loadDesignationList() {
+  const list = await getDesignationList();
+  // If your API returns { data: [...] }
+  const designations = Array.isArray(list.data) ? list.data : [];
+  const results = designations.map((item) => {
+    return {
+      id: item.id,
+      value: item.name,
+      label: item.name,
+    };
+  });
+
+  setDesignationOptionList(results);
+}
 
   function handleStaffSelection(value) {
     console.log(value);
