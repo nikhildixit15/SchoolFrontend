@@ -83,11 +83,11 @@ export default function CreateStaff() {
     });
     setDepartmentName(selectedOption);
 
-    // Only filter if departmentName exists
-    const filteredList = departmentName?.label 
-      ? designationList.filter((item) => item.departmentName === departmentName.label)
+    // Use selectedOption.label instead of departmentName.label
+    const filteredList = selectedOption?.label 
+      ? designationList.filter((item) => item.departmentName === selectedOption.label)
       : [];
-    const formattedOptions =  getOptionList(filteredList);
+    const formattedOptions = getOptionList(filteredList);
 
       
     setDesignationOptionList(formattedOptions);

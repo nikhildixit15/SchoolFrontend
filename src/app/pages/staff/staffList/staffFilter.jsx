@@ -13,8 +13,9 @@ export default function StaffFilter({ getData }) {
   const [filterName, setFilterName] = useState();
   const [filter, setFilter] = useState({});
 
-  const [designationOptionList, setDesignationOptionList] = useState();
-  const [departmentOptionList, setDepartmentOptionList] = useState();
+  const [designationOptionList, setDesignationOptionList] = useState([]);
+  const [allDesignations, setAllDesignations] = useState([]); // Store all designations
+  const [departmentOptionList, setDepartmentOptionList] = useState([]);
 
   useEffect(() => {
     loadDesignationList();
@@ -22,37 +23,30 @@ export default function StaffFilter({ getData }) {
   }, []);
 
   async function loadDepartmentList() {
-  const list = await getDepartmentList();
-  // If your API returns { data: [...] }
-  const departments = Array.isArray(list.data) ? list.data : [];
-  const results = departments.map((item) => {
-    return {
+    const list = await getDepartmentList();
+    const departments = Array.isArray(list.data) ? list.data : [];
+    const results = departments.map((item) => ({
       id: item.id,
       value: item.name,
       label: item.name,
-    };
-  });
-
-  setDepartmentOptionList(results);
-}
+    }));
+    setDepartmentOptionList(results);
+  }
 
   async function loadDesignationList() {
-  const list = await getDesignationList();
-  // If your API returns { data: [...] }
-  const designations = Array.isArray(list.data) ? list.data : [];
-  const results = designations.map((item) => {
-    return {
+    const list = await getDesignationList();
+    const designations = Array.isArray(list.data) ? list.data : [];
+    const results = designations.map((item) => ({
       id: item.id,
       value: item.name,
       label: item.name,
-    };
-  });
-
-  setDesignationOptionList(results);
-}
+      departmentName: item.departmentName, // Make sure this field exists in your API
+    }));
+    setAllDesignations(results);
+    setDesignationOptionList(results);
+  }
 
   function handleStaffSelection(value) {
-    console.log(value);
     setFilterName(value);
     setFilter({ ...filter, filterName: value });
   }
@@ -60,6 +54,13 @@ export default function StaffFilter({ getData }) {
   function handleDepartmentSection(value) {
     setDepartment(value);
     setFilter({ ...filter, department: value });
+    setDesignation(null); // Reset designation
+
+    // Filter designations by department
+    const filteredList = value?.label
+      ? allDesignations.filter((item) => item.departmentName === value.label)
+      : [];
+    setDesignationOptionList(filteredList);
   }
 
   function handleDesignationSection(value) {
@@ -96,6 +97,7 @@ export default function StaffFilter({ getData }) {
             value={designation}
             onChange={handleDesignationSection}
             options={designationOptionList}
+            isDisabled={!department}
           />
         </div>
 
