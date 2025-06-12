@@ -3,7 +3,7 @@ import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
 export async function getStaffList(data) {
-  if (isMock) {
+  if (!isMock) {
     return staffList;
   }
   return await axiosClient.get("/staff");
