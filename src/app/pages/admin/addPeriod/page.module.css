@@ -1,0 +1,93 @@
+.mainContainer {
+  max-width: 500px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 32px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.formRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 24px;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 140px;
+  min-width: 140px;
+}
+.label {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.inputValue {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.saveButton {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 18px;
+  align-self: flex-end;
+  transition: background 0.2s;
+}
+.saveButton:hover {
+  background: #0056b3;
+}
+.periodListSection {
+  margin-top: 16px;
+}
+.subHeading {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.periodList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.periodItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f7f7f7;
+  border-radius: 4px;
+  padding: 8px 14px;
+}
+.periodName {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.periodTime {
+  font-size: 0.98rem;
+  color: #555;
+  margin-left: 18px;
+}
+.noPeriod {
+  color: #888;
+  text-align: center;
+  padding: 12px 0;
+}

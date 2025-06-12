@@ -18,7 +18,7 @@ export default function AddSubject() {
 
   async function handleAddSubject() {
     if (subjectName.trim() === "") return;
-    await addSubject({ subjectName: subjectName });
+    await addSubject({ name: subjectName });
     setSubjectName("");
     loadSubjects();
   }
@@ -51,7 +51,7 @@ export default function AddSubject() {
           ) : (
             subjects?.map((subj, idx) => (
               <li key={subj.id || idx} className={styles.subjectItem}>
-                <span className={styles.subjectName}>{subj.subjectName}</span>
+                <span className={styles.subjectName}>{subj.name}</span>
                 <button className={styles.deleteButton} onClick={() => handleDeleteSubject(subj._id)}>
                   Delete
                 </button>

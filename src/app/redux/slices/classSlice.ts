@@ -7,6 +7,7 @@ export const classSlice = createSlice({
     examTypeList: [],
     subjectList: [],
     teacherList: [],
+    periodList: [],
   },
   reducers: {
     setMasterData: (state, action) => {
@@ -14,6 +15,7 @@ export const classSlice = createSlice({
       state.examTypeList = action.payload.examTypeList;
       state.subjectList = action.payload.subjectList;
       state.teacherList = action.payload.teacherList;
+      state.periodList = action.payload.periodList;
     },
   },
 });

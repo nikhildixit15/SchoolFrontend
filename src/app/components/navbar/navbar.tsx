@@ -181,6 +181,9 @@ function MMSNavbar() {
               <NavDropdown.Item>
                 <Link href="/pages/admin/assignedPeriods">Assigned Periods</Link>
               </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="/pages/admin/addPeriod">Add Period</Link>
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>

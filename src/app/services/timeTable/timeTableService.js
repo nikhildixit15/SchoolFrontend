@@ -21,8 +21,17 @@ export async function getClassWiseTimeTable(data) {
 }
 
 export async function getDayWiseTimeTable(data) {
-  if (isMock) {
+  if (!isMock) {
     return dayWiseTimeTable;
   }
-  return await axiosClient.get("/student");
+  console.log("###data", data);
+  return await axiosClient.get("/timetable/day_wise", data);
 }
+
+export async function addPeriodInTimeTable(data) {
+  if (!isMock) {
+    return dayWiseTimeTable;
+  }
+  return await axiosClient.post("/timeTable", data);
+}
+

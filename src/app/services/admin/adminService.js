@@ -60,3 +60,20 @@ export async function deleteSubject(id) {
   }
   return await axiosClient.del(`/subject/${id}`);
 }
+
+export async function addPeriod(data) {
+  if (!isMock) {
+      return [...(subjectList || []), { ...data, _id: Math.random().toString() }];
+
+  }
+    return await axiosClient.post("/period", data);
+
+}
+
+export async function getPeriodList() {
+  if (!isMock) {
+  return { data: [] };
+
+  }
+    return await axiosClient.get("/period");
+}
