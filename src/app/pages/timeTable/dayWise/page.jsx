@@ -36,10 +36,8 @@ export default function TeacherWise() {
   function handleDaySelect(value) {
     setDayName(value);
     getTableData({ day: value?.value });
-  }
-
-  function handleClassSectionChange({ className, sectionName }) {
-    // getTableData({ classId: className?.id, section: sectionName?.value, day: dayName?.value });
+        // getTableData({ classId: className?.id, section: sectionName?.value });// get class wise
+    // getTableData({ teacherId: teacherName?.id });// get teacher wise
 
   }
 
