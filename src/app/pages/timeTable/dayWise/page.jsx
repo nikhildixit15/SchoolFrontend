@@ -12,8 +12,6 @@ export default function TeacherWise() {
   const [tableData, setTableDAta] = useState([]);
   const [dayName, setDayName] = useState();
   const [daysOptionList, setDaysOptionList] = useState();
-  const [selectedClass, setSelectedClass] = useState();
-  const [selectedSection, setSelectedSection] = useState();
 
   useEffect(() => {
     // getTableData({});
@@ -37,19 +35,18 @@ export default function TeacherWise() {
 
   function handleDaySelect(value) {
     setDayName(value);
+    getTableData({ day: value?.value });
   }
 
   function handleClassSectionChange({ className, sectionName }) {
-    setSelectedClass(className);
-    setSelectedSection(sectionName);
-    getTableData({ classId: className?.id, section: sectionName?.value, day: dayName?.value });
+    // getTableData({ classId: className?.id, section: sectionName?.value, day: dayName?.value });
+
   }
 
   return (
     <>
       <main>
         <div>
-          <ClassSecFilter getStudentData={handleClassSectionChange} />
           <div className={styles.dropdownContainer}>
             <label>Day Name:</label>
             <Select
