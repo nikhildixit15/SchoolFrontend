@@ -12,10 +12,16 @@ axios.defaults.baseURL = "http://localhost:8000";
 
 export async function get(url: string, params?: any) {
   try {
+    if(params)  {
+      const response = await axios.get(url, { params });
+    return response;
+    }
+    // If no params are provided, just make a simple GET request
     const response = await axios.get(url);
     return response;
-  } catch (error) {
-    alert(error);
+      
+     } catch (error) {
+        alert(error); 
   }
 }
 
@@ -38,3 +44,13 @@ export async function put(url: string, data: any) {
   }
 
 }
+
+export async function del(url: string, data?: any) {
+  try {
+    const response = await axios.delete(url, data);
+    return response;
+  } catch (error) {
+    alert(error);
+  }
+}
+

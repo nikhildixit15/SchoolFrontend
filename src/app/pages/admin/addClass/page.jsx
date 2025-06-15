@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import AddClass from "./addClass";
 import AddSection from "./addSection";
-import { addClass, getClassList, updateClass } from "@/app/services/amin/adminService";
+import { addClass, getClassList, updateClass } from "@/app/services/admin/adminService";
 
 export default function ClassMaster() {
   const [classList, setClassList] = useState([]);

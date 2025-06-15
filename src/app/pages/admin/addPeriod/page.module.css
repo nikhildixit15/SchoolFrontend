@@ -1,23 +1,12 @@
-.description {
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-}
-.departmentInput {
-  margin: 15px;
-}
 .mainContainer {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   max-width: 500px;
   margin: 40px auto;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   padding: 32px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
 .heading {
@@ -28,17 +17,22 @@
 }
 .formRow {
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px 24px;
   align-items: flex-end;
-  gap: 16px;
+  margin-bottom: 12px;
+}
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 140px;
+  min-width: 140px;
 }
 .label {
   font-weight: 500;
-  margin-bottom: 0;
-  min-width: 110px;
+  margin-bottom: 6px;
 }
 .inputValue {
-  flex: 1;
-  min-width: 0;
   padding: 8px 12px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -48,17 +42,18 @@
   background: #007bff;
   color: #fff;
   border: none;
-  padding: 8px 20px;
+  padding: 10px 24px;
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
-  margin-left: 8px;
+  margin-top: 18px;
+  align-self: flex-end;
   transition: background 0.2s;
 }
 .saveButton:hover {
   background: #0056b3;
 }
-.subjectListSection {
+.periodListSection {
   margin-top: 16px;
 }
 .subHeading {
@@ -66,7 +61,7 @@
   font-weight: 500;
   margin-bottom: 10px;
 }
-.subjectList {
+.periodList {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -74,7 +69,7 @@
   flex-direction: column;
   gap: 10px;
 }
-.subjectItem {
+.periodItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -82,33 +77,17 @@
   border-radius: 4px;
   padding: 8px 14px;
 }
-.subjectName {
+.periodName {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
 }
-.deleteButton {
-  background: #dc3545;
-  color: #fff;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-left: 12px;
-  transition: background 0.2s;
+.periodTime {
+  font-size: 0.98rem;
+  color: #555;
+  margin-left: 18px;
 }
-.deleteButton:hover {
-  background: #a71d2a;
-}
-.noSubject {
+.noPeriod {
   color: #888;
   text-align: center;
   padding: 12px 0;
-}
-.footer {
-  margin-top: auto;
-  text-align: center;
-  color: #888;
-  font-size: 0.95rem;
-  padding: 16px 0 0 0;
 }

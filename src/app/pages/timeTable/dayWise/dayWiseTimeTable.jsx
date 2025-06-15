@@ -25,56 +25,18 @@ function DayWiseTimeTable({ tableData }) {
         {tableData?.map((item) => (
           <tr>
             <td>{item.teacherName}</td>
-            <td>{Object.keys(item.periods).length}</td>
+            <td>{item.periods.length}</td>
+            {item.periods.map ((period) => (
             <td>
               <div className={styles.rowItem}>
-                <label>{item.periods.p1?.className}</label>
-                <label>{item.periods.p1?.subject}</label>
+                <label>{period.className}</label>
+                <label>{period.subjectName}</label>
               </div>
             </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p2?.className}</label>
-                <label>{item.periods.p2?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p3?.className}</label>
-                <label>{item.periods.p3?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p4?.className}</label>
-                <label>{item.periods.p4?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p5?.className}</label>
-                <label>{item.periods.p5?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p6?.className}</label>
-                <label>{item.periods.p6?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p7?.className}</label>
-                <label>{item.periods.p7?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p8?.className}</label>
-                <label>{item.periods.p8?.subject}</label>
-              </div>
-            </td>
+            ))}
+    
           </tr>
+
         ))}
       </tbody>
     </Table>
