@@ -21,15 +21,14 @@ export default function App({ children }) {
 
   async function loadMasterData() {
      const response= await getMasterData();
-    const { classList, examTypeList, subjectList, teacherList } = response.data;
-
-console.log("###classList", classList)
+    const { classList, examTypeList, subjectList, staffList } = response.data;
+console.log("###staffList", staffList);
     dispatch(
       setMasterData({
         examTypeList,
         subjectList,
         classes: classList,
-        teacherList,
+        teacherList: staffList,
       })
     );
   }
