@@ -1,0 +1,68 @@
+.listRowContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 8px 0;
+  background-color: #fff;
+  padding: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.listRowContainerSingle {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+  background-color: #fff;
+  padding: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.listRow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 6px 12px;
+  font-size: 1em;
+}
+
+.divider {
+  border-right: 2px solid #b3b3b3;
+  margin-right: 12px;
+}
+
+.rowItemText {
+  color: #1abc1a;
+  font-weight: 600;
+  margin-right: 8px;
+  min-width: 110px;
+  white-space: nowrap;
+}
+
+.rowItemValue {
+  margin-left: 8px;
+  color: #222;
+  font-weight: 400;
+  word-break: break-all;
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .listRowContainer,
+  .listRowContainerSingle {
+    flex-direction: column;
+    padding: 8px 0;
+  }
+  .listRow {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6px 6vw;
+  }
+  .divider {
+    border-right: none;
+    border-bottom: 2px solid #b3b3b3;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
