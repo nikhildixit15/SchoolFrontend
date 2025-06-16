@@ -16,77 +16,108 @@
   margin-right: 20px;
 }
 
+/* Container for the whole card */
 .profileCardContainer {
   background: #fff;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid #e0e0e0;
   width: 350px;
   overflow: hidden;
   font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+/* Header section */
 .profileHeaderBlue {
   background: #e6f0ff;
   color: #0066cc;
-  padding: 10px 16px;
+  padding: 14px 20px;
   font-weight: bold;
   display: flex;
   align-items: center;
   border-bottom: 2px solid #b3d1ff;
+  font-size: 1.15em;
 }
 
 .profileHeaderIcon {
-  margin-right: 8px;
+  margin-right: 10px;
+  font-size: 1.5em;
 }
 
+/* Main content */
 .profileMain {
-  padding: 16px;
+  padding: 20px 18px 18px 18px;
 }
 
+/* Profile image styling */
 .profileImageBox {
   display: flex;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 
 .profileImage {
-  width: 230px;
-  height: 320px;
-  border-radius: 50%;
-  border: 2px solid #b3d1ff;
+  width: 160px;
+  height: 220px;
+  border-radius: 15%;
+  border: 3px solid #b3d1ff;
   object-fit: cover;
+  background: #f5f5f5;
 }
 
-.studentNameBox {
+/* Name styling */
+.staffNameBox {
   display: flex;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-.studentName {
+.staffName {
   background: #1abc1a;
   color: #fff;
-  padding: 6px 18px;
-  border-radius: 6px;
-  font-size: 1.1em;
+  padding: 8px 22px;
+  border-radius: 8px;
+  font-size: 1.15em;
   font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
+/* Details section */
 .profileDetails {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .profileRow {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .labelGreen {
   color: #1abc1a;
   font-weight: bold;
+  min-width: 110px;
 }
 
 .value {
   color: #222;
+  text-align: right;
+  word-break: break-all;
+}
+
+/* Responsive for small screens */
+@media (max-width: 500px) {
+  .profileCardContainer {
+    width: 98vw;
+    min-width: unset;
+  }
+  .profileMain {
+    padding: 12px 4vw;
+  }
+  .profileImage {
+    width: 120px;
+    height: 120px;
+  }
 }

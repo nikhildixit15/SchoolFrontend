@@ -3,9 +3,6 @@ import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
 export async function getStaffList(data) {
-  if (!isMock) {
-    return staffList;
-  }
   return await axiosClient.get("/staff");
 }
 
@@ -39,4 +36,10 @@ export async function addDesignation(data) {
 
 export async function saveStudentInfo(data) {
   return await axiosClient.post("/staff", data);
+}
+
+export async function getStaffById(data) {
+  const id = data.id;
+  const response = await axiosClient.get(`/staff/${id}`);
+  return response.data;
 }

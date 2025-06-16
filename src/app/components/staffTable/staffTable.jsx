@@ -31,30 +31,47 @@ function StaffTable({ staffList }) {
             <td>{index + 1}</td>
             <td>{item.adminInfo?.employeeId}</td>
             <td>
-              {item.basicInfo?.firstName} {item.basicInfo?.lastName}
+              {item.basicInfo?.firstName || item.firstName} {item.basicInfo?.lastName || item.lastName}
             </td>
-            <td>{item.profileDetails.department}</td>
-            <td>{item.profileDetails.designation}</td>
-            <td>{item.qualification}</td>
-            <td>{item.classes}</td>
-            <td>{item.classTeacher}</td>
-            <td>{item.basicInfo?.dob}</td>
-            <td>{item.basicInfo?.gender}</td>
             <td>
-              {item.address
-                ? `${item.address.permanentAddress || ""} (${
-                    item.address.permanentPinCode || ""
-                  })`
-                : ""}
+              {item.profileDetails?.department || item.department}
             </td>
-            <td>{item.adminInfo?.userName}</td>
-            <td>{item.adminInfo?.password}</td>
-            <td>{item.mobileNumber}</td>
+            <td>
+              {item.profileDetails?.designation || item.designation}
+            </td>
+            <td>
+              {item.qualification}
+            </td>
+            <td>
+              {item.classes}
+            </td>
+            <td>
+              {item.classTeacher}
+            </td>
+            <td>
+              {item.basicInfo?.dob || item.dob}
+            </td>
+            <td>
+              {item.basicInfo?.gender || item.gender}
+            </td>
+            <td>
+              {item.address?.permanentAddress || item.address || ""} ({item.address?.permanentPinCode || ""})
+            </td>
+            <td>
+              {item.adminInfo?.userName || item.userName}
+            </td>
+            <td>
+              {item.adminInfo?.password || item.password}
+            </td>
+            {console.log("Row item:", item)}
+            <td>
+              {item.basicInfo?.mobileNumber?.trim() || item.mobileNumber?.trim() || item.familyInfo?.mobileNumber?.trim() || "N/A"}
+            </td>
             <td>
               <Link
                 href={{
                   pathname: "/pages/staff/staffDetails",
-                  query: { student: JSON.stringify(item) },
+                  query: { staffId:item._id },
                 }}
               >
                 view
