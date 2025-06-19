@@ -9,10 +9,10 @@ import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
 export async function getStudentAttendanceList(data) {
-  if (isMock) {
+  if (!isMock) {
     return studentAttendanceList;
   }
-  return await axiosClient.get("/studentAttendanceList");
+  return await axiosClient.get("/attendance/class_wise", data);
 }
 
 export async function getClasswiseAttendanceList(data) {
@@ -42,3 +42,12 @@ export async function getStudentAttendanceById(data) {
   }
   return await axiosClient.get("/studentAttendance");
 }
+
+export async function saveAttendance(data) {
+  return await axiosClient.post("/attendance", data);
+}
+
+export async function updateAttendance(data) {
+  return await axiosClient.put("/attendance", data);
+}
+

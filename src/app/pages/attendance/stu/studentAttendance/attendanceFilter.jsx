@@ -2,8 +2,10 @@ import Select from "react-select";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { useSelector } from "react-redux";
+import { getClassOptionList } from "@/app/utils/optionListUtils";
 
 export default function AttendanceFilter({ getStudentData }) {
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // Default to today's date
   const [className, setClassName] = useState();
   const [sectionName, setSectionName] = useState();
   const [classOptionList, setClassOptionList] = useState();
@@ -17,16 +19,7 @@ export default function AttendanceFilter({ getStudentData }) {
   }, [classes]);
 
   function createOptionList() {
-    const list = [];
-    classes.map((item) => {
-      list.push({
-        id: item.id,
-        value: item.className,
-        label: item.className,
-        sec: item.sec,
-      });
-    });
-    setClassOptionList(list);
+    setClassOptionList(getClassOptionList(classes));
   }
 
   function handleClassSelect(value) {
@@ -49,7 +42,9 @@ export default function AttendanceFilter({ getStudentData }) {
   }
 
   function onDatedSelected(event) {
-    console.log("onDatedSelected", event.target.value);
+   const str = new Date(event.target.value).toISOString().split("T")[0]; // Format the date to YYYY-MM-DD
+    setSelectedDate(str);
+    console.log("onDatedSelected", str);
   }
 
   return (
@@ -57,7 +52,7 @@ export default function AttendanceFilter({ getStudentData }) {
       <div className={styles.container}>
         <div className={styles.dropdownContainer}>
           <label>Date:</label>
-          <input type="date" id="date" name="date" onInput={onDatedSelected} />
+          <input type="date" id="date" name="date" value={selectedDate} onInput={onDatedSelected} />
         </div>
         <div className={styles.dropdownContainer}>
           <label>Class:</label>
@@ -79,7 +74,7 @@ export default function AttendanceFilter({ getStudentData }) {
         </div>
 
         <button
-          onClick={() => getStudentData({ className, sectionName })}
+          onClick={() => getStudentData({selectedDate:selectedDate, classId:className.id, className: className.value, section: sectionName.value})}
           className={styles.btn}
         >
           Get data

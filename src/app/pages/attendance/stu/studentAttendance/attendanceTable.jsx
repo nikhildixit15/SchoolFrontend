@@ -7,7 +7,7 @@ function AttendanceTable({ students, onAttendanceChange }) {
   console.log("students####", students);
 
   function handleAttendanceSection(selectedValue, index) {
-    students[index].attendance = selectedValue.label;
+    students[index].status = selectedValue.value;
     onAttendanceChange(students);
   }
 
@@ -30,16 +30,16 @@ function AttendanceTable({ students, onAttendanceChange }) {
         {students?.map((item, index) => (
           <tr>
             <td>{index + 1}</td>
-            <td>{item.studentId}</td>
-            <td>{item.name}</td>
+            <td>{item.userName}</td>
+            <td>{item.studentName}</td>
             <td>{item.fatherName}</td>
-            <td>{item.class}</td>
-            <td>{item.sex}</td>
-            <td>{item.mobileNumber}</td>
+            <td>{item.className}</td>
+            <td>{item.gender}</td>
+            <td>{item.mobile}</td>
             <td>
               <Select
                 className={styles.classDropdown}
-                value={{ label: item.attendance, value: item.attendance }}
+                value={{ label: item.status, value: item.status }}
                 onChange={(event) => handleAttendanceSection(event, index)}
                 options={attendanceTypeList}
               />
