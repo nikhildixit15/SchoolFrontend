@@ -3,9 +3,6 @@ import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
 export async function getStudents(data: any) {
-  if (!isMock) {
-    return studentListByClass;
-  }
   return await axiosClient.get("/student");
 }
 
