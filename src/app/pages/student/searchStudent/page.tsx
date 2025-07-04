@@ -7,39 +7,49 @@ import { useEffect, useState } from "react";
 import { getStudents } from "@/app/services/student/studentService";
 
 export default function SearchStudent() {
-  const [students, setStudents] = useState<any>();
-  const [filteredList, setFilteredList] = useState<any>();
+  const [students, setStudents] = useState<any[]>([]);
+  const [filteredList, setFilteredList] = useState<any[]>([]);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
-    getStudentData({});
+    getStudentData();
   }, []);
 
-  async function getStudentData(data: any) {
-    const result = await getStudents(data);
-    console.log("####", result);
-    setStudents(result);
+  async function getStudentData() {
+    const result = await getStudents({});
+    setStudents(result?.data || []);
+    // setFilteredList(result?.data || []);
+    console.log("Fetched students:", result);
   }
 
   function onTextChange(event: any) {
-    const value = event.target.value;
+    const value = event.target.value.trim().toLowerCase();
+    setSearchValue(event.target.value);
     if (!value) {
       setFilteredList([]);
     } else {
       const list = students.filter((item: any) =>
         (
-          item.name +
-          item.userName +
-          item.fatherName +
-          item.motherName +
-          item.mobileNumber +
-          item.dob +
-          item.address +
-          item.adarNo
-        ).includes(value)
+          (item.name || "") +
+          (item.userName || "") +
+          (item.fatherName || "") +
+          (item.motherName || "") +
+          (item.mobileNumber || "") +
+          (item.dob || "") +
+          (typeof item.address === "string"
+            ? item.address
+            : (item.address?.permanentAddress || item.address?.currentAddress || "")) +
+          (item.adarNo || "")
+        )
+          .toLowerCase()
+          .includes(value)
       );
       setFilteredList(list);
+      console.log("Filtered list:", list);
     }
+    console.log("All students:", students);
   }
+
   return (
     <>
       <main>
@@ -47,15 +57,16 @@ export default function SearchStudent() {
           <label>
             Search for anything like Student name, father's name, mobile number,
             user name etc.
-            <input name="myInput" onInput={onTextChange} />
+            <input name="myInput" value={searchValue} onChange={onTextChange} />
           </label>
 
-          <StudentTable students={filteredList}></StudentTable>
+          <StudentTable students={filteredList} />
 
           <Link href={"/pages/login"}>Got to Login</Link>
-          <br/>
-          <button><Link href={"./nikhilStudent"}>Class wise Strength</Link></button>
-           {/* Or Path/pages/student/nikhilStudent */}
+          <br />
+          <button>
+            <Link href={"./nikhilStudent"}>Class wise Strength</Link>
+          </button>
         </div>
       </main>
     </>
