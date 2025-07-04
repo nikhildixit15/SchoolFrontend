@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 import { getStudents } from "@/app/services/student/studentService";
 
 export default function SearchStudent() {
-  const [students, setStudents] = useState<any[]>([]);
-  const [filteredList, setFilteredList] = useState<any[]>([]);
+  const [students, setStudents] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
@@ -22,13 +22,13 @@ export default function SearchStudent() {
     console.log("Fetched students:", result);
   }
 
-  function onTextChange(event: any) {
+  function onTextChange(event) {
     const value = event.target.value.trim().toLowerCase();
     setSearchValue(event.target.value);
     if (!value) {
       setFilteredList([]);
     } else {
-      const list = students.filter((item: any) =>
+      const list = students.filter((item) =>
         (
           (item.name || "") +
           (item.userName || "") +
@@ -64,9 +64,6 @@ export default function SearchStudent() {
 
           <Link href={"/pages/login"}>Got to Login</Link>
           <br />
-          <button>
-            <Link href={"./nikhilStudent"}>Class wise Strength</Link>
-          </button>
         </div>
       </main>
     </>
