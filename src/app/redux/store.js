@@ -4,7 +4,6 @@ import { persistReducer, persistStore } from "redux-persist";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import storage from "redux-persist/lib/storage";
 
-//This is store file
 const persistConfig = {
   key: "root",
   storage,
