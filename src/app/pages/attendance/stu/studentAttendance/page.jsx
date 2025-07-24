@@ -13,7 +13,6 @@ export default function StudentList() {
 
 
   async function getStudentData(data) {
-    console.log("####data", data);
     setBasicInfo(data)
     const result = await getStudentAttendanceList(data);
     console.log("####", result);
@@ -21,13 +20,13 @@ export default function StudentList() {
   }
 
   async function onAttendanceChange(studentList) {
-    console.log("onAttendanceChange", studentList);
     const list = studentList.map(item=>item);
     setStudents(list);
   }
 
   async function saveButtonClicked() {
     const payload = {
+      _id: students.length>0?students[0]._id: null, // This should be replaced with the actual attendance ID if available
       classId: basicInfo.classId,
       className: basicInfo.className,
       section: basicInfo.section,
@@ -35,7 +34,8 @@ export default function StudentList() {
       markedBy: "68455b6641509e199ab0ab88", // This should be replaced with the actual user ID
       students: students.map((student) => ({
         studentId: student.studentId,
-        status: student.status || "Absent", // Default to Present if not specified
+        // _id: student._id, // Assuming each student has a unique ID
+        status: student.status || "Absent", // Default to Absent if not specified
       })),
     };
     console.log("Attendance saved successfully", payload);

@@ -18,7 +18,6 @@ export default function TeacherWise() {
   });
 
   useEffect(() => {
-    getTableData({});
     createTeachersOptionList();
   }, []);
 
@@ -39,6 +38,8 @@ export default function TeacherWise() {
 
   function handleTeacherSelect(value) {
     setTeacherName(value);
+    getTableData({teacherId: value?.id});
+
   }
 
   return (

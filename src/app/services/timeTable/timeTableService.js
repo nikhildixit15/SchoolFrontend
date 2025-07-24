@@ -7,9 +7,7 @@ import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
 export async function getTeacherWiseTimeTable(data) {
-  if (isMock) {
-    return teacherWiseTimeTable;
-  }
+
   return await axiosClient.get("/timetable/teacher_wise", data);
 }
 

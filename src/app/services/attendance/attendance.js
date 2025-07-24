@@ -9,10 +9,7 @@ import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
 export async function getStudentAttendanceList(data) {
-  if (!isMock) {
-    return studentAttendanceList;
-  }
-  return await axiosClient.get("/attendance/class_wise", data);
+  return await axiosClient.get("/attendance", data);
 }
 
 export async function getClasswiseAttendanceList(data) {
