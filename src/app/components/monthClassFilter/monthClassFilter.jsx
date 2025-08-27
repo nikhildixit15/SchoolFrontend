@@ -1,3 +1,5 @@
+"use client";
+
 import Select from "react-select";
 import { useEffect, useState } from "react";
 import styles from "./classSecFilter.module.css";

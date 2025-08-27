@@ -26,16 +26,16 @@ function ClasswiseTable({ listData }) {
         {listData?.map((item, index) => (
           <tr>
             <td>{index + 1}</td>
-            <td>{item.classTeacher}</td>
-            <td>{item.class}</td>
-            <td>{item.total}</td>
-            <td>{item.present}</td>
-            <td>{item.absent}</td>
-            <td>{item.earlyLeave}</td>
-            <td>{item.holidays}</td>
-            <td>{item.supervision}</td>
-            <td>{item.NIWD}</td>
-            <td>{item.medicalLeave}</td>
+            <td>{item?.classTeacher}</td>
+            <td>{item?.class}</td>
+            <td>{item?.total}</td>
+            <td>{item?.present}</td>
+            <td>{item?.absent}</td>
+            <td>{item?.earlyLeave}</td>
+            <td>{item?.holidays}</td>
+            <td>{item?.supervision}</td>
+            <td>{item?.NIWD}</td>
+            <td>{item?.medicalLeave}</td>
           </tr>
         ))}
       </tbody>

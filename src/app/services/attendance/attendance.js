@@ -13,10 +13,7 @@ export async function getStudentAttendanceList(data) {
 }
 
 export async function getClasswiseAttendanceList(data) {
-  if (isMock) {
-    return classwiseAttendanceList;
-  }
-  return await axiosClient.get("/classwiseAttendance");
+  return await axiosClient.get("/attendance/classWise", data);
 }
 
 export async function getDatewiseAttendanceList(data) {

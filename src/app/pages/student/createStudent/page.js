@@ -251,6 +251,7 @@ export default function CreateStudent() {
                 onChange={classValueChanged
                 }
                 options={classOptionList}
+                instanceId="class-select"
               />
   
             </div>
@@ -263,6 +264,7 @@ export default function CreateStudent() {
                 onChange={sectionValueChanged
                 }
                 options={sectionList}
+                instanceId="section-select"
               />
             </div>
           </div>
@@ -292,6 +294,7 @@ export default function CreateStudent() {
                 onChange={bloodGroupValueChanged
                 }
                 options={bloodGroups}
+                instanceId="blood-group-select"
               />
 
             </div>
@@ -435,9 +438,10 @@ export default function CreateStudent() {
                 className={styles.inputValue}
                 value={religiousValue}
                 placeholder={"Enter Religion"}
-                onChange={religionValueChanged 
+                onChange={religionValueChanged
                 }
                 options={religionList}
+                instanceId="religion-select"
               />
               
             </div>
@@ -451,6 +455,7 @@ export default function CreateStudent() {
                 onChange={categoryValueChanged
                 }
                 options={categoryList}
+                instanceId="category-select"
               />
             </div>
           </div>

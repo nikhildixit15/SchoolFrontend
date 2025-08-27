@@ -1,3 +1,5 @@
+"use client";
+
 import Select from "react-select";
 import { useEffect, useState } from "react";
 import styles from "./classSecFilter.module.css";
@@ -48,6 +50,7 @@ export default function ClassSecFilter({ getStudentData }) {
             value={className}
             onChange={handleClassSelect}
             options={classOptionList}
+            instanceId="class-sec-filter-class"
           />
         </div>
         <div className={styles.dropdownContainer}>
@@ -57,6 +60,7 @@ export default function ClassSecFilter({ getStudentData }) {
             value={sectionName}
             onChange={handleSectionSelect}
             options={sectionOptionList}
+            instanceId="class-sec-filter-section"
           />
         </div>
 
