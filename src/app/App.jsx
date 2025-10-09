@@ -21,7 +21,7 @@ export default function App({ children }) {
 
   async function loadMasterData() {
      const response= await getMasterData();
-    const { classList, examTypeList, subjectList, staffList, periodList } = response.data;
+    const { classList, examTypeList, subjectList, staffList, periodList, streamList } = response.data;
 
     dispatch(
       setMasterData({
@@ -29,7 +29,8 @@ export default function App({ children }) {
         subjectList,
         classes: classList,
         teacherList: staffList,
-       periodList
+       periodList,
+       streamList
       })
     );
   }

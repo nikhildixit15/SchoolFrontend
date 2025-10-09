@@ -51,7 +51,7 @@ export default function AddDesignation({
       <label>Designation</label>
 
       <input
-        className={styles.departmentInput}
+        className={styles.departmentInput} 
         name="designation"
         onInput={onTextChanged}
       />
@@ -67,7 +67,7 @@ export default function AddDesignation({
         </thead>
         <tbody>
           {designationList?.map((item, index) => (
-            <tr>
+            <tr key={index}>
               <td>{index + 1}</td>
               <td>{item.name}</td>
               <td>

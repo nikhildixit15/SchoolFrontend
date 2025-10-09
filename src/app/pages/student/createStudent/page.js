@@ -10,10 +10,10 @@ import {
 import { Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getClassOptionList } from "@/app/utils/optionListUtils";
-import { bloodGroups, categoryList, religionList, sectionList } from "@/app/utils/constants";
+import { bloodGroups, categoryList, religionList } from "@/app/utils/constants";
 
 export default function CreateStudent() {
-  const [stdBasicInfo, setStdBasicInfo] = useState();
+  const [stdBasicInfo, setStdBasicInfo] = useState({gender:"Male"});
   const [stuAddress, setStuAddress] = useState({});
   const [stuFamilyDetails, setStuFamilyDetails] = useState({});
   const [previousSchoolInfo, setPreviousSchoolInfo] = useState({});
@@ -24,6 +24,7 @@ export default function CreateStudent() {
   const [classValue, setClassValue] = useState();
   const [categoryValue, setCategoryValue] = useState();
   const [religiousValue, setReligiousValue] = useState();
+  const [sectionList, setSectionList] = useState(); 
 
   const classes = useSelector((state) => state.class.classes);
 
@@ -42,110 +43,124 @@ export default function CreateStudent() {
     console.log("####", result);
   }
 
-  function classValueChanged(value){
-      setStdBasicInfo({
-        ...stdBasicInfo,
-        className: value.value,
-      })
-      setClassValue(value)
+  function sectioData(value) {
+    const selectedClass = classes.find((cls) => cls._id === value.id);
+    if (selectedClass) {
+      const sections =
+        selectedClass.sections?.map((sec) => ({
+          value: sec.name,
+          label: sec.name,
+        })) || [];
+      setSectionList(sections);
+    } else {
+      setSectionList([]);
+    }
   }
 
-  function bloodGroupValueChanged(value){
-      setStdBasicInfo({
-        ...stdBasicInfo,
-        bloodGroup: value.value,
-      })
-      setBloodGroupValue(value)
+  function classValueChanged(value) {
+    setStdBasicInfo({
+      ...stdBasicInfo,
+      className: value.value,
+    });
+    setClassValue(value);
+    sectioData(value);
   }
 
-  function sectionValueChanged(value){
-      setStdBasicInfo({
-        ...stdBasicInfo,
-        section: value.value,
-      })
-      setSectionValue(value)
+  function bloodGroupValueChanged(value) {
+    setStdBasicInfo({
+      ...stdBasicInfo,
+      bloodGroup: value.value,
+    });
+    setBloodGroupValue(value);
   }
 
-  function categoryValueChanged(value){
-      setStuFamilyDetails({
-        ...stuFamilyDetails,
-        category: value.value,
-      })
-      setCategoryValue(value)
+  function sectionValueChanged(value) {
+    setStdBasicInfo({
+      ...stdBasicInfo,
+      section: value.value,
+    });
+    setSectionValue(value);
   }
 
-  function religionValueChanged(value){
-      setStuFamilyDetails({
-        ...stuFamilyDetails,
-        religion: value.value,
-      })
-      setReligiousValue(value)
+  function categoryValueChanged(value) {
+    setStuFamilyDetails({
+      ...stuFamilyDetails,
+      category: value.value,
+    });
+    setCategoryValue(value);
+  }
+
+  function religionValueChanged(value) {
+    setStuFamilyDetails({
+      ...stuFamilyDetails,
+      religion: value.value,
+    });
+    setReligiousValue(value);
   }
 
   async function validateStudentData() {
-    if(!stdBasicInfo.firstName){
+    if (!stdBasicInfo.firstName) {
       alert("please enter firstName");
       return false;
     }
-    if(!stdBasicInfo.lastName){
-      alert("please enter lastName")
+    if (!stdBasicInfo.lastName) {
+      alert("please enter lastName");
       return false;
     }
-    if(!stdBasicInfo.className){
-      alert("please enter className")
+    if (!stdBasicInfo.className) {
+      alert("please enter className");
       return false;
     }
-    if(!stdBasicInfo.section){
-      alert("please enter section")
+    if (!stdBasicInfo.section) {
+      alert("please enter section");
       return false;
     }
-    if(!stdBasicInfo.dob){
-      alert("please enter dob")
+    if (!stdBasicInfo.dob) {
+      alert("please enter dob");
       return false;
     }
-    if(!stdBasicInfo.adarNo){
-      alert("please enter adarNo")
+    if (!stdBasicInfo.adarNo) {
+      alert("please enter adarNo");
       return false;
     }
-    if(!stuFamilyDetails.fatherName){
-      alert("please enter fatherName")
+    if (!stuFamilyDetails.fatherName) {
+      alert("please enter fatherName");
       return false;
     }
-    if(!stuFamilyDetails.motherName){
-      alert("please enter motherName")
+    if (!stuFamilyDetails.motherName) {
+      alert("please enter motherName");
       return false;
     }
-    if(!stuFamilyDetails.mobileNumber){
-      alert("please enter mobileNumber")
+    if (!stuFamilyDetails.mobileNumber) {
+      alert("please enter mobileNumber");
       return false;
     }
-    if(!stuAddress.permanentAddress){
-      alert("please enter permanentAddress")
+    if (!stuAddress.permanentAddress) {
+      alert("please enter permanentAddress");
       return false;
     }
 
-  return true;
+    return true;
   }
 
   async function postStudentData() {
-   const isValid = await validateStudentData();
+    const isValid = await validateStudentData();
 
     const payload = {
-      basicInfo:stdBasicInfo,
-      address:stuAddress,
-      familyInfo:stuFamilyDetails,
+      basicInfo: stdBasicInfo,
+      address: stuAddress,
+      familyInfo: stuFamilyDetails,
       previousSchoolInfo,
     };
 
-    console.log("###payload", payload)
-    if(isValid){
-     const response = await saveStudentInfo(payload);
-     if(response.data){
-      alert("Data saved successfully");
-     }else{
-      alert("Error while saving");
-     }
-      
+    console.log("###payload", payload);
+    if (isValid) {
+      const response = await saveStudentInfo(payload);
+      if (response.data) {
+        alert("Data saved successfully");
+      } else {
+        alert("Error while saving");
+      }
     }
   }
 
@@ -210,34 +225,36 @@ export default function CreateStudent() {
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Gender"}</label>
               <Form>
-                <Form.Check
-                  inline
-                  label="Male"
-                  name="genderGroup"
-                  type={"radio"}
-                  value={stdBasicInfo?.gender}
-                  onInput={(event) =>
-                    setStdBasicInfo({
-                      ...stdBasicInfo,
-                      gender: event.target.value,
-                    })
-                  }
-                  defaultChecked
-                />
-                <Form.Check
-                  inline
-                  label="Female"
-                  name="genderGroup"
-                  type={"radio"}
-                  value={stdBasicInfo?.gender}
-                  onInput={(event) =>
-                    setStdBasicInfo({
-                      ...stdBasicInfo,
-                      gender: event.target.value,
-                    })
-                  }
-                />
-              </Form>
+  <Form.Check
+    inline
+    label="Male"
+    name="genderGroup"
+    type="radio"
+    value="Male"
+    checked={stdBasicInfo.gender === "Male"}    
+    onChange={(event) =>
+      setStdBasicInfo({
+        ...stdBasicInfo,
+        gender: event.target.value,   
+      })
+    }
+  />
+  <Form.Check
+    inline
+    label="Female"
+    name="genderGroup"
+    type="radio"
+    value="Female"
+    checked={stdBasicInfo.gender === "Female"}   
+    onChange={(event) =>
+      setStdBasicInfo({
+        ...stdBasicInfo,
+        gender: event.target.value,   
+      })
+    }
+  />
+</Form>
+
             </div>
           </div>
 
@@ -248,12 +265,10 @@ export default function CreateStudent() {
                 className={styles.inputValue}
                 value={classValue}
                 placeholder={"Enter class name"}
-                onChange={classValueChanged
-                }
+                onChange={classValueChanged}
                 options={classOptionList}
                 instanceId="class-select"
               />
-  
             </div>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Section"}</label>
@@ -261,8 +276,7 @@ export default function CreateStudent() {
                 className={styles.inputValue}
                 value={sectionValue}
                 placeholder={"Enter section"}
-                onChange={sectionValueChanged
-                }
+                onChange={sectionValueChanged}
                 options={sectionList}
                 instanceId="section-select"
               />
@@ -291,44 +305,10 @@ export default function CreateStudent() {
                 className={styles.inputValue}
                 value={bloodGroupValue}
                 placeholder={"Enter blood group"}
-                onChange={bloodGroupValueChanged
-                }
+                onChange={bloodGroupValueChanged}
                 options={bloodGroups}
                 instanceId="blood-group-select"
               />
-
-            </div>
-          </div>
-
-          <div className={styles.fullRow}>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Admission Date"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Admission date"}
-                value={stdBasicInfo?.admissionDate}
-                onInput={(event) =>
-                  setStdBasicInfo({
-                    ...stdBasicInfo,
-                    admissionDate: event.target.value,
-                  })
-                }
-              ></input>
-            </div>
-
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Admission Date"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Admission date"}
-                value={stdBasicInfo?.admissionDate}
-                onInput={(event) =>
-                  setStdBasicInfo({
-                    ...stdBasicInfo,
-                    admissionDate: event.target.value,
-                  })
-                }
-              ></input>
             </div>
           </div>
         </div>
@@ -438,12 +418,10 @@ export default function CreateStudent() {
                 className={styles.inputValue}
                 value={religiousValue}
                 placeholder={"Enter Religion"}
-                onChange={religionValueChanged
-                }
+                onChange={religionValueChanged}
                 options={religionList}
                 instanceId="religion-select"
               />
-              
             </div>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Category"}</label>
@@ -452,8 +430,7 @@ export default function CreateStudent() {
                 className={styles.inputValue}
                 value={categoryValue}
                 placeholder={"Enter Category"}
-                onChange={categoryValueChanged
-                }
+                onChange={categoryValueChanged}
                 options={categoryList}
                 instanceId="category-select"
               />

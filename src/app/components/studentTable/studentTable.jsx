@@ -27,7 +27,7 @@ function StudentTable({ students }) {
 
       <tbody>
         {students?.map((item, index) => (
-          <tr>
+          <tr key={index}>
             <td>{index + 1}</td>
             <td>{item.name}</td>
             <td>{item.adarNo}</td>

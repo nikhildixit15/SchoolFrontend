@@ -5,16 +5,19 @@ import { useEffect, useState } from "react";
 import AddClass from "./addClass";
 import AddSection from "./addSection";
 import { addClass, getClassList, updateClass } from "@/app/services/admin/adminService";
+import { addSection } from "@/app/services/section/sectionService"; 
+import { useSelector } from "react-redux";
 
 export default function ClassMaster() {
   const [classList, setClassList] = useState([]);
-
+  
+  
   useEffect(() => {
     loadClassList();
   }, []);
 
   async function loadClassList() {
-    const list = await getClassList();
+    const list = await getClassList()
     setClassList(list);
   }
 
@@ -25,17 +28,34 @@ export default function ClassMaster() {
     setClassList([...classList, data]);
   }
 
-  async function addNewSection(data) {
-    const updatedClassList = classList.map(item=>{
-      if(data._id == item._id){
-        const newItem = {...item }
-        newItem.sec = data.sec;
-        return newItem;
+  // async function addNewSection(data) {
+  //   const updatedClassList = classList.map(item=>{
+  //     if(data._id == item._id){
+  //       const newItem = {...item }
+  //       newItem.code = data.code;
+  //       return newItem;
+  //     }
+  //     return item
+  //   })
+  //   const list = await updateClass(data);
+  //   setClassList(updatedClassList);// todo
+  // }
+
+   async function addNewSection(data) { 
+    const createdSection = await addSection(data);
+
+    // Update classList locally
+    const updatedClassList = classList.map(item => {
+      if (item._id === createdSection.classId) {
+        return {
+          ...item,
+          sections: [...(item.sections || []), createdSection]
+        };
       }
-      return item
-    })
-    const list = await updateClass(data);
-    setClassList(updatedClassList);// todo
+      return item;
+    });
+
+    setClassList(updatedClassList);
   }
   return (
     <>

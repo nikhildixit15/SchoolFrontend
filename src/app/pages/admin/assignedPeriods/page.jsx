@@ -36,27 +36,41 @@ export default function AssignedPeriods() {
 
   // When class changes, update section options
   useEffect(() => {
-    if (selectedClass && selectedClass.sec) {
-      const list = selectedClass.sec.map((item) => ({ value: item, label: item }));
+    if (selectedClass && selectedClass.sections) {
+      const list = selectedClass.sections.map((item) => ({
+        value: item.name,
+        label: item.name,
+      }));
       setSectionOptionList(list);
     } else {
       setSectionOptionList([]);
     }
   }, [selectedClass]);
-    console.log("Payload for adding period:", selectedSubject);
+  console.log("Payload for adding period:", selectedSubject);
 
   function handleAddPeriod() {
-    if (!selectedClass || !selectedSection || !selectedTeacher || !selectedSubject || !selectedDay || !selectedPeriod) {
+    if (
+      !selectedClass ||
+      !selectedSection ||
+      !selectedTeacher ||
+      !selectedSubject ||
+      !selectedDay ||
+      !selectedPeriod
+    ) {
       alert("Please fill all fields.");
       return;
     }
     const payload = {
-      classId: selectedClass.id, // assuming id is present in option object
-      section: selectedSection.value,
+      classId: selectedClass.id,
+      sectionId: selectedSection.id, // 👈 section ki actual _id bhejna hoga
       day: selectedDay.value,
-      periodId: selectedPeriod.id,
-      subjectId: selectedSubject.id, // assuming id is present in option object
-      teacherId: selectedTeacher.id, // assuming id is present in option object
+      schedule: [
+        {
+          periodId: selectedPeriod.id,
+          subjectId: selectedSubject.id,
+          teacherId: selectedTeacher.id,
+        },
+      ],
     };
     console.log("Payload for adding period:", payload);
     addPeriodInTimeTable(payload);
@@ -108,7 +122,10 @@ export default function AssignedPeriods() {
         <Select
           value={selectedDay}
           onChange={setSelectedDay}
-          options={daysList.map(day => ({ value: day.dayName, label: day.dayName }))}
+          options={daysList.map((day) => ({
+            value: day.dayName,
+            label: day.dayName,
+          }))}
           placeholder="Select Day"
         />
       </div>

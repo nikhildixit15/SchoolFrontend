@@ -12,9 +12,7 @@ export default function ClassWise() {
   const [className, setClassName] = useState();
   const [classOptionList, setClassOptionList] = useState();
 
-  const classList = useSelector((state) => {
-    return state.class.classes;
-  });
+  const classList = useSelector((state) => state.class.classes);
 
   useEffect(() => {
     getTableData({});
@@ -25,8 +23,8 @@ export default function ClassWise() {
   function createClassOptionList() {
     const list = [];
     classList?.map((item) => {
-      list.push({ ...item, value: item.className, label: item.className });
-    });
+      list.push({ ...item, value: item.name, label: item.name });
+    }); 
     setClassOptionList(list);
   }
 

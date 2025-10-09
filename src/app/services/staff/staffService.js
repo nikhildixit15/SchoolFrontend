@@ -21,14 +21,14 @@ export async function getDepartmentList(data) {
 }
 
 export async function addDepartment(data) {
-  if (isMock) {
+  if (!isMock) {
     return { success: true };
   }
-  return await axiosClient.post("/departmentList", data);
+  return await axiosClient.post("/department", data);
 }
 
 export async function addDesignation(data) {
-  if (isMock) {
+  if (!isMock) {
     return { success: true };
   }
   return await axiosClient.post("/designation", data);

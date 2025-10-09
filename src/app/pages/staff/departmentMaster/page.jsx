@@ -40,6 +40,7 @@ export default function DepartmentMaster() {
   async function addNewDesignation(data) {
     const list = await addDesignation(data);
     setDesignationList([...designationList, data]);
+    console.log([...designationList, data]);
   }
   return (
     <>

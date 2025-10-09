@@ -233,3 +233,17 @@ export const sectionList = [
     id: 4,
   }
 ];
+
+
+export const trainedList=[
+  {
+    label:"Trained",
+    value:"Trained",
+    id:1
+  },
+  {
+    label:"Untrained",
+    value:"Untrained",
+    id:2
+  }
+]
