@@ -8,6 +8,7 @@ export const classSlice = createSlice({
     subjectList: [],
     teacherList: [],
     periodList: [],
+    streamList:[]
   },
   reducers: {
     setMasterData: (state, action) => {
@@ -16,6 +17,7 @@ export const classSlice = createSlice({
       state.subjectList = action.payload.subjectList;
       state.teacherList = action.payload.teacherList;
       state.periodList = action.payload.periodList;
+      state.streamList = action.payload.streamList;
     },
   },
 });

@@ -6,7 +6,7 @@ export function getClassOptionList(classes=[]) {
         id: item.id || item._id,
         value: item.name,
         label: item.name,
-        sec: item.sec,
+        sections: item.sections,
       });
     });
    return list;;

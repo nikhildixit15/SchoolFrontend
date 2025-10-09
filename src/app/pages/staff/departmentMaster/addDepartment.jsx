@@ -27,7 +27,7 @@ export default function AddDepartment({ departmentList, addDepartment }) {
 
       <Table striped bordered hover>
         <thead>
-          <tr>
+          <tr >
             <th>#</th>
             <th>Department Name</th>
             <th>Action</th>
@@ -35,7 +35,7 @@ export default function AddDepartment({ departmentList, addDepartment }) {
         </thead>
         <tbody>
           {departmentList?.map((item, index) => (
-            <tr>
+            <tr key={index}>
               <td>{index + 1}</td>
               <td>{item.name}</td>
               <td>

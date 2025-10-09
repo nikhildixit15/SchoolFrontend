@@ -168,11 +168,7 @@ function MMSNavbar() {
                 <Link href={"/pages/admin/addClass"}>
                   Add Class
                 </Link>
-              </NavDropdown.Item>
-
-              <NavDropdown.Item href="/pages/student/studentList">
-                <Link href={"/pages/student/studentList"}>Add Section</Link>
-              </NavDropdown.Item>
+              </NavDropdown.Item>             
               <NavDropdown.Item>
                 <Link href={"/pages/admin/addSubject"}>
                   Add Subject

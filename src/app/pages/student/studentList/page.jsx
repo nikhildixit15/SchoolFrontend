@@ -33,8 +33,10 @@ export default function StudentList() {
 
             // Strict comparison for both class and section
             const isMatch =
-              student.className.trim() === data.className.value.trim() &&
-              student.section.trim() === data.sectionName.value.trim();
+              student.className.trim().toLowerCase() ===
+                data.className.label.trim().toLowerCase() &&
+              student.section.trim().toLowerCase() ===
+                data.sectionName.label.trim().toLowerCase();
 
             return isMatch;
           });

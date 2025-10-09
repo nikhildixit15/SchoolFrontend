@@ -3,25 +3,30 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Select from "react-select";
+import { useSelector } from "react-redux";
 
-export default function AddSection({
-  classList,
-  addSection,
-}) {
+export default function AddSection({ classList, addSection }) {
   const [sectionList, setSectionList] = useState([]);
   const [sectionName, setSectionName] = useState();
   const [className, setClassName] = useState();
   const [classOptionList, setClassOptionList] = useState();
 
+  const state = useSelector((state) => state.class.classes);
+
+  function sectioData(value) {
+    state.map((sec) => {
+      const selectedClass = state.find((cls) => cls._id === value._id);
+      if (selectedClass) {
+        const sections = selectedClass.sections?.map((sec) => sec.name ) || [];
+        setSectionList(sections);
+      } else {
+        setSectionList([]);
+      }
+    });
+  }
+
   useEffect(() => {
     loadClassList();
-    if(className){
-        const selectedClass = classList.find(item=>item._id == className._id )
-        setSectionList(selectedClass.sec);
-        console.log("###selectedClass", selectedClass);
-        setClassName(selectedClass);
-    }
-
   }, [classList]);
 
   async function loadClassList() {
@@ -30,7 +35,7 @@ export default function AddSection({
         _id: item._id,
         value: item.name,
         label: item.name,
-        sec: item.sec
+        code: item.code,
       };
     });
 
@@ -38,15 +43,24 @@ export default function AddSection({
   }
 
   function addNewSection() {
-    const secArr = [...className.sec ]
-    secArr.push(sectionName)
-    console.log("###className", className)
-    const classData = { _id:className._id, sec: secArr, name: className.value }
-    addSection(classData);
+     if (sectionList.includes(sectionName)) {
+    alert(`Section "${sectionName}" already exists in ${className.label}`);
+    return;
   }
+    const sectionData = {
+      name: sectionName,
+      classCode: className.code,
+      classTeacherId: "68c08f38d107101376272bb8",
+    };
+    console.log("###sectionData", sectionData);
+    addSection(sectionData);
+    setSectionList([...sectionList, sectionName]);
+    setSectionName("");
+  }
+
   function handleClassSelection(value) {
     setClassName(value);
-    setSectionList(value.sec)
+    sectioData(value);
   }
 
   function onTextChanged(event) {
@@ -67,10 +81,11 @@ export default function AddSection({
 
       <input
         className={styles.departmentInput}
-        name="designation"
+        value={sectionName || ""}
         onInput={onTextChanged}
+        disabled={!className}
       />
-      <button onClick={addNewSection}>Add Record</button>
+      <button onClick={addNewSection} disabled={!sectionName}>Add Record</button>
 
       <Table striped bordered hover>
         <thead>
@@ -82,7 +97,7 @@ export default function AddSection({
         </thead>
         <tbody>
           {sectionList?.map((item, index) => (
-            <tr>
+            <tr key={index}>
               <td>{index + 1}</td>
               <td>{item}</td>
               <td>

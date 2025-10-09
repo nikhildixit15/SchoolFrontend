@@ -15,27 +15,31 @@ export default function ClassSecFilter({ getStudentData }) {
 
   useEffect(() => {
     console.log(classes);
-   const list = getClassOptionList(classes);
-   setClassOptionList(list);
+    const list = getClassOptionList(classes);
+    setClassOptionList(list);
   }, [classes]);
 
   function handleClassSelect(value) {
+    //console.log(value)
     setClassName(value);
     createSectionOptionList(value);
   }
-
-  function handleSectionSelect(value) {
-    setSectionName(value);
+ 
+  function createSectionOptionList(data) {
+    // find class by name and build sections
+    const selectedClass = classes.find((c) => c.name === data.value);
+    if (selectedClass) {
+      const list = selectedClass.sections.map((sec) => ({
+        value: sec._id,
+        label: sec.name,
+      }));
+      setSectionOptionList(list); 
+    }
   }
 
-  function createSectionOptionList(value) {
-    const list = [];
-    const result = value.sec;
-    result.map((item) => {
-      list.push({ value: item, label: item });
-    });
-
-    setSectionOptionList(list);
+  // section select
+  function handleSectionSelect(selected) {
+    setSectionName(selected);
   }
 
   return (
@@ -56,7 +60,7 @@ export default function ClassSecFilter({ getStudentData }) {
             className={styles.classDropdown}
             value={sectionName}
             onChange={handleSectionSelect}
-            options={sectionOptionList}
+            options={sectionOptionList} 
           />
         </div>
 

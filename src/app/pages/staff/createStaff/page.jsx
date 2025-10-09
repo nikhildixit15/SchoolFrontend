@@ -2,9 +2,10 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { getStudentBasicInfo } from "@/app/services/student/studentService";
 import { saveStudentInfo } from "@/app/services/staff/staffService";
-
+import FileChooser from "@/app/components/fileChooser/fileChooser";
 
 import { Form } from "react-bootstrap";
 import Select from "react-select";
@@ -13,7 +14,13 @@ import {
   getDesignationList,
 } from "@/app/services/staff/staffService";
 import { getOptionList } from "@/app/utils/optionListUtils";
-import { categoryList, martialStatusList, religionList } from "@/app/utils/constants";
+import {
+  categoryList,
+  martialStatusList,
+  religionList,
+  bloodGroups,
+  trainedList,
+} from "@/app/utils/constants";
 
 export default function CreateStaff() {
   const [basicInfo, setBasicInfo] = useState({});
@@ -31,19 +38,49 @@ export default function CreateStaff() {
   const [religiousValue, setReligiousValue] = useState();
   const [martialStatusValue, setMartialStatusValue] = useState();
   const [categoryValue, setCategoryValue] = useState();
+  const [bloodValue, setBloodValue] = useState();
+  const [streamOptionList, setStreamOptionList] = useState();
+  const [streamValue, setStreamValue] = useState();
+  const [classValue, setClassValue] = useState();
+  const [classOptionList, setClassOptionList] = useState();
+  const [trainedValue, setTrainedValue] = useState();
+  const [profileValue, setProfileValue] = useState();
+
+  const streams = useSelector((state) => state.class.streamList);
+  const classes = useSelector((state) => state.class.classes);
 
   useEffect(() => {
+    console.log(streams);
     // fetchStudentBasicInfo();//for edit flow
     fetchDepartments();
     fetchDesignations();
-  }, []);
+    const list = getOptionList(streams);
+    setStreamOptionList(list);
+    const classlist = getOptionList(classes);
+    setClassOptionList(classlist);
+  }, [streams, classes]);
+
+  async function onFileSelected(event, item) {
+    const file = event.target.files[0];
+    console.log("####subjectList", file);
+
+    const formData = new FormData();
+    formData.append("file", file);
+    const attachmentData = {
+      attachment: formData,
+      name: file.name,
+      type: file.type,
+    }; 
+    setProfileValue(attachmentData);
+    console.log(profileValue);
+  }
 
   async function fetchStudentBasicInfo(data) {
     const result = await getStudentBasicInfo(data);
     setProfileDetails(result);
     console.log("####", result);
   }
-  
+
   async function fetchDepartments() {
     const response = await getDepartmentList();
     const departments = response.data;
@@ -55,41 +92,73 @@ export default function CreateStaff() {
   async function fetchDesignations() {
     const response = await getDesignationList();
     const designations = response.data;
-    setDesignationList(designations)
-    const formattedOptions =  getOptionList(designations);
+    setDesignationList(designations);
+    const formattedOptions = getOptionList(designations);
     setDesignationOptionList(formattedOptions);
   }
 
-  function religionValueChanged(value){
-      setBasicInfo({
-        ...basicInfo,
-        religion: value.value,
-      })
-      setReligiousValue(value)
+  function streamValueChanged(value) {
+    setBasicInfo({
+      ...basicInfo,
+      stream: value.value,
+    });
+    setStreamValue(value);
   }
 
-  function martialStatusValueChanged(value){
-      setFamilyInfo({
-        ...familyInfo,
-        martialStatus: value.value,
-      })
-      setMartialStatusValue(value)
+  function religionValueChanged(value) {
+    setBasicInfo({
+      ...basicInfo,
+      religion: value.value,
+    });
+    setReligiousValue(value);
+  }
+
+  function classValueChanged(value) {
+    setBasicInfo({
+      ...basicInfo,
+      className: value.value,
+    });
+    setClassValue(value);
+  }
+
+  function bloodValueChanged(value) {
+    setBasicInfo({
+      ...basicInfo,
+      blood: value.value,
+    });
+    setBloodValue(value);
+  }
+
+  function martialStatusValueChanged(value) {
+    setFamilyInfo({
+      ...familyInfo,
+      martialStatus: value.value,
+    });
+    setMartialStatusValue(value);
+  }
+  function trainedValueChanged(value) {
+    setProfileDetails({
+      ...profileDetails,
+      trained: value.value,
+    });
+    setTrainedValue(value);
   }
 
   function handleDepartmentSection(selectedOption) {
     setProfileDetails({
       ...profileDetails,
-      department: selectedOption.value
+      department: selectedOption.value,
     });
     setDepartmentName(selectedOption);
 
     // Use selectedOption.label instead of departmentName.label
-    const filteredList = selectedOption?.label 
-      ? designationList.filter((item) => item.departmentName === selectedOption.label)
+    const filteredList = selectedOption?.label
+      ? designationList.filter(
+          (item) => item.departmentName === selectedOption.label
+        )
       : [];
     const formattedOptions = getOptionList(filteredList);
 
-      
     setDesignationOptionList(formattedOptions);
     setDesignationName(null); // Reset designation when department changes
   }
@@ -97,17 +166,17 @@ export default function CreateStaff() {
   function handleDesignationSelect(selectedOption) {
     setProfileDetails({
       ...profileDetails,
-      designation: selectedOption.value
+      designation: selectedOption.value,
     });
     setDesignationName(selectedOption);
   }
 
-    function categoryValueChanged(value){
-      setBasicInfo({
-        ...basicInfo,
-        category: value.value,
-      })
-      setCategoryValue(value)
+  function categoryValueChanged(value) {
+    setBasicInfo({
+      ...basicInfo,
+      category: value.value,
+    });
+    setCategoryValue(value);
   }
 
   async function onSaveBtnClicked() {
@@ -122,58 +191,58 @@ export default function CreateStaff() {
       address,
       familyInfo,
       profileDetails,
-      experience
+      experience,
     };
 
-    await saveStudentInfo(payload)
+    await saveStudentInfo(payload);
 
-    console.log("###payload", payload)
+    console.log("###payload", payload);
     alert("Data saved successfully");
-  }  
+  }
 
   async function validateTeacherData() {
-    if(!basicInfo.firstName){
+    if (!basicInfo.firstName) {
       alert("please enter firstName");
       return false;
     }
-    if(!basicInfo.lastName){
-      alert("please enter lastName")
+    if (!basicInfo.lastName) {
+      alert("please enter lastName");
       return false;
     }
-    if(!basicInfo.className){
-      alert("please enter className")
+    if (!basicInfo.className) {
+      alert("please enter className");
       return false;
     }
-    if(!basicInfo.stream){
-      alert("please enter section")
+    if (!basicInfo.stream) {
+      alert("please enter section");
       return false;
     }
-    if(!basicInfo.dob){
-      alert("please enter dob")
+    if (!basicInfo.dob) {
+      alert("please enter dob");
       return false;
     }
-    if(!basicInfo.adarNumber){
-      alert("please enter adarNo")
+    if (!basicInfo.adarNumber) {
+      alert("please enter adarNo");
       return false;
     }
-    if(!familyInfo.fatherName){
-      alert("please enter fatherName")
+    if (!familyInfo.fatherName) {
+      alert("please enter fatherName");
       return false;
     }
-    if(!familyInfo.motherName){
-      alert("please enter motherName")
+    if (!familyInfo.motherName) {
+      alert("please enter motherName");
       return false;
     }
-    if(!familyInfo.mobileNumber){
-      alert("please enter mobileNumber")
+    if (!familyInfo.mobileNumber) {
+      alert("please enter mobileNumber");
       return false;
     }
-    if(!address.permanentAddress){
-      alert("please enter permanentAddress")
+    if (!address.permanentAddress) {
+      alert("please enter permanentAddress");
       return false;
     }
 
-  return true;
+    return true;
   }
 
   return (
@@ -199,7 +268,7 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter First Name"}
-                value={basicInfo?.firstName}
+                value={basicInfo?.firstName || ""}
                 required={true}
                 onInput={(event) =>
                   setBasicInfo({
@@ -214,16 +283,15 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Last Name"}
-                value={basicInfo?.lastName}
+                value={basicInfo?.lastName || ""}
                 required={true}
-                onInput={(event) =>{
-                  console.log("###event.target.value", event.target.value)
+                onInput={(event) => {
+                  console.log("###event.target.value", event.target.value);
                   setBasicInfo({
                     ...basicInfo,
                     lastName: event.target.value,
-                  })
-                }
-                }
+                  });
+                }}
               ></input>
             </div>
           </div>
@@ -235,7 +303,7 @@ export default function CreateStaff() {
                 className={styles.inputValue}
                 type={"date"}
                 placeholder={"Enter DOB"}
-                value={basicInfo?.dob}
+                value={basicInfo?.dob || ""}
                 required={true}
                 onInput={(event) =>
                   setBasicInfo({ ...basicInfo, dob: event.target.value })
@@ -245,31 +313,31 @@ export default function CreateStaff() {
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Gender"}</label>
               <Form>
-              <Form.Check
-                inline
-                label="Male"
-                name="genderGroup"
-                type={"radio"}
-                value="male"
-                onInput={(event) =>
-                  setBasicInfo({
-                    ...basicInfo,
-                    gender: event.target.value,
-                  })
-                }
-              />
-              <Form.Check
-                inline
-                label="Female"
-                name="genderGroup"
-                type={"radio"}
-                value="female"
-                onInput={(event) =>
-                  setBasicInfo({
-                    ...basicInfo,
-                    gender: event.target.value,
-                  })
-                }
+                <Form.Check
+                  inline
+                  label="Male"
+                  name="genderGroup"
+                  type={"radio"}
+                  value="male"
+                  onInput={(event) =>
+                    setBasicInfo({
+                      ...basicInfo,
+                      gender: event.target.value,
+                    })
+                  }
+                />
+                <Form.Check
+                  inline
+                  label="Female"
+                  name="genderGroup"
+                  type={"radio"}
+                  value="female"
+                  onInput={(event) =>
+                    setBasicInfo({
+                      ...basicInfo,
+                      gender: event.target.value,
+                    })
+                  }
                 />
               </Form>
             </div>
@@ -278,31 +346,24 @@ export default function CreateStaff() {
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Class"}</label>
-              <input
+              <Select
                 className={styles.inputValue}
+                value={classValue}
                 placeholder={"Enter class name"}
-                value={basicInfo?.className}
-                onInput={(event) =>
-                  setBasicInfo({
-                    ...basicInfo,
-                    className: event.target.value,
-                  })
-                }
-              ></input>
+                onChange={classValueChanged}
+                options={classOptionList}
+              />
             </div>
+
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Stream"}</label>
-              <input
+              <Select
                 className={styles.inputValue}
-                placeholder={"Enter stream"}
-                value={basicInfo?.stream}
-                onInput={(event) =>
-                  setBasicInfo({
-                    ...basicInfo,
-                    stream: event.target.value,
-                  })
-                }
-              ></input>
+                value={streamValue}
+                placeholder={"Enter Stream"}
+                onChange={streamValueChanged}
+                options={streamOptionList}
+              />
             </div>
           </div>
 
@@ -324,8 +385,7 @@ export default function CreateStaff() {
                 className={styles.inputValue}
                 value={categoryValue}
                 placeholder={"Enter Category"}
-                onChange={categoryValueChanged
-                }
+                onChange={categoryValueChanged}
                 options={categoryList}
               />
             </div>
@@ -337,7 +397,7 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter AADHAAR number"}
-                value={basicInfo?.adarNumber}
+                value={basicInfo?.adarNumber || ""}
                 onInput={(event) =>
                   setBasicInfo({
                     ...basicInfo,
@@ -348,41 +408,35 @@ export default function CreateStaff() {
             </div>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Blood Group"}</label>
-              <input
+              <Select
                 className={styles.inputValue}
-                placeholder={"Enter blood group"}
-                value={basicInfo?.bloodGroup}
-                onInput={(event) =>
-                  setBasicInfo({
-                    ...basicInfo,
-                    bloodGroup: event.target.value,
-                  })
-                }
-              ></input>
+                value={bloodValue}
+                placeholder={"Enter Blood Group"}
+                onChange={bloodValueChanged}
+                options={bloodGroups}
+              />
             </div>
           </div>
-
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"PAN Number"}</label>
               <input
                 className={styles.inputValue}
                 placeholder={"Enter PAN number"}
-                value={basicInfo?.panNumber}
+                value={basicInfo?.panNumber || ""}
                 onInput={(event) =>
                   setBasicInfo({
                     ...basicInfo,
                     panNumber: event.target.value,
                   })
                 }
-
               ></input>
             </div>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Email "}</label>
               <input
                 className={styles.inputValue}
-                value={basicInfo?.email}
+                value={basicInfo?.email || ""}
                 placeholder={"Enter email address"}
                 onInput={(event) =>
                   setBasicInfo({
@@ -400,15 +454,13 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Mobile Number"}
-                value={basicInfo?.mobileNumber}
-                onInput={(event) =>{
-
+                value={basicInfo?.mobileNumber || ""}
+                onInput={(event) => {
                   setBasicInfo({
                     ...basicInfo,
                     mobileNumber: event.target.value,
-                  })
-                }
-                }
+                  });
+                }}
               ></input>
             </div>
             <div className={styles.halfRow}>
@@ -418,7 +470,7 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Alternate Mobile Number"}
-                value={basicInfo?.altMobileNumber}
+                value={basicInfo?.altMobileNumber || ""}
                 onInput={(event) =>
                   setBasicInfo({
                     ...basicInfo,
@@ -440,7 +492,7 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Father Name"}
-                value={familyInfo?.fatherName}
+                value={familyInfo?.fatherName || ""}
                 onInput={(event) =>
                   setFamilyInfo({
                     ...familyInfo,
@@ -451,7 +503,7 @@ export default function CreateStaff() {
             </div>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Religion"}</label>
-               <Select
+              <Select
                 className={styles.inputValue}
                 value={religiousValue}
                 placeholder={"Enter Religion"}
@@ -464,7 +516,7 @@ export default function CreateStaff() {
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Marital Status"}</label>
-               <Select
+              <Select
                 className={styles.inputValue}
                 value={martialStatusValue}
                 placeholder={"Enter Marital status"}
@@ -476,7 +528,7 @@ export default function CreateStaff() {
               <label className={styles.titleLabel}>{"Spouse Name"}</label>
               <input
                 className={styles.inputValue}
-                value={familyInfo?.spouseName}
+                value={familyInfo?.spouseName || ""}
                 onInput={(event) =>
                   setFamilyInfo({
                     ...familyInfo,
@@ -499,7 +551,7 @@ export default function CreateStaff() {
               <textarea
                 className={styles.inputValue}
                 placeholder={"Enter Permanent Address"}
-                value={address?.permanentAddress}
+                value={address?.permanentAddress || ""}
                 onInput={(event) =>
                   setAddress({
                     ...address,
@@ -513,7 +565,7 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter PinCode"}
-                value={address?.permanentPinCode}
+                value={address?.permanentPinCode || ""}
                 onInput={(event) =>
                   setAddress({
                     ...address,
@@ -530,7 +582,7 @@ export default function CreateStaff() {
               <textarea
                 className={styles.inputValue}
                 placeholder={"Enter Current Address"}
-                value={address?.currentAddress}
+                value={address?.currentAddress || ""}
                 onInput={(event) =>
                   setAddress({
                     ...address,
@@ -544,7 +596,7 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Enter PinCode"}
-                value={address?.currentPinCode}
+                value={address?.currentPinCode || ""}
                 onInput={(event) =>
                   setAddress({
                     ...address,
@@ -564,24 +616,24 @@ export default function CreateStaff() {
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Department"}</label>
-                <Select
-                  className={styles.inputValue}
-                  value={departmentName}
-                  placeholder={"Enter Department"}
-                  onChange={handleDepartmentSection}
-                  options={departmentOptionList}
-                /> 
+              <Select
+                className={styles.inputValue}
+                value={departmentName}
+                placeholder={"Enter Department"}
+                onChange={handleDepartmentSection}
+                options={departmentOptionList}
+              />
             </div>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Designation"}</label>
-                <Select
-                  className={styles.inputValue}
-                  value={designationName}
-                  placeholder={"Select Designation"}
-                  onChange={handleDesignationSelect}
-                  options={designationOptionList}
-                  isDisabled={!departmentName} // Disable if no department selected
-                />
+              <Select
+                className={styles.inputValue}
+                value={designationName}
+                placeholder={"Select Designation"}
+                onChange={handleDesignationSelect}
+                options={designationOptionList}
+                isDisabled={!departmentName} // Disable if no department selected
+              />
             </div>
           </div>
 
@@ -592,7 +644,7 @@ export default function CreateStaff() {
                 className={styles.inputValue}
                 type={"date"}
                 placeholder={"Enter Date Of Joining"}
-                value={profileDetails?.dateOfJoining}
+                value={profileDetails?.dateOfJoining || ""}
                 onInput={(event) =>
                   setProfileDetails({
                     ...profileDetails,
@@ -603,17 +655,13 @@ export default function CreateStaff() {
             </div>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Trained/Untrained"}</label>
-              <input
+              <Select
                 className={styles.inputValue}
-                placeholder={"Trained/Untrained"}
-                value={profileDetails?.trained}
-                onInput={(event) =>
-                  setProfileDetails({
-                    ...profileDetails,
-                    trained: event.target.value,
-                  })
-                }
-              ></input>
+                value={trainedValue}
+                placeholder={"Enter Trained/Untrained"}
+                onChange={trainedValueChanged}
+                options={trainedList}
+              />
             </div>
           </div>
 
@@ -649,24 +697,16 @@ export default function CreateStaff() {
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Profile Pic"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter profile pic"}
-                value={profileDetails?.profilePicUrl}
-                onInput={(event) =>
-                  setProfileDetails({
-                    ...profileDetails,
-                    profilePicUrl: event.target.value,
-                  })
-                }
-              ></input>
+              <FileChooser
+                onChange={(event) => onFileSelected(event, item)}
+              ></FileChooser>
             </div>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Resume"}</label>
               <input
                 className={styles.inputValue}
                 placeholder={"Enter resume"}
-                value={profileDetails?.resumeUrl}
+                value={profileDetails?.resumeUrl || ""}
                 onInput={(event) =>
                   setProfileDetails({
                     ...profileDetails,
@@ -683,7 +723,7 @@ export default function CreateStaff() {
               <textarea
                 className={styles.inputValue}
                 placeholder={"Upload Pan card"}
-                value={profileDetails?.panCardUrl}
+                value={profileDetails?.panCardUrl || ""}
                 onInput={(event) =>
                   setProfileDetails({
                     ...profileDetails,
@@ -697,7 +737,7 @@ export default function CreateStaff() {
               <input
                 className={styles.inputValue}
                 placeholder={"Upload AADHAR"}
-                value={profileDetails?.aadharUrl}
+                value={profileDetails?.aadharUrl || ""}
                 onInput={(event) =>
                   setProfileDetails({
                     ...profileDetails,
@@ -708,7 +748,6 @@ export default function CreateStaff() {
             </div>
           </div>
         </div>
-
 
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
@@ -721,7 +760,7 @@ export default function CreateStaff() {
               <textarea
                 className={styles.inputValue}
                 placeholder={"Enter Organization Name"}
-                value={experience?.organizationName}
+                value={experience?.organizationName || ""}
                 onInput={(event) =>
                   setExperience({
                     ...experience,
@@ -731,11 +770,13 @@ export default function CreateStaff() {
               ></textarea>
             </div>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Years of experience"}</label>
+              <label className={styles.titleLabel}>
+                {"Years of experience"}
+              </label>
               <input
                 className={styles.inputValue}
                 placeholder={"Enter years of experience"}
-                value={experience?.experienceYear}
+                value={experience?.experienceYear || ""}
                 onInput={(event) =>
                   setExperience({
                     ...experience,
