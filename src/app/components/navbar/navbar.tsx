@@ -3,7 +3,6 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import styles from "./navbar.module.css";
-import Link from "next/link";
 
 function MMSNavbar() {
   return (
@@ -14,19 +13,14 @@ function MMSNavbar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown title="Student" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="/pages/student/createStud">
-                <Link href={"/pages/student/createStudent"}>
-                  Create Student
-                </Link>
+              <NavDropdown.Item href="/pages/student/createStudent">
+                Create Student
               </NavDropdown.Item>
-
               <NavDropdown.Item href="/pages/student/studentList">
-                <Link href={"/pages/student/studentList"}>Student List</Link>
+                Student List
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href={"/pages/student/searchStudent"}>
-                  Search Student
-                </Link>
+              <NavDropdown.Item href="/pages/student/searchStudent">
+                Search Student
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/pages/downloadExcel">
@@ -36,24 +30,22 @@ function MMSNavbar() {
                 Defaulters
               </NavDropdown.Item>
             </NavDropdown>
+            
             <NavDropdown title="Staff" id="collapsible-nav-dropdown">
-              <NavDropdown.Item>
-                <Link href="/pages/staff/departmentMaster">
-                  Department Master
-                </Link>
+              <NavDropdown.Item href="/pages/staff/departmentMaster">
+                Department Master
               </NavDropdown.Item>
-
-              <NavDropdown.Item>
-                <Link href="/pages/staff/createStaff">Create Staff</Link>
+              <NavDropdown.Item href="/pages/staff/createStaff">
+                Create Staff
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/staff/staffList">Staff list</Link>
+              <NavDropdown.Item href="/pages/staff/staffList">
+                Staff list
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/staff/searchStaff">Search Staff</Link>
+              <NavDropdown.Item href="/pages/staff/searchStaff">
+                Search Staff
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/staff/staffStrength">Staff Strength</Link>
+              <NavDropdown.Item href="/pages/staff/staffStrength">
+                Staff Strength
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
@@ -65,28 +57,20 @@ function MMSNavbar() {
               title="Student Attendance"
               id="collapsible-nav-dropdown"
             >
-              <NavDropdown.Item>
-                <Link href="/pages/attendance/stu/studentAttendance">
-                  Student Attendance
-                </Link>
+              <NavDropdown.Item href="/pages/attendance/stu/studentAttendance">
+                Student Attendance
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/attendance/stu/attendanceClasswise">
-                  Attendance ClassWise
-                </Link>
+              <NavDropdown.Item href="/pages/attendance/stu/attendanceClasswise">
+                Attendance ClassWise
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/attendance/stu/attendanceDatewise">
-                  Attendance DateWise
-                </Link>
+              <NavDropdown.Item href="/pages/attendance/stu/attendanceDatewise">
+                Attendance DateWise
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/staff/staffStrength">Absence Logs</Link>
+              <NavDropdown.Item href="/pages/staff/staffStrength">
+                Absence Logs
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/attendance/stu/attendanceRegister">
-                  Student Register
-                </Link>
+              <NavDropdown.Item href="/pages/attendance/stu/attendanceRegister">
+                Student Register
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
@@ -95,90 +79,80 @@ function MMSNavbar() {
             </NavDropdown>
 
             <NavDropdown title="Academic" id="collapsible-nav-dropdown">
-              <NavDropdown.Item>
-                <Link href="/pages/academic/activities">Activities</Link>
+              <NavDropdown.Item href="/pages/academic/activities">
+                Activities
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/academic/dateSheet">Date Sheet</Link>
+              <NavDropdown.Item href="/pages/academic/dateSheet">
+                Date Sheet
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/academic/dateSheet">Holidays</Link>
+              <NavDropdown.Item href="/pages/academic/holidays">
+                Holidays
               </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Time Table" id="collapsible-nav-dropdown">
-              <NavDropdown.Item>
-                <Link href="/pages/timeTable/teacherWise">
-                  Teacher’s time table
-                </Link>
+              <NavDropdown.Item href="/pages/timeTable/teacherWise">
+                Teacher's time table
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/timeTable/dayWise">Day wise time table</Link>
+              <NavDropdown.Item href="/pages/timeTable/dayWise">
+                Day wise time table
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/timeTable/classWise">
-                  Class wise time table
-                </Link>
+              <NavDropdown.Item href="/pages/timeTable/classWise">
+                Class wise time table
               </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Message" id="collapsible-nav-dropdown">
-              <NavDropdown.Item>
-                <Link href="/pages/message/messageTemplate">
-                  Message Templates
-                </Link>
+              <NavDropdown.Item href="/pages/message/messageTemplate">
+                Message Templates
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/message/smartMessage">Smart Message</Link>
+              <NavDropdown.Item href="/pages/message/smartMessage">
+                Smart Message
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/message/defaulters">Defaulters Message</Link>
+              <NavDropdown.Item href="/pages/message/defaulters">
+                Defaulters Message
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/message/messageToStaff">
-                  Message To Staff
-                </Link>
+              <NavDropdown.Item href="/pages/message/messageToStaff">
+                Message To Staff
               </NavDropdown.Item>
-
-              <NavDropdown.Item>
-                <Link href="/pages/message/commonMessage">Common Message</Link>
+              <NavDropdown.Item href="/pages/message/commonMessage">
+                Common Message
               </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Home Work" id="collapsible-nav-dropdown">
-              <NavDropdown.Item>
-                <Link href="/pages/homeWork/assignHomeWork">Assign HW</Link>
+              <NavDropdown.Item href="/pages/homeWork/assignHomeWork">
+                Assign HW
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/homeWork/viewHomeWork">View HW</Link>
+              <NavDropdown.Item href="/pages/homeWork/viewHomeWork">
+                View HW
               </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Fee" id="collapsible-nav-dropdown">
-              <NavDropdown.Item>
-                <Link href="/pages/fees/submitFee">SubmitFee</Link>
+              <NavDropdown.Item href="/pages/fees/submitFee">
+                SubmitFee
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/fees/feeDetails">Fee Details</Link>
+              <NavDropdown.Item href="/pages/fees/feeDetails">
+                Fee Details
               </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Admin" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="/pages/student/createStud">
-                <Link href={"/pages/admin/addClass"}>
-                  Add Class
-                </Link>
-              </NavDropdown.Item>             
-              <NavDropdown.Item>
-                <Link href={"/pages/admin/addSubject"}>
-                  Add Subject
-                </Link>
+              <NavDropdown.Item href="/pages/admin/addClass">
+                Add Class
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/admin/assignedPeriods">Assigned Periods</Link>
+              <NavDropdown.Item href="/pages/admin/addSection">
+                Add Section
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link href="/pages/admin/addPeriod">Add Period</Link>
+              <NavDropdown.Item href="/pages/admin/addSubject">
+                Add Subject
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/assignedPeriods">
+                Assigned Periods
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/addPeriod">
+                Add Period
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

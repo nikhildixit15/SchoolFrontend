@@ -74,18 +74,23 @@ export const attendanceTypeList = [
     id: 1,
   },
   {
-    label: "Half day leave",
-    value: "HDL",
+    label: "Half Day",
+    value: "Half Day",
     id: 2,
   },
   {
     label: "Absent",
-    value: "absent",
+    value: "Absent",
     id: 3,
   },
   {
     label: "Early Leave",
-    value: "early_leave",
+    value: "Early Leave",
+    id: 4,
+  },
+    {
+    label: "Holiday",
+    value: "Holiday",
     id: 4,
   },
 ];

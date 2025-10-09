@@ -267,6 +267,7 @@ export default function CreateStudent() {
                 placeholder={"Enter class name"}
                 onChange={classValueChanged}
                 options={classOptionList}
+                instanceId="class-select"
               />
             </div>
             <div className={styles.halfRow}>
@@ -277,6 +278,7 @@ export default function CreateStudent() {
                 placeholder={"Enter section"}
                 onChange={sectionValueChanged}
                 options={sectionList}
+                instanceId="section-select"
               />
             </div>
           </div>
@@ -305,6 +307,7 @@ export default function CreateStudent() {
                 placeholder={"Enter blood group"}
                 onChange={bloodGroupValueChanged}
                 options={bloodGroups}
+                instanceId="blood-group-select"
               />
             </div>
           </div>
@@ -417,6 +420,7 @@ export default function CreateStudent() {
                 placeholder={"Enter Religion"}
                 onChange={religionValueChanged}
                 options={religionList}
+                instanceId="religion-select"
               />
             </div>
             <div className={styles.halfRow}>
@@ -428,6 +432,7 @@ export default function CreateStudent() {
                 placeholder={"Enter Category"}
                 onChange={categoryValueChanged}
                 options={categoryList}
+                instanceId="category-select"
               />
             </div>
           </div>

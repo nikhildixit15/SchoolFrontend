@@ -1,5 +1,6 @@
 "use client";
 // import type { Metadata } from "next";
+import "./polyfills";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import { Provider } from "react-redux";
@@ -13,10 +14,23 @@ import App from "./App";
 
 export default function RootLayout({ children }) {
   return (
-    <Provider store={store}>
-      {/* <PersistGate persistor={persistor}> */}
-      <App children={children}></App>
-      {/* </PersistGate> */}
-    </Provider>
+    <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
+      </head>
+      <body>
+        <Provider store={store}>
+          {/* <PersistGate persistor={persistor}> */}
+          <App children={children}></App>
+          {/* </PersistGate> */}
+        </Provider>
+      </body>
+    </html>
   );
 }

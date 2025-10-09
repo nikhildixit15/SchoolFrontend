@@ -5,16 +5,15 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import AttendanceFilter from "./attendanceFilter";
 import { getClasswiseAttendanceList } from "@/app/services/attendance/attendance";
-import DatewiseTable from "./classwiseTable";
 import ClasswiseTable from "./classwiseTable";
 
 export default function AttendanceClasswise() {
-  const [classwiseList, setClasswiseList] = useState();
+  const [classWiseList, setClassWiseList] = useState();
 
   async function getListData(data) {
     const result = await getClasswiseAttendanceList(data);
     console.log("####classwiseListq", result);
-    setClasswiseList(result);
+    setClassWiseList(result);
   }
 
   return (
@@ -23,7 +22,7 @@ export default function AttendanceClasswise() {
         <AttendanceFilter getStudentData={getListData}></AttendanceFilter>
 
         <div>
-          <ClasswiseTable listData={classwiseList}></ClasswiseTable>
+          <ClasswiseTable listData={classWiseList}></ClasswiseTable>
         </div>
       </main>
     </>
