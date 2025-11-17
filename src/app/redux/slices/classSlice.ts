@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const classSlice = createSlice({
   name: "class",
   initialState: {
+    isLoggedIn: false,
     classes: [],
     examTypeList: [],
     subjectList: [],
@@ -11,6 +12,14 @@ export const classSlice = createSlice({
     streamList:[]
   },
   reducers: {
+    login: (state) => {
+      state.isLoggedIn = true;
+      console.log(state.isLoggedIn)
+    },
+    logout: (state) => {
+      state.isLoggedIn = false;
+      console.log(state.isLoggedIn)
+    },
     setMasterData: (state, action) => {
       state.classes = action.payload.classes;
       state.examTypeList = action.payload.examTypeList;
@@ -22,6 +31,6 @@ export const classSlice = createSlice({
   },
 });
 
-export const { setMasterData } = classSlice.actions;
+export const { setMasterData,login, logout } = classSlice.actions;
 
 export default classSlice.reducer;

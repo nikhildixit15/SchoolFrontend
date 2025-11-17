@@ -31,7 +31,7 @@ export default function AssignedPeriods() {
     setClassOptionList(getClassOptionList(classes));
     setTeacherOptionList(getOptionList(teacherList));
     setSubjectOptionList(getOptionList(subjectList));
-    setPeriodOptionList(getOptionList(periodList));
+    setPeriodOptionList(getOptionList(periodList)); 
   }, [classes, teacherList, subjectList, periodList]);
 
   // When class changes, update section options
@@ -40,13 +40,15 @@ export default function AssignedPeriods() {
       const list = selectedClass.sections.map((item) => ({
         value: item.name,
         label: item.name,
+        id:item.id
       }));
       setSectionOptionList(list);
     } else {
       setSectionOptionList([]);
     }
-  }, [selectedClass]);
-  console.log("Payload for adding period:", selectedSubject);
+    console.log("###periodOptionList", selectedSection);
+  }, [selectedClass,selectedSection]);
+  // console.log("Payload for adding period:", selectedSubject);
 
   function handleAddPeriod() {
     if (
@@ -76,7 +78,6 @@ export default function AssignedPeriods() {
     addPeriodInTimeTable(payload);
   }
 
-  console.log("###periodOptionList", selectedTeacher);
 
   return (
     <div className={styles.mainContainer}>

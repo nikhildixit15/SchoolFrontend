@@ -56,7 +56,7 @@ export default function TeacherWise() {
             />
           </div>
         </div>
-        <TeacherWiseTimeTable tableData={tableData}></TeacherWiseTimeTable>
+        {/* <TeacherWiseTimeTable tableData={tableData}></TeacherWiseTimeTable> */}
       </main>
     </>
   );
