@@ -212,26 +212,41 @@ export const categoryList = [
   }
 ];
 
-export const sectionList = [
+export const periodNumber = [
   {
-    label: "A",
-    value: "A",
+    label: "1",
+    value: "1",
     id: 1,
   },  {
-    label: "B",
-    value: "B",
+    label: "2",
+    value: "2",
     id: 2,
   },
    {
-    label: "C",
-    value: "C",
+    label: "3",
+    value: "3",
     id: 3,
   }, 
-   {
-    label: "D",
-    value: "D",
+  {
+    label: "4",
+    value: "4",
     id: 4,
-  }
+  },
+  {
+   label: "5",
+   value: "5",
+   id: 5,
+ }, 
+  {
+   label: "6",
+   value: "6",
+   id: 6,
+ }, 
+  {
+   label: "7",
+   value: "7",
+   id: 7,
+ },
 ];
 
 

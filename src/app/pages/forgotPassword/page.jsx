@@ -1,19 +1,18 @@
 "use client";
-import { useState } from "react";
-import { auth, setupRecaptcha } from "./firebase/firebase";
-import { signInWithPhoneNumber } from "firebase/auth";
+
+import { useState } from "react"; 
 
 export default function ResetPassword() {
   const [step, setStep] = useState(1);
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
-  const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  // 🔹 SEND OTP USING FIREBASE
+  // SEND OTP
   const handleSendOTP = async (e) => {
     e.preventDefault();
     setError("");
@@ -25,29 +24,16 @@ export default function ResetPassword() {
 
     try {
       setIsLoading(true);
-
-      setupRecaptcha();
-
-      const formattedPhone = "+91" + phone;
-
-      const confirmationResult = await signInWithPhoneNumber(
-        auth,
-        formattedPhone,
-        window.recaptchaVerifier
-      );
-
-      window.confirmationResult = confirmationResult;
-
       setIsLoading(false);
       setStep(2);
     } catch (error) {
       setIsLoading(false);
-      setError("OTP sending failed. Try again.");
       console.log(error);
+      setError("OTP sending failed. Try again.");
     }
   };
 
-  // 🔹 VERIFY OTP + RESET PASSWORD
+  // VERIFY OTP + RESET PASSWORD
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setError("");
@@ -57,13 +43,13 @@ export default function ResetPassword() {
       return;
     }
 
-    if (!oldPassword) {
-      setError("Please enter your old password.");
+    if (newPassword.length < 6) {
+      setError("Password must be at least 6 characters.");
       return;
     }
 
-    if (newPassword.length < 6) {
-      setError("Password must be at least 6 characters.");
+    if (newPassword !== confirmPassword) {
+      setError("New Password & Confirm Password do not match.");
       return;
     }
 
@@ -72,13 +58,13 @@ export default function ResetPassword() {
 
       await window.confirmationResult.confirm(otp);
 
-      // Everything verified
+      // If OTP Verified
       setIsLoading(false);
       setSuccess(true);
     } catch (error) {
       setIsLoading(false);
-      setError("Invalid OTP. Try again.");
       console.error(error);
+      setError("Invalid OTP. Try again.");
     }
   };
 
@@ -120,15 +106,6 @@ export default function ResetPassword() {
           margin-bottom: 6px;
           display: block;
         }
-            input[type="number"]::-webkit-inner-spin-button,
-         input[type="number"]::-webkit-outer-spin-button {
-         -webkit-appearance: none;
-         margin: 0;
-        }
-
-         input[type="number"] {
-        -moz-appearance: textfield;
-         }
         .input {
           width: 100%;
           padding: 12px;
@@ -175,7 +152,9 @@ export default function ResetPassword() {
         }
       `}</style>
 
-      {/* Success Screen */}
+      {/* Recaptcha Container */}
+      <div id="recaptcha-container"></div>
+
       {success ? (
         <div className="containerForgot">
           <div className="card success-box">
@@ -196,7 +175,6 @@ export default function ResetPassword() {
             <h2 className="title">Reset Password</h2>
             <p className="subtitle">Enter your details to reset password</p>
 
-            {/* Step 1: Enter Phone Number */}
             {step === 1 && (
               <form onSubmit={handleSendOTP}>
                 <label className="label">Phone Number</label>
@@ -207,8 +185,8 @@ export default function ResetPassword() {
                   value={phone}
                   maxLength={10}
                   onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, ""); // allow only numbers
-                    if (value.length <= 10) setPhone(value); // stop at 10 digits
+                    const value = e.target.value.replace(/\D/g, "");
+                    if (value.length <= 10) setPhone(value);
                   }}
                 />
 
@@ -220,8 +198,6 @@ export default function ResetPassword() {
               </form>
             )}
 
-            {/* Step 2: OTP + Old + New Password */}
-            {/* Step 2: OTP + New + Confirm Password */}
             {step === 2 && (
               <form onSubmit={handleResetPassword}>
                 <label className="label">Enter OTP</label>

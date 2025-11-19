@@ -10,14 +10,32 @@ export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleEmailSignIn = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setTimeout(() => {
-      alert("Email sign in functionality would be implemented here");
-      setIsLoading(false);
-    }, 1000);
-  };
+ const handleEmailSignIn = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+
+  try {
+    const res = await fetch("http://localhost:5000/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      // Redirect to next page
+      window.location.href = "/pages/Dashboard"; // or Next.js router push
+    } else {
+      alert(data.message);
+    }
+  } catch (err) {
+    alert("Server error");
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <>
@@ -256,9 +274,10 @@ export default function SignInPage() {
               <Link href="/pages/forgotPassword" className="forgot-btn">
                 Forgot Password?
               </Link>
-              <button type="button" className="forgot-btn">
-                Change Password
-              </button>
+              <Link href="/pages/ChangePassword" className="forgot-btn">
+                Change Password?
+              </Link>
+               
             </div>
 
             <button type="submit" disabled={isLoading} className="signin-btn">
