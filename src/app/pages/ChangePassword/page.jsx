@@ -1,16 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Lock, Eye, EyeOff } from "lucide-react";
-import Link from "next/link";
+import { Lock, Eye, EyeOff } from "lucide-react"; 
 
 export default function ChangePasswordPage() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [showOld, setShowOld] = useState(false);
-  const [showNew, setShowNew] = useState(false);
+  const [showOld, setShowOld] =useState(false);
+  const [showNew, setShowNew] =useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
   const [message, setMessage] = useState("");
