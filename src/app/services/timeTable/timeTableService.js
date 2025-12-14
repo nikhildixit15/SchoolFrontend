@@ -12,7 +12,7 @@ export async function getTeacherWiseTimeTable(data) {
 }
 
 export async function getClassWiseTimeTable(data) {
-  if (isMock) {
+  if (!isMock) {
     return classWiseTimeTable;
   }
   return await axiosClient.get("/timetable/class_wise", data);

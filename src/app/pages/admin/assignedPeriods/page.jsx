@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import { useSelector } from "react-redux";
 import { getClassOptionList, getOptionList } from "@/app/utils/optionListUtils";
-import { daysList } from "@/app/utils/constants";
+import { daysList,periodNumber } from "@/app/utils/constants";
 import { addPeriodInTimeTable } from "@/app/services/timeTable/timeTableService";
 
 export default function AssignedPeriods() {
@@ -17,22 +17,19 @@ export default function AssignedPeriods() {
 
   const classes = useSelector((state) => state.class.classes);
   const teacherList = useSelector((state) => state.class.teacherList);
-  const subjectList = useSelector((state) => state.class.subjectList);
-  const periodList = useSelector((state) => state.class.periodList || []);
+  const subjectList = useSelector((state) => state.class.subjectList); 
 
   const [classOptionList, setClassOptionList] = useState([]);
   const [sectionOptionList, setSectionOptionList] = useState([]);
   const [teacherOptionList, setTeacherOptionList] = useState([]);
-  const [subjectOptionList, setSubjectOptionList] = useState([]);
-  const [periodOptionList, setPeriodOptionList] = useState([]);
+  const [subjectOptionList, setSubjectOptionList] = useState([]); 
 
   // Populate class, teacher, subject options from redux
-  useEffect(() => {
+  useEffect(() => { 
     setClassOptionList(getClassOptionList(classes));
     setTeacherOptionList(getOptionList(teacherList));
-    setSubjectOptionList(getOptionList(subjectList));
-    setPeriodOptionList(getOptionList(periodList));
-  }, [classes, teacherList, subjectList, periodList]);
+    setSubjectOptionList(getOptionList(subjectList));  
+  }, [classes, teacherList, subjectList]);
 
   // When class changes, update section options
   useEffect(() => {
@@ -40,13 +37,14 @@ export default function AssignedPeriods() {
       const list = selectedClass.sections.map((item) => ({
         value: item.name,
         label: item.name,
+        id:item._id
       }));
       setSectionOptionList(list);
     } else {
       setSectionOptionList([]);
     }
-  }, [selectedClass]);
-  console.log("Payload for adding period:", selectedSubject);
+    console.log("###periodOptionList", selectedSection);
+  }, [selectedClass,selectedSection]); 
 
   function handleAddPeriod() {
     if (
@@ -66,7 +64,7 @@ export default function AssignedPeriods() {
       day: selectedDay.value,
       schedule: [
         {
-          periodId: selectedPeriod.id,
+          periodId: selectedPeriod.value,
           subjectId: selectedSubject.id,
           teacherId: selectedTeacher.id,
         },
@@ -76,7 +74,6 @@ export default function AssignedPeriods() {
     addPeriodInTimeTable(payload);
   }
 
-  console.log("###periodOptionList", selectedTeacher);
 
   return (
     <div className={styles.mainContainer}>
@@ -134,7 +131,10 @@ export default function AssignedPeriods() {
         <Select
           value={selectedPeriod}
           onChange={setSelectedPeriod}
-          options={periodOptionList}
+          options={periodNumber.map((num) => ({
+            value: num.value,
+            label: num.label,
+          }))}
           placeholder="Select Period Number"
         />
       </div>

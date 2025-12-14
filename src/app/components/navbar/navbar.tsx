@@ -2,9 +2,10 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import styles from "./navbar.module.css";
+import styles from "./navbar.module.css"; 
 
 function MMSNavbar() {
+
   return (
     <Navbar collapseOnSelect expand="lg" className={`${styles.container}`}>
       <Container>
@@ -136,6 +137,18 @@ function MMSNavbar() {
               <NavDropdown.Item href="/pages/fees/feeDetails">
                 Fee Details
               </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/fees/paymentType">
+                Payment Type
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/fees/adminfee">
+                Admin fee
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/fees/SeeDetail">
+                SeeDetail
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/fees/gallery">
+                Gallery
+              </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Admin" id="collapsible-nav-dropdown">
@@ -157,7 +170,7 @@ function MMSNavbar() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="/pages/login">Logout</Nav.Link>
+            <Nav.Link href="/">Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

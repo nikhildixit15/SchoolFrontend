@@ -2,76 +2,41 @@ import Table from "react-bootstrap/Table";
 import styles from "./page.module.css";
 
 function ClassWiseTimeTable({ tableData }) {
-  console.log("students", tableData);
+  if (!Array.isArray(tableData) || tableData.length === 0) {
+    return <p>No timetable found.</p>;
+  }
+
+  // Dynamically get period keys (p1, p2, p3...)
+  const periodKeys = Object.keys(tableData[0].periods);
 
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>Day Name</th>
-          <th>P1</th>
-          <th>P2</th>
-          <th>P3</th>
-          <th>P4</th>
-          <th>P5</th>
-          <th>P6</th>
-          <th>P7</th>
-          <th>P8</th>
+          <th>Day</th>
+
+          {periodKeys.map((key) => (
+            <th key={key}>{key.toUpperCase()}</th>
+          ))}
         </tr>
       </thead>
 
       <tbody>
-        {tableData?.map((item) => (
-          <tr>
-            <td>{item.dayName}</td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p1?.teacherName}</label>
-                <label>{item.periods.p1?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p2?.teacherName}</label>
-                <label>{item.periods.p2?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p3?.teacherName}</label>
-                <label>{item.periods.p3?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p4?.teacherName}</label>
-                <label>{item.periods.p4?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p5?.teacherName}</label>
-                <label>{item.periods.p5?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p6?.teacherName}</label>
-                <label>{item.periods.p6?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p7?.teacherName}</label>
-                <label>{item.periods.p7?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p8?.teacherName}</label>
-                <label>{item.periods.p8?.subject}</label>
-              </div>
-            </td>
+        {tableData.map((row, index) => (
+          <tr key={index}>
+            <td>{row.dayName}</td>
+
+            {periodKeys.map((key, idx) => {
+              const period = row.periods[key];
+              return (
+                <td key={idx}>
+                  <div className={styles.rowItem}>
+                    <label>{period?.teacherName || "-"}</label>
+                    <label>{period?.subjectName || "-"}</label>
+                  </div>
+                </td>
+              );
+            })}
           </tr>
         ))}
       </tbody>

@@ -89,7 +89,7 @@ export default function TeacherDashboard() {
                 </div>
                 <div className={styles.statsText}>
                   <h3>{stats.totalStudents}</h3>
-                  <p>Total Students</p>
+                  <p>Total Students</p> 
                 </div>
               </div>
             </Card.Body>
