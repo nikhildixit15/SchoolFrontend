@@ -59,17 +59,21 @@ export default function ClassWise() {
     const data = {
       classId: selectedSection.classId,
       sectionId: selectedSection.sectionId,
-    }; 
+    };
     getTableData(data);
   }
 
   // ✅ API Call Function
   async function getTableData(data) {
-    const result = await getClassWiseTimeTable(data);
-    console.log("API Result:", result);
-    setTableData(result);
-  }
+    try {
+      const result = await getClassWiseTimeTable(data);
 
+      setTableData(result.data);
+    } catch (error) {
+      console.error("Error fetching timetable:", error);
+      setTableData([]);
+    }
+  }
   return (
     <>
       <main>

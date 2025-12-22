@@ -1,8 +1,12 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import "./page.css";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -10,27 +14,29 @@ export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
- const handleEmailSignIn = async (e) => {
+  const router = useRouter();
+
+const handleEmailSignIn = async (e) => {
   e.preventDefault();
   setIsLoading(true);
 
   try {
-    const res = await fetch("http://localhost:5000/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    const payload = { email, password };
 
-    const data = await res.json();
+  await axios.post(
+      "http://localhost:8000/login",
+      payload
+    );
 
-    if (res.ok) {
-      // Redirect to next page
-      window.location.href = "/pages/Dashboard"; // or Next.js router push
-    } else {
-      alert(data.message);
-    }
-  } catch (err) {
-    alert("Server error");
+    toast.success("Login Successfully");
+    router.push("/pages/dashboard");
+
+  } catch (error) {
+    console.error(error);
+    toast.error(
+  error.response?.data?.message || "Login failed"
+);
+
   } finally {
     setIsLoading(false);
   }
@@ -39,193 +45,6 @@ export default function SignInPage() {
 
   return (
     <>
-      <style>
-        {`/* Container */
-.signin-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #eff6ff, #ffffff, #f3e8ff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  flex-direction: column;
-}
-
-/* Card */
-.signin-card {
-  background: #fff;
-  padding: 32px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
-}
-
-.signin-header h1 {
-  font-size: 28px;
-  font-weight: bold;
-  color: #111827;
-}
-
-.signin-header p {
-  color: #6b7280;
-  margin-top: 4px;
-}
-
-.signin-icon {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(135deg, #3b82f6, #9333ea);
-  border-radius: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 16px;
-}
-
-.lock-icon {
-  color: white;
-  width: 32px;
-  height: 32px;
-}
-
-/* Form */
-.form-group {
-  text-align: left;
-  margin-bottom: 16px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 14px;
-  color: #374151;
-  margin-bottom: 4px;
-  font-weight: 500;
-}
-
-.input-wrapper {
-  position: relative;
-}
-
-.input-wrapper input {
-  width: 100%;
-  padding: 12px 40px 12px 40px;
-  border: 1px solid #d1d5db;
-  border-radius: 12px;
-  outline: none;
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.input-wrapper input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px #bfdbfe;
-}
-
-.input-icon {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-  color: #9ca3af;
-  width: 20px;
-  height: 20px;
-}
-
-.eye-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #9ca3af;
-}
-
-.eye-btn:hover {
-  color: #4b5563;
-}
-
-/* Remember me & Forgot password */
-.remember-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.checkbox {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.forgot-btn {
-  background: none;
-  border: none;
-  color: #2563eb;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.forgot-btn:hover {
-  text-decoration: underline;
-}
-
-/* Sign In Button */
-.signin-btn {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(to right, #3b82f6, #9333ea);
-  border: none;
-  color: white;
-  border-radius: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.signin-btn:hover {
-  transform: scale(1.02);
-  background: linear-gradient(to right, #2563eb, #7e22ce);
-}
-
-.signin-btn:active {
-  transform: scale(0.98);
-}
-
-.signin-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Footer */
-.signup-text {
-  margin-top: 12px;
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.signup-btn {
-  background: none;
-  border: none;
-  color: #2563eb;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.signup-btn:hover {
-  text-decoration: underline;
-}
- 
- 
-`}
-      </style>
       <div className="signin-container">
         <div className="signin-card">
           <div className="signin-header">
@@ -242,7 +61,7 @@ export default function SignInPage() {
                 <input
                   type="email"
                   value={email}
-                  placeholder="you@example.com"
+                  placeholder="you@gmail.com"
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
@@ -274,10 +93,6 @@ export default function SignInPage() {
               <Link href="/pages/forgotPassword" className="forgot-btn">
                 Forgot Password?
               </Link>
-              <Link href="/pages/ChangePassword" className="forgot-btn">
-                Change Password?
-              </Link>
-               
             </div>
 
             <button type="submit" disabled={isLoading} className="signin-btn">

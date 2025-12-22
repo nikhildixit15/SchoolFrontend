@@ -2,14 +2,14 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import styles from "./navbar.module.css"; 
+import styles from "./navbar.module.css";
+import { CircleUser } from "lucide-react";
 
 function MMSNavbar() {
-
   return (
     <Navbar collapseOnSelect expand="lg" className={`${styles.container}`}>
       <Container>
-        <Navbar.Brand href="/">BNSD School</Navbar.Brand>
+        <Navbar.Brand href="/pages/dashboard">BNSD School</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -31,7 +31,7 @@ function MMSNavbar() {
                 Defaulters
               </NavDropdown.Item>
             </NavDropdown>
-            
+
             <NavDropdown title="Staff" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="/pages/staff/departmentMaster">
                 Department Master
@@ -153,10 +153,7 @@ function MMSNavbar() {
 
             <NavDropdown title="Admin" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="/pages/admin/addClass">
-                Add Class
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/pages/admin/addSection">
-                Add Section
+                Add Class/Section
               </NavDropdown.Item>
               <NavDropdown.Item href="/pages/admin/addSubject">
                 Add Subject
@@ -168,9 +165,14 @@ function MMSNavbar() {
                 Add Period
               </NavDropdown.Item>
             </NavDropdown>
-          </Nav>
-          <Nav>
-            <Nav.Link href="/">Logout</Nav.Link>
+             <NavDropdown title={<CircleUser/>}>
+            <NavDropdown.Item href="/">
+               Logout 
+            </NavDropdown.Item>
+            <NavDropdown.Item href="/pages/ChangePassword">
+              Change Password
+            </NavDropdown.Item>
+             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -9,19 +9,30 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setMasterData } from "./redux/slices/classSlice";
 import { getMasterData } from "./services/common/commonService";
-
-const inter = Inter({ subsets: ["latin"] });
+import { usePathname } from "next/navigation"; 
+import { Toaster } from "react-hot-toast";
 
 export default function App({ children }) {
   const dispatch = useDispatch();
 
+  const pathname = usePathname(); 
+  const hideNavbarRoutes = ["/","/pages/forgotPassword","/pages/login"]; // is route par navbar hide
+  const showNavbar = !hideNavbarRoutes.includes(pathname);
+
   useEffect(() => {
-    loadMasterData();
-  },[]);
+    loadMasterData(); 
+  }, []);
 
   async function loadMasterData() {
-     const response= await getMasterData();
-    const { classList, examTypeList, subjectList, staffList, periodList, streamList } = response.data;
+    const response = await getMasterData();
+    const {
+      classList,
+      examTypeList,
+      subjectList,
+      staffList,
+      periodList,
+      streamList,
+    } = response.data;
 
     dispatch(
       setMasterData({
@@ -29,18 +40,21 @@ export default function App({ children }) {
         subjectList,
         classes: classList,
         teacherList: staffList,
-       periodList,
-       streamList
+        periodList,
+        streamList,
       })
     );
   }
 
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <header>
-          <MMSNavbar></MMSNavbar>
-        </header>
+      <body >
+        <Toaster/>
+        {showNavbar && (
+          <header>
+            <MMSNavbar />
+          </header>
+        )}
         {children}
         <footer>
           <Footer></Footer>
