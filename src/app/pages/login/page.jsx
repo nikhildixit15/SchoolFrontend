@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import "./page.css";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -11,31 +14,34 @@ export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleEmailSignIn = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const router = useRouter();
 
-    try {
-      const res = await fetch("http://localhost:5000/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+const handleEmailSignIn = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-      const data = await res.json();
+  try {
+    const payload = { email, password };
 
-      if (res.ok) {
-        // Redirect to next page
-        window.location.href = "/pages/student/createStudent"; // or Next.js router push
-      } else {
-        alert(data.message);
-      }
-    } catch (err) {
-      alert("Server error");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  await axios.post(
+      "http://localhost:8000/login",
+      payload
+    );
+
+    toast.success("Login Successfully");
+    router.push("/pages/dashboard");
+
+  } catch (error) {
+    console.error(error);
+    toast.error(
+  error.response?.data?.message || "Login failed"
+);
+
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <>
@@ -55,7 +61,7 @@ export default function SignInPage() {
                 <input
                   type="email"
                   value={email}
-                  placeholder="you@example.com"
+                  placeholder="you@gmail.com"
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
@@ -86,9 +92,6 @@ export default function SignInPage() {
             <div className="remember-row">
               <Link href="/pages/forgotPassword" className="forgot-btn">
                 Forgot Password?
-              </Link>
-              <Link href="/pages/ChangePassword" className="forgot-btn">
-                Change Password?
               </Link>
             </div>
 

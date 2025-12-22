@@ -10,12 +10,13 @@ import { useDispatch } from "react-redux";
 import { setMasterData } from "./redux/slices/classSlice";
 import { getMasterData } from "./services/common/commonService";
 import { usePathname } from "next/navigation"; 
+import { Toaster } from "react-hot-toast";
 
 export default function App({ children }) {
   const dispatch = useDispatch();
 
   const pathname = usePathname(); 
-  const hideNavbarRoutes = ["/","/pages/forgotPassword","/pages/ChangePassword"]; // is route par navbar hide
+  const hideNavbarRoutes = ["/","/pages/forgotPassword","/pages/login"]; // is route par navbar hide
   const showNavbar = !hideNavbarRoutes.includes(pathname);
 
   useEffect(() => {
@@ -48,6 +49,7 @@ export default function App({ children }) {
   return (
     <html lang="en">
       <body >
+        <Toaster/>
         {showNavbar && (
           <header>
             <MMSNavbar />

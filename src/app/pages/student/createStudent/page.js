@@ -350,7 +350,7 @@ export default function CreateStudent() {
 
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Father Occupation"}</label>
+              <label className={styles.titleLabel}>{"Mother Occupation"}</label>
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Occupation"}
@@ -454,16 +454,16 @@ export default function CreateStudent() {
             </div>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>
-                {"Alternate Mobile Number"}
+                {"Email"}
               </label>
               <input
                 className={styles.inputValue}
-                placeholder={"Enter Alternate Mobile Number"}
-                value={stuFamilyDetails?.altMobileNumber}
+                placeholder={"Enter Email"}
+                value={stuFamilyDetails?.email}
                 onInput={(event) =>
                   setStuFamilyDetails({
                     ...stuFamilyDetails,
-                    altMobileNumber: event.target.value,
+                    email: event.target.value,
                   })
                 }
               ></input>
