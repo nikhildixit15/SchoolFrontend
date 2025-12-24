@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { getClassOptionList, getOptionList } from "@/app/utils/optionListUtils";
 import { daysList,periodNumber } from "@/app/utils/constants";
 import { addPeriodInTimeTable } from "@/app/services/timeTable/timeTableService";
+import {toast} from "react-hot-toast";
 
 export default function AssignedPeriods() {
   const [selectedClass, setSelectedClass] = useState(null);
@@ -55,7 +56,7 @@ export default function AssignedPeriods() {
       !selectedDay ||
       !selectedPeriod
     ) {
-      alert("Please fill all fields.");
+      toast.error("Please fill all fields.");
       return;
     }
     const payload = {
@@ -71,6 +72,7 @@ export default function AssignedPeriods() {
       ],
     };
     console.log("Payload for adding period:", payload);
+    toast.success("Assign Period Successfully")
     addPeriodInTimeTable(payload);
   }
 

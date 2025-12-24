@@ -1,20 +1,88 @@
-.description {
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
+.container {
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
 }
 
-.rowItem {
-  display: flex;
-  flex-direction: column;
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.dropdownContainer {
-  flex-direction: row;
+.header {
   display: flex;
-  margin-left: 8px;
-  margin-right: 8px;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 22px;
+  color: #1f2937;
+}
+
+/* 👇 FIXED */
+.dropdown {
+  max-width: 260px;
+}
+
+.dropdown label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.dropdown select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 30px;
+}
+
+/* 👇 FIXED */
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.card th {
+  background: #4f46e5;
+  color: white;
+  padding: 12px;
+  border: 1px solid #4338ca;
+}
+
+.card td {
+  border: 1px solid #d1d5db;
+  padding: 8px;
+  text-align: center;
+}
+
+.period {
+  font-weight: 600;
+  color: #4f46e5;
+  background: #f9fafb;
+}
+
+/* 👇 FIXED */
+.card input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+}
+
+.card input:focus {
+  outline: none;
+  border-color: #4f46e5;
 }

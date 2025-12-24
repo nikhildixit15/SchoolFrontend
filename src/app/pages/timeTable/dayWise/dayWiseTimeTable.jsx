@@ -1,45 +1,71 @@
+"use client";
+
 import Table from "react-bootstrap/Table";
 import styles from "./page.module.css";
+import { useSelector } from "react-redux";
 
 function DayWiseTimeTable({ tableData }) {
-  console.log("students", tableData);
+  const classList = useSelector((state) => state.class.classes);
+
+  if (!tableData || tableData.length === 0) {
+    return <p>No timetable available</p>;
+  }
+
+  // Find max period count
+  const maxPeriod = Math.max(
+    ...tableData.flatMap((d) =>
+      d.periods.map((p) => p.periodNumber || 0)
+    )
+  );
 
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Teacher Name</th>
-          <th>Total</th>
-          <th>P1</th>
-          <th>P2</th>
-          <th>P3</th>
-          <th>P4</th>
-          <th>P5</th>
-          <th>P6</th>
-          <th>P7</th>
-          <th>P8</th>
-        </tr>
-      </thead>
+    <div className={styles.card}>
+      {tableData.map((dayData) => (
+        <div key={dayData.day}>
+          <h2>Day : {dayData.day}</h2>
 
-      <tbody>
-        {tableData?.map((item) => (
-          <tr>
-            <td>{item.teacherName}</td>
-            <td>{item.periods.length}</td>
-            {item.periods.map ((period) => (
-            <td>
-              <div className={styles.rowItem}>
-                <label>{period.className}</label>
-                <label>{period.subjectName}</label>
-              </div>
-            </td>
-            ))}
-    
-          </tr>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Section</th>
+                {Array.from({ length: maxPeriod }).map((_, i) => (
+                  <th key={i}>Period {i + 1}</th>
+                ))}
+              </tr>
+            </thead>
 
-        ))}
-      </tbody>
-    </Table>
+            <tbody>
+              {classList.map((cls) =>
+                cls.sections.map((section) => (
+                  <tr key={`${cls._id}-${section._id}`}>
+                    <td>Class {cls.name}</td>
+                    <td>{section.name}</td>
+
+                    {Array.from({ length: maxPeriod }).map((_, i) => {
+                      const period = dayData.periods.find(
+                        (p) =>
+                          p.className === cls.name &&
+                          p.section === section.name &&
+                          p.periodNumber === i + 1
+                      );
+
+                      return (
+                        <td key={i}>
+                          {period
+                            ? `${period.subjectName} (${period.teacherName})`
+                            : "-"}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </Table>
+        </div>
+      ))}
+    </div>
   );
 }
 
