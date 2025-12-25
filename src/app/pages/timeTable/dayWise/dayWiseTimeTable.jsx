@@ -7,16 +7,11 @@ import { useSelector } from "react-redux";
 function DayWiseTimeTable({ tableData }) {
   const classList = useSelector((state) => state.class.classes);
 
-  if (!tableData || tableData.length === 0) {
+  if (!Array.isArray(tableData) || tableData.length === 0) {
     return <p>No timetable available</p>;
   }
 
-  // Find max period count
-  const maxPeriod = Math.max(
-    ...tableData.flatMap((d) =>
-      d.periods.map((p) => p.periodNumber || 0)
-    )
-  );
+  const periodKeys = ["p1", "p2", "p3", "p4", "p5", "p6", "p7"];
 
   return (
     <div className={styles.card}>
@@ -24,13 +19,13 @@ function DayWiseTimeTable({ tableData }) {
         <div key={dayData.day}>
           <h2>Day : {dayData.day}</h2>
 
-          <Table striped bordered hover>
+          <Table striped bordered hover className={styles.tableFixed}>
             <thead>
               <tr>
                 <th>Class</th>
                 <th>Section</th>
-                {Array.from({ length: maxPeriod }).map((_, i) => (
-                  <th key={i}>Period {i + 1}</th>
+                {periodKeys.map((key) => (
+                  <th key={key}>{key.toUpperCase()}</th>
                 ))}
               </tr>
             </thead>
@@ -42,8 +37,8 @@ function DayWiseTimeTable({ tableData }) {
                     <td>Class {cls.name}</td>
                     <td>{section.name}</td>
 
-                    {Array.from({ length: maxPeriod }).map((_, i) => {
-                      const period = dayData.periods.find(
+                    {periodKeys.map((_, i) => {
+                      const period = dayData.periods?.find(
                         (p) =>
                           p.className === cls.name &&
                           p.section === section.name &&
@@ -52,9 +47,10 @@ function DayWiseTimeTable({ tableData }) {
 
                       return (
                         <td key={i}>
-                          {period
-                            ? `${period.subjectName} (${period.teacherName})`
-                            : "-"}
+                          <div className={styles.rowItem}>
+                            <span>{period?.subjectName ?? "-"}</span>
+                            <span>{period?.teacherName ?? "-"}</span>
+                          </div>
                         </td>
                       );
                     })}

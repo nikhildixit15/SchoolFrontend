@@ -49,29 +49,12 @@
   margin-top: 30px;
 }
 
-/* 👇 FIXED */
-.card table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
+ 
 .card th {
   background: #4f46e5;
   color: white;
   padding: 12px;
   border: 1px solid #4338ca;
-}
-
-.card td {
-  border: 1px solid #d1d5db;
-  padding: 8px;
-  text-align: center;
-}
-
-.period {
-  font-weight: 600;
-  color: #4f46e5;
-  background: #f9fafb;
 }
 
 /* 👇 FIXED */
@@ -86,3 +69,27 @@
   outline: none;
   border-color: #4f46e5;
 }
+
+
+.tableFixed {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.tableFixed th,
+.tableFixed td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 6px;
+}
+
+.rowItem {
+  min-height: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.2;
+}
+
+ 
