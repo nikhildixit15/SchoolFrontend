@@ -131,6 +131,10 @@ function MMSNavbar() {
             </NavDropdown>
 
             <NavDropdown title="Fee" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="/pages/fees/addFee">
+                Add Fee
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="/pages/fees/submitFee">
                 SubmitFee
               </NavDropdown.Item>

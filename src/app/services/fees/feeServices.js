@@ -45,6 +45,10 @@ export async function submitStudentFee(data) {
   return await axiosClient.post("/submitStudentFee", data);
 }
 
+export async function addFeeByAdmin(data) {
+  return await axiosClient.post("/addFeeByAdmin", data);
+}
+
 export async function downloadFeeReceipt(data) {
   if (isMock) {
     return {
