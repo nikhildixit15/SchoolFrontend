@@ -54,12 +54,12 @@ export async function addSubject(data) {
   return await axiosClient.post("/subject", data);
 }
 
-export async function deleteSubject(id) {
-  if (!isMock) {
-    return subjectList.filter((item) => item.id !== id);
-  }
-  return await axiosClient.del(`/subject/${id}`);
+export async function deleteSubject(data) {
+  return axiosClient.del("/subject", {
+    data // 👈 axios sends body like POST
+  });
 }
+
 
 export async function addPeriod(data) {
   if (!isMock) {
@@ -77,3 +77,8 @@ export async function getPeriodList() {
   }
     return await axiosClient.get("/period");
 }
+
+
+ export async function studentDelete(studentId) {
+     return await axiosClient.put(`/student/delete/${studentId}`);
+};

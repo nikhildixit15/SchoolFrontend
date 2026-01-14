@@ -12,8 +12,8 @@ export default function AttendanceClasswise() {
 
   async function getListData(data) {
     const result = await getClasswiseAttendanceList(data);
-    console.log("####classwiseListq", result);
-    setClassWiseList(result);
+    console.log("####classwiseListq", result.data);
+    setClassWiseList(result.data);
   }
 
   return (

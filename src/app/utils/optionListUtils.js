@@ -24,3 +24,13 @@ export function getOptionList(classes=[], ) {
   });
  return list;;
 }
+
+export function getSectionOptionList(selected) {
+    const secList =
+      selected?.sections?.map((sec) => ({
+        value: sec.name,
+        label: sec.name,
+      })) || [];
+
+    return secList;
+  }

@@ -2,62 +2,59 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import TeacherWiseTimeTable from "./teacherWiseTimeTable";
+import TeacherDayWiseTable from "./teacherWiseTimeTable";
 import { getTeacherWiseTimeTable } from "@/app/services/timeTable/timeTableService";
 import Select from "react-select";
 import { useSelector } from "react-redux";
 
 export default function TeacherWise() {
-  const [tableData, setTableDAta] = useState();
-  const [teacherName, setTeacherName] = useState();
-  const [teacherOptionList, setTeacherOptionList] = useState();
+  const [tableData, setTableData] = useState([]);
+  const [teacherName, setTeacherName] = useState(null);
+  const [teacherOptionList, setTeacherOptionList] = useState([]);
 
-  const teacherList = useSelector((state) => {
-
-    return state.class.teacherList;
-  });
+  const teacherList = useSelector(
+    (state) => state.class.teacherList
+  );
 
   useEffect(() => {
-    createTeachersOptionList();
-  }, []);
+    if (teacherList?.length) {
+      const list = teacherList.map((item) => ({
+        value: item.id,   // ✅ teacherId
+        label: item.name,
+      }));
+      setTeacherOptionList(list);
+    }
+  }, [teacherList]);
 
-  console.log("###teacherList", teacherList);
-  function createTeachersOptionList() {
-    const list = [];
-    teacherList?.map((item) => {
-      list.push({ ...item, value: item.name, label: item.name });
-    });
-    setTeacherOptionList(list);
-  }
+async function getTableData(teacherId) {
+  if (!teacherId) return;
 
-  async function getTableData(data) {
-    const result = await getTeacherWiseTimeTable(data);
-    console.log("####", result);
-    setTableDAta(result);
-  }
+  const result = await getTeacherWiseTimeTable({ teacherId });
 
-  function handleTeacherSelect(value) {
-    setTeacherName(value);
-    getTableData({teacherId: value?.id});
+  // ✅ IMPORTANT: only pass ARRAY
+  setTableData(result?.data || []);
+}
 
+
+  function handleTeacherSelect(option) {
+    setTeacherName(option);
+    getTableData(option.value);  
   }
 
   return (
-    <>
-      <main>
-        <div>
-          <div className={styles.dropdownContainer}>
-            <label>Teacher Name:</label>
-            <Select
-              className={styles.classDropdown}
-              value={teacherName}
-              onChange={handleTeacherSelect}
-              options={teacherOptionList}
-            />
-          </div>
-        </div>
-        {/* <TeacherWiseTimeTable tableData={tableData}></TeacherWiseTimeTable> */}
-      </main>
-    </>
+    <main>
+      <div className={styles.dropdownContainer}>
+        <label>Teacher Name:</label>
+        <Select
+          className={styles.classDropdown}
+          value={teacherName}
+          onChange={handleTeacherSelect}
+          options={teacherOptionList}
+          placeholder="Select Teacher"
+        />
+      </div>
+
+      <TeacherDayWiseTable data={tableData?.data || []} />
+    </main>
   );
 }

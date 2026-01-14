@@ -7,7 +7,9 @@ import { useSelector } from "react-redux";
 import { getClassOptionList } from "@/app/utils/optionListUtils";
 
 export default function AttendanceFilter({ getStudentData }) {
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // Default to today's date
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().toISOString().split("T")[0]
+  ); // Default to today's date
   const [className, setClassName] = useState();
   const [sectionName, setSectionName] = useState();
   const [classOptionList, setClassOptionList] = useState();
@@ -33,18 +35,19 @@ export default function AttendanceFilter({ getStudentData }) {
     setSectionName(value);
   }
 
-  function createSectionOptionList(value) {
-    const list = [];
-    const result = value.sec;
-    result.map((item) => {
-      list.push({ value: item, label: item });
-    });
+  function createSectionOptionList(selected) {
+    const secList = selected.sections?.map((sec) => ({
+      value: sec._id,
+      label: sec.name,
+      classId: selected.value,
+      sectionId: sec._id,
+    }));
 
-    setSectionOptionList(list);
+    setSectionOptionList(secList || []);
   }
 
   function onDatedSelected(event) {
-   const str = new Date(event.target.value).toISOString().split("T")[0]; // Format the date to YYYY-MM-DD
+    const str = new Date(event.target.value).toISOString().split("T")[0]; // Format the date to YYYY-MM-DD
     setSelectedDate(str);
     console.log("onDatedSelected", str);
   }
@@ -54,9 +57,13 @@ export default function AttendanceFilter({ getStudentData }) {
       <div className={styles.container}>
         <div className={styles.dropdownContainer}>
           <label>Date:</label>
-          <input type="date" id="date" name="date" value={selectedDate} onInput={onDatedSelected} />
-        </div>
-        <div className={styles.dropdownContainer}>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={selectedDate}
+            onInput={onDatedSelected}
+          />
           <label>Class:</label>
           <Select
             className={styles.classDropdown}
@@ -64,8 +71,6 @@ export default function AttendanceFilter({ getStudentData }) {
             onChange={handleClassSelect}
             options={classOptionList}
           />
-        </div>
-        <div className={styles.dropdownContainer}>
           <span>Section:</span>
           <Select
             className={styles.classDropdown}
@@ -73,14 +78,20 @@ export default function AttendanceFilter({ getStudentData }) {
             onChange={handleSectionSelect}
             options={sectionOptionList}
           />
+          <button
+            onClick={() =>
+              getStudentData({
+                selectedDate: selectedDate,
+                classId: className.id,
+                className: className.value,
+                section: sectionName.label,
+              })
+            }
+            className={styles.btn}
+          >
+            Get data
+          </button>
         </div>
-
-        <button
-          onClick={() => getStudentData({selectedDate:selectedDate, classId:className.id, className: className.value, section: sectionName.value})}
-          className={styles.btn}
-        >
-          Get data
-        </button>
       </div>
     </>
   );

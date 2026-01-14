@@ -1,6 +1,5 @@
 "use client";
-
-import styles from "./page.module.css";
+ 
 import { useState } from "react";
 import AttendanceTable from "./attendanceTable";
 import DatewiseFilter from "./datewiseFilter";
@@ -11,8 +10,8 @@ export default function StudentList() {
 
   async function getStudentData(data) {
     const result = await getDatewiseAttendanceList(data);
-    console.log("####", result);
-    setStudents(result);
+    console.log("####", result.data.data);
+    setStudents(result.data.data);
   }
 
   return (

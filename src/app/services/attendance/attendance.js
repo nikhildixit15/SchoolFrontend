@@ -17,17 +17,19 @@ export async function getClasswiseAttendanceList(data) {
 }
 
 export async function getDatewiseAttendanceList(data) {
-  if (isMock) {
+  if (!isMock) {
     return datewiseAttendanceList;
   }
-  return await axiosClient.get("/datewiseAttendanceList");
+  console.log("DateWiseData", data)
+  return await axiosClient.get("/attendance/fromDateWise", data);
 }
 
 export async function getAttendanceRegisterData(data) {
-  if (isMock) {
+  if (!isMock) {
     return attendanceRegisterData;
   }
-  return await axiosClient.get("/datewiseAttendanceList");
+  console.log("Frontend",data)
+  return await axiosClient.get("attendance/attendanceRegisterData", data);
 }
 
 export async function getStudentAttendanceById(data) {
@@ -42,6 +44,6 @@ export async function saveAttendance(data) {
 }
 
 export async function updateAttendance(data) {
-  return await axiosClient.put("/attendance", data);
+  return await axiosClient.put("/attendanjnkce", data);
 }
 

@@ -1,17 +1,18 @@
 export const months = {
-  jan: "January",
-  feb: "February",
-  mar: "March",
-  Apr: "April",
+  jan: "Jan",
+  feb: "Feb",
+  mar: "Mar",
+  apr: "Apr",
   may: "May",
-  Jun: "June",
-  jul: "July",
-  aug: "August",
-  sep: "September",
-  oct: "October",
-  nov: "November",
-  dec: "December",
+  jun: "Jun",
+  jul: "Jul",
+  aug: "Aug",
+  sep: "Sep",
+  oct: "Oct",
+  nov: "Nov",
+  dec: "Dec",
 };
+
 
 export const monthList = [
   { monthName: "January", monthCount: 0 },
@@ -27,6 +28,22 @@ export const monthList = [
   { monthName: "November", monthCount: 10 },
   { monthName: "December", monthCount: 11 },
 ];
+
+export const getMonthOptions = (year = new Date().getFullYear()) => [
+  { label: "January", value: `${year}-01-01` },
+  { label: "February", value: `${year}-02-01` },
+  { label: "March", value: `${year}-03-01` },
+  { label: "April", value: `${year}-04-01` },
+  { label: "May", value: `${year}-05-01` },
+  { label: "June", value: `${year}-06-01` },
+  { label: "July", value: `${year}-07-01` },
+  { label: "August", value: `${year}-08-01` },
+  { label: "September", value: `${year}-09-01` },
+  { label: "October", value: `${year}-10-01` },
+  { label: "November", value: `${year}-11-01` },
+  { label: "December", value: `${year}-12-01` },
+];
+
 
 export const daysList = [
   { dayName: "Sunday", dayCount: 0 },

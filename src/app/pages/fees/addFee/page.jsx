@@ -1,29 +1,44 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import styles from "./page.module.css";
+
 import ClassSecFilter from "@/app/components/classFilter/classSecFilter";
-import { getStudents } from "@/app/services/student/studentService";
+import StudentSearch from "@/app/components/studentSearch/studentSearch";
+import StudentTable from "./studentTable";
+
+import {
+  addFeeByAdmin,
+  getStudentsByClass,
+} from "@/app/services/fees/feeServices";
 
 export default function AddFee() {
-  const [classInfo, setClassInfo] = useState();
+  /* ================= BASIC STATES ================= */
+  const [classInfo, setClassInfo] = useState(null);
   const [dueDate, setDueDate] = useState("");
   const [amount, setAmount] = useState("");
   const [remark, setRemark] = useState("");
   const [feeType, setFeeType] = useState("Tuition");
   const [status, setStatus] = useState("");
 
-  const [students, setStudents] = useState([]);
+  /* ================= STUDENT STATES ================= */
+  const [students, setStudents] = useState([]); // ✅ ALWAYS ARRAY
   const [selected, setSelected] = useState({});
   const [selectAll, setSelectAll] = useState(false);
 
-
+  /* ================= CLASS + SECTION FILTER ================= */
   async function handleClassData(data) {
     setClassInfo(data);
     setStatus("");
+
     try {
-      const response = await getStudents({ className: data.className, sectionName: data.sectionName });
-      setStudents(response.data || []);
-      // reset any previous selections
+      const response = await getStudentsByClass({
+        className: data.className.value,
+        section: data.sectionName.label,
+      });
+
+      // ✅ IMPORTANT FIX
+      setStudents(response?.data || []);
       setSelected({});
       setSelectAll(false);
     } catch (err) {
@@ -31,97 +46,107 @@ export default function AddFee() {
     }
   }
 
+  /* ================= SEARCH SELECT (FROM StudentSearch) ================= */
+  function handleSearchSelect(student) {
+    setStudents((prev) => {
+      const exists = prev.some((s) => s._id === student._id);
+      return exists ? prev : [...prev, student];
+    });
+
+    setSelected((prev) => ({
+      ...prev,
+      [student._id]: true,
+    }));
+  }
+
+  /* ================= CHECKBOX LOGIC ================= */
   function toggleSelectAll(checked) {
     const next = {};
     if (checked) {
-      students.forEach((s) => (next[s._id] = true));
+      students.forEach((s) => {
+        next[s._id] = true;
+      });
     }
     setSelected(next);
     setSelectAll(checked);
   }
 
   function toggleStudent(_id) {
-    const next = { ...selected };
-    if (next[_id]) delete next[_id];
-    else next[_id] = true;
-    setSelected(next);
-    setSelectAll(students.length > 0 && Object.keys(next).length === students.length);
+    setSelected((prev) => {
+      const next = { ...prev };
+      if (next[_id]) delete next[_id];
+      else next[_id] = true;
+      return next;
+    });
   }
 
-  function handleSubmit(e) {
+  useEffect(() => {
+    setSelectAll(
+      students.length > 0 &&
+        Object.keys(selected).length === students.length
+    );
+  }, [students, selected]);
+
+  /* ================= SUBMIT ================= */
+  async function handleSubmit(e) {
     e.preventDefault();
+
+    const studentIds = Object.keys(selected);
+    if (studentIds.length === 0) {
+      setStatus("Please select at least one student");
+      return;
+    }
+
     const payload = {
-      className: classInfo?.className,
-      sectionName: classInfo?.sectionName,
+      className: classInfo?.className?.value,
+      sectionName: classInfo?.sectionName?.label,
       dueDate,
       amount,
       remark,
       feeType,
+      studentIds,
     };
-    // TODO: call backend service to persist fee structure
-    console.log("Add Fee payload:", payload);
-    setStatus("Fee added (mock)");
-    // reset form (keeps selected class/section)
-    setDueDate("");
-    setAmount("");
-    setRemark("");
-    setFeeType("Tuition");
-  }
 
-  console.log("Students:", students);
-  console.log("Selected students:", selected);
+    try {
+      await addFeeByAdmin(payload);
+      setStatus("Fee added successfully");
 
-
-  function addFee() {  
-    // studentIds,amount, description, dueDate, recipientId:staffId, feeType  
-    alert("Fee added successfully!");
+      setDueDate("");
+      setAmount("");
+      setRemark("");
+      setFeeType("Tuition");
+    } catch (err) {
+      console.error(err);
+      setStatus("Something went wrong");
+    }
   }
 
   return (
     <main className={styles.container}>
       <h2>Add Fee</h2>
+
+      {/* ================= CLASS FILTER ================= */}
       <div className={styles.filterRow}>
         <ClassSecFilter getStudentData={handleClassData} />
       </div>
 
-    {students && students.length > 0 && (
-        <div className={styles.studentList}>
-          <h3>Students</h3>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>
-                  <input
-                    type="checkbox"
-                    checked={selectAll}
-                    onChange={(e) => toggleSelectAll(e.target.checked)}
-                  />
-                </th>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>Father Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {students.map((s) => (
-                <tr key={s._id}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      checked={!!selected[s._id]}
-                      onChange={() => toggleStudent(s._id)}
-                    />
-                  </td>
-                  <td>{s._id}</td>
-                  <td>{s.name || `${s.fName || ""} ${s.lName || ""}`}</td>
-                  <td>{s.fatherName}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-    )}
-    
+      <strong>OR</strong>
+
+      {/* ================= STUDENT SEARCH ================= */}
+      <StudentSearch onSelect={handleSearchSelect} />
+
+      {/* ================= STUDENT TABLE ================= */}
+      {students.length > 0 && (
+        <StudentTable
+          students={students}
+          selected={selected}
+          selectAll={selectAll}
+          onToggleStudent={toggleStudent}
+          onToggleSelectAll={toggleSelectAll}
+        />
+      )}
+
+      {/* ================= FORM ================= */}
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label>Due Date</label>
@@ -139,14 +164,16 @@ export default function AddFee() {
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder="0.00"
             required
           />
         </div>
 
         <div className={styles.row}>
           <label>Fee Type</label>
-          <select value={feeType} onChange={(e) => setFeeType(e.target.value)}>
+          <select
+            value={feeType}
+            onChange={(e) => setFeeType(e.target.value)}
+          >
             <option>Tuition</option>
             <option>Exam</option>
             <option>Transport</option>
@@ -164,9 +191,7 @@ export default function AddFee() {
         </div>
 
         <div className={styles.actions}>
-          <button type="submit" onClick={addFee} className={styles.btn}>
-            Save
-          </button>
+          <button type="submit">Save</button>
           <span className={styles.status}>{status}</span>
         </div>
       </form>

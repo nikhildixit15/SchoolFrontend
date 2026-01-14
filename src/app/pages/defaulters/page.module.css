@@ -1,7 +1,56 @@
-.description {
-  font-size: 0.85rem;
-  max-width: var(--max-width);
+.container { 
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.table {
   width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.table th,
+.table td {
+  padding: 14px 18px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.table thead {
+  background-color: #f3f4f6;
+}
+
+.table th {
+  font-weight: 600;
+  color: #374151;
+}
+
+.table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.amount {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.noData {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 50px;
 }
