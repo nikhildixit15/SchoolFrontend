@@ -1,35 +1,100 @@
-.description {
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.dropdownContainer {
-  flex-direction: row;
-  display: flex;
-  margin-left: 8px;
-  margin-right: 8px;
-  align-items: center;
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.description {
+  font-size: 0.85rem; 
+  width: 100%;
+  z-index: 2; 
 }
 
 .container {
   display: flex;
   justify-content: center;
-  padding: 16px;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  flex-wrap: wrap;
+}
+
+.dropdownContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.dropdownContainer:nth-child(2) {
+  animation: slideInLeft 0.7s ease-out;
+}
+
+.dropdownContainer label {
+  font-size: 15px;
+  font-weight: 600; 
+  white-space: nowrap;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
 }
 
 .classDropdown {
-  width: 230px;
-  margin-left: 8px;
+  width: 200px;
+  min-height: 48px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.classDropdown > div {
+  border-radius: 12px !important;
 }
 
 .btn {
-  border-radius: 16px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-left: 16px;
+  padding: 12px 32px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  background: linear-gradient(135deg, #64c8ff, #9064ff); 
+  box-shadow: 0 8px 20px rgba(100, 200, 255, 0.3);
+  min-height: 48px;
+  min-width: 140px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  animation: slideInRight 0.8s ease-out;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(100, 200, 255, 0.5);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }

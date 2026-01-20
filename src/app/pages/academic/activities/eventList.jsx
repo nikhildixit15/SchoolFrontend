@@ -1,35 +1,129 @@
-import Link from "next/link";
+"use client";
+import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
-import { useState } from "react";
-import Table from "react-bootstrap/Table";
+import { monthList } from "@/app/utils/constants";
 
-export default function EventList({ listData }) {
+const EventList = ({ events = [], onDelete }) => {
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [filteredEvents, setFilteredEvents] = useState([]);
+
+  // store all events initially
+  useEffect(() => {
+    setFilteredEvents(events);
+  }, [events]);
+
+  // month filter logic
+  useEffect(() => {
+    if (!selectedMonth) {
+      setFilteredEvents(events); // show all if empty
+    } else {
+      const filtered = events.filter((e) => {
+        const month = new Date(e.date).getMonth();
+        return month === Number(selectedMonth);
+      });
+      setFilteredEvents(filtered);
+    }
+  }, [selectedMonth, events]);
+
+  const handleDelete = (id) => { 
+    // UI update
+    setFilteredEvents((prev) => prev.filter((e) => e._id !== id));
+
+    // backend call
+    onDelete?.(id);
+  };
+
   return (
-    <div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Event Name</th>
-            <th>Classes</th>
-            <th>Event Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listData?.map((item, index) => (
-            <tr>
-              <td>{index + 1}</td>
-              <td>{item.description}</td>
-              <td>{item.classes.join(",  ")}</td>
-              <td>{item.eventDate}</td>
-              <td>
-                <button>View</button>
-              </td>
-            </tr>
+    <>
+      {/* 🔽 Month Filter */}
+      <div className={styles.filterRow}>
+        <select
+          className={styles.select}
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}
+        >
+          <option value="">Select Months</option>
+          {monthList.map((m, i) => (
+            <option key={i} value={i}>
+              {m.monthName}
+            </option>
           ))}
-        </tbody>
-      </Table>
-    </div>
+        </select>
+      </div>
+
+      {/* 📊 Table */}
+      <div className={styles.tableWrapper}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Location</th>
+              <th>Audience</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {filteredEvents.length === 0 ? (
+              <tr>
+                <td colSpan="9" className={styles.empty}>
+                  No events found
+                </td>
+              </tr>
+            ) : (
+              filteredEvents.map((e, index) => (
+                <tr key={e._id || index}>
+                  <td>{index + 1}</td>
+                  <td className={styles.bold}>{e.title}</td>
+                  <td>{new Date(e.date).toLocaleDateString()}</td>
+                  <td>
+                    {e.startTime}
+                    {e.endTime && ` - ${e.endTime}`}
+                  </td>
+                  <td>{e.location}</td>
+
+                  <td>
+                    {e.audience?.map((a) => (
+                      <span key={a} className={styles.badge}>
+                        {a}
+                      </span>
+                    ))}
+                  </td>
+
+                  <td>{e.role}</td>
+
+                  <td>
+                    <span
+                      className={`${styles.status} ${
+                        styles[e.status.toLowerCase()]
+                      }`}
+                    >
+                      {e.status}
+                    </span>
+                  </td>
+
+                  {/* 🗑 Delete */}
+                  <td>
+                    <button
+                      className={styles.deleteBtn}
+                      onClick={() => handleDelete(e._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
-}
+};
+
+export default EventList;

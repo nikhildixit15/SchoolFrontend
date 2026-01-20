@@ -4,87 +4,121 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import Accordion from "react-bootstrap/Accordion";
-import { addMessageInTemplate, deleteTemplateMessage, getTemplateMessageList } from "@/app/services/message/messageService";
+import {
+  deleteTemplateMessage,
+  getTemplateMessageList,
+  addTemplateMessage,
+} from "@/app/services/message/messageService";
 
-export default function addTemplateMessage({ tableData }) {
-  const [message, setMessage] = useState();
-  const [selectedCategoryName, setSelectedCategoryName] = useState();
-  const [categoryOptionList, setCategoryOptionList] = useState();
-  const [templateList, setTemplateList] = useState();
-
+export default function AddTemplateMessage({ tableData }) {
+  const [message, setMessage] = useState("");
+  const [selectedCategoryName, setSelectedCategoryName] = useState(null);
+  const [categoryOptionList, setCategoryOptionList] = useState([]);
+  const [templateList, setTemplateList] = useState([]);
 
   useEffect(() => {
     loadCategoryOptionList();
-    getTemplateMessages()
+    getTemplateMessages();
   }, [tableData]);
 
-   function loadCategoryOptionList() {
-    const results = tableData?.map((item) => {
-      return { ...item, value: item.name, label: item.name };
+  function loadCategoryOptionList() {
+    const unique = new Map();
+
+    tableData?.forEach((item) => {
+      unique.set(item.categoryName, {
+        value: item._id,
+        label: item.categoryName,
+        categoryName: item.categoryName,
+      });
     });
-    setCategoryOptionList(results);
+
+    setCategoryOptionList([...unique.values()]);
   }
 
   async function getTemplateMessages() {
     const list = await getTemplateMessageList();
-    setTemplateList(list)
+    setTemplateList(list.data || []);
   }
 
-  function deleteTemplateMessageItem() {
-    deleteTemplateMessage({
-      id:  1,
+  async function deleteTemplateMessageItem(templateId, messageId) {
+    await deleteTemplateMessage({ templateId, messageId });
+    getTemplateMessages();
+  }
+
+  async function addNewTemplateMessage() {
+    if (!selectedCategoryName || !message.trim()) return;
+
+    await addTemplateMessage({
+      categoryName: selectedCategoryName.categoryName,
+      message,
     });
-  }
-  function handleCategorySelect(value) {
-    setSelectedCategoryName(value);
-  }
 
-  function onTextChanged(event) {
-    setMessage(event.target.value);
+    setMessage("");
+    getTemplateMessages();
   }
-
-  function addNewTemplateMessage(){
-    addMessageInTemplate({templateId:selectedCategoryName.id, message:message})
-  }
-
 
   return (
-    <div>
+    <div > 
+      {/* CATEGORY SELECT */}
       <div className={styles.dropdownContainer}>
-        <span>Category:</span>
+        <span className={styles.selectLabel}>Category:</span>
+
         <Select
-          className={styles.classDropdown}
           value={selectedCategoryName}
-          onChange={handleCategorySelect}
+          onChange={setSelectedCategoryName}
           options={categoryOptionList}
+          className={styles.customSelect}
+          classNamePrefix="react-select"  // 🔥 REQUIRED
         />
       </div>
-      <label>Message</label>
 
+      {/* MESSAGE INPUT */}
+      <label className={styles.formLabel}>Message</label>
       <input
         className={styles.departmentInput}
-        name="message"
-        onInput={onTextChanged}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Enter message"
       />
-      <button onClick={addNewTemplateMessage}>Add Record</button>
-      {templateList?.map((template,index) => (
-        <Accordion defaultActiveKey="0">
-          <Accordion.Item eventKey={""+index}>
-            <Accordion.Header>{template.name}</Accordion.Header>
+
+      {/* BUTTON */}
+      <button
+        className={styles.actionButton}
+        onClick={addNewTemplateMessage}
+      >
+        Add Record
+      </button>
+
+      {/* ACCORDION */}
+      <Accordion className={styles.styledAccordion}>
+        {templateList.map((template, index) => (
+          <Accordion.Item eventKey={String(index)} key={template._id}>
+            <Accordion.Header>
+              {template.categoryName}
+            </Accordion.Header>
+
             <Accordion.Body>
-              {template?.descriptionList?.map((item) => (
-                <div>
+              {template.categoryMessage?.map((item) => (
+                <div key={item._id}>
                   <div className={styles.itemContainer}>
-                  <label className={styles.listItem}>{item.message}</label>
-                   <button onClick={()=>deleteTemplateMessageItem(item.id)}>delete</button>
+                    <label>{item.message}</label>
+
+                    <button
+                      onClick={() =>
+                        deleteTemplateMessageItem(template._id, item._id)
+                      }
+                    >
+                      Delete
+                    </button>
                   </div>
-                  <div className={styles.divider}></div>
+
+                  <div className={styles.divider} />
                 </div>
               ))}
             </Accordion.Body>
           </Accordion.Item>
-        </Accordion>
-      ))}
+        ))}
+      </Accordion>
     </div>
   );
 }

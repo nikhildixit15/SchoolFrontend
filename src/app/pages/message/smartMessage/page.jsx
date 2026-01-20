@@ -1,68 +1,67 @@
 "use client";
 
-import Link from "next/link";
-import styles from "./page.module.css";
-import { useEffect, useState } from "react";
-
-
+import { useState } from "react";
 import ClassSecFilter from "@/app/components/classFilter/classSecFilter";
-import { getStudents } from "@/app/services/student/studentService";
-import StudentTable from "./studentTable";
 import MessageBuilderView from "./messageBuilderView";
+import StudentTable from "./studentTable";
+import { getStudentsOfClass } from "@/app/services/student/studentService";
+import { sendMessage } from "@/app/services/message/messageService";
+import styles from "./page.module.css"
 
 export default function SmartMessage() {
-  const [studentList, setStudentList] = useState();
-
-  const [senderName, setSenderName] = useState();
-  const [customText, setCustomText] = useState();
-
-  useEffect(() => {
-   // loadCategoryList();
-  }, []);
-
-  async function loadCategoryList() {
-  }
+  const [studentList, setStudentList] = useState([]);
+  const [senderName, setSenderName] = useState(null);
+  const [messageText, setMessageText] = useState("");
 
   async function getStudentData(data) {
-    const list = await getStudents(data);
-    setStudentList(list);
+    if (!data?.className || !data?.sectionName) return;
+
+    const res = await getStudentsOfClass({
+      className: data.className.label,
+      sectionName: data.sectionName.label,
+    });
+
+    setStudentList(res.data.students || []);
   }
 
+  async function performSendMessageApiCall(selectedList) {
+    const payload = {
+      sender: senderName?.label,
+      message: messageText,
+      students: selectedList.map((s) => s._id),
+    };
 
-  function performSendMessageApiCall(selectedList){
-
-    const selectedStudent = selectedList.map((item)=>{
-      return ({id:item.id})
-    })
-    sendMessage({selectedStudent, message:customText, sender:senderName.label})
-
+    console.log("SEND PAYLOAD", payload);
+    await sendMessage(payload);
   }
-
-  function handleSenderSelect(value) {
-    setSenderName(value);
-  }
-
-  function onMessageTextChanged(event) {
-    setCustomText(event.target.value);
-  }
-
-
 
   return (
-      <main>
-        
-        <div>
-          <div>
-          <ClassSecFilter getStudentData={getStudentData}></ClassSecFilter>
-          </div>
-          <div>
-          <MessageBuilderView senderName={senderName}  customText={customText} handleSenderSelect={handleSenderSelect} onMessageTextChanged={onMessageTextChanged}></MessageBuilderView>
-          </div>
+     
+    <main className={styles.main}>
+      <div className={styles.wrapper}>
+        <div className={styles.card3d}>
+          <h3 className={styles.title}>Class & Section</h3>
+          <ClassSecFilter getStudentData={getStudentData} />
+        </div>
+
+        <div className={styles.card3d}>
+          <h3 className={styles.title}>Message Builder</h3>
+          <MessageBuilderView
+            senderName={senderName}
+            customText={messageText}
+            handleSenderSelect={setSenderName}
+            onMessageTextChanged={setMessageText}
+          />
+        </div>
+
+        <div className={styles.card3d}>
+          <h3 className={styles.title}>Students</h3>
           <StudentTable
             students={studentList}
             sendMessage={performSendMessageApiCall}
-          ></StudentTable>
+          />
         </div>
-      </main>
+      </div>
+    </main>
   );
 }

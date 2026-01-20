@@ -160,6 +160,15 @@ function MMSNavbar() {
               <NavDropdown.Item href="/pages/fees/addFee">
                 Add Fee
               </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/addHoliday">
+                Add Holiday
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/addEvent">
+                Add Event
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/addExamSchedule">
+                Add Exam Schedule
+              </NavDropdown.Item>
               <NavDropdown.Item href="/pages/admin/deleteStudent">
                 Delete Student
               </NavDropdown.Item>

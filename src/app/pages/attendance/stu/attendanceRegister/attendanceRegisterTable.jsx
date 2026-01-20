@@ -1,15 +1,12 @@
-import Table from "react-bootstrap/Table";
+import { useEffect, useState } from "react";
+import AttendanceTable from "./attendanceTable";
+import { getHolidays } from "@/app/services/attendance/attendance";
 
 /* -------------------- UTILS -------------------- */
 
-const getShortMonthName = (dateStr) =>
-  new Date(dateStr).toLocaleString("en-US", { month: "short" });
-
 const getDaysInMonth = (dateStr) => {
   const date = new Date(dateStr);
-  const year = date.getFullYear();
-  const month = date.getMonth(); // 0-based
-  return new Date(year, month + 1, 0).getDate();
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 };
 
 const getDayFromDate = (dateStr) => {
@@ -17,33 +14,44 @@ const getDayFromDate = (dateStr) => {
   return Number(dateStr.split("-")[2]);
 };
 
-const getStatusLabel = (status) => {
-  switch (status) {
-    case "Present":
-      return "P";
-    case "Absent":
-      return "A";
-    case "Half Day":
-      return "HD";
-    case "Early Leave":
-      return "EL";
-    case "Holiday":
-      return "H";
-    default:
-      return "";
-  }
-};
-
 /* -------------------- COMPONENT -------------------- */
 
 function AttendanceRegisterTable({ students, month }) {
   const attendanceRecords = students?.data || [];
+  if (!month) return null;
 
-  const monthName = getShortMonthName(month); // Dec
-  const totalDays = getDaysInMonth(month);    // 31
+  const monthDate = new Date(month);
+  if (isNaN(monthDate.getTime())) return null;
+
+  const year = monthDate.getFullYear();
+  const monthIndex0 = monthDate.getMonth();     // ✅ 0–11 (JS Date)
+  const monthIndex1 = monthIndex0 + 1;          // ✅ 1–12 (API)
+
+  const totalDays = getDaysInMonth(month);
   const dateList = Array.from({ length: totalDays }, (_, i) => i + 1);
 
-  console.log("Attendance Record:", attendanceRecords, monthName, totalDays);
+  /* 🔥 HOLIDAY STATE */
+  const [holidays, setHolidays] = useState([]);
+
+  /* 🔥 FETCH HOLIDAYS */
+  useEffect(() => {
+    const fetchHolidays = async () => {
+      try {
+        const res = await getHolidays({
+          month: monthIndex1,
+          year,
+        });
+
+        if (res?.data?.success) {
+          setHolidays(res.data.data || []);
+        }
+      } catch (err) {
+        console.error("Failed to fetch holidays", err);
+      }
+    };
+
+    fetchHolidays();
+  }, [monthIndex1, year]);
 
   /* -------- Group attendance by student -------- */
 
@@ -55,7 +63,7 @@ function AttendanceRegisterTable({ students, month }) {
         className: item.className,
         section: item.section,
         fatherName: item.fatherName,
-        days: {}, // { 1: "Present", 2: "Absent" }
+        days: {},
       };
     }
 
@@ -67,67 +75,16 @@ function AttendanceRegisterTable({ students, month }) {
     return map;
   }, {});
 
-  const studentList = Object.values(groupedStudents);
-
-  /* -------------------- RENDER -------------------- */
-
   return (
-    <Table striped bordered hover responsive>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Student ID</th>
-          <th>Student Name</th>
-          <th>Class</th>
-          <th>Section</th>
-          <th>Father Name</th>
-
-          {dateList.map((day) => (
-            <th key={day}>{day}</th>
-          ))}
-
-          <th>TW</th>
-          <th>TA</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {studentList.length === 0 ? (
-          <tr>
-            <td colSpan={dateList.length + 8} align="center">
-              No attendance data found
-            </td>
-          </tr>
-        ) : (
-          studentList.map((student, index) => {
-            const presentCount = Object.values(student.days).filter(
-              (status) => status === "Present"
-            ).length;
-
-            return (
-              <tr key={student.studentId}>
-                <td>{index + 1}</td>
-                <td>{student.studentId}</td>
-                <td>{student.name}</td>
-                <td>{student.className}</td>
-                <td>{student.section}</td>
-                <td>{student.fatherName}</td>
-
-                {dateList.map((day) => (
-                  <td key={day} align="center">
-                    {getStatusLabel(student.days[day])}
-                  </td>
-                ))}
-
-                <td>{totalDays}</td>
-                <td>{presentCount}</td>
-              </tr>
-            );
-          })
-        )}
-      </tbody>
-    </Table>
+    <AttendanceTable
+      studentList={Object.values(groupedStudents)}
+      dateList={dateList}
+      year={year}
+      monthIndex={monthIndex0}   // ✅ 0-based for Date()
+      totalDays={totalDays}
+      holidays={holidays}
+    />
   );
 }
 
-export default AttendanceRegisterTable;  
+export default AttendanceRegisterTable;

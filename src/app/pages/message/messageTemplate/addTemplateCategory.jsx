@@ -1,44 +1,89 @@
-import Link from "next/link";
+"use client";
+
 import styles from "./page.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Table from "react-bootstrap/Table";
 
-export default function AddTemplateCategory({ addData, tableData }) {
-  const [categoryName, setCategoryName] = useState();
+export default function AddTemplateCategory({
+  addData,
+  tableData,
+  deleteCategory,
+}) {
+  const [categoryName, setCategoryName] = useState("");
 
   function onTextChanged(event) {
     setCategoryName(event.target.value);
   }
+
+  function handleAddCategory() {
+    if (!categoryName.trim()) return;
+    addData(categoryName);
+    setCategoryName("");
+  }
+
+  async function handleDeleteCategory(categoryId) {
+    await deleteCategory(categoryId);
+  }
+
   return (
     <div>
-      <label>Category</label>
-      <input
-        className={styles.departmentInput}
-        name="category"
-        onInput={onTextChanged}
-      />
-      <button onClick={() => addData(categoryName)}>Add Category</button>
+      {/* INPUT ROW */}
+      <div className={styles.inputRow}>
+        <label className={styles.formLabel}>Category</label>
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Category Name</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData?.map((item, index) => (
+        <input
+          className={styles.departmentInput}
+          name="category"
+          value={categoryName}
+          onChange={onTextChanged}
+          placeholder="Enter category name"
+        />
+
+        <button className={styles.actionButton} onClick={handleAddCategory}>
+          Add Category
+        </button>
+      </div>
+
+      {/* TABLE */}
+      <div className={styles.tableWrapper}>
+        <Table striped bordered hover className={styles.styledTable}>
+          <thead>
             <tr>
-              <td>{index + 1}</td>
-              <td>{item.name}</td>
-              <td>
-                <button>View</button>
-              </td>
+              <th>#</th>
+              <th>Category Name</th>
+              <th>View</th>
+              <th>Delete</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+
+          <tbody>
+            {tableData?.length > 0 ? (
+              tableData.map((item, index) => (
+                <tr key={item._id}>
+                  <td>{index + 1}</td>
+                  <td>{item.categoryName}</td>
+
+                  <td>
+                    <button>View</button>
+                  </td>
+
+                  <td>
+                    <button onClick={() => handleDeleteCategory(item._id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" className={styles.emptyState}>
+                  No categories found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 }
