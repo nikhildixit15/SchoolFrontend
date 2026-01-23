@@ -157,6 +157,9 @@ function MMSNavbar() {
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Admin" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="/pages/admin/notification">
+                Send Notification
+              </NavDropdown.Item>
               <NavDropdown.Item href="/pages/fees/addFee">
                 Add Fee
               </NavDropdown.Item>

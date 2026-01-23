@@ -8,18 +8,21 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess } from "@/app/redux/slices/loginSlice";  
+import { loginSuccess } from "@/app/redux/slices/loginSlice";
+import { useFCMToken } from "@/useFCMtoken";  
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  
   const router = useRouter();
   const dispatch = useDispatch(); // ✅ redux dispatcher
+  const userId = useSelector((state)=>state.auth.userId)
   console.log("Selector", useSelector((state)=>state.auth.userId))
-
+  
+  useFCMToken(userId);
   const handleEmailSignIn = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -39,7 +42,6 @@ export default function SignInPage() {
           userId: res.data.userId, // fallback safe
         })
       );
-
       toast.success("Login Successfully");
 
       // 🔹 Redirect after login

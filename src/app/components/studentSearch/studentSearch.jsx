@@ -38,7 +38,7 @@ export default function StudentSearch({ onSelect }) {
       } catch (err) {
         console.error(err);
       }
-    }, 300);
+    }, 100);
 
     return () => clearTimeout(delay);
   }, [query]);
@@ -47,6 +47,7 @@ export default function StudentSearch({ onSelect }) {
     onSelect(student);      // ✅ send to parent
     setQuery(student.firstName + " " + student.lastName);
     setShowDropdown(false);
+    console.log("Students", student)
   }
 
   return (
