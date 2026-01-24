@@ -1,84 +1,79 @@
-import Table from "react-bootstrap/Table";
-import styles from "./page.module.css";
+"use client";
 
-function TeacherWiseTimeTable({ tableData }) {
-  console.log("students", tableData);
+import { useState } from "react";
+import style from "./page.module.css";
+
+export default function TeacherWiseTimeTable({ tableData }) {
+  const [openDay, setOpenDay] = useState(null);
+
+  if (!Array.isArray(tableData) || tableData.length === 0) {
+    return <p>No schedule found</p>;
+  }
+
+  const dayOrder = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  // ===== Group data by day =====
+  const groupedByDay = dayOrder.reduce((acc, day) => {
+    acc[day] = tableData
+      .filter((item) => item.day === day)
+      .sort(
+        (a, b) => (a.periodNumber || 0) - (b.periodNumber || 0)
+      );
+    return acc;
+  }, {});
+
+  const toggleDay = (day) => {
+    setOpenDay(openDay === day ? null : day);
+  };
 
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Day Name</th>
-          <th>Total</th>
-          <th>P1</th>
-          <th>P2</th>
-          <th>P3</th>
-          <th>P4</th>
-          <th>P5</th>
-          <th>P6</th>
-          <th>P7</th>
-          <th>P8</th>
-        </tr>
-      </thead>
+    <div className={style.dayWrapper}>
+      {dayOrder.map(
+        (day) =>
+          groupedByDay[day].length > 0 && (
+            <div key={day} className={style.dayCard}>
+              {/* Day Header */}
+              <div 
+                onClick={() => toggleDay(day)}  
+              >
+                <h3>{day}</h3> 
+              </div>
 
-      <tbody>
-        {tableData?.map((item) => (
-          <tr>
-            <td>{item.dayName}</td>
-            <td>{Object.keys(item.periods).length}</td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p1?.className}</label>
-                <label>{item.periods.p1?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p2?.className}</label>
-                <label>{item.periods.p2?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p3?.className}</label>
-                <label>{item.periods.p3?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p4?.className}</label>
-                <label>{item.periods.p4?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p5?.className}</label>
-                <label>{item.periods.p5?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p6?.className}</label>
-                <label>{item.periods.p6?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p7?.className}</label>
-                <label>{item.periods.p7?.subject}</label>
-              </div>
-            </td>
-            <td>
-              <div className={styles.rowItem}>
-                <label>{item.periods.p8?.className}</label>
-                <label>{item.periods.p8?.subject}</label>
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+              {/* Dropdown Content */}
+              {openDay === day && (
+                <table className={style.table}>
+                  <thead>
+                    <tr>
+                      <th>Class</th>
+                      <th>Section</th>
+                      <th>Period</th>
+                      <th>Subject</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {groupedByDay[day].map((item, idx) => (
+                      <tr key={`${day}-${item.periodNumber}-${idx}`}>
+                        <td>{item.className}</td>
+                        <td>{item.section}</td>
+                        <td>Period {item.periodNumber}</td>
+                        <td>{item.subjectName}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          )
+      )}
+    </div>
   );
 }
-
-export default TeacherWiseTimeTable;

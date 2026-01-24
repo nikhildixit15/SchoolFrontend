@@ -10,7 +10,7 @@ export default function AddClass({ classList, addClass }) {
   function addNewClass() {
     addClass({
       name: className,
-      code:codeName
+      code: codeName,
     });
   }
 
@@ -18,7 +18,7 @@ export default function AddClass({ classList, addClass }) {
     setClassName(event.target.value);
   }
 
-  function onCodeTextChanged(event){
+  function onCodeTextChanged(event) {
     setCodeName(event.target.value);
   }
 
@@ -27,10 +27,15 @@ export default function AddClass({ classList, addClass }) {
       <label>Class</label>
       <input
         className={styles.departmentInput}
-        name="class"
+        type="text"
+        inputMode="numeric"
         placeholder="Enter Class Name"
-        onInput={onTextChanged}
+        onInput={(e) => {
+          e.target.value = e.target.value.replace(/\D/g, "");
+          onTextChanged(e);
+        }}
       />
+
       <input
         className={styles.departmentInput}
         name="codeName"

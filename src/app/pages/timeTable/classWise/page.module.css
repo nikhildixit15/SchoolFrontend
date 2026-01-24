@@ -6,11 +6,6 @@
   font-family: var(--font-mono);
 }
 
-.rowItem {
-  display: flex;
-  flex-direction: column;
-}
-
 .dropdownContainer {
   flex-direction: row;
   display: flex;
@@ -18,3 +13,18 @@
   margin-right: 8px;
   align-items: center;
 }
+   
+.rowItem {       /* cell height never changes */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.2;
+} 
+ .customTable thead th {
+  background-color: #2563eb ;
+  color: #fff;
+}
+
+
+ 

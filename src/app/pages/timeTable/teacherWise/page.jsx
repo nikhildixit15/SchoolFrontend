@@ -1,63 +1,86 @@
 "use client";
 
-import styles from "./page.module.css";
-import { useEffect, useState } from "react";
-import TeacherWiseTimeTable from "./teacherWiseTimeTable";
-import { getTeacherWiseTimeTable } from "@/app/services/timeTable/timeTableService";
+import { useState, useMemo } from "react";
+import { Search } from "lucide-react";
 import Select from "react-select";
 import { useSelector } from "react-redux";
+import style from "./page.module.css";
+import { getTeacherWiseTimeTable } from "@/app/services/timeTable/timeTableService";
+import TeacherWiseTimeTable from "./teacherWiseTimeTable";
 
-export default function TeacherWise() {
-  const [tableData, setTableDAta] = useState();
-  const [teacherName, setTeacherName] = useState();
-  const [teacherOptionList, setTeacherOptionList] = useState();
+export default function TeacherSchedule() {
+  const [selectedTeacher, setSelectedTeacher] = useState(null);
+  const [timetable, setTimetable] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const teacherList = useSelector((state) => {
+  // ===== Redux Data =====
+  const teacherList = useSelector((state) => state.class.teacherList);
 
-    return state.class.teacherList;
-  });
+  // ===== Teacher dropdown options =====
+  const teacherOptions = useMemo(() => {
+    if (!Array.isArray(teacherList)) return [];
+    return teacherList.map((t) => ({
+      value: t.id,
+      label: t.name,
+    }));
+  }, [teacherList]);
 
-  useEffect(() => {
-    createTeachersOptionList();
-  }, []);
+  // ===== Fetch timetable =====
+  const teacherhandle = async (teacher) => {
+    if (!teacher) return;
 
-  console.log("###teacherList", teacherList);
-  function createTeachersOptionList() {
-    const list = [];
-    teacherList?.map((item) => {
-      list.push({ ...item, value: item.name, label: item.name });
-    });
-    setTeacherOptionList(list);
-  }
+    setSelectedTeacher(teacher);
+    setLoading(true);
+    setTimetable([]);
 
-  async function getTableData(data) {
-    const result = await getTeacherWiseTimeTable(data);
-    console.log("####", result);
-    setTableDAta(result);
-  }
+    try {
+      const payload = { teacherId: teacher.value };
+      const result = await getTeacherWiseTimeTable(payload);
 
-  function handleTeacherSelect(value) {
-    setTeacherName(value);
-    getTableData({teacherId: value?.id});
-
-  }
+      // ✅ Ensure array
+      setTimetable(result?.data?.schedule ?? []);
+    } catch (error) {
+      console.error("Error fetching timetable:", error);
+      setTimetable([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <>
-      <main>
-        <div>
-          <div className={styles.dropdownContainer}>
-            <label>Teacher Name:</label>
+    <div className={style.container}>
+      <div className={style.wrapper}>
+        <h1 className={style.title}>Teacher Schedule Finder</h1>
+
+        {/* ===== Teacher Select ===== */}
+        <div className={style.searchBox}>
+          <div className={style.searchInputWrapper}>
+            <Search className={style.searchIcon} size={20} />
             <Select
-              className={styles.classDropdown}
-              value={teacherName}
-              onChange={handleTeacherSelect}
-              options={teacherOptionList}
+              className={style.select}
+              options={teacherOptions}
+              value={selectedTeacher}
+              onChange={teacherhandle}
+              placeholder="Select Teacher"
             />
           </div>
         </div>
-        {/* <TeacherWiseTimeTable tableData={tableData}></TeacherWiseTimeTable> */}
-      </main>
-    </>
+
+        {/* ===== Schedule Table ===== */}
+        {selectedTeacher && (
+          <div className={style.scheduleCard}>
+            <h2 className={style.scheduleTitle}>
+              {selectedTeacher.label}'s Schedule
+            </h2>
+
+            {loading ? (
+              <p>Loading schedule...</p>
+            ) : (
+              <TeacherWiseTimeTable tableData={timetable} />
+            )}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

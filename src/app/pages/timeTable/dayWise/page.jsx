@@ -1,62 +1,64 @@
 "use client";
 
-import styles from "./page.module.css";
-import { useEffect, useState } from "react";
-import { getDayWiseTimeTable } from "@/app/services/timeTable/timeTableService";
+import React, { useState } from "react";
+import { Search, Calendar } from "lucide-react";
 import Select from "react-select";
-import { daysList } from "@/app/utils/constants";
+import styles from "./page.module.css";
+import { getDayWiseTimeTable } from "@/app/services/timeTable/timeTableService";
 import DayWiseTimeTable from "./dayWiseTimeTable";
-import ClassSecFilter from "@/app/components/classFilter/classSecFilter";
 
-export default function TeacherWise() {
-  const [tableData, setTableDAta] = useState([]);
-  const [dayName, setDayName] = useState();
-  const [daysOptionList, setDaysOptionList] = useState();
+export default function ClassScheduleManager() {
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [tableData, setTableData] = useState([]);
 
-  useEffect(() => {
-    // getTableData({});
-    createDaysOptionList();
-  }, []);
+  const days = [
+    { day: "Monday", label: "Monday" },
+    { day: "Tuesday", label: "Tuesday" },
+    { day: "Wednesday", label: "Wednesday" },
+    { day: "Thursday", label: "Thursday" },
+    { day: "Friday", label: "Friday" },
+  ];
 
-  console.log("###daysList", tableData);
-  function createDaysOptionList() {
-    const list = [];
-    daysList?.map((item) => {
-      list.push({ ...item, value: item.dayName, label: item.dayName });
-    });
-    setDaysOptionList(list);
-  }
-
-  async function getTableData(data) {
-    const response = await getDayWiseTimeTable(data);
-    console.log("####", response);
-    setTableDAta(response.data || []);
-  }
-
-  function handleDaySelect(value) {
-    setDayName(value);
-    getTableData({ day: value?.value });
-        // getTableData({ classId: className?.id, section: sectionName?.value });// get class wise
-    // getTableData({ teacherId: teacherName?.id });// get teacher wise
-
-  }
+  const handleSelectDay = async (option) => {
+    if (!option) return;
+    setSelectedDay(option);
+    try { 
+      const result = await getDayWiseTimeTable(option);
+      console.log("DayWise### Data", result.data);
+      setTableData(result.data);
+    } catch (error) {
+      console.error("Error fetching timetable:", error);
+      setTableData([]);
+    }
+  };
 
   return (
-    <>
-      <main>
-        <div>
-          <div className={styles.dropdownContainer}>
-            <label>Day Name:</label>
-            <Select
-              className={styles.classDropdown}
-              value={dayName}
-              onChange={handleDaySelect}
-              options={daysOptionList}
-            />
-          </div>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <div className={styles.header}>
+          <Search />
+          <h1>Class Schedule Manager</h1>
         </div>
-        <DayWiseTimeTable tableData={tableData}></DayWiseTimeTable>
-      </main>
-    </>
+
+        <div className={styles.dropdown}>
+          <label>
+            <Calendar size={16} /> Select Day
+          </label>
+
+          <Select
+            className={styles.classDropdown}
+            instanceId="day-select"
+            options={days}
+            value={selectedDay}
+            onChange={handleSelectDay}
+            placeholder="Select Day"
+          /> 
+        </div>
+      </div>
+
+      {tableData && tableData.length > 0 && (
+        <DayWiseTimeTable tableData={tableData} />
+      )}
+    </div>
   );
 }
