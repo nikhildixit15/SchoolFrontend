@@ -46,7 +46,28 @@ export async function submitStudentFee(data) {
 }
 
 export async function addFeeByAdmin(data) {
-  return await axiosClient.post("/addFeeByAdmin", data);
+  return await axiosClient.post("/fee/addFeeByAdmin", data);
+}
+
+export async function fetchNameWise(query) {
+  return axiosClient.get("/fee/fetchNameWise", {
+    params: { query },
+  });
+}
+
+export async function getStudentsByClass(data) { 
+  return await axiosClient.get("/fee/studentByClass", data);
+}
+
+export async function getStudentAmount(data) { 
+  return await axiosClient.get("/fee/studentFeeData", data);
+}
+
+export async function getSeeDetail(data) { 
+  return await axiosClient.get("/fee/seeDetail", data);
+}
+export async function submitFeeByAdmin(data) { 
+  return await axiosClient.post("/fee/submitFeeByAdmin", data);
 }
 
 export async function downloadFeeReceipt(data) {

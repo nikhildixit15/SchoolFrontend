@@ -4,8 +4,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import styles from "./navbar.module.css";
 import { CircleUser } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { logout } from "@/app/redux/slices/loginSlice";
 
 function MMSNavbar() {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout()); // ✅ remove email from redux
+  };
   return (
     <Navbar collapseOnSelect expand="lg" className={`${styles.container}`}>
       <Container>
@@ -131,31 +137,45 @@ function MMSNavbar() {
             </NavDropdown>
 
             <NavDropdown title="Fee" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="/pages/fees/addFee">
-                Add Fee
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
               <NavDropdown.Item href="/pages/fees/submitFee">
                 SubmitFee
               </NavDropdown.Item>
-              <NavDropdown.Item href="/pages/fees/feeDetails">
-                Fee Details
-              </NavDropdown.Item>
               <NavDropdown.Item href="/pages/fees/paymentType">
-                Payment Type
+                Payment By Admin
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/fees/feeDetails">
+                Fee Detail
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/fees/SeeDetail">
+                See Payment History
               </NavDropdown.Item>
               <NavDropdown.Item href="/pages/fees/adminfee">
                 Admin fee
               </NavDropdown.Item>
-              <NavDropdown.Item href="/pages/fees/SeeDetail">
-                SeeDetail
-              </NavDropdown.Item>
               <NavDropdown.Item href="/pages/fees/gallery">
-                Gallery
+                Galleryf
               </NavDropdown.Item>
             </NavDropdown>
-
             <NavDropdown title="Admin" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="/pages/admin/notification">
+                Send Notification
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/fees/addFee">
+                Add Fee
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/addHoliday">
+                Add Holiday
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/addEvent">
+                Add Event
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/addExamSchedule">
+                Add Exam Schedule
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/deleteStudent">
+                Delete Student
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="/pages/admin/addClass">
                 Add Class/Section
               </NavDropdown.Item>
@@ -169,14 +189,14 @@ function MMSNavbar() {
                 Add Period
               </NavDropdown.Item>
             </NavDropdown>
-             <NavDropdown title={<CircleUser/>}>
-            <NavDropdown.Item href="/">
-               Logout 
-            </NavDropdown.Item>
-            <NavDropdown.Item href="/pages/ChangePassword">
-              Change Password
-            </NavDropdown.Item>
-             </NavDropdown>
+            <NavDropdown title={<CircleUser />}>
+              <NavDropdown.Item onClick={handleLogout} href="/">
+                Logout
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/ChangePassword">
+                Change Password
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

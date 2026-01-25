@@ -16,7 +16,7 @@ function ClasswiseTable({ listData }) {
           <th>Absent</th>
           <th>Early leave</th>
           <th>Holiday</th>
-          <th>Supervision</th>
+          <th>Half Day</th>
           <th>NIWD</th>
           <th>Medical leave</th>
         </tr>
@@ -27,13 +27,13 @@ function ClasswiseTable({ listData }) {
           <tr>
             <td>{index + 1}</td>
             <td>{item?.classTeacher}</td>
-            <td>{item?.class}</td>
+            <td>{item?.class}-{item?.section}</td>
             <td>{item?.total}</td>
             <td>{item?.present}</td>
             <td>{item?.absent}</td>
             <td>{item?.earlyLeave}</td>
-            <td>{item?.holidays}</td>
-            <td>{item?.supervision}</td>
+            <td>{item?.holiDay}</td>
+            <td>{item?.halfDay}</td>
             <td>{item?.NIWD}</td>
             <td>{item?.medicalLeave}</td>
           </tr>

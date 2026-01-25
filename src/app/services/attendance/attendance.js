@@ -1,6 +1,4 @@
-import {
-  studentAttendanceList,
-  classwiseAttendanceList,
+import { 
   datewiseAttendanceList,
   attendanceRegisterData,
   studentAttendances,
@@ -17,17 +15,17 @@ export async function getClasswiseAttendanceList(data) {
 }
 
 export async function getDatewiseAttendanceList(data) {
-  if (isMock) {
+  if (!isMock) {
     return datewiseAttendanceList;
-  }
-  return await axiosClient.get("/datewiseAttendanceList");
+  } 
+  return await axiosClient.get("/attendance/fromDateWise", data);
 }
 
 export async function getAttendanceRegisterData(data) {
-  if (isMock) {
+  if (!isMock) {
     return attendanceRegisterData;
-  }
-  return await axiosClient.get("/datewiseAttendanceList");
+  } 
+  return await axiosClient.get("attendance/attendanceRegisterData", data);
 }
 
 export async function getStudentAttendanceById(data) {
@@ -41,7 +39,11 @@ export async function saveAttendance(data) {
   return await axiosClient.post("/attendance", data);
 }
 
+export async function getHolidays(data) {
+  return await axiosClient.get("/holidayRouter/holidayByMonth", data);
+}
+
 export async function updateAttendance(data) {
-  return await axiosClient.put("/attendance", data);
+  return await axiosClient.put("/attendanjnkce", data);
 }
 

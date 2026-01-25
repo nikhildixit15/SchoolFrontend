@@ -3,59 +3,73 @@
 import Select from "react-select";
 import { useEffect, useState } from "react";
 import styles from "./messageTemplateSelector.module.css";
-import {  getTemplateMessageList } from "@/app/services/message/messageService";
+import {
+  getCategoryList,
+  getTemplateMessage,
+} from "@/app/services/message/messageService";
 
-export default function MessageTemplateSelector({ getStudentData }) {
-  const [categoryName, setCategoryName] = useState();
-  const [templateMessage, setTemplateMessage] = useState();
-  const [categoryOptionList, setCategoryOptionList] = useState();
-
-
+export default function MessageTemplateSelector({ onMessageSelect }) {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedMessage, setSelectedMessage] = useState(null);
+  const [categoryOptionList, setCategoryOptionList] = useState([]);
+  const [messageTemplateList, setMessageTemplateList] = useState([]);
 
   useEffect(() => {
-    getTemplateMessages();
+    loadCategories();
   }, []);
 
-  async function getTemplateMessages() {
-    const list = await getTemplateMessageList();
-    loadCategoryOptionList(list);
+  async function loadCategories() {
+    const res = await getCategoryList();
+    setCategoryOptionList(
+      res.data.map((item) => ({
+        value: item._id,
+        label: item.categoryName,
+      }))
+    );
   }
 
+  async function handleCategorySelect(category) {
+    setSelectedCategory(category);
+    setSelectedMessage(null);
 
-  async function loadCategoryOptionList(list) {
-    const results = list?.map((item) => {
-      return { ...item, value: item.name, label: item.name };
+    const res = await getTemplateMessage({
+      categoryName: category.label,
     });
-    setCategoryOptionList(results);
+
+    const options = res.data.flatMap((cat) =>
+      cat.categoryMessage.map((msg) => ({
+        value: msg._id,
+        label: msg.message,
+        message: msg.message,
+      }))
+    );
+
+    setMessageTemplateList(options);
   }
 
-
-  function handleCategorySelect(value) {
-    setCategoryName(value);
-    setTemplateMessage(value.descriptionList[0].message)
+  function handleMessageSelect(message) {
+    setSelectedMessage(message);
+    onMessageSelect(message.message); // 🔥 SEND UP
   }
-
-  function onTextChanged(event){
-    setTemplateMessage(event.target.value)
-  }
-
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.dropdownContainer}>
-          <label>Category:</label>
-          <Select
-            className={styles.classDropdown}
-            value={categoryName}
-            onChange={handleCategorySelect}
-            options={categoryOptionList}
-          />
-        </div>
+    <div className={styles.container}>
+      <label>Category</label>
+      <Select
+        value={selectedCategory}
+        onChange={handleCategorySelect}
+        options={categoryOptionList}
+        placeholder="Select category"
+      />
 
-
-        <textarea disabled={true}  value={templateMessage} type="input" onInput={onTextChanged}></textarea>
-      </div>
-    </>
+      <label>Message</label>
+      <Select
+        value={selectedMessage}
+        onChange={handleMessageSelect}
+        options={messageTemplateList}
+        placeholder="Select message"
+        isDisabled={!messageTemplateList.length}
+      />
+    </div>
   );
 }

@@ -1,0 +1,54 @@
+.wrapper {
+  margin: 20px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+/* Header */
+.table thead {
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+}
+
+.table th {
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* Body */
+.table td {
+  padding: 10px;
+  text-align: center; 
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Paid Amount */
+.amount {
+  font-weight: 600;
+  color: #16a34a;
+}
+
+/* Empty text */
+.emptyText {
+  padding: 20px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 15px;
+}

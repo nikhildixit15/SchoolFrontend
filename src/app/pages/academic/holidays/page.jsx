@@ -2,40 +2,24 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import AddHoliday from "./addHoliday";
 import HolidayList from "./holidayList";
-import {
-  getEventList,
-  addNewEvent,
-} from "@/app/services/academic/academicService";
+import { getHolidayList } from "@/app/services/academic/academicService";
 
 export default function Activities() {
-  const [eventList, setEventList] = useState();
+  const [holidayList, setholidayList] = useState([]); // ✅ array
 
   useEffect(() => {
-    getEvent();
+    getHoliday();
   }, []);
 
-  async function addEvent(data) {
-    const result = await addNewEvent(data);
-    console.log("####", result);
-    setEventList(result);
-  }
-
-  async function getEvent(data) {
-    const result = await getEventList(data);
-    setEventList(result);
+  async function getHoliday() {
+    const result = await getHolidayList(); 
+    setholidayList(result.data.holidays); // ✅ correct level
   }
 
   return (
-    <>
-      <main>
-        <AddHoliday addEvent={addEvent}></AddHoliday>
-
-        <div>
-          <HolidayList listData={eventList}></HolidayList>
-        </div>
-      </main>
-    </>
+    <main>
+      <HolidayList listData={holidayList} />
+    </main>
   );
 }

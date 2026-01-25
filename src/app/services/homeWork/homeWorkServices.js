@@ -3,15 +3,20 @@ import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
 export async function saveHomeWorkByClass(data) {
-  if (isMock) {
+  if (!isMock) {
     return { success: true };
   }
-  return await axiosClient.post("/profile", data);
+  return await axiosClient.post("/homework/saved", data);
 }
 
 export async function getHomeWorkByClass(data) {
-  if (isMock) {
+  if (!isMock) {
     return homeWorkList;
   }
-  return await axiosClient.get("/homeWorkList");
+
+  return await axiosClient.get("/homework/viewHomeWork", {
+    params: data
+  });
 }
+
+

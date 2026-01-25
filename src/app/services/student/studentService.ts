@@ -6,11 +6,15 @@ export async function getStudents(data: any) {
   return await axiosClient.get("/student");
 }
 
-export async function getDefaulterStudents(data: any) {
-  if (isMock) {
+export async function getStudentsOfClass(data: any) {
+  return await axiosClient.get("/student/getStudentsOfClass", data);
+}
+
+export async function getDefaulterStudents() {
+  if (!isMock) {
     return defaulterStudents;
   }
-  return await axiosClient.get("/student");
+  return await axiosClient.get("/student/defaulters");
 }
 
 export async function getStudentBasicInfo(data: any) {
@@ -36,11 +40,9 @@ export async function getStudentInfo(data: any) {
   return await axiosClient.get("/student");
 }
 
-
 export async function saveStudentInfo(data: any) {
   if (!isMock) {
     return student;
   }
   return await axiosClient.post("/student", data);
 }
-

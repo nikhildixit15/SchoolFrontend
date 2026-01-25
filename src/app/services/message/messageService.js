@@ -15,45 +15,58 @@ export async function getProfileData() {
 }
 
 export async function getCategoryList() {
-  if (isMock) {
+  if (!isMock) {
     return categoryList;
   }
-  return await axiosClient.get("/categoryList");
+  return await axiosClient.get("/messageCategory/getCategoryList");
 }
 
-export async function addTemplateCategory(value) {
-  if (isMock) {
-    return [...categoryList, value];
+export async function addCategory(data) {
+  if (!isMock) {
+    return [...categoryList, data];
   }
-  return await axiosClient.post("/categoryList");
+  return await axiosClient.post("/messageCategory/addCategory",data);
 }
 
-export async function getTemplateMessageList() {
-  if (isMock) {
+export async function addTemplateMessage(data) {
+  if (!isMock) {
     return templateList;
   }
-  return await axiosClient.get("/templateMessageList");
+  return await axiosClient.post("/messageTemplate/addMessageTemplate",data);
+}
+
+export async function getTemplateMessage(data) {
+  if (!isMock) {
+    return templateList;
+  }
+  return await axiosClient.get("/messageTemplate/getMessageByCategory",data);
+}
+export async function getTemplateMessageList() {
+  if (!isMock) {
+    return templateList;
+  }
+  return await axiosClient.get("/messageTemplate/getMessageTemplate");
 }
 
 export async function deleteTemplateMessage(data) {
-  if (isMock) {
+  if (!isMock) {
     return true;
   }
-  return await axiosClient.get("/templateMessageList");
+  return await axiosClient.del("/messageTemplate/deleteMessageTemplate", {data:data});
 }
 
-export async function addMessageInTemplate(data) {
-  if (isMock) {
+export async function deleteACategory(data) {
+  if (!isMock) {
     return true;
   }
-  return await axiosClient.get("/templateMessageList");
+  return await axiosClient.del("/messageCategory/deleteCategory", {data:data});
 }
 
 export async function sendMessage(data) {
-  if (isMock) {
+  if (!isMock) {
     return true;
   }
-  return await axiosClient.post("/sendMessage");
+  return await axiosClient.post("/messageTemplate/sendMessage", data);
 }
 
 export async function getStudentMessagesById(data) {

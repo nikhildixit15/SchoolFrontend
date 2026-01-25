@@ -1,105 +1,110 @@
 import Link from "next/link";
 import Table from "react-bootstrap/Table";
-import {useState,useEffect} from 'react'
+import { useEffect, useState } from "react"; 
 
 function StudentTable({ students, sendMessage }) {
-
-  const [studentList, setStudentList] = useState();
-  const [isAllSelected, setAllSelected] = useState(false);
+  const [studentList, setStudentList] = useState([]);
   const [selectedStudents, setSelectedStudents] = useState([]);
+  const [isAllSelected, setAllSelected] = useState(false);
 
+  useEffect(() => {
+    const updated = students.map((item) => ({
+      ...item,
+      isSelected: false,
+    }));
+    setStudentList(updated);
+    setSelectedStudents([]);
+    setAllSelected(false);
+  }, [students]);
 
-  useEffect(()=>{
-    setStudentList(students);
-  },[students])
+  function onCheckboxSelected(student) {
+    const updatedList = studentList.map((item) =>
+      item._id === student._id
+        ? { ...item, isSelected: !item.isSelected }
+        : item
+    );
 
-  function onCheckboxSelected(selectedItem){
-    selectedItem.isSelected=!selectedItem.isSelected;
+    setStudentList(updatedList);
 
-   if(selectedItem.isSelected){
-    selectedStudents.push(selectedItem)
-    setSelectedStudents(selectedStudents)
-    setAllSelected(selectedStudents.length == studentList.length)
-   }else{
-    const list = selectedStudents.filter((item)=>item.id !=  selectedItem.id)
-    setSelectedStudents(list)
-    setAllSelected(false)
-
-   }
-
-   const newList = studentList.map((item)=>item)
-   setStudentList(newList);
-
+    const selected = updatedList.filter((item) => item.isSelected);
+    setSelectedStudents(selected);
+    setAllSelected(selected.length === updatedList.length);
   }
 
-  function onHeaderCheckboxSelected(){
-    const list = studentList.map((item)=>{
-      item.isSelected = !isAllSelected;
-      return item;
-    })
+  function onHeaderCheckboxSelected() {
+    const selectAll = !isAllSelected;
 
-    if(!isAllSelected)
-    {
-      setSelectedStudents(list)
-    }else{
-      setSelectedStudents([])
-    }
-    setAllSelected(!isAllSelected)
-    setStudentList(list)
-   }
+    const updatedList = studentList.map((item) => ({
+      ...item,
+      isSelected: selectAll,
+    }));
 
-   function performSendMessage(){
-   sendMessage(selectedStudents)
+    setStudentList(updatedList);
+    setSelectedStudents(selectAll ? updatedList : []);
+    setAllSelected(selectAll);
+  }
+
+  function performSendMessage() {
+    sendMessage(selectedStudents);
   }
 
   return (
     <div>
-      {selectedStudents.count >0 &&
-          <button onClick={performSendMessage}>Send Message</button>
-      }
+      {selectedStudents.length > 0 && (
+        <button onClick={performSendMessage}>Send Message</button>
+      )}
 
       <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th><input type="checkbox" checked={isAllSelected} onInput={onHeaderCheckboxSelected}></input></th>
-          <th>#</th>
-          <th>Student Name</th>
-          <th>Father's Name</th>
-          <th>Class</th>
-          <th>Address</th>
-          <th>User Name</th>
-          <th>Mobile Number</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {studentList?.map((item, index) => (
+        <thead>
           <tr>
-           <td> <input type="checkbox" checked={item.isSelected}  onInput={()=>onCheckboxSelected(item)}   ></input></td>
-            <td>{index + 1}</td>
-            <td>{item.name}</td>
-            <td>{item.fatherName}</td>
-            <td>{item.class}</td>
-            <td>{item.address}</td>
-            <td>{item.userName}</td>
-            <td>{item.mobileNumber}</td>
-            <td>
-              <Link
-                href={{
-                  pathname: "/pages/student/studentDetails",
-                  query: { student: JSON.stringify(item) },
-                }}
-              >
-                view
-              </Link>
-            </td>
+            <th>
+              <input
+                type="checkbox"
+                checked={isAllSelected}
+                onChange={onHeaderCheckboxSelected}
+              />
+            </th>
+            <th>#</th>
+            <th>Student Name</th>
+            <th>User Name</th>
+            <th>Father's Name</th> 
+            <th>Address</th>
+            <th>Mobile Number</th>
+            <th>Action</th>
           </tr>
-        ))}
-      </tbody>
-    </Table>
-    </div>
+        </thead>
 
+        <tbody>
+          {studentList.map((item, index) => (
+            <tr key={item._id}>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={item.isSelected}
+                  onChange={() => onCheckboxSelected(item)}
+                />
+              </td>
+              <td>{index + 1}</td>
+              <td>{item.basicInfo?.firstName}{" "}  {item.basicInfo?.lastName}</td>
+              <td>{item.adminInfo?.userName}</td>
+              <td>{item.familyInfo?.fatherName}</td> 
+              <td>{item.address?.permanentAddress || "-"}</td>
+              <td>{item.familyInfo?.mobileNumber}</td>
+              <td>
+                <Link
+                  href={{
+                    pathname: "/pages/student/studentDetails",
+                    query: { student: JSON.stringify(item) },
+                  }}
+                >
+                  view
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 }
 

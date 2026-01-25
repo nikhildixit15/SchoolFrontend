@@ -2,32 +2,35 @@ import { eventList, examList, subjectList, examTypeList } from "@/mocks";
 import * as axiosClient from "../axiosClient/axiosClient";
 
 const isMock = true;
-export async function getEventList(data) {
-  if (isMock) {
+export async function getEventList() {
+  if (!isMock) {
     return eventList;
   }
-  return await axiosClient.get("/eventList");
+  return await axiosClient.get("/event/getAllEvent");
 }
 
-export async function addNewEvent(data) {
-  if (isMock) {
-    return [...eventList, { ...data, id: eventList.length }];
-  }
-  return await axiosClient.get("/eventList");
-}
-
-export async function getHolidayList(data) {
-  if (isMock) {
+export async function getHolidayList() {
+  if (!isMock) {
     return eventList;
   }
-  return await axiosClient.get("/holiday");
+  return await axiosClient.get("/holidayRouter/getHoliday");
 }
 
-export async function addNewHoliday(data) {
-  if (isMock) {
-    return [...eventList, { ...data, id: eventList.length }];
+export async function deleteHoliday(id) {
+  if (!isMock) {
+    return { success: true }; // mock response
   }
-  return await axiosClient.post("/holiday", data);
+
+  return await axiosClient.del(`/holidayRouter/${id}`);
+}
+
+
+export async function deleteEvent(id) {
+  if (!isMock) {
+  return { data: [] };
+
+  }
+    return await axiosClient.del(`/event/${id}`);
 }
 
 export async function getEventListByMonth(data) {
@@ -37,11 +40,11 @@ export async function getEventListByMonth(data) {
   return await axiosClient.get("/eventList");
 }
 
-export async function getExamList(data) {
-  if (isMock) {
+export async function getExamList( ) {
+  if (!isMock) {
     return examList;
   }
-  return await axiosClient.get("/examList");
+  return await axiosClient.get("/exam/getExamSheet");
 }
 
 export async function getSubjectList(data) {

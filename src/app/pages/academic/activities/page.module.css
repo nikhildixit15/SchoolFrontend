@@ -1,0 +1,159 @@
+/* Wrapper */
+.tableWrapper {
+  margin-top: 32px;  
+  border-radius: 18px;
+  overflow-x: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #ffffff, #f9fbff);
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0; 
+}
+
+/* Header */
+.table thead th {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff;
+  padding: 16px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 10;
+}
+
+/* Body cells */
+.table tbody td {
+    padding: 16px 18px;
+    font-size: 14px; 
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid #eef2ff;
+} 
+
+/* Title */
+.bold {
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e0e7ff, #eef2ff);
+  color: #3730a3;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+
+/* Status pill */
+.status {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.scheduled {
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  color: #0369a1;
+}
+
+.completed {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  color: #166534;
+}
+
+.cancelled {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #991b1b;
+}
+
+/* Empty state */
+.empty {
+  text-align: center;
+  padding: 50px;
+  font-size: 16px;
+  color: #6b7280;
+  background: #f9fafb;
+}
+
+/* Action buttons (future use) */
+.actionBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.actionBtn:hover {
+  transform: scale(1.2);
+}
+
+.filterRow {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+.filterRow select {
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  padding: 10px 40px 10px 40px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+
+  cursor: pointer; 
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #991b1b;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteBtn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #fecaca, #fca5a5);
+}
+
+.title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 15px;
+}

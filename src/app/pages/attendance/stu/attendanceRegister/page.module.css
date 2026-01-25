@@ -1,14 +1,57 @@
-.present {
-  background-color: rgb(134, 177, 229) !important;
-}
-.absent {
-  background-color: rgb(168, 45, 23) !important;
-}
-
-.holiday {
-  background-color: aqua !important;
+.container { 
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
-.sunday {
-  background-color: aqua !important;
+.dropdownContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dropdownContainer label,
+.dropdownContainer span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Date input */
+.dropdownContainer input[type="date"] {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.dropdownContainer input[type="date"]:focus {
+  border-color: #2563eb;
+}
+
+/* Button */
+.btn {
+  margin-top: 10px;
+  padding: 10px 22px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+  background-color: #1d4ed8;
+}
+
+.btn:active {
+  transform: scale(0.97);
 }

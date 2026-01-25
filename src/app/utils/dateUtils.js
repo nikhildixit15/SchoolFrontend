@@ -11,8 +11,8 @@ export function getDaysByMonths(month) {
     case months.oct.toLowerCase():
     case months.dec.toLowerCase():
       return 31;
-    case months.Apr.toLowerCase():
-    case months.jul.toLowerCase():
+    case months.apr.toLowerCase():
+    case months.jun.toLowerCase():
     case months.sep.toLowerCase():
     case months.nov.toLowerCase():
       return 30;

@@ -1,65 +1,51 @@
 "use client";
 
-import Link from "next/link";
-import styles from "./page.module.css";
+import Select from "react-select";
 import { useEffect, useState } from "react";
-
-
-import MessageTemplateSelector from "@/app/components/messageTemplateSelector/messageTemplateSelector";
-import Select from 'react-select';
 import { useSelector } from "react-redux";
+import MessageTemplateSelector from "@/app/components/messageTemplateSelector/messageTemplateSelector";
+ 
 
-export default function MessageBuilderView({senderName, customText, handleSenderSelect, onMessageTextChanged}) {
-
-  const teacherList = useSelector((state) => {
-
-    return state.class.teacherList;
-  });
-
-
-  const [senderOptionList, setSenderOptionList] = useState();
-
-
+export default function MessageBuilderView({
+  senderName,
+  customText,
+  handleSenderSelect,
+  onMessageTextChanged,
+}) {
+  const teacherList = useSelector((state) => state.class.teacherList);
+  const [senderOptionList, setSenderOptionList] = useState([]);
 
   useEffect(() => {
-    loadSenderOptionList();
+    if (teacherList?.length) {
+      setSenderOptionList(
+        teacherList.map((t) => ({
+          ...t,
+          value: t.name,
+          label: t.name,
+        }))
+      );
+    }
   }, [teacherList]);
 
-
-
-  async function loadSenderOptionList() {
-    const results = teacherList?.map((item) => {
-      return { ...item, value: item.name, label: item.name };
-    });
-    setSenderOptionList(results);
-  }
-
-
-
   return (
-    <>
-        
-        <div>
+    <div>
+      <label>Sender</label>
+      <Select
+        value={senderName}
+        onChange={handleSenderSelect}
+        options={senderOptionList}
+      />
 
-        <div style={styles.customTextMessage}>
-        <label>Custom Message:</label>
+      {/* 🔥 TEMPLATE SELECTOR */}
+      <MessageTemplateSelector onMessageSelect={onMessageTextChanged} />
 
-            <textarea value={customText} onInput={onMessageTextChanged}></textarea>
-        </div>
-        <diV>
-            <label>Sender:</label>
-            <Select
-                className={styles.classDropdown}
-                value={senderName}
-                onChange={handleSenderSelect}
-                options={senderOptionList}
-            /> 
-          </diV>
-  
-          <MessageTemplateSelector></MessageTemplateSelector>
+      <h3>OR</h3>
 
-
-        </div>
-    </>
+      <label>Custom Message</label>
+      <textarea
+        value={customText || ""}
+        onChange={(e) => onMessageTextChanged(e.target.value)}
+      />
+    </div>
   );
 }

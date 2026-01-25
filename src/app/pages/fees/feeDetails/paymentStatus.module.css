@@ -1,0 +1,61 @@
+.card {
+  max-width: 520px;
+  margin: 24px auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.fullRow {
+  grid-column: span 2;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.paid {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.partial {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.unpaid {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.due {
+  color: #dc2626;
+}
+
+.advance {
+  color: #16a34a;
+}
+
+.error {
+  text-align: center;
+  color: #dc2626;
+  font-weight: 500;
+}

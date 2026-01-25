@@ -2,89 +2,93 @@ import Select from "react-select";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { useSelector } from "react-redux";
+import {
+  getClassOptionList,
+  getSectionOptionList,
+} from "@/app/utils/optionListUtils";
+import { attendanceTypeList } from "@/app/utils/constants";
 
 export default function AttendanceFilter({ getStudentData }) {
-  const [className, setClassName] = useState();
-  const [sectionName, setSectionName] = useState();
-  const [classOptionList, setClassOptionList] = useState();
-  const [sectionOptionList, setSectionOptionList] = useState();
+  const [className, setClassName] = useState(null);
+  const [sectionName, setSectionName] = useState(null);
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [status, setStatus] = useState("");
+  const [classOptionList, setClassOptionList] = useState([]);
+  const [sectionOptionList, setSectionOptionList] = useState([]);
 
   const classes = useSelector((state) => state.class.classes);
 
   useEffect(() => {
-    console.log(classes);
-    createOptionList();
+    setClassOptionList(getClassOptionList(classes));
   }, [classes]);
-
-  function createOptionList() {
-    const list = [];
-    classes.map((item) => {
-      list.push({
-        id: item.id,
-        value: item.className,
-        label: item.className,
-        sec: item.sec,
-      });
-    });
-    setClassOptionList(list);
-  }
 
   function handleClassSelect(value) {
     setClassName(value);
-    createSectionOptionList(value);
+    setSectionName(null);
+    setSectionOptionList(getSectionOptionList(value));
   }
+function handleTypeList(selectedOption){
+  setStatus(selectedOption); // selectedOption has { value, label }
+}
 
-  function handleSectionSelect(value) {
-    setSectionName(value);
-  }
+  function handleGetData() {
+    if (!fromDate || !toDate || !className || !sectionName) {
+      alert("Please select all fields");
+      return;
+    }
 
-  function createSectionOptionList(value) {
-    const list = [];
-    const result = value.sec;
-    result.map((item) => {
-      list.push({ value: item, label: item });
+    getStudentData({
+      fromDate,
+      toDate,
+      className: className.value,
+      section: sectionName.value,
+      status:status.value
     });
-
-    setSectionOptionList(list);
-  }
-
-  function onDatedSelected(event) {
-    console.log("onDatedSelected", event.target.value);
   }
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.dropdownContainer}>
-          <label>Date:</label>
-          <input type="date" id="date" name="date" onInput={onDatedSelected} />
-        </div>
-        <div className={styles.dropdownContainer}>
-          <label>Class:</label>
-          <Select
-            className={styles.classDropdown}
-            value={className}
-            onChange={handleClassSelect}
-            options={classOptionList}
-          />
-        </div>
-        <div className={styles.dropdownContainer}>
-          <span>Section:</span>
-          <Select
-            className={styles.classDropdown}
-            value={sectionName}
-            onChange={handleSectionSelect}
-            options={sectionOptionList}
-          />
-        </div>
+    <div className={styles.container}>
+      <div className={styles.dropdownContainer}>
+        <label>From Date:</label>
+        <input
+          type="date"
+          id="fromDate"
+          onChange={(e) => setFromDate(e.target.value)}
+        />
 
-        <button
-          onClick={() => getStudentData({ className, sectionName })}
-          className={styles.btn}
-        >
-          Get data
-        </button>
+        <label>To Date:</label>
+        <input
+          type="date"
+          id="toDate"
+          onChange={(e) => setToDate(e.target.value)}
+        />
+
+        <label>Attendance Type:</label>
+        <Select
+          value={status}
+          onChange={handleTypeList}
+          options={attendanceTypeList}
+        />
+        <label>Class:</label>
+        <Select
+          value={className}
+          onChange={handleClassSelect}
+          options={classOptionList}
+        />
+
+        <label>Section:</label>
+        <Select
+          value={sectionName}
+          onChange={setSectionName}
+          options={sectionOptionList}
+          isDisabled={!className}
+        />
+      <button className={styles.btn} onClick={handleGetData}>
+        Get data
+      </button>
       </div>
-    </>
+
+    </div>
   );
 }

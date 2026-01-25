@@ -1,62 +1,88 @@
 "use client";
-import Link from "next/link";
+
+import { useState } from "react";
 import styles from "./page.module.css";
-import { useEffect, useState } from "react";
-import StudentTable from "@/app/components/studentTable/studentTable";
-import { getStudents } from "@/app/services/student/studentService";
-import ClassSecFilter from "@/app/components/classFilter/classSecFilter";
+import StudentSearch from "@/app/components/studentSearch/studentSearch";
+import { getStudentAmount } from "@/app/services/fees/feeServices"; // ✅ import
+import StudentPaymentStatus from "./paymentStatus";
 
-import {
-  getFeeDetailsByMonthAndClass,
-  updateStudentFeeStatus,
-} from "@/app/services/fees/feeServices";
-import StudentFeeTable from "@/app/components/studentFeeTable/studentFeeTable";
-import MonthClassFilter from "@/app/components/monthClassFilter/monthClassFilter";
 export default function FeeDetails() {
-  const [students, setStudents] = useState();
-  const [stdFeeInfo, setStdFeeInfo] = useState();
-  const [userName, setUserName] = useState();
+  const [students, setStudents] = useState({
+    studentName: "",
+    studentId: "",
+    studentUserId:""
+  });
+  const [paymentData, setPaymentData] = useState(null);
 
-  async function loadData(data) {
-    setClassInfo(data);
-    await Promise.all([getFeeDetails(data)]);
+
+  const [loading, setLoading] = useState(false);
+
+  // ✅ when student selected from dropdown
+  function handleSearchSelect(student) {
+    setStudents({
+      studentName: student.firstName ,
+      studentId: student._id,
+      studentUserId:student.userName
+    });
+
+    console.log("Fee Detail Student:", student);
   }
 
-  async function getFeeDetails(data) {
-    const result = await getFeeDetailsByMonthAndClass(data);
-    console.log("####123", result);
-    setStudents(result);
+  // ✅ submit handler
+ const handleSubmit = async () => {
+  if (!students.studentId) {
+    alert("Please select a student");
+    return;
   }
 
-  function onTextChanged(event) {
-    console.log("####", hwData);
-    const value = event.target.value;
-    setUserName(value);
-  }
+  try {
+    setLoading(true);
 
-  async function onGetStudentClick(event) {
-    if (userName) {
-      const result = await getStudentFeeDetail({ userName });
-      setStdFeeInfo(result);
+    const response = await getStudentAmount(students);
+
+    if (response?.data?.success) {
+      setPaymentData(response.data); // ✅ SAVE DATA
     }
-    setUserName(value);
+  } catch (error) {
+    console.error("Submit fee error:", error);
+    alert("Something went wrong");
+  } finally {
+    setLoading(false);
   }
+};
+
 
   return (
     <main>
+      {/* Student Search */}
+      <div className={styles.container}>
       <div className={styles.searchContainer}>
-        <label>Enter UserName</label>
-        <input value={userName} onInput={onTextChanged}></input>
-        <Link
-          href={{
-            pathname: "/pages/student/studentDetails",
-            query: { userName },
-          }}
-        >
-          Get Student
-        </Link>
+        <label className={styles.label}>Student Name</label>
+        <StudentSearch onSelect={handleSearchSelect} />
       </div>
-      <div className={styles.mainContainer}></div>
+
+      {/* Student ID */}
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Student ID</label>
+        <input
+          type="text"
+          value={students.studentUserId}
+          readOnly
+          className={styles.input}
+        />
+      </div>
+
+      {/* Button */}
+      <button
+        type="button"
+        onClick={handleSubmit}   // ✅ FIXED
+        className={styles.button}
+        disabled={loading}
+      >
+        {loading ? "Loading..." : "Get Data"}
+      </button>
+      {paymentData && <StudentPaymentStatus data={paymentData} />}
+</div>
     </main>
   );
 }

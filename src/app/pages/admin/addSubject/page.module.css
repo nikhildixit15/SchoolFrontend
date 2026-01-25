@@ -11,8 +11,7 @@
 .mainContainer {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  max-width: 500px;
+  flex-direction: column; 
   margin: 40px auto;
   background: #fff;
   border-radius: 8px;
@@ -111,4 +110,12 @@
   color: #888;
   font-size: 0.95rem;
   padding: 16px 0 0 0;
+}
+
+.infoBox {
+  background: #eef2ff;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 14px;
 }

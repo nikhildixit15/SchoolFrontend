@@ -1,60 +1,89 @@
-import Table from "react-bootstrap/Table";
-import styles from "./page.module.css";
-import Select from "react-select";
-import { attendanceStatus, attendanceTypeList } from "@/app/utils/constants";
-import { getDaysByMonths } from "@/app/utils/dateUtils";
+import { useEffect, useState } from "react";
+import AttendanceTable from "./attendanceTable";
+import { getHolidays } from "@/app/services/attendance/attendance";
+
+/* -------------------- UTILS -------------------- */
+
+const getDaysInMonth = (dateStr) => {
+  const date = new Date(dateStr);
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+};
+
+const getDayFromDate = (dateStr) => {
+  if (!dateStr) return null;
+  return Number(dateStr.split("-")[2]);
+};
+
+/* -------------------- COMPONENT -------------------- */
 
 function AttendanceRegisterTable({ students, month }) {
-  console.log("students####", students);
+  const attendanceRecords = students?.data || [];
+  if (!month) return null;
 
-  const days = getDaysByMonths(month);
-  const dateList = new Array(days).fill(0);
+  const monthDate = new Date(month);
+  if (isNaN(monthDate.getTime())) return null;
 
-  function getAttendanceStatusText(value) {
-    console.log(attendanceStatus[value.attendanceStatus]);
-    return attendanceStatus[value.attendanceStatus];
-  }
+  const year = monthDate.getFullYear();
+  const monthIndex0 = monthDate.getMonth();     // ✅ 0–11 (JS Date)
+  const monthIndex1 = monthIndex0 + 1;          // ✅ 1–12 (API)
+
+  const totalDays = getDaysInMonth(month);
+  const dateList = Array.from({ length: totalDays }, (_, i) => i + 1);
+
+  /* 🔥 HOLIDAY STATE */
+  const [holidays, setHolidays] = useState([]);
+
+  /* 🔥 FETCH HOLIDAYS */
+  useEffect(() => {
+    const fetchHolidays = async () => {
+      try {
+        const res = await getHolidays({
+          month: monthIndex1,
+          year,
+        });
+
+        if (res?.data?.success) {
+          setHolidays(res.data.data || []);
+        }
+      } catch (err) {
+        console.error("Failed to fetch holidays", err);
+      }
+    };
+
+    fetchHolidays();
+  }, [monthIndex1, year]);
+
+  /* -------- Group attendance by student -------- */
+
+  const groupedStudents = attendanceRecords.reduce((map, item) => {
+    if (!map[item.studentId]) {
+      map[item.studentId] = {
+        studentId: item.studentId,
+        name: item.name,
+        className: item.className,
+        section: item.section,
+        fatherName: item.fatherName,
+        days: {},
+      };
+    }
+
+    const day = getDayFromDate(item.attendanceDate);
+    if (day) {
+      map[item.studentId].days[day] = item.status;
+    }
+
+    return map;
+  }, {});
 
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Stu Id</th>
-          <th>Student Name</th>
-          <th>Father's Name</th>
-          <th>Class</th>
-          {dateList.map((item, index) => (
-            <th>{index + 1}</th>
-          ))}
-          <th>TW</th>
-          <th>TA</th>
-          <th>PM</th>
-          <th>GT</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {students?.map((item, index) => (
-          <tr>
-            <td>{index + 1}</td>
-            <td>{item.studentId}</td>
-            <td>{item.name}</td>
-            <td>{item.fatherName}</td>
-            <td>{item.class}</td>
-            {item.attendanceArr.map((data) => (
-              <td className={styles[data.attendanceStatus]}>
-                {getAttendanceStatusText(data)}
-              </td>
-            ))}
-            <td>{item.totalWorking}</td>
-            <td>{item.totalAttendance}</td>
-            <td>{item.pm}</td>
-            <td>{item.gt}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <AttendanceTable
+      studentList={Object.values(groupedStudents)}
+      dateList={dateList}
+      year={year}
+      monthIndex={monthIndex0}   // ✅ 0-based for Date()
+      totalDays={totalDays}
+      holidays={holidays}
+    />
   );
 }
 

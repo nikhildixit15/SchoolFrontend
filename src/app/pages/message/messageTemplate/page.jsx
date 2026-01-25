@@ -1,51 +1,57 @@
 "use client";
 
-import Link from "next/link";
-import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import {
-  getDepartmentList,
-  getDesignationList,
-  addDepartment,
-  addDesignation,
-} from "@/app/services/staff/staffService";
+import styles from "./page.module.css";
+
 import AddTemplateCategory from "./addTemplateCategory";
 import AddTemplateMessage from "./addTemplateMessage";
+
 import {
-  addTemplateCategory,
+  addCategory,
   getCategoryList,
+  deleteACategory,
 } from "@/app/services/message/messageService";
 
 export default function DepartmentMaster() {
-  const [categoryList, setCategoryList] = useState();
+  const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
     loadCategoryList();
   }, []);
 
   async function loadCategoryList() {
-    const list = await getCategoryList();
-    setCategoryList(list);
+    const res = await getCategoryList();
+    setCategoryList(res?.data || []);
   }
 
   async function addNewCategory(categoryName) {
-    const list = await addTemplateCategory({
-      name: categoryName,
-    });
-    setCategoryList(list);
+    if (!categoryName.trim()) return;
+    await addCategory({ categoryName });
+    loadCategoryList();
+  }
+
+  async function deleteCategory(categoryId) {
+    await deleteACategory({ categoryId });
+    loadCategoryList();
   }
 
   return (
-    <>
-      <main>
-        <div>
+    <main className={styles.page}>
+      <div className={styles.container}>
+        
+          <h2 className={styles.title}>Template Categories</h2>
           <AddTemplateCategory
             addData={addNewCategory}
             tableData={categoryList}
-          ></AddTemplateCategory>
-          <AddTemplateMessage tableData={categoryList}></AddTemplateMessage>
-        </div>
-      </main>
-    </>
+            deleteCategory={deleteCategory}
+          />
+     
+
+    
+          <h2 className={styles.title}>Template Messages</h2>
+          <AddTemplateMessage tableData={categoryList} />
+      
+      </div>
+    </main>
   );
 }

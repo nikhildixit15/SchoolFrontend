@@ -1,35 +1,46 @@
 import Table from "react-bootstrap/Table";
-import styles from "./page.module.css";
 
-function AttendanceTable({ students, onAttendanceChange }) {
-  console.log("students####", students);
+function AttendanceTable({ students}) {
+  if (!Array.isArray(students) || students.length === 0) {
+    return <p>No students found</p>;
+  }
+
+  // Flatten date-wise students
+  const rows = students.flatMap((day) =>
+    day.students.map((stu) => ({
+      date: new Date(day.date).toLocaleDateString(),
+      studentId: stu.studentId,
+      studentName: stu.studentName,
+      fatherName: stu.fatherName,
+      mobileNumber: stu.mobileNumber,
+      status: stu.status,
+    }))
+  );
 
   return (
-    <Table striped bordered hover>
+    <Table striped bordered hover responsive>
       <thead>
         <tr>
           <th>#</th>
-          <th>Stu Id</th>
+          <th>Date</th>
+          <th>Student ID</th>
           <th>Student Name</th>
-          <th>Father's Name</th>
-          <th>Class</th>
-          <th>Sex</th>
-          <th>Mobile Number</th>
-          <th>Action</th>
+          <th>Father Name</th>
+          <th>Mobile No</th>
+          <th>Status</th>
         </tr>
       </thead>
 
       <tbody>
-        {students?.map((item, index) => (
-          <tr>
+        {rows.map((row, index) => (
+          <tr key={`${row.studentId}-${index}`}>
             <td>{index + 1}</td>
-            <td>{item.studentId}</td>
-            <td>{item.name}</td>
-            <td>{item.fatherName}</td>
-            <td>{item.class}</td>
-            <td>{item.sex}</td>
-            <td>{item.mobileNumber}</td>
-            <td></td>
+            <td>{row.date}</td>
+            <td>{row.studentId}</td>
+            <td>{row.studentName}</td>
+            <td>{row.fatherName}</td>
+            <td>{row.mobileNumber}</td>
+            <td>{row.status}</td>
           </tr>
         ))}
       </tbody>

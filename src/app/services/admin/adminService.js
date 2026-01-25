@@ -38,8 +38,7 @@ export async function getSectionList(data) {
   return await axiosClient.get("/sections");
 }
 
-
-export async function getSubjectList(data) {
+export async function getSubjectList() {
   if (!isMock) {
     return subjectList;
   }
@@ -54,12 +53,12 @@ export async function addSubject(data) {
   return await axiosClient.post("/subject", data);
 }
 
-export async function deleteSubject(id) {
-  if (!isMock) {
-    return subjectList.filter((item) => item.id !== id);
-  }
-  return await axiosClient.del(`/subject/${id}`);
+export async function deleteSubject(data) {
+  return axiosClient.del("/subject", {
+    data // 👈 axios sends body like POST
+  });
 }
+
 
 export async function addPeriod(data) {
   if (!isMock) {
@@ -77,3 +76,31 @@ export async function getPeriodList() {
   }
     return await axiosClient.get("/period");
 }
+
+export async function addHoliday(data) {
+  if (!isMock) {
+  return { data: [] };
+
+  }
+    return await axiosClient.post("/holidayRouter/addHoliday",data);
+}
+
+export async function addEvent(data) {
+  if (!isMock) {
+  return { data: [] };
+
+  }
+    return await axiosClient.post("/event/addEvent",data);
+}
+
+export async function addExamSchedule(data) {
+  if (!isMock) {
+  return { data: [] };
+
+  }
+    return await axiosClient.post("/exam/addExamSchedule", data);
+}
+
+ export async function studentDelete(studentId) {
+     return await axiosClient.put(`/student/delete/${studentId}`);
+};

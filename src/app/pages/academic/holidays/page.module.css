@@ -1,0 +1,122 @@
+.page {
+  min-height: 100vh;
+  padding: 30px;
+
+  background: linear-gradient(135deg, #d5d5e4, #c2bcd1);
+}
+
+.container {
+  margin: auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.tableWrapper {
+  background: #fff;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #6366f1;
+  color: white;
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.table tr:hover {
+  background: #f9fafb;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  margin: 2px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #22c55e;
+  color: white;
+  font-size: 12px;
+}
+
+.yes {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.no {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+.empty {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+}
+.deleteBtn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #dc2626;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background: #b91c1c;
+}
+
+/* Filter Row Container */
+.filterRow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* Dropdown Styling */
+.filterRow select {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  padding: 10px 40px 10px 40px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.filterRow select:hover {
+  border-color: #6366f1;
+}
+

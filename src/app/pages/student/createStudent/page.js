@@ -11,9 +11,10 @@ import { Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getClassOptionList } from "@/app/utils/optionListUtils";
 import { bloodGroups, categoryList, religionList } from "@/app/utils/constants";
+import toast from "react-hot-toast";
 
 export default function CreateStudent() {
-  const [stdBasicInfo, setStdBasicInfo] = useState({gender:"Male"});
+  const [stdBasicInfo, setStdBasicInfo] = useState({ gender: "Male" });
   const [stuAddress, setStuAddress] = useState({});
   const [stuFamilyDetails, setStuFamilyDetails] = useState({});
   const [previousSchoolInfo, setPreviousSchoolInfo] = useState({});
@@ -24,9 +25,10 @@ export default function CreateStudent() {
   const [classValue, setClassValue] = useState();
   const [categoryValue, setCategoryValue] = useState();
   const [religiousValue, setReligiousValue] = useState();
-  const [sectionList, setSectionList] = useState(); 
+  const [sectionList, setSectionList] = useState();
 
   const classes = useSelector((state) => state.class.classes);
+  const createStudentBy = useSelector((state) => state.auth.userId);
 
   useEffect(() => {
     console.log(classes);
@@ -151,15 +153,16 @@ export default function CreateStudent() {
       address: stuAddress,
       familyInfo: stuFamilyDetails,
       previousSchoolInfo,
+      createdBy: createStudentBy,
     };
 
     console.log("###payload", payload);
     if (isValid) {
       const response = await saveStudentInfo(payload);
       if (response.data) {
-        alert("Data saved successfully");
+        toast.success("Data saved successfully");
       } else {
-        alert("Error while saving");
+        toast.error("Error while saving");
       }
     }
   }
@@ -225,36 +228,35 @@ export default function CreateStudent() {
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Gender"}</label>
               <Form>
-  <Form.Check
-    inline
-    label="Male"
-    name="genderGroup"
-    type="radio"
-    value="Male"
-    checked={stdBasicInfo.gender === "Male"}    
-    onChange={(event) =>
-      setStdBasicInfo({
-        ...stdBasicInfo,
-        gender: event.target.value,   
-      })
-    }
-  />
-  <Form.Check
-    inline
-    label="Female"
-    name="genderGroup"
-    type="radio"
-    value="Female"
-    checked={stdBasicInfo.gender === "Female"}   
-    onChange={(event) =>
-      setStdBasicInfo({
-        ...stdBasicInfo,
-        gender: event.target.value,   
-      })
-    }
-  />
-</Form>
-
+                <Form.Check
+                  inline
+                  label="Male"
+                  name="genderGroup"
+                  type="radio"
+                  value="Male"
+                  checked={stdBasicInfo.gender === "Male"}
+                  onChange={(event) =>
+                    setStdBasicInfo({
+                      ...stdBasicInfo,
+                      gender: event.target.value,
+                    })
+                  }
+                />
+                <Form.Check
+                  inline
+                  label="Female"
+                  name="genderGroup"
+                  type="radio"
+                  value="Female"
+                  checked={stdBasicInfo.gender === "Female"}
+                  onChange={(event) =>
+                    setStdBasicInfo({
+                      ...stdBasicInfo,
+                      gender: event.target.value,
+                    })
+                  }
+                />
+              </Form>
             </div>
           </div>
 
@@ -453,9 +455,7 @@ export default function CreateStudent() {
               ></input>
             </div>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>
-                {"Email"}
-              </label>
+              <label className={styles.titleLabel}>{"Email"}</label>
               <input
                 className={styles.inputValue}
                 placeholder={"Enter Email"}

@@ -2,13 +2,10 @@
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import EventList from "./eventList";
-import AddEvent from "./addEvent";
+import EventList from "./eventList"; 
 import {
-  getEventList,
-  addNewEvent,
-} from "@/app/services/academic/academicService";
-import MonthWiseEvents from "./monthwiseEvents";
+  getEventList,deleteEvent
+} from "@/app/services/academic/academicService"; 
 
 export default function Activities() {
   const [eventList, setEventList] = useState();
@@ -17,29 +14,23 @@ export default function Activities() {
     getEvent();
   }, []);
 
-  async function addEvent(data) {
-    const result = await addNewEvent(data);
-    console.log("####", result);
-    setEventList(result);
-  }
+  const handleDeleteEvent = async (id) => {
+    await deleteEvent(id); // backend API
+    console.log("Id",id)
+    setEventList((prev) => prev.filter((e) => e._id !== id));
+  };
 
   async function getEvent(data) {
     const result = await getEventList(data);
-    console.log("####", result);
-    setEventList(result);
+    console.log("####", result.data);
+    setEventList(result.data);
   }
 
   return (
     <>
-      <main>
-        <AddEvent addEvent={addEvent}></AddEvent>
+      <main><h1 className={styles.title}>🏫 Academic Events</h1> 
 
-        <div>
-          <EventList listData={eventList}></EventList>
-        </div>
-        <div>
-          <MonthWiseEvents eventList={eventList}></MonthWiseEvents>
-        </div>
+        <EventList events={eventList} onDelete={handleDeleteEvent} />
       </main>
     </>
   );
