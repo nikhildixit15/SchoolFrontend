@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import styles from "./page.module.css";
 import ClassSecFilter from "@/app/components/classFilter/classSecFilter";
 import { useEffect, useState } from "react";
 import { getStudents } from "@/app/services/student/studentService";
 import StudentTable from "@/app/components/studentTable/studentTable";
+import styles from "./page.module.css";
 
 export default function StudentList() {
   const [students, setStudents] = useState([]);

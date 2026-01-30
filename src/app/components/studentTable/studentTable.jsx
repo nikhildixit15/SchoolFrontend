@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Table from "react-bootstrap/Table";
-import { useRouter } from "next/router";
+import styles from "./page.module.css"
 
 function StudentTable({ students }) {
   console.log("students", students);
@@ -18,8 +18,7 @@ function StudentTable({ students }) {
           <th>DOB</th>
           <th>Sex</th>
           <th>Address</th>
-          <th>User Name</th>
-          <th>Password</th>
+          <th>User Name</th> 
           <th>Mobile Number</th>
           <th>Action</th>
         </tr>
@@ -37,8 +36,7 @@ function StudentTable({ students }) {
             <td>{item.dob}</td>
             <td>{item.gender}</td>
             <td>{item.address}</td>
-            <td>{item.userName}</td>
-            <td>{item.password}</td>
+            <td>{item.userName}</td> 
             <td>{item.mobileNumber}</td>
             <td>
               <Link
@@ -47,7 +45,7 @@ function StudentTable({ students }) {
                   query: { studentId:item._id },
                 }}
               >
-                view
+                <button className={styles.viewBtn}>View</button>
               </Link>
             </td>
           </tr>

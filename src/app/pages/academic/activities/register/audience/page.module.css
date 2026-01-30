@@ -1,0 +1,56 @@
+.card {
+  max-width: 420px;
+  margin: auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.inputGroup label {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  border-color: #4f46e5;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 10px;
+  background: #4f46e5;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background: #4338ca;
+}

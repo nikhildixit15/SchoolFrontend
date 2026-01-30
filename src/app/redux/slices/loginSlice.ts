@@ -3,16 +3,37 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    userId: null,          // 🔹 user email will be stored here
-    isLoggedIn: false,    // 🔹 login status
+    userId: null,
+    studentId: null,
+    staffId: null,
+    role: "",
+    isLoggedIn: false,
   },
   reducers: {
     loginSuccess: (state, action) => {
-      state.userId = action.payload.userId;  // ✅ store email
+      const { _id, role, studentId, staffId } = action.payload;
+
+      state.userId = _id;   // common user _id
+      state.role = role;
       state.isLoggedIn = true;
+
+      //   role-based ID storage
+      if (role === "student") {
+        state.studentId = studentId;
+        state.staffId = null;
+      }
+
+      if (role === "teacher" || role === "staff") {
+        state.staffId = staffId;
+        state.studentId = null;
+      }
     },
+
     logout: (state) => {
-      state.userId = null;      // ❌ clear email
+      state.userId = null;
+      state.studentId = null;
+      state.staffId = null;
+      state.role = "";
       state.isLoggedIn = false;
     },
   },

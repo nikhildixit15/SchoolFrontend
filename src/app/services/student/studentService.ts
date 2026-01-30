@@ -30,7 +30,13 @@ export async function getStudentById(data: any) {
   if (!isMock) {
     return student;
   }
-  return await axiosClient.get(`/student/${id}`);
+  return await axiosClient.get(`/student/studentById/${id}`);
+}
+export async function getProfile(id: any) {
+  if (!isMock) {
+    return student;
+  }
+  return await axiosClient.get(`/student/studentById/${id}`);
 }
 
 export async function getStudentInfo(data: any) {
@@ -45,4 +51,10 @@ export async function saveStudentInfo(data: any) {
     return student;
   }
   return await axiosClient.post("/student", data);
+}
+export async function updateStudentProfile(id:any,data: any) {
+  if (!isMock) {
+    return student;
+  }
+  return await axiosClient.put(`/api/student/${id}`, data);
 }

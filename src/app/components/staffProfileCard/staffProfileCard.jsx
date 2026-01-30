@@ -1,9 +1,10 @@
 import styles from "./staffProfileCard.module.css";
 
 export default function StaffProfileCard({ staff }) {
+  console.log("Detail", staff)
   return (
     <div className={styles.profileCardContainer}>
-      <div className={styles.profileHeaderBlue}>
+       <div className={styles.profileHeaderBlue}>
         <span className={styles.profileHeaderIcon}>👤</span>
         <span className={styles.profileHeaderText}>Staff Profile</span>
       </div>
@@ -40,10 +41,7 @@ export default function StaffProfileCard({ staff }) {
               {staff.profileDetails?.designation || staff.designation || "N/A"}
             </span>
           </div>
-          <div className={styles.profileRow}>
-            <span className={styles.labelGreen}>DOB</span>
-            <span className={styles.value}>{staff.basicInfo?.dob}</span>
-          </div>
+         
           <div className={styles.profileRow}>
             <span className={styles.labelGreen}>Gender</span>
             <span className={styles.value}>{staff.basicInfo?.gender}</span>
@@ -62,12 +60,7 @@ export default function StaffProfileCard({ staff }) {
             <span className={styles.labelGreen}>Password</span>
             <span className={styles.value}>*{staff.adminInfo?.password?.slice(-4)}</span>
           </div>
-          <div className={styles.profileRow}>
-            <span className={styles.labelGreen}>Date of Joining</span>
-            <span className={styles.value}>
-              {staff.profileDetails?.dateOfJoining || staff.dateOfJoining || "N/A"}
-            </span>
-          </div>
+          
         </div>
       </div>
     </div>

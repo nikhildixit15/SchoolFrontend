@@ -6,9 +6,7 @@ import { getBirthdayFromDOB } from "@/app/utils/dateUtils";
 import styles from "./studentProfileCard.module.css";
 
 export default function StudentProfileCard({ student }: any) {
-  const birthDay = getBirthdayFromDOB(student?.dob);
-
-  useEffect(() => {}, []);
+  const birthDay = getBirthdayFromDOB(student?.dob);  
   return (
     <div className={styles.profileCardContainer}>
       <div className={styles.profileHeaderBlue}>
@@ -45,7 +43,7 @@ export default function StudentProfileCard({ student }: any) {
           </div>
           <div className={styles.profileRow}>
             <span className={styles.labelGreen}>Birthday</span>
-            <span className={styles.value}>{birthDay}</span>
+            <span className={styles.value}>{student.basicInfo?.dob}</span>
           </div>
           <div className={styles.profileRow}>
             <span className={styles.labelGreen}>Gender</span>
@@ -58,7 +56,7 @@ export default function StudentProfileCard({ student }: any) {
           <div className={styles.profileRow}>
             <span className={styles.labelGreen}>Password</span>
             <span className={styles.value}>
-              *{student.adminInfo?.password?.slice(-4)}
+              {student.adminInfo?.password }
             </span>
           </div>
         </div>

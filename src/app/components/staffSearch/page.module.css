@@ -1,0 +1,38 @@
+.searchWrapper {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #888;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 42px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #f3f4f6;
+}

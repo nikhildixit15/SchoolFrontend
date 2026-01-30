@@ -10,6 +10,13 @@ import StaffFilter from "./staffFilter";
 export default function StaffList() {
   const [staff, setStaff] = useState([]);
 
+  console.log("Staff", staff)
+
+  useEffect(()=>{
+    getData();
+  },[])
+
+
   async function getData(data) {
     const result = await getStaffList();
     // Support both result and result.data
@@ -53,11 +60,9 @@ export default function StaffList() {
     <main>
       <StaffFilter getData={getData} />
       <div>
-        {staff.length > 0 ? (
+        {staff.length > 0 &&
           <StaffTable staffList={staff} />
-        ) : (
-          <div>No staff found for selected filters</div>
-        )}
+          }
       </div>
     </main>
   );

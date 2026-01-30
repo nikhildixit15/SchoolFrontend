@@ -22,7 +22,7 @@ export default function StudentSearch({ onSelect }) {
     const delay = setTimeout(async () => {
       try {
         const res = await fetchNameWise(query);
-
+        console.log("uigfiuv", res)
         const flat = (res?.data || []).map((s) => ({
           _id: s._id,
           firstName: s.basicInfo?.firstName || "",

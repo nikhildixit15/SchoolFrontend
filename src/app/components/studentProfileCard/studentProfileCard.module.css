@@ -1,92 +1,107 @@
-.description {
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-}
-
-.profileContainer {
-  background-color: antiquewhite;
-  min-width: 35%;
-}
-
-.userProfileRowItem {
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
 .profileCardContainer {
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  width: 350px;
+  width: 100%;
+  max-width: 380px;
+  margin-right: 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .profileHeaderBlue {
-  background: #e6f0ff;
-  color: #0066cc;
-  padding: 10px 16px;
-  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 5px 24px;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #b3d1ff;
+  gap: 12px;
 }
 
 .profileHeaderIcon {
-  margin-right: 8px;
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.profileHeaderText {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.3px;
 }
 
 .profileMain {
-  padding: 16px;
+  padding: 32px 24px 24px;
 }
 
 .profileImageBox {
   display: flex;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
 }
 
 .profileImage {
-  width: 230px;
-  height: 320px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  border: 2px solid #b3d1ff;
   object-fit: cover;
+  border: 5px solid #f0f4f8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.profileImage:hover {
+  transform: scale(1.05);
 }
 
 .studentNameBox {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 12px;
+  text-align: center;
+  margin-bottom: 28px;
 }
 
 .studentName {
-  background: #1abc1a;
-  color: #fff;
-  padding: 6px 18px;
-  border-radius: 6px;
-  font-size: 1.1em;
-  font-weight: bold;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a202c;
+  letter-spacing: 0.2px;
 }
 
 .profileDetails {
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .profileRow {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  align-items: center;
+  padding: 4px 16px;
+  background: #f7fafc;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.profileRow:hover {
+  background: #edf2f7;
+  border-left-color: #188602;
+  transform: translateX(2px);
 }
 
 .labelGreen {
-  color: #1abc1a;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 600;
+  color: #289706;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 100px;
 }
 
 .value {
-  color: #222;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2d3748;
+  text-align: right;
+  word-break: break-word;
 }
+ 

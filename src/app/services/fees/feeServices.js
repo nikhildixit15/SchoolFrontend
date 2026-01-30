@@ -9,12 +9,6 @@ export async function updateStudentFeeStatus(data) {
   return await axiosClient.post("/profile", data);
 }
 
-export async function getStudentFeeSummary(data) {
-  if (isMock) {
-    return studentFeeSummary;
-  }
-  return await axiosClient.get("/studentFeeSummary", data);
-}
 
 export async function getFeeDetailsByMonthAndClass(data) {
   if (isMock) {
@@ -47,6 +41,20 @@ export async function submitStudentFee(data) {
 
 export async function addFeeByAdmin(data) {
   return await axiosClient.post("/fee/addFeeByAdmin", data);
+}
+
+export async function getStudentFeeDetail(studentId) {
+  if (!isMock) {
+    return studentFeeSummary;
+  }
+  return await axiosClient.get(`/fee/getFeeById/${studentId}`);
+}
+
+export async function getStudentFeePaymentHistory(studentId) {
+  if (!isMock) {
+    return studentFeeSummary;
+  }
+  return await axiosClient.get(`/fee/getFeePaymentById/${studentId}`);
 }
 
 export async function fetchNameWise(query) {

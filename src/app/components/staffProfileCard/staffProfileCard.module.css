@@ -1,123 +1,107 @@
-.description {
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-}
-
-.profileContainer {
-  background-color: antiquewhite;
-  min-width: 35%;
-}
-
-.userProfileRowItem {
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-/* Container for the whole card */
 .profileCardContainer {
-  background: #fff;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  width: 350px;
+  width: 100%;
+  max-width: 380px;
+  margin-right: 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  font-family: Arial, sans-serif;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Header section */
 .profileHeaderBlue {
-  background: #e6f0ff;
-  color: #0066cc;
-  padding: 14px 20px;
-  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 5px 24px;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #b3d1ff;
-  font-size: 1.15em;
+  gap: 12px;
 }
 
 .profileHeaderIcon {
-  margin-right: 10px;
-  font-size: 1.5em;
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-/* Main content */
+.profileHeaderText {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
 .profileMain {
-  padding: 20px 18px 18px 18px;
+  padding: 32px 24px 24px;
 }
 
-/* Profile image styling */
 .profileImageBox {
   display: flex;
   justify-content: center;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
 }
 
 .profileImage {
-  width: 160px;
-  height: 220px;
-  border-radius: 15%;
-  border: 3px solid #b3d1ff;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
   object-fit: cover;
-  background: #f5f5f5;
+  border: 5px solid #f0f4f8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-/* Name styling */
+.profileImage:hover {
+  transform: scale(1.05);
+}
+
 .staffNameBox {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
+  text-align: center;
+  margin-bottom: 28px;
 }
 
 .staffName {
-  background: #1abc1a;
-  color: #fff;
-  padding: 8px 22px;
-  border-radius: 8px;
-  font-size: 1.15em;
-  font-weight: bold;
-  letter-spacing: 0.5px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a202c;
+  letter-spacing: 0.2px;
 }
 
-/* Details section */
 .profileDetails {
-  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .profileRow {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+  padding: 4px 16px;
+  background: #f7fafc;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.profileRow:hover {
+  background: #edf2f7;
+  border-left-color: #188602;
+  transform: translateX(2px);
 }
 
 .labelGreen {
-  color: #1abc1a;
-  font-weight: bold;
-  min-width: 110px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #289706;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 100px;
 }
 
 .value {
-  color: #222;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2d3748;
   text-align: right;
-  word-break: break-all;
+  word-break: break-word;
 }
-
-/* Responsive for small screens */
-@media (max-width: 500px) {
-  .profileCardContainer {
-    width: 98vw;
-    min-width: unset;
-  }
-  .profileMain {
-    padding: 12px 4vw;
-  }
-  .profileImage {
-    width: 120px;
-    height: 120px;
-  }
-}
+ 

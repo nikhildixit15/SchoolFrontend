@@ -9,19 +9,18 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "@/app/redux/slices/loginSlice";
-import { useFCMToken } from "@/useFCMtoken";  
+import { useFCMToken } from "@/useFCMtoken";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const router = useRouter();
   const dispatch = useDispatch(); // ✅ redux dispatcher
-  const userId = useSelector((state)=>state.auth.userId)
-  console.log("Selector", useSelector((state)=>state.auth.userId))
-  
+  const { userId } = useSelector((state) => state.auth);
+
   useFCMToken(userId);
   const handleEmailSignIn = async (e) => {
     e.preventDefault();
@@ -31,27 +30,24 @@ export default function SignInPage() {
       const payload = { email, password };
 
       // 🔹 LOGIN API
-      const res = await axios.post(
-        "http://localhost:8000/login",
-        payload
-      );
+      const res = await axios.post("http://localhost:8000/login", payload);
 
       // ✅ Store email in redux (persisted)
       dispatch(
         loginSuccess({
           userId: res.data.userId, // fallback safe
-        })
+          role: res.data.role,
+          studentId: res.data.studentId,
+          staffId: res.data.staffId,
+        }),
       );
       toast.success("Login Successfully");
 
       // 🔹 Redirect after login
       router.push("/pages/dashboard");
-
     } catch (error) {
       console.error(error);
-      toast.error(
-        error.response?.data?.message || "Login failed"
-      );
+      toast.error(error.response?.data?.message || "Login failed");
     } finally {
       setIsLoading(false);
     }

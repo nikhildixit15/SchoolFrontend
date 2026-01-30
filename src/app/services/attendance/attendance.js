@@ -1,4 +1,4 @@
-import { 
+import {
   datewiseAttendanceList,
   attendanceRegisterData,
   studentAttendances,
@@ -17,18 +17,30 @@ export async function getClasswiseAttendanceList(data) {
 export async function getDatewiseAttendanceList(data) {
   if (!isMock) {
     return datewiseAttendanceList;
-  } 
+  }
   return await axiosClient.get("/attendance/fromDateWise", data);
 }
 
 export async function getAttendanceRegisterData(data) {
   if (!isMock) {
     return attendanceRegisterData;
-  } 
+  }
   return await axiosClient.get("attendance/attendanceRegisterData", data);
 }
 
-export async function getStudentAttendanceById(data) {
+export async function getStudentAttendanceById({ studentId, month, year }) {
+  if (!isMock) {
+    return studentAttendances;
+  } 
+  return await axiosClient.get("/attendance/attendanceById", {
+    params: {
+      studentId,
+      month,
+      year,
+    },
+  });
+}
+export async function getStaffAttendanceById() {
   if (isMock) {
     return studentAttendances;
   }
@@ -46,4 +58,3 @@ export async function getHolidays(data) {
 export async function updateAttendance(data) {
   return await axiosClient.put("/attendanjnkce", data);
 }
-

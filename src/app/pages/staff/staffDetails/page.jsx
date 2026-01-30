@@ -4,21 +4,20 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import { getStaffById } from "@/app/services/staff/staffService";
 import StaffProfileCard from "@/app/components/staffProfileCard/staffProfileCard";
-import StaffTabbedPage from "./staffTabbedPage";
+import StaffTabbedPage from "@/app/components/staffProfileTab/staffProfileTab";
+ 
 
 export default function StaffDetails({ searchParams }) {
   const staffId = searchParams.staffId;
   const [staff, setStaff] = useState({});
 
   useEffect(() => {
-    fetchStaffDetails();
-    // eslint-disable-next-line
+    fetchStaffDetails(); 
   }, []);
 
   async function fetchStaffDetails() {
     const response = await getStaffById({id:staffId});
       setStaff(response);
-
   }
 
   return (

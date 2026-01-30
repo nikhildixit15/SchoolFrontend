@@ -1,6 +1,6 @@
 import StaffAttendanceList from "@/app/components/staffAttendanceList/staffAttendanceList";
 import StaffMessageList from "@/app/components/staffMessageList/staffMessageList";
-import StaffProfileSummary from "@/app/components/staffProfileSummary/staffProfileSummary";
+import StaffProfileSummary from "../staffProfileSummary/staffProfileSummary"; 
 import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -18,17 +18,15 @@ function StaffTabbedPage({ staff }) {
       <Tab eventKey="summary" title="Summary">
         <StaffProfileSummary staff={staff} />
       </Tab>
-      <Tab eventKey="attendance" title="Attendance">
-        <StaffAttendanceList></StaffAttendanceList>
-        {/* <StaffAttendanceList staff={staff} /> */}
+      {/* <Tab eventKey="attendance" title="Attendance"> 
+        <StaffAttendanceList staff={staff} />
       </Tab>
       <Tab eventKey="message" title="Message">
         <StaffMessageList staff={staff} />
       </Tab>
-      <Tab eventKey="Salary" title="Salary">
-        {/* Placeholder for Salary tab content */}
+      <Tab eventKey="Salary" title="Salary"> 
         <div className="p-3">Salary details will be available soon.</div>
-      </Tab>
+      </Tab> */}
     </Tabs>
   );
 }

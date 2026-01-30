@@ -1,0 +1,1 @@
+export const FeatureFlag = { enableMessage :true, enableStaffSalary: false }

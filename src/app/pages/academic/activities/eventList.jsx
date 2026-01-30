@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { monthList } from "@/app/utils/constants";
+import EventDetail from "./showEventDetail";
 
 const EventList = ({ events = [], onDelete }) => {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   // store all events initially
   useEffect(() => {
@@ -15,7 +17,7 @@ const EventList = ({ events = [], onDelete }) => {
   // month filter logic
   useEffect(() => {
     if (!selectedMonth) {
-      setFilteredEvents(events); // show all if empty
+      setFilteredEvents(events);
     } else {
       const filtered = events.filter((e) => {
         const month = new Date(e.date).getMonth();
@@ -25,17 +27,33 @@ const EventList = ({ events = [], onDelete }) => {
     }
   }, [selectedMonth, events]);
 
-  const handleDelete = (id) => { 
-    // UI update
+  const handleDelete = (id) => {
     setFilteredEvents((prev) => prev.filter((e) => e._id !== id));
-
-    // backend call
     onDelete?.(id);
+    setSelectedEvent(null);
   };
+
+  // 👉 Row click
+  const handleRowClick = (event) => {
+    setSelectedEvent(event);
+    console.log("Event", event);
+  };
+
+  // 👉 Show detail page
+  if (selectedEvent) {
+    return (
+      <EventDetail
+        event={selectedEvent}
+        onBack={() => setSelectedEvent(null)}
+        onDelete={handleDelete}
+      />
+    );
+  }
 
   return (
     <>
       {/* 🔽 Month Filter */}
+      <h1 className={styles.title}>🏫 Academic Events</h1>
       <div className={styles.filterRow}>
         <select
           className={styles.select}
@@ -62,7 +80,6 @@ const EventList = ({ events = [], onDelete }) => {
               <th>Time</th>
               <th>Location</th>
               <th>Audience</th>
-              <th>Role</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -71,13 +88,17 @@ const EventList = ({ events = [], onDelete }) => {
           <tbody>
             {filteredEvents.length === 0 ? (
               <tr>
-                <td colSpan="9" className={styles.empty}>
+                <td colSpan="8" className={styles.empty}>
                   No events found
                 </td>
               </tr>
             ) : (
               filteredEvents.map((e, index) => (
-                <tr key={e._id || index}>
+                <tr
+                  key={e._id}
+                  onClick={() => handleRowClick(e)}
+                  className={styles.clickableRow}
+                >
                   <td>{index + 1}</td>
                   <td className={styles.bold}>{e.title}</td>
                   <td>{new Date(e.date).toLocaleDateString()}</td>
@@ -95,8 +116,6 @@ const EventList = ({ events = [], onDelete }) => {
                     ))}
                   </td>
 
-                  <td>{e.role}</td>
-
                   <td>
                     <span
                       className={`${styles.status} ${
@@ -111,7 +130,10 @@ const EventList = ({ events = [], onDelete }) => {
                   <td>
                     <button
                       className={styles.deleteBtn}
-                      onClick={() => handleDelete(e._id)}
+                      onClick={(ev) => {
+                        ev.stopPropagation();
+                        handleDelete(e._id);
+                      }}
                     >
                       Delete
                     </button>

@@ -1,15 +1,17 @@
-import FeeSummary from "@/app/components/feeSummary/feeSummary";
-import StudentAttendanceList from "@/app/components/studentAttendanceList/studentAttendanceList";
+ import FeeSummary from "@/app/components/feeSummary/page";
 import StudentMessageList from "@/app/components/studentMessageList/studentMessageList";
-import StudentProfileSummary from "@/app/components/studentProfileSummary/studentProfileSummary";
+import StudentProfileSummary from "../studentProfileSummary/studentProfileSummary"; 
+import AttendanceCalendar from "../studentAttendanceShow/studentAttendanceShow"; 
 import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import styles from "./page.module.css";
 
-function StudentTabbedPage({student}) {
+function StudentTabbedPage({student, studentId}) {
   const [key, setKey] = useState("summary");
-
+console.log("Tab",studentId, student)
   return (
+        <div className={styles.tabsContainer}>
     <Tabs
       id="controlled-tab-example"
       activeKey={key}
@@ -20,15 +22,16 @@ function StudentTabbedPage({student}) {
         <StudentProfileSummary student={student}></StudentProfileSummary>
       </Tab>
       <Tab eventKey="attendance" title="Attendance">
-        <StudentAttendanceList></StudentAttendanceList>
+        <AttendanceCalendar studentId={studentId}></AttendanceCalendar>
       </Tab>
-      <Tab eventKey="message" title="Message">
+      {/* <Tab eventKey="message" title="Message">
         <StudentMessageList></StudentMessageList>
-      </Tab>
+      </Tab> */}
       <Tab eventKey="fee" title="Fee">
-        <FeeSummary></FeeSummary>
+        <FeeSummary studentId={studentId} />
       </Tab>
     </Tabs>
+    </div>
   );
 }
 

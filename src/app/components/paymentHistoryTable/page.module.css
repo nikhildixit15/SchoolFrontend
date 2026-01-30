@@ -1,0 +1,110 @@
+.wrapper {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Table */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.table thead {
+  background: #f5f7fb;
+}
+
+.table th,
+.table td {
+  padding: 12px 14px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.table th {
+  font-weight: 600;
+  color: #555;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #eee;
+}
+
+.table tbody tr:hover {
+  background-color: #fafafa;
+}
+
+.noData {
+  text-align: center;
+  padding: 1.5rem;
+  color: #999;
+}
+
+/* Status Badge */
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.paid {
+  background: #e6f7ee;
+  color: #1e8e5a;
+}
+
+.pending {
+  background: #fff1f0;
+  color: #d4380d;
+}
+
+/* 📱 Mobile Responsive (Card Style) */
+@media (max-width: 768px) {
+  .table {
+    min-width: 100%;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 0.5rem;
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px dashed #eee;
+  }
+
+  .table td:last-child {
+    border-bottom: none;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #666;
+  }
+}

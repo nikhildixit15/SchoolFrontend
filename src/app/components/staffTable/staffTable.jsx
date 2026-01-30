@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Table from "react-bootstrap/Table";
-import { useRouter } from "next/router";
+import styles from "./staffTable.module.css";
 
-function StaffTable({ staffList }) {
+function StaffTable({ staffList }) { 
   return (
     <Table striped bordered hover>
       <thead>
@@ -12,7 +12,7 @@ function StaffTable({ staffList }) {
           <th>Name</th>
           <th>Department</th>
           <th>Designation</th>
-          <th>Qualification</th>
+          <th>Joining Date</th>
           <th>Classes</th>
           <th>ClassTeacher</th>
           <th>DOB</th>
@@ -24,57 +24,41 @@ function StaffTable({ staffList }) {
           <th>Action</th>
         </tr>
       </thead>
-      
+
       <tbody>
         {staffList?.map((item, index) => (
           <tr key={item._id || index}>
             <td>{index + 1}</td>
-            <td>{item.adminInfo?.employeeId}</td>
+            <td>{item.employeeId}</td>
             <td>
-              {item.basicInfo?.firstName || item.firstName} {item.basicInfo?.lastName || item.lastName}
+              {item.basicInfo?.firstName || item.firstName}{" "}
+              {item.basicInfo?.lastName || item.lastName}
             </td>
-            <td>
-              {item.profileDetails?.department || item.department}
-            </td>
-            <td>
-              {item.profileDetails?.designation || item.designation}
-            </td>
-            <td>
-              {item.qualification}
-            </td>
-            <td>
-              {item.classes}
-            </td>
-            <td>
-              {item.classTeacher}
-            </td>
-            <td>
-              {item.basicInfo?.dob || item.dob}
-            </td>
-            <td>
-              {item.basicInfo?.gender || item.gender}
-            </td>
-            <td>
-              {item.address?.permanentAddress || item.address || ""} ({item.address?.permanentPinCode || ""})
-            </td>
-            <td>
-              {item.adminInfo?.userName || item.userName}
-            </td>
-            <td>
-              {item.adminInfo?.password || item.password}
-            </td>
+            <td>{item.profileDetails?.department || item.department}</td>
+            <td>{item.profileDetails?.designation || item.designation}</td>
+            <td>{item.dateOfJoining}</td>
+            <td>{item.classes}</td>
+            <td>{item.classTeacher}</td>
+            <td>{item.basicInfo?.dob || item.dob}</td>
+            <td>{item.basicInfo?.gender || item.gender}</td>
+            <td>{item.address}</td>
+            <td>{item.adminInfo?.userName || item.userName}</td>
+            <td>{item.adminInfo?.password || item.password}</td>
             {console.log("Row item:", item)}
             <td>
-              {item.basicInfo?.mobileNumber?.trim() || item.mobileNumber?.trim() || item.familyInfo?.mobileNumber?.trim() || "N/A"}
+              {item.basicInfo?.mobileNumber?.trim() ||
+                item.mobileNumber?.trim() ||
+                item.familyInfo?.mobileNumber?.trim() ||
+                "N/A"}
             </td>
             <td>
               <Link
                 href={{
                   pathname: "/pages/staff/staffDetails",
-                  query: { staffId:item._id },
+                  query: { staffId: item._id },
                 }}
               >
-                view
+                <button className={styles.viewBtn}>View</button>
               </Link>
             </td>
           </tr>

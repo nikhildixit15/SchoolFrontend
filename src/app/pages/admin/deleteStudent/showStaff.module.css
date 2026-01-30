@@ -1,0 +1,50 @@
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1px; 
+  margin: 20px auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+} 
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.table th { 
+  background: #f9fafb;
+  font-weight: 600;
+  color: #0c0c0c;
+}
+
+.table td {
+  color: #16191d;
+}
+
+.table tr:last-child td,
+.table tr:last-child th {
+  border-bottom: none;
+}
+
+.deleteBtn {
+  background: #ef4444;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background: #dc2626;
+}
+ 

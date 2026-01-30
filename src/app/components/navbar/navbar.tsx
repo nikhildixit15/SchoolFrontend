@@ -39,9 +39,6 @@ function MMSNavbar() {
             </NavDropdown>
 
             <NavDropdown title="Staff" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="/pages/staff/departmentMaster">
-                Department Master
-              </NavDropdown.Item>
               <NavDropdown.Item href="/pages/staff/createStaff">
                 Create Staff
               </NavDropdown.Item>
@@ -110,9 +107,6 @@ function MMSNavbar() {
             </NavDropdown>
 
             <NavDropdown title="Message" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="/pages/message/messageTemplate">
-                Message Templates
-              </NavDropdown.Item>
               <NavDropdown.Item href="/pages/message/smartMessage">
                 Smart Message
               </NavDropdown.Item>
@@ -160,6 +154,12 @@ function MMSNavbar() {
               <NavDropdown.Item href="/pages/admin/notification">
                 Send Notification
               </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/message/messageTemplate">
+                Message Templates
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/staff/departmentMaster">
+                Department Master
+              </NavDropdown.Item>
               <NavDropdown.Item href="/pages/fees/addFee">
                 Add Fee
               </NavDropdown.Item>
@@ -172,8 +172,12 @@ function MMSNavbar() {
               <NavDropdown.Item href="/pages/admin/addExamSchedule">
                 Add Exam Schedule
               </NavDropdown.Item>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="/pages/admin/deleteStudent">
-                Delete Student
+                Delete Student/Staff
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/editStudent">
+                Edit Student
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/pages/admin/addClass">
@@ -190,6 +194,9 @@ function MMSNavbar() {
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={<CircleUser />}>
+              <NavDropdown.Item href="/pages/profile">
+                Profile
+              </NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout} href="/">
                 Logout
               </NavDropdown.Item>

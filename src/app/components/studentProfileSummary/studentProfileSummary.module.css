@@ -1,36 +1,81 @@
+/* Page container */
+.profileContainer {
+  display: grid; 
+  gap: 20px;
+  padding: 20px;
+  background: #f4f6f8;
+}
+
+/* Each section card */
+.sectionContainer {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Section header */
+.sectionHeader {
+  background: #f1f5f9;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sectionHeader label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Row containers */
 .listRowContainer {
-  display: flex;
-  flex-direction: row;
-  margin: 8px;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .listRowContainerSingle {
-  display: flex;
-  flex-direction: column;
-  margin: 8px;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
+  display: inline-block;
 }
 
-.listRow {
-  flex: 1;
-}
+/* Rows */
+.listRow,
 .listRowSingle {
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
+  padding: 14px 16px;
 }
 
+/* Divider between rows */
 .divider {
-  border-right: 2px solid #7f7b7bdb;
-  margin-right: 12px;
+  border-right: 1px solid #e5e7eb;
 }
 
+/* Text styles */
 .rowItemText {
-  margin-right: 8px;
+  font-size: 14px;
+  color: #03b62a;
+  font-weight: 500;
+  margin-right: 15px;
 }
 
 .rowItemValue {
-  margin-left: 8px;
+  font-size: 14px;
+  color: #111827;
+  font-weight: 500;
+  text-align: right;
+  max-width: 65%;
+  word-break: break-word;
 }
+
+/* Address row special */
+.listRowSingle .rowItemValue {
+  text-align: left; 
+}
+
+/* Hover effect */
+.listRow:hover,
+.listRowSingle:hover {
+  background-color: #f9fafb;
+}
+ 

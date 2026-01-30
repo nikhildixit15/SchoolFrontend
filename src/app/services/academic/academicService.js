@@ -24,7 +24,6 @@ export async function deleteHoliday(id) {
   return await axiosClient.del(`/holidayRouter/${id}`);
 }
 
-
 export async function deleteEvent(id) {
   if (!isMock) {
   return { data: [] };
@@ -53,12 +52,26 @@ export async function getSubjectList(data) {
   }
   return await axiosClient.get("/subject");
 }
-
-export async function addExam(data) {
-  if (isMock) {
+ 
+export async function saveStudentParticipant(data) {
+  if (!isMock) {
     return [...examList, { ...data, id: examList.length }];
   }
-  return await axiosClient.post("/addExam");
+  return await axiosClient.post("/event/addStudentParticipants", data);
+}
+ 
+export async function saveStaffParticipant(data) {
+  if (!isMock) {
+    return [...examList, { ...data, id: examList.length }];
+  }
+  return await axiosClient.post("/event/addStaffParticipants", data);
+}
+ 
+export async function saveAudienceParticipant(data) {
+  if (!isMock) {
+    return [...examList, { ...data, id: examList.length }];
+  }
+  return await axiosClient.post("/event/addAudParticipants", data);
 }
 
 export async function getExamTypeList(data) {

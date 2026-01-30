@@ -1,31 +1,35 @@
 "use client";
 
 import { useState } from "react";
-import StudentSearch from "@/app/components/studentSearch/studentSearch"; 
+import StudentSearch from "@/app/components/studentSearch/studentSearch";
+import StaffSearch from "@/app/components/staffSearch/page";
 import styles from "./page.module.css";
 import toast from "react-hot-toast";
-import { studentDelete } from "@/app/services/admin/adminService";
 
-export default function DeleteStudent() {
-  const [studentData, setStudentData] = useState(null);
+import { studentDelete, staffDelete } from "@/app/services/admin/adminService";
+
+import ShowStudent from "./showStudent"; 
+import ShowStaff from "./showStaff";
+
+export default function DeletePage() {
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [selectedStaff, setSelectedStaff] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleStudentSelect = (student) => {
-    setStudentData(student);
-  };
+  /* ===== Student Delete ===== */
+  const handleStudentDelete = async () => {
+    if (!selectedStudent?._id) return;
 
-  const handleDelete = async () => {
-    if (!studentData?._id) return;
-     console.log(studentData._id)
     try {
-      setLoading(true); 
-      const response = await studentDelete(studentData._id);
-       if (response?.data?.success) {
-      toast.success("Student deleted successfully");
-      setStudentData(null);
-    } else {
-      toast.error("Delete failed");
-    }
+      setLoading(true);
+      const res = await studentDelete(selectedStudent._id);
+
+      if (res?.data?.success) {
+        toast.success("Student deleted successfully");
+        setSelectedStudent(null);
+      } else {
+        toast.error("Student delete failed");
+      }
     } catch (err) {
       console.error(err);
       toast.error("Failed to delete student");
@@ -34,49 +38,59 @@ export default function DeleteStudent() {
     }
   };
 
+  /* ===== Staff Delete ===== */
+  const handleStaffDelete = async () => {
+    if (!selectedStaff?._id) return;
+ 
+    try {
+      setLoading(true);
+      const res = await staffDelete(selectedStaff._id);
+ 
+      if (res?.data?.success) {
+        toast.success("Staff deleted successfully");
+        setSelectedStaff(null);
+      } else {
+        toast.error("Staff delete failed");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to delete staff");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
+
+      {/* ===== DELETE STUDENT ===== */}
       <h2 className={styles.title}>Delete Student</h2>
 
-      <StudentSearch onSelect={handleStudentSelect} />
+      <StudentSearch onSelect={setSelectedStudent} />
 
-      {studentData && (
-        <div className={styles.card}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Class</th>
-                <th>Section</th>
-                <th>Father</th>
-                <th>Username</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>
-                  {studentData.firstName} {studentData.lastName}
-                </td>
-                <td>{studentData.className}</td>
-                <td>{studentData.section}</td>
-                <td>{studentData.fatherName}</td>
-                <td>{studentData.userName}</td>
-                <td>
-                  <button
-                    onClick={handleDelete}
-                    className={styles.deleteBtn}
-                    disabled={loading}
-                  >
-                    {loading ? "Deleting..." : "Delete"}
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      {selectedStudent && (
+        <ShowStudent
+          studentData={selectedStudent}
+          onDelete={handleStudentDelete}
+          loading={loading}
+        />
       )}
+
+      <hr className={styles.divider} />
+
+      {/* ===== DELETE STAFF ===== */}
+      <h2 className={styles.title}>Delete Staff</h2>
+
+      <StaffSearch onSelect={setSelectedStaff} />
+
+      {selectedStaff && (
+        <ShowStaff
+          staffData={selectedStaff}
+          onDelete={handleStaffDelete}
+          loading={loading}
+        />
+      )}
+
     </div>
   );
 }
