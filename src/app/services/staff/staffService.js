@@ -43,3 +43,10 @@ export async function getStaffById(data) {
   const response = await axiosClient.get(`/staff/${id}`);
   return response.data;
 }
+
+export async function updateStaffProfile(id,data) {
+  if (!isMock) {
+    return student;
+  }
+  return await axiosClient.put(`/staff/editStaffProfile/${id}`, data);
+}

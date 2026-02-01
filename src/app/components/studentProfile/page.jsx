@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import StudentTabbedPage from "../studentProfileTab/studentProfileTab";
 import StudentProfileCard from "../studentProfileCard/studentProfileCard";
 import { getProfile } from "@/app/services/student/studentService";
+import { useRouter } from "next/navigation";
+import StudentProfileEdit from "../studentProfileEdit/profileSdit";
 
 export default function StudentProfile({ studentId }) {
   console.log("###StudentProfile", studentId);
   const [stdBasicInfo, setStdBasicInfo] = useState({});
   const [student, setStudent] = useState({});
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     if (!studentId) {
@@ -29,9 +32,34 @@ export default function StudentProfile({ studentId }) {
     console.log("StudentDataPresent", student);
   }
 
+  if (editMode) {
+    return (
+      <>
+       <button className={styles.backBtn} onClick={() => setEditMode(false)}>
+            Back Profile
+          </button>
+      <StudentProfileEdit
+        studentId={studentId}
+        onClose={() => setEditMode(false)}
+      />
+          </>
+    );
+  }
+
   return (
     <div className={styles.container}>
-      <StudentProfileCard student={stdBasicInfo}></StudentProfileCard>
+      {/* LEFT SIDE */}
+      <div className={styles.leftColumn}>
+        <StudentProfileCard student={stdBasicInfo} />
+
+        {/* ✅ BUTTON CARD KE NEECH */}
+        <div className={styles.stickyBtnWrapper}>
+          <button className={styles.editBtn} onClick={() => setEditMode(true)}>
+            ✏️ Edit Profile
+          </button>
+        </div>
+      </div>
+      {/* RIGHT SIDE */}
       <div className={styles.tabContainer}>
         <StudentTabbedPage student={student} studentId={studentId} />
       </div>

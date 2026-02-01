@@ -3,14 +3,12 @@
 import Link from "next/link";
 import ClassSecFilter from "@/app/components/classFilter/classSecFilter";
 import { useEffect, useState } from "react";
-import { getStudents } from "@/app/services/student/studentService";
+import { getStudents, getExcleSheet } from "@/app/services/student/studentService";
 import StudentTable from "@/app/components/studentTable/studentTable";
 import styles from "./page.module.css";
 
 export default function StudentList() {
-  const [students, setStudents] = useState([]);
-  const [selectedClass, setSelectedClass] = useState(null);
-  const [selectedSection, setSelectedSection] = useState(null);
+  const [students, setStudents] = useState([]); 
 
   async function getStudentData(data) {
     try {
@@ -55,8 +53,7 @@ export default function StudentList() {
       console.error("Error fetching students:", error);
       setStudents([]);
     }
-  }
-
+  } 
   return (
     <>
       <main>

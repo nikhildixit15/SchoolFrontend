@@ -52,9 +52,10 @@ export async function saveStudentInfo(data: any) {
   }
   return await axiosClient.post("/student", data);
 }
+
 export async function updateStudentProfile(id:any,data: any) {
   if (!isMock) {
     return student;
   }
-  return await axiosClient.put(`/api/student/${id}`, data);
-}
+  return await axiosClient.put(`/student/editStudentProfile/${id}`, data);
+} 
