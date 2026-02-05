@@ -7,8 +7,11 @@ function AttendanceTable({ students, onAttendanceChange }) {
   console.log("students####", students);
 
   function handleAttendanceSection(selectedValue, index) {
-    students[index].status = selectedValue.value;
-    onAttendanceChange(students);
+    const updatedStudents = students.map((stu, i) =>
+      i === index ? { ...stu, status: selectedValue.value } : stu,
+    );
+
+    onAttendanceChange(updatedStudents);
   }
 
   return (
@@ -39,7 +42,9 @@ function AttendanceTable({ students, onAttendanceChange }) {
             <td>
               <Select
                 className={styles.classDropdown}
-                value={{ label: item.status, value: item.status }}
+                value={attendanceTypeList.find(
+                  (opt) => opt.value === item.status,
+                )}
                 onChange={(event) => handleAttendanceSection(event, index)}
                 options={attendanceTypeList}
               />

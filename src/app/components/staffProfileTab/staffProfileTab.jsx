@@ -1,13 +1,16 @@
 import StaffAttendanceList from "@/app/components/staffAttendanceList/staffAttendanceList";
 import StaffMessageList from "@/app/components/staffMessageList/staffMessageList";
-import StaffProfileSummary from "../staffProfileSummary/staffProfileSummary"; 
+import StaffProfileSummary from "../staffProfileSummary/staffProfileSummary";
 import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import MyAttendance from "../staffTakeAttendance/page";
+import StaffAttendanceCalendar from "../StaffAttendanceShow/page"; 
+import StaffSalaryPage from "../StaffSalary/page";
 
 function StaffTabbedPage({ staff }) {
   const [key, setKey] = useState("summary");
-
+  console.log("Stafffed", staff);
   return (
     <Tabs
       id="controlled-tab-example"
@@ -18,15 +21,18 @@ function StaffTabbedPage({ staff }) {
       <Tab eventKey="summary" title="Summary">
         <StaffProfileSummary staff={staff} />
       </Tab>
-      {/* <Tab eventKey="attendance" title="Attendance"> 
-        <StaffAttendanceList staff={staff} />
+      <Tab eventKey="attendanceStaff" title="Attendance Staff">
+        <MyAttendance staffId={staff._id} />
       </Tab>
-      <Tab eventKey="message" title="Message">
+     <Tab eventKey="attendance" title="Attendance">
+        <StaffAttendanceCalendar staffId={staff._id}></StaffAttendanceCalendar>
+      </Tab>
+      {/* <Tab eventKey="message" title="Message">
         <StaffMessageList staff={staff} />
-      </Tab>
-      <Tab eventKey="Salary" title="Salary"> 
-        <div className="p-3">Salary details will be available soon.</div>
       </Tab> */}
+      <Tab eventKey="Salary" title="Salary"> 
+        <StaffSalaryPage staffId={staff._id}/>
+      </Tab>
     </Tabs>
   );
 }

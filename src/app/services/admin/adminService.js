@@ -103,3 +103,15 @@ export async function staffDelete(staffId) {
 export async function fetchNameWiseStaff(query) {
   return axiosClient.get("/staff/fetchNameWiseStaff", {query});
 }
+
+export async function addAllowance(data) {
+  return axiosClient.post("/staff/addAllowanceBonus", data);
+}
+
+export function getStaffSalarySingle(params) {
+  return axiosClient.get("/staff/staffSalarySingle", { params });
+}
+export function paySalary(params) {
+  return axiosClient.post("/staff/paySalary",  params );
+}
+

@@ -1,0 +1,67 @@
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+
+.filterRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+ 
+
+.card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.badge {
+  margin-top: 12px;
+  padding: 6px;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.paid {
+  background: #e8f7ee;
+  color: #1e7f43;
+}
+
+.pending {
+  background: #fff4e5;
+  color: #b76e00;
+}
+
+.hold {
+  background: #fdecea;
+  color: #b42318;
+}
+
+.date {
+  font-size: 13px;
+  margin-top: 6px;
+  color: #666;
+}
+
+.noData {
+  text-align: center;
+  color: #999;
+}

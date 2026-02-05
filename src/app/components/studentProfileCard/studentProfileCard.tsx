@@ -6,7 +6,7 @@ import { getBirthdayFromDOB } from "@/app/utils/dateUtils";
 import styles from "./studentProfileCard.module.css";
 
 export default function StudentProfileCard({ student }: any) {
-  const birthDay = getBirthdayFromDOB(student?.dob);  
+  const birthDay = getBirthdayFromDOB(student?.dob);
   return (
     <div className={styles.profileCardContainer}>
       <div className={styles.profileHeaderBlue}>
@@ -32,12 +32,6 @@ export default function StudentProfileCard({ student }: any) {
         {/* Details */}
         <div className={styles.profileDetails}>
           <div className={styles.profileRow}>
-            <span className={styles.labelGreen}>Admission No.</span>
-            <span className={styles.value}>
-              {student.adminInfo?.admissionNumber}
-            </span>
-          </div>
-          <div className={styles.profileRow}>
             <span className={styles.labelGreen}>Class</span>
             <span className={styles.value}>{student.basicInfo?.className}</span>
           </div>
@@ -55,9 +49,7 @@ export default function StudentProfileCard({ student }: any) {
           </div>
           <div className={styles.profileRow}>
             <span className={styles.labelGreen}>Password</span>
-            <span className={styles.value}>
-              {student.adminInfo?.password }
-            </span>
+            <span className={styles.value}>{student.adminInfo?.password}</span>
           </div>
         </div>
       </div>

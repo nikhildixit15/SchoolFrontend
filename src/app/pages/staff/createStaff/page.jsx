@@ -23,7 +23,7 @@ import {
 } from "@/app/utils/constants";
 
 export default function CreateStaff() {
-  const [basicInfo, setBasicInfo] = useState({});
+  const [basicInfo, setBasicInfo] = useState({ gender: "Male" });
   const [address, setAddress] = useState({});
   const [familyInfo, setFamilyInfo] = useState({});
   const [profileDetails, setProfileDetails] = useState({});
@@ -70,7 +70,7 @@ export default function CreateStaff() {
       attachment: formData,
       name: file.name,
       type: file.type,
-    }; 
+    };
     setProfileValue(attachmentData);
     console.log(profileValue);
   }
@@ -154,7 +154,7 @@ export default function CreateStaff() {
     // Use selectedOption.label instead of departmentName.label
     const filteredList = selectedOption?.label
       ? designationList.filter(
-          (item) => item.departmentName === selectedOption.label
+          (item) => item.departmentName === selectedOption.label,
         )
       : [];
     const formattedOptions = getOptionList(filteredList);
@@ -217,6 +217,10 @@ export default function CreateStaff() {
       alert("please enter section");
       return false;
     }
+    if (!basicInfo.salary) {
+      alert("please enter salary");
+      return false;
+    }
     if (!basicInfo.dob) {
       alert("please enter dob");
       return false;
@@ -247,17 +251,7 @@ export default function CreateStaff() {
 
   return (
     <div className={styles.mainContainer}>
-      <label>Employee Information</label>
-
       <div className={styles.container}>
-        <div className={styles.halfRow}>
-          <label className={styles.titleLabel}>{"Emp ID"}</label>
-          <input
-            className={styles.inputValue}
-            value={adminInfo?.employeeId}
-            placeholder={"Enter Employee ID"}
-          ></input>
-        </div>
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
             <label>Personal Information</label>
@@ -317,9 +311,10 @@ export default function CreateStaff() {
                   inline
                   label="Male"
                   name="genderGroup"
-                  type={"radio"}
-                  value="male"
-                  onInput={(event) =>
+                  type="radio"
+                  value="Male"
+                  checked={basicInfo.gender === "Male"}
+                  onChange={(event) =>
                     setBasicInfo({
                       ...basicInfo,
                       gender: event.target.value,
@@ -330,9 +325,10 @@ export default function CreateStaff() {
                   inline
                   label="Female"
                   name="genderGroup"
-                  type={"radio"}
-                  value="female"
-                  onInput={(event) =>
+                  type="radio"
+                  value="Female"
+                  checked={basicInfo.gender === "Female"}
+                  onChange={(event) =>
                     setBasicInfo({
                       ...basicInfo,
                       gender: event.target.value,
@@ -345,14 +341,18 @@ export default function CreateStaff() {
 
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Class"}</label>
-              <Select
+              <label className={styles.titleLabel}>{"Email "}</label>
+              <input
                 className={styles.inputValue}
-                value={classValue}
-                placeholder={"Enter class name"}
-                onChange={classValueChanged}
-                options={classOptionList}
-              />
+                value={basicInfo?.email || ""}
+                placeholder={"Enter email address"}
+                onInput={(event) =>
+                  setBasicInfo({
+                    ...basicInfo,
+                    email: event.target.value,
+                  })
+                }
+              ></input>
             </div>
 
             <div className={styles.halfRow}>
@@ -433,15 +433,15 @@ export default function CreateStaff() {
               ></input>
             </div>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Email "}</label>
+              <label className={styles.titleLabel}>{"Salary"}</label>
               <input
                 className={styles.inputValue}
-                value={basicInfo?.email || ""}
-                placeholder={"Enter email address"}
+                placeholder={"Enter Salary"}
+                value={basicInfo?.salary || ""}
                 onInput={(event) =>
                   setBasicInfo({
                     ...basicInfo,
-                    email: event.target.value,
+                    salary: event.target.value,
                   })
                 }
               ></input>
@@ -502,19 +502,6 @@ export default function CreateStaff() {
               ></input>
             </div>
             <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Religion"}</label>
-              <Select
-                className={styles.inputValue}
-                value={religiousValue}
-                placeholder={"Enter Religion"}
-                onChange={religionValueChanged}
-                options={religionList}
-              />
-            </div>
-          </div>
-
-          <div className={styles.fullRow}>
-            <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Marital Status"}</label>
               <Select
                 className={styles.inputValue}
@@ -524,6 +511,8 @@ export default function CreateStaff() {
                 options={martialStatusList}
               />
             </div>
+          </div>
+          <div className={styles.fullRow}>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Spouse Name"}</label>
               <input
@@ -538,6 +527,7 @@ export default function CreateStaff() {
                 placeholder={"Enter Spouse Name"}
               ></input>
             </div>
+            <div className={styles.halfRow}></div>
           </div>
         </div>
 
@@ -665,35 +655,6 @@ export default function CreateStaff() {
             </div>
           </div>
 
-          {/* <div className={styles.fullRow}>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Class Teacher"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Class"}
-                onInput={(event) =>
-                  setProfileDetails({
-                    ...profileDetails,
-                    classTeacher: event.target.value,
-                  })
-                }              
-              ></input>
-            </div>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Section"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter Section"}
-                onInput={(event) =>
-                  setProfileDetails({
-                    ...profileDetails,
-                    section: event.target.value,
-                  })
-                }
-              ></input>
-            </div>
-          </div> */}
-
           <div className={styles.fullRow}>
             <div className={styles.halfRow}>
               <label className={styles.titleLabel}>{"Profile Pic"}</label>
@@ -701,51 +662,7 @@ export default function CreateStaff() {
                 onChange={(event) => onFileSelected(event, item)}
               ></FileChooser>
             </div>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Resume"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Enter resume"}
-                value={profileDetails?.resumeUrl || ""}
-                onInput={(event) =>
-                  setProfileDetails({
-                    ...profileDetails,
-                    resumeUrl: event.target.value,
-                  })
-                }
-              ></input>
-            </div>
-          </div>
-
-          <div className={styles.fullRow}>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"Pan Card"}</label>
-              <textarea
-                className={styles.inputValue}
-                placeholder={"Upload Pan card"}
-                value={profileDetails?.panCardUrl || ""}
-                onInput={(event) =>
-                  setProfileDetails({
-                    ...profileDetails,
-                    panCardUrl: event.target.value,
-                  })
-                }
-              ></textarea>
-            </div>
-            <div className={styles.halfRow}>
-              <label className={styles.titleLabel}>{"AADHAR Card"}</label>
-              <input
-                className={styles.inputValue}
-                placeholder={"Upload AADHAR"}
-                value={profileDetails?.aadharUrl || ""}
-                onInput={(event) =>
-                  setProfileDetails({
-                    ...profileDetails,
-                    aadharUrl: event.target.value,
-                  })
-                }
-              ></input>
-            </div>
+            <div className={styles.halfRow}></div>
           </div>
         </div>
 

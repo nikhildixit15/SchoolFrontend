@@ -40,12 +40,6 @@ export async function getStudentAttendanceById({ studentId, month, year }) {
     },
   });
 }
-export async function getStaffAttendanceById() {
-  if (isMock) {
-    return studentAttendances;
-  }
-  return await axiosClient.get("/studentAttendance");
-}
 
 export async function saveAttendance(data) {
   return await axiosClient.post("/attendance", data);

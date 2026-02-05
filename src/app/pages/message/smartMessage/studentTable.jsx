@@ -45,8 +45,12 @@ function StudentTable({ students, sendMessage }) {
   }
 
   function performSendMessage() {
-    sendMessage(selectedStudents);
-  }
+  const emails = selectedStudents
+    .map((s) => s.familyInfo?.email) 
+
+  sendMessage(emails);
+}
+
 
   return (
     <div>
@@ -91,10 +95,10 @@ function StudentTable({ students, sendMessage }) {
               <td>{item.address?.permanentAddress || "-"}</td>
               <td>{item.familyInfo?.mobileNumber}</td>
               <td>
-                <Link
+               <Link
                   href={{
                     pathname: "/pages/student/studentDetails",
-                    query: { student: JSON.stringify(item) },
+                    query: { studentId: item._id },
                   }}
                 >
                   view

@@ -6,9 +6,6 @@
   font-family: var(--font-mono);
 }
 
-.container {
-  display: flex;
-}
 
 .tabContainer {
   flex: 1;
@@ -51,5 +48,50 @@
   font-weight: 600;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
- 
+.container {
+  display: flex;
+  align-items: flex-start;
+}
 
+/* 👈 NEW */
+.leftColumn {
+  width: 340px;   /* same as StudentProfileCard width */
+  position: relative;
+}
+
+/* Sticky button ONLY for left column */
+.stickyBtnWrapper {
+  position: sticky;
+  bottom: 0;
+  background: #ffffff;
+  padding: 12px 0;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+}
+
+/* Button style */
+.editBtn {
+  background: #2563eb;
+  color: white;
+  border: none;   
+  padding: 10px 22px;
+  font-size: 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.backBtn {
+  background: #36435e;
+  color: white;
+  border: none;
+   width: 10%;  
+  padding: 10px 22px;
+  font-size: 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.editBtn:hover {
+  background: #1e40af;
+}

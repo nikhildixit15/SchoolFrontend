@@ -163,6 +163,12 @@ function MMSNavbar() {
               <NavDropdown.Item href="/pages/fees/addFee">
                 Add Fee
               </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/addAllowanceBonus">
+                Add Allowance
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/paySalary">
+                Pay Salary
+              </NavDropdown.Item>
               <NavDropdown.Item href="/pages/admin/addHoliday">
                 Add Holiday
               </NavDropdown.Item>
@@ -202,9 +208,6 @@ function MMSNavbar() {
               </NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout} href="/">
                 Logout
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/pages/ChangePassword">
-                Change Password
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

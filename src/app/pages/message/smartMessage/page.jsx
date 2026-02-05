@@ -24,16 +24,18 @@ export default function SmartMessage() {
     setStudentList(res.data.students || []);
   }
 
-  async function performSendMessageApiCall(selectedList) {
-    const payload = {
-      sender: senderName?.label,
-      message: messageText,
-      students: selectedList.map((s) => s._id),
-    };
+async function performSendMessageApiCall(emailList) {
+  const payload = {
+    sender: senderName?.label,
+    message: messageText,
+    students: emailList, // already emails
+  };
 
-    console.log("SEND PAYLOAD", payload);
-    await sendMessage(payload);
-  }
+  console.log("SEND PAYLOAD", payload);
+  await sendMessage(payload);
+}
+
+
 
   return (
      

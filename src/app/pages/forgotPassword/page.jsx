@@ -1,37 +1,45 @@
 "use client";
 
 import { useState } from "react";
-import "./page.css"
+import "./page.css";
+import {
+  SendOTP,
+  changePassword,
+} from "@/app/services/forgotPassword/password";
+import { useRouter } from "next/navigation";
 
 export default function ResetPassword() {
   const [step, setStep] = useState(1);
-  const [phone, setPhone] = useState("");
+  const [email, setemail] = useState("");
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [otpTimer, setOtpTimer] = useState(0);
+
+  const router = useRouter();
+
+useEffect(() => {
+  if (otpTimer <= 0) return;
+
+  const interval = setInterval(() => {
+    setOtpTimer((prev) => prev - 1);
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, [otpTimer]);
 
   // SEND OTP
   const handleSendOTP = async (e) => {
     e.preventDefault();
-    setError("");
+    setIsLoading(true);
 
-    if (phone.length !== 10) {
-      setError("Please enter a valid 10-digit phone number.");
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      setIsLoading(false);
-      setStep(2);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      setError("OTP sending failed. Try again.");
-    }
+    await SendOTP({ email });
+setOtpTimer(120); // 2 minutes
+    setIsLoading(false);
+    setStep(2);
   };
 
   // VERIFY OTP + RESET PASSWORD
@@ -44,11 +52,6 @@ export default function ResetPassword() {
       return;
     }
 
-    if (newPassword.length < 6) {
-      setError("Password must be at least 6 characters.");
-      return;
-    }
-
     if (newPassword !== confirmPassword) {
       setError("New Password & Confirm Password do not match.");
       return;
@@ -57,15 +60,17 @@ export default function ResetPassword() {
     try {
       setIsLoading(true);
 
-      await window.confirmationResult.confirm(otp);
+      await changePassword({
+        email,
+        otp,
+        newPassword,
+      });
 
-      // If OTP Verified
-      setIsLoading(false);
       setSuccess(true);
     } catch (error) {
+      setError(error?.response?.data?.message || "Invalid OTP");
+    } finally {
       setIsLoading(false);
-      console.error(error);
-      setError("Invalid OTP. Try again.");
     }
   };
 
@@ -82,7 +87,7 @@ export default function ResetPassword() {
 
             <button
               className="button"
-              onClick={() => (window.location.href = "/login")}
+              onClick={() => router.push("/pages/login")}
             >
               Go to Login
             </button>
@@ -96,22 +101,21 @@ export default function ResetPassword() {
 
             {step === 1 && (
               <form onSubmit={handleSendOTP}>
-                <label className="label">Phone Number</label>
+                <label className="label">Email </label>
                 <input
-                  type="tel"
+                  type="email"
                   className="input"
-                  placeholder="Enter phone number"
-                  value={phone}
-                  maxLength={10}
+                  placeholder="Enter Email"
+                  value={email}
                   onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, "");
-                    if (value.length <= 10) setPhone(value);
+                    const value = e.target.value;
+                    setemail(value);
                   }}
                 />
 
                 {error && <div className="error">{error}</div>}
 
-                <button className="button" disabled={isLoading}>
+                <button className="button" disabled={isLoading || otpTimer>0}>
                   {isLoading ? "Sending OTP..." : "Send OTP"}
                 </button>
               </form>

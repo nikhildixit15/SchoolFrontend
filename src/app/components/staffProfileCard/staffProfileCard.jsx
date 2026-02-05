@@ -58,7 +58,7 @@ export default function StaffProfileCard({ staff }) {
           </div>
           <div className={styles.profileRow}>
             <span className={styles.labelGreen}>Password</span>
-            <span className={styles.value}>*{staff.adminInfo?.password?.slice(-4)}</span>
+            <span className={styles.value}>{staff.adminInfo?.password}</span>
           </div>
           
         </div>

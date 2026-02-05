@@ -23,7 +23,7 @@ export default function StaffSearch({ onSelect }) {
       try {
         setLoading(true);
 
-        const res = await fetchNameWiseStaff(query);
+        const res = await fetchNameWiseStaff(query); 
         const staffList = res?.data || [];
         console.log("Sta",res)
         const flat = staffList.map((s) => ({
@@ -31,6 +31,7 @@ export default function StaffSearch({ onSelect }) {
           firstName: s.basicInfo?.firstName || "",
           lastName: s.basicInfo?.lastName || "",
           stream: s.basicInfo?.stream || "",
+          salary: s.basicInfo?.salary || "",
           department: s.profileDetails?.department || "",
           designation: s.profileDetails?.designation || "",
           employeeId: s.adminInfo?.employeeId || "",

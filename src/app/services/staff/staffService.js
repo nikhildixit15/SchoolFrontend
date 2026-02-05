@@ -44,9 +44,23 @@ export async function getStaffById(data) {
   return response.data;
 }
 
-export async function updateStaffProfile(id,data) {
+export async function updateStaffProfile(id, data) {
   if (!isMock) {
     return student;
   }
   return await axiosClient.put(`/staff/editStaffProfile/${id}`, data);
+}
+export async function myStaffAttendance(data) {
+  if (!isMock) {
+    return student;
+  }
+  return await axiosClient.post("/staff/myAttendance", data);
+}
+
+export async function getStaffAttendanceById({ staffId, month, year }) {
+  return await axiosClient.get("/staff/StaffAttendanceById", {
+    staffId,
+    month,
+    year,
+  });
 }

@@ -8,14 +8,14 @@ const getStatusLabel = (status) => {
       return "P";
     case "Absent":
       return "A";
+    case "Sunday":
+      return "S";
     case "Half Day":
       return "HD";
     case "Early Leave":
       return "EL";
     case "Holiday":
-      return "H";
-    case "National Holiday":
-      return "NH";
+      return "H"; 
     default:
       return "";
   }
@@ -97,9 +97,9 @@ function AttendanceTable({
                 if (student.days[day]) {
                   status = student.days[day];        // ✅ highest priority
                 } else if (holiday) {
-                  status = "National Holiday";                 // ✅ full range absent
+                  status = "Holiday";                
                 } else if (sunday) {
-                  status = "Absent";
+                  status = "Sunday";
                 }
 
                 return (

@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 import { getStudentById } from "@/app/services/student/studentService";
 import StudentTabbedPage from "@/app/components/studentProfileTab/studentProfileTab"; 
 import StudentProfileCard from "@/app/components/studentProfileCard/studentProfileCard";
+import StudentProfileEdit from "@/app/components/studentProfileEdit/profileSdit";
 
 export default function StudentDetails({ searchParams }) {
   console.log("###searchParams", searchParams);
   const studentId = searchParams.studentId;
   const [stdBasicInfo, setStdBasicInfo] = useState({});
   const [student, setStudent] = useState({});
+      const [editMode, setEditMode] = useState(false);
+
 
   useEffect(() => {
     fetchStudentDetails();
@@ -22,16 +25,39 @@ export default function StudentDetails({ searchParams }) {
     setStudent(response.data);
   }
 
+   if (editMode) {
+    return (
+      <>
+       <button className={styles.backBtn} onClick={() => setEditMode(false)}>
+            Back Profile
+          </button>
+      <StudentProfileEdit
+        studentId={studentId}
+        onClose={() => setEditMode(false)}
+      />
+          </>
+    );
+  }
+
   return (
     <>
-      <main>
-        <div className={styles.container}>
-          <StudentProfileCard student={stdBasicInfo}></StudentProfileCard>
-          <div className={styles.tabContainer}>
-            <StudentTabbedPage student={student} studentId={studentId} />
-          </div>
+     <div className={styles.container}>
+      {/* LEFT SIDE */}
+      <div className={styles.leftColumn}>
+        <StudentProfileCard student={stdBasicInfo} />
+
+        {/* ✅ BUTTON CARD KE NEECH */}
+        <div className={styles.stickyBtnWrapper}>
+          <button className={styles.editBtn} onClick={() => setEditMode(true)}>
+            ✏️ Edit Profile
+          </button>
         </div>
-      </main>
+      </div>
+      {/* RIGHT SIDE */}
+      <div className={styles.tabContainer}>
+        <StudentTabbedPage student={student} studentId={studentId} />
+      </div>
+    </div>
     </>
   );
 }

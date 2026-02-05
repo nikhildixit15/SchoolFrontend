@@ -60,6 +60,7 @@ export const attendanceStatus = {
   absent: "A",
   holiday: "H",
   sunday: "S",
+  leave:"L"
 };
 
 export const departmentFilterOptions = [
