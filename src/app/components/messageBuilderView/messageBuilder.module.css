@@ -1,0 +1,37 @@
+ 
+.title {
+  color: #2e2424;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 22px;
+  letter-spacing: -0.5px;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+}
+.customTextarea { 
+  margin-left: 15px;
+   padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  resize: none; /* optional - prevents manual resize */
+}
+
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #64c8ff, #9064ff);
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(100, 200, 255, 0.6);
+}
+
+.container{  
+    margin-left:16px;
+    margin-right:16px;
+  }

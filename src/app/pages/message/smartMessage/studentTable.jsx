@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Table from "react-bootstrap/Table";
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
+import styles from "./studentTableByName.module.css";
 
 function StudentTable({ students, sendMessage }) {
   const [studentList, setStudentList] = useState([]);
@@ -21,7 +22,7 @@ function StudentTable({ students, sendMessage }) {
     const updatedList = studentList.map((item) =>
       item._id === student._id
         ? { ...item, isSelected: !item.isSelected }
-        : item
+        : item,
     );
 
     setStudentList(updatedList);
@@ -45,20 +46,20 @@ function StudentTable({ students, sendMessage }) {
   }
 
   function performSendMessage() {
-  const emails = selectedStudents
-    .map((s) => s.familyInfo?.email) 
+    const emails = selectedStudents.map((s) => s.familyInfo?.email);
 
-  sendMessage(emails);
-}
-
+    sendMessage(emails);
+  }
 
   return (
     <div>
       {selectedStudents.length > 0 && (
-        <button onClick={performSendMessage}>Send Message</button>
+        <button className={styles.sendButton} onClick={performSendMessage}>
+          Send Message
+        </button>
       )}
 
-      <Table striped bordered hover>
+      <Table striped bordered hover className={styles.table}>
         <thead>
           <tr>
             <th>
@@ -71,7 +72,7 @@ function StudentTable({ students, sendMessage }) {
             <th>#</th>
             <th>Student Name</th>
             <th>User Name</th>
-            <th>Father's Name</th> 
+            <th>Father's Name</th>
             <th>Address</th>
             <th>Mobile Number</th>
             <th>Action</th>
@@ -84,24 +85,28 @@ function StudentTable({ students, sendMessage }) {
               <td>
                 <input
                   type="checkbox"
+                  className={styles.checkbox}
                   checked={item.isSelected}
                   onChange={() => onCheckboxSelected(item)}
                 />
               </td>
               <td>{index + 1}</td>
-              <td>{item.basicInfo?.firstName}{" "}  {item.basicInfo?.lastName}</td>
+              <td>
+                {item.basicInfo?.firstName} {item.basicInfo?.lastName}
+              </td>
               <td>{item.adminInfo?.userName}</td>
-              <td>{item.familyInfo?.fatherName}</td> 
+              <td>{item.familyInfo?.fatherName}</td>
               <td>{item.address?.permanentAddress || "-"}</td>
               <td>{item.familyInfo?.mobileNumber}</td>
               <td>
-               <Link
+                <Link
+                  className={styles.viewLink}
                   href={{
                     pathname: "/pages/student/studentDetails",
                     query: { studentId: item._id },
                   }}
                 >
-                  view
+                  View
                 </Link>
               </td>
             </tr>

@@ -10,10 +10,10 @@ export async function getDesignationList(data) {
   if (!isMock) {
     return designationList;
   }
-  return await axiosClient.get("/designation");
+  return await axiosClient.get("/designation", data);
 }
 
-export async function getDepartmentList(data) {
+export async function getDepartmentList() {
   if (!isMock) {
     return departmentList;
   }

@@ -51,7 +51,7 @@ export default function AddTemplateCategory({
             <tr>
               <th>#</th>
               <th>Category Name</th>
-              <th>View</th>
+              
               <th>Delete</th>
             </tr>
           </thead>
@@ -62,11 +62,7 @@ export default function AddTemplateCategory({
                 <tr key={item._id}>
                   <td>{index + 1}</td>
                   <td>{item.categoryName}</td>
-
-                  <td>
-                    <button>View</button>
-                  </td>
-
+ 
                   <td>
                     <button onClick={() => handleDeleteCategory(item._id)}>
                       Delete

@@ -31,6 +31,7 @@ export default function StaffSearch({ onSelect }) {
           firstName: s.basicInfo?.firstName || "",
           lastName: s.basicInfo?.lastName || "",
           stream: s.basicInfo?.stream || "",
+          email:s.basicInfo?.email || "",
           salary: s.basicInfo?.salary || "",
           department: s.profileDetails?.department || "",
           designation: s.profileDetails?.designation || "",

@@ -36,8 +36,7 @@ export default function DepartmentMaster() {
   }
 
   return (
-    <main className={styles.page}>
-      <div className={styles.container}>
+       <div className={styles.container}>
         
           <h2 className={styles.title}>Template Categories</h2>
           <AddTemplateCategory
@@ -52,6 +51,5 @@ export default function DepartmentMaster() {
           <AddTemplateMessage tableData={categoryList} />
       
       </div>
-    </main>
-  );
+   );
 }

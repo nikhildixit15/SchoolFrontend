@@ -7,7 +7,7 @@
 
   /* color */
 
-  --main-color: #1a8fff;
+  --main-color: #1aff2d;
   --text-color: #777;
   --text-color-light: #ccc;
   --border-color: #eee;
@@ -15,7 +15,7 @@
   --neutral-color: #fff;
 
   --dark-primary-color: "";
-  --primary-color: #7f7fed;
+  --primary-color: #ed7f91;
   --light-primary-color: "";
 
   --dark-secondary-color: "";
@@ -74,8 +74,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --dark-primary-color: "";
-    --primary-color: "";
+    --dark-primary-color: "#ffffff";
+    --primary-color: "#245F73";
     --light-primary-color: "";
 
     --dark-secondary-color: "";

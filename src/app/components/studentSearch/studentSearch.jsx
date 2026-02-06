@@ -29,6 +29,7 @@ export default function StudentSearch({ onSelect }) {
           lastName: s.basicInfo?.lastName || "",
           className: s.basicInfo?.className || "",
           section: s.basicInfo?.section || "",
+          email:s.familyInfo?.email || "",
           fatherName: s.familyInfo?.fatherName || "",
           userName: s.adminInfo?.userName || "",
         }));
