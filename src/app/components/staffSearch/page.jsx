@@ -36,6 +36,7 @@ export default function StaffSearch({ onSelect }) {
           department: s.profileDetails?.department || "",
           designation: s.profileDetails?.designation || "",
           employeeId: s.adminInfo?.employeeId || "",
+          mobileNumber: s.basicInfo?.mobileNumber || "",
         }));
 
         setResults(flat);

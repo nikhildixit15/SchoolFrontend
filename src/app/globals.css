@@ -15,12 +15,13 @@
   --neutral-color: #fff;
 
   --dark-primary-color: "";
-  --primary-color: #ed7f91;
+  --primary-color: #003147;
   --light-primary-color: "";
 
   --dark-secondary-color: "";
-  --secondary-color: "";
+  --secondary-color: #2F72A8;
   --light-secondary-color: "";
+  --bs-navbar-color: #ffffff;
 
   /* Gray color */
   --dark-gray-color: "";
@@ -74,8 +75,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --dark-primary-color: "#ffffff";
-    --primary-color: "#245F73";
+    --dark-primary-color: #ffffff;
+    --primary-color: #245F73;
     --light-primary-color: "";
 
     --dark-secondary-color: "";

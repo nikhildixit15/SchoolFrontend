@@ -3,10 +3,12 @@
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import { getDepartmentList, getDesignationList } from "@/app/services/staff/staffService";
+import {
+  getDepartmentList,
+  getDesignationList,
+} from "@/app/services/staff/staffService";
 
 export default function StaffFilter({ getData }) {
-
   const [department, setDepartment] = useState(null);
   const [designation, setDesignation] = useState(null);
   const [departmentOptionList, setDepartmentOptionList] = useState([]);
@@ -17,57 +19,58 @@ export default function StaffFilter({ getData }) {
   }, []);
 
   async function loadDepartmentList() {
-     const response = await getDepartmentList();
-
-  const list = response?.data || [];
-    const results = list.map((item) => ({
-      value: item._id,
-      label: item.name,
-    }));
-
-    setDepartmentOptionList(results);
+    const response = await getDepartmentList();
+    const list = response?.data || [];
+console.log("kjfv ejkad", list)
+    setDepartmentOptionList(
+      list.map((item) => ({
+        value: item._id,
+        label: item.name,
+      }))
+    );
   }
 
- async function handleDepartmentSection(value) {
+  async function handleDepartmentSection(value) {
     setDepartment(value);
-     const response = await getDesignationList(value);
- 
-  const list = response?.data || [];
-    const results = list.map((item) => ({
-      value: item._id,
-      label: item.name,
-    }));
+     setDesignation(null); // reset designation
+     const response = await getDesignationList({label:value.label});
+    const list = response?.data || [];
 
-    setDesignation(results);
+    setDesignationOptionList(
+      list.map((item) => ({
+        value: item._id,
+        label: item.name,
+      }))
+    );
+  }
+
+  function handleSearch() {
+    getData({
+      department: department?.label || "",
+      designation: designation?.label || "",
+    });
   }
 
   return (
-    <>
     <div>
       <div className={styles.dropdownContainer}>
         <span>Department:</span>
-
         <Select
-          className={styles.classDropdown}
           value={department}
           onChange={handleDepartmentSection}
           options={departmentOptionList}
         />
       </div>
-        <span>Designation:</span>
 
-        <Select
-          className={styles.classDropdown}
-          value={designation}
-          onChange={setDesignation}
-          options={designationOptionList}
-        />
-      
+      <span>Designation:</span>
+      <Select
+        value={designation}
+        onChange={setDesignation}
+        options={designationOptionList}
+        isDisabled={!department}
+      />
 
-      <button onClick={() => getData(department?.value)}>
-        Get Data
-      </button>
+      <button onClick={handleSearch}>Get Data</button>
     </div>
-          </>
   );
 }

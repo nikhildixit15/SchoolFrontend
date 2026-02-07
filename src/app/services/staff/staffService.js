@@ -6,6 +6,10 @@ export async function getStaffList(data) {
   return await axiosClient.get("/staff");
 }
 
+export async function getStaffByDepart(data) {
+  return await axiosClient.post("/staff/staffByDepart", data);
+}
+
 export async function getDesignationList(data) {
   if (!isMock) {
     return designationList;

@@ -13,13 +13,13 @@ function MMSNavbar() {
     dispatch(logout()); // ✅ remove email from redux
   };
   return (
-    <Navbar collapseOnSelect expand="lg" className={`${styles.container}`}>
+    <Navbar collapseOnSelect expand="lg" className={`${styles.container} ${styles.navbarCustom}`}>
       <Container>
         <Navbar.Brand href="/pages/dashboard">BNSD School</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <NavDropdown title="Student" id="collapsible-nav-dropdown">
+            <NavDropdown className={styles.navLink} title="Student" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="/pages/student/createStudent">
                 Create Student
               </NavDropdown.Item>

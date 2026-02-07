@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ClassSecFilter from "@/app/components/classFilter/classSecFilter";
-import MessageBuilderView from "./messageBuilderView";
+import MessageBuilderView from "@/app/components/messageBuilderView/messageBuilder";
 import StudentTable from "./studentTable";
 import { getStudentsOfClass } from "@/app/services/student/studentService";
 import { sendMessage } from "@/app/services/message/messageService";
@@ -19,7 +19,7 @@ export default function SmartMessage() {
   const [category, setCategory] = useState("");
 
   // ⭐ New state to control which table to show
-  const [viewMode, setViewMode] = useState(null); // "name" or "class"
+  const [viewMode, setViewMode] = useState(null);
 
   async function getStudentData(data) {
     if (!data?.className || !data?.sectionName) return;
@@ -34,25 +34,44 @@ export default function SmartMessage() {
     setSingleStudent(null); // reset single student
   }
 
-  function categoryPayload(data){
-    setMessageText(data.message);
-    setCategory(data.category)
+  function categoryPayload(data) {
+    if (data.message !== undefined) {
+      setMessageText(data.message);
+    }
+    if (data.category !== undefined) {
+      setCategory(data.category);
+    }
   }
 
-  async function performSendMessageApiCall(emailList) {
+  async function performSendMessageApiCall(data) {
+    const students = Array.isArray(data.students) // convert same format
+      ? data.students.flat()
+      : [data.students];
+
+    const emails = Array.isArray(data.emails)
+      ? data.emails.flat()
+      : [data.emails];
+
+    if (!messageText?.trim()) {
+      toast.error("Message cannot be Empty");
+      return;
+    }
+
     const payload = {
       sender: senderName?.label,
       message: messageText,
-      students: emailList,
-      categoryName:category
+      categoryName: category,
+      students,
+      emails,
     };
-console.log("vjhub",payload)
-    // const result = await sendMessage(payload);
-    // if(result.data.success){
-    //   toast.success(result.data.message)
-    // }else{
-    //   toast.error(res.data.success)
-    // }
+
+    const result = await sendMessage(payload);
+
+    if (result.data.success) {
+      toast.success(result.data.message);
+    } else {
+      toast.error("Failed to send message");
+    }
   }
 
   function handleStudentSelect(student) {
@@ -64,17 +83,16 @@ console.log("vjhub",payload)
   return (
     <main className={styles.main}>
       <div className={styles.wrapper}>
-        
         <div className={styles.card3d}>
           <h3 className={styles.title}>Class & Section</h3>
           <ClassSecFilter getStudentData={getStudentData} />
 
           <div className={styles.container}>
-          <label className={styles.label}>Student Name</label>
+            <label className={styles.label}>Student Name</label>
 
-          <StudentSearch onSelect={handleStudentSelect}  />
+            <StudentSearch onSelect={handleStudentSelect} />
           </div>
-         
+
           <h3 className={styles.title}>Message Builder</h3>
           <MessageBuilderView
             senderName={senderName}
@@ -89,7 +107,7 @@ console.log("vjhub",payload)
         {viewMode === "name" && singleStudent && (
           <StudentTableByNAme
             students={singleStudent}
-            onEmailSelect={performSendMessageApiCall}
+            sendMessageData={performSendMessageApiCall}
           />
         )}
 
@@ -98,11 +116,10 @@ console.log("vjhub",payload)
             <h3 className={styles.title}>Students</h3>
             <StudentTable
               students={studentList}
-              sendMessage={performSendMessageApiCall}
+              sendMessageData={performSendMessageApiCall}
             />
           </div>
         )}
-
       </div>
     </main>
   );

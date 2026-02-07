@@ -1,3 +1,18 @@
 .container {
   background-color: var(--primary-color);
 }
+ 
+ .navLink > a:hover {
+  color: darkgreen !important;
+}
+
+.navLink .dropdown-item:hover {
+  color: darkgreen !important;
+}
+
+
+.navbarCustom {
+  --bs-navbar-brand-color: red;
+  --bs-navbar-brand-hover-color: darkred;
+  --bs-nav-link-color:green;
+}

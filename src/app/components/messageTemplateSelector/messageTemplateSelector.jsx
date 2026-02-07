@@ -50,7 +50,7 @@ export default function MessageTemplateSelector({ onMessageSelect }) {
   function handleMessageSelect(message) {
     setSelectedMessage(message);
 
-    onMessageSelect({message:message.message, category:selectedCategory}); // 🔥 SEND UP
+    onMessageSelect({message:message.message, category:selectedCategory.label}); // 🔥 SEND UP
   }
 
   return (

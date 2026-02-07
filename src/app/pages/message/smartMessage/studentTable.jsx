@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
 import styles from "./studentTableByName.module.css";
 
-function StudentTable({ students, sendMessage }) {
+function StudentTable({ students, sendMessageData }) {
   const [studentList, setStudentList] = useState([]);
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [isAllSelected, setAllSelected] = useState(false);
@@ -45,19 +45,19 @@ function StudentTable({ students, sendMessage }) {
     setAllSelected(selectAll);
   }
 
-  function performSendMessage() {
-    const emails = selectedStudents.map((s) => s.familyInfo?.email);
+function performSendMessage() {
+  const emails = selectedStudents.map(
+    (s) => s.familyInfo?.email
+  );
 
-    sendMessage(emails);
-  }
+  const students = selectedStudents.map(
+    (s) => s._id
+  );
 
+  sendMessageData({ students, emails });
+}
   return (
     <div>
-      {selectedStudents.length > 0 && (
-        <button className={styles.sendButton} onClick={performSendMessage}>
-          Send Message
-        </button>
-      )}
 
       <Table striped bordered hover className={styles.table}>
         <thead>
@@ -105,7 +105,7 @@ function StudentTable({ students, sendMessage }) {
                     pathname: "/pages/student/studentDetails",
                     query: { studentId: item._id },
                   }}
-                >
+                  >
                   View
                 </Link>
               </td>
@@ -113,6 +113,11 @@ function StudentTable({ students, sendMessage }) {
           ))}
         </tbody>
       </Table>
+          {selectedStudents.length > 0 && (
+            <button className={styles.sendButton} onClick={performSendMessage}>
+              Send Message
+            </button>
+          )}
     </div>
   );
 }

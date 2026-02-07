@@ -3,26 +3,35 @@ import styles from "./studentTableByName.module.css";
 import Table from "react-bootstrap/Table";
 import Link from "next/link";
 
-function StudentTableByNAme({ students, onEmailSelect }) {
-  const [selectedEmail, setSelectedEmail] = useState(null);
+function StudentTableByNAme({ students, sendMessageData }) {
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
   const studentList = Array.isArray(students) ? students : [students];
 
   const handleCheckboxChange = (student, checked) => {
+    console.log("uvbjehd", student);
     if (checked) {
-      setSelectedEmail(student.email);
+      setSelectedStudent({
+        id: student._id,
+        email: student.email,
+      });
     } else {
-      setSelectedEmail(null);
+      setSelectedStudent(null);
     }
   };
 
-  const handleSendClick = () => {
-    if (selectedEmail) {
-      onEmailSelect([selectedEmail]);
-    } else {
-      alert("Please select student first");
-    }
-  };
+ const handleSendClick = () => {
+  if (!selectedStudent) {
+    alert("Please select student first");
+    return;
+  }
+
+  sendMessageData({
+    students: [selectedStudent.id],
+    emails: [selectedStudent.email],
+  });
+};
+
 
   return (
     <div className={styles.container}>
@@ -46,7 +55,7 @@ function StudentTableByNAme({ students, onEmailSelect }) {
                 <input
                   type="checkbox"
                   className={styles.checkbox}
-                  checked={selectedEmail === student.email}
+                  checked={selectedStudent?.id === student._id}
                   onChange={(e) =>
                     handleCheckboxChange(student, e.target.checked)
                   }

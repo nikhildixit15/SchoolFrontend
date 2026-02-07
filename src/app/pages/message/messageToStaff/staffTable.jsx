@@ -1,92 +1,100 @@
-import Link from "next/link";
 import Table from "react-bootstrap/Table";
-import {useState,useEffect} from 'react'
+import { useEffect, useState } from "react";
 
-function StaffTable({ staffData, sendMessage }) {
-
-  const [staffList, setStaffList] = useState();
+function StaffTable({ staffData = [], sendMessage }) {
+  const [staffList, setStaffList] = useState([]);
   const [isAllSelected, setAllSelected] = useState(false);
   const [selectedStaffList, setSelectedStaffList] = useState([]);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     setStaffList(staffData);
-  },[staffData])
+    setSelectedStaffList([]);
+    setAllSelected(false);
+  }, [staffData]);
 
-  function onCheckboxSelected(selectedItem){
-    selectedItem.isSelected=!selectedItem.isSelected;
+  function onCheckboxSelected(id) {
+    const updated = staffList.map((item) =>
+      item.id === id ? { ...item, isSelected: !item.isSelected } : item
+    );
 
-   if(selectedItem.isSelected){
-    selectedStaffList.push(selectedItem)
-    setSelectedStaffList(selectedStaffList)
-    setAllSelected(selectedStaffList.length === staffList.length)
+    setStaffList(updated);
 
-   }else{
-    const list = selectedStaffList.filter((item)=>item.id !=  selectedItem.id)
-    setSelectedStaffList(list)
-    setAllSelected(false)
-   }
-
-   const newList = staffList.map((item)=>item)
-   setStaffList(newList);
-   console.log("item.isSelected",selectedItem.isSelected);
+    const selected = updated.filter((item) => item.isSelected);
+    setSelectedStaffList(selected);
+    setAllSelected(selected.length === updated.length);
   }
 
-  function onHeaderCheckboxSelected(){
-    const list = staffList.map((item)=>{
-      item.isSelected = !isAllSelected;
-      return item;
-    })
+  function onHeaderCheckboxSelected() {
+    const selectAll = !isAllSelected;
 
-    if(!isAllSelected)
-    {
-      setSelectedStaffList(list)
-    }else{
-      setSelectedStaffList([])
-    }
-    setAllSelected(!isAllSelected)
-    setStaffList(list)
-   }
+    const updated = staffList.map((item) => ({
+      ...item,
+      isSelected: selectAll,
+    }));
 
-   function performSendMessage(){
-   sendMessage(selectedStaffList)
+    setStaffList(updated);
+    setSelectedStaffList(selectAll ? updated : []);
+    setAllSelected(selectAll);
+  }
+
+  function performSendMessage() {
+    const ids = selectedStaffList.map((item) => item.id);
+    const emails = selectedStaffList.map((item) => item.email).filter(Boolean);
+console.log("Hello", ids, emails)
+    sendMessage({
+      ids,
+      emails,
+    });
   }
 
   return (
     <div>
-      {selectedStaffList.count >0 &&
-          <button onClick={performSendMessage}>Send Message</button>
-      }
+      {selectedStaffList.length > 0 && (
+        <button onClick={performSendMessage}>Send Message</button>
+      )}
 
       <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th><input type="checkbox" checked={isAllSelected}  onInput={onHeaderCheckboxSelected}></input></th>
-          <th>#</th>
-          <th>Name</th>
-          <th>Father's Name</th>
-          <th>Department</th>
-          <th>Designation</th>
-          <th>Contact</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {staffList?.map((item, index) => (
+        <thead>
           <tr>
-           <td> <input type="checkbox" checked={item.isSelected}  onInput={()=>onCheckboxSelected(item)}   ></input></td>
-            <td>{index + 1}</td>
-            <td>{item.name}</td>
-            <td>{item.fatherName}</td>
-            <td>{item.department}</td>
-            <td>{item.designation}</td>
-            <td>{item.mobileNumber}</td>
+            <th>
+              <input
+                type="checkbox"
+                checked={isAllSelected}
+                onChange={onHeaderCheckboxSelected}
+              />
+            </th>
+            <th>#</th>
+            <th>Emp ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Designation</th>
+            <th>Mobile</th>
           </tr>
-        ))}
-      </tbody>
-    </Table>
-    </div>
+        </thead>
 
+        <tbody>
+          {staffList.map((item, index) => (
+            <tr key={item.id}>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={item.isSelected}
+                  onChange={() => onCheckboxSelected(item.id)}
+                />
+              </td>
+              <td>{index + 1}</td>
+              <td>{item.employeeId}</td>
+              <td>{item.name}</td>
+              <td>{item.email}</td>
+              <td>{item.department}</td>
+              <td>{item.designation}</td>
+              <td>{item.mobileNumber}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 }
 

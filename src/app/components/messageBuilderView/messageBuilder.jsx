@@ -3,7 +3,7 @@
 import Select from "react-select";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import MessageTemplateSelector from "../messageTemplateSelector/messageTemplateSelector"; 
+import MessageTemplateSelector from "../messageTemplateSelector/messageTemplateSelector";
 import styles from "./messageBuilder.module.css";
 
 export default function MessageBuilderView({
@@ -47,7 +47,11 @@ export default function MessageBuilderView({
         <textarea
           className={styles.customTextarea}
           value={customText || ""}
-          onChange={(e) => onMessageTextChanged(e.target.value)}
+          onChange={(e) =>
+            onMessageTextChanged({
+              message: e.target.value,
+             })
+          }
         />
       </div>
     </div>
