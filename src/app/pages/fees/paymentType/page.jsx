@@ -5,11 +5,12 @@ import styles from "./page.module.css";
 import StudentSearch from "@/app/components/studentSearch/studentSearch";
 import { submitFeeByAdmin } from "@/app/services/fees/feeServices";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 export default function FeePaymentForm() {
   const [formData, setFormData] = useState({
     studentName: "",
-    studentAdminId:"",
+    studentAdminId: "",
     studentId: "",
     feeType: "",
     feeAmount: "0",
@@ -19,8 +20,10 @@ export default function FeePaymentForm() {
   });
 
   const [showPopup, setShowPopup] = useState(false);
-console.log("FormData", formData)
-  /* ================= HANDLE INPUT CHANGE ================= */
+
+  const { staffId } = useSelector((state) => state.auth);
+
+  console.log("FormData", formData);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -29,67 +32,54 @@ console.log("FormData", formData)
     }));
   };
 
-  /* ================= STUDENT SELECT ================= */
   function handleStudentSelect(student) {
+    console.log("Stgujfe",student)
     setFormData((prev) => ({
       ...prev,
       studentAdminId: student.userName,
-      studentId:student._id, // ✅ FIXED
+      studentId: student._id, // ✅ FIXED
       studentName: `${student.firstName} ${student.lastName}`,
     }));
   }
 
-  /* ================= SUBMIT ================= */
-const handleSubmit = async () => {
-  const amount = Number(formData.feeAmount);
-
-  // ❌ Student not selected
-  if (!formData.studentId) {
-    toast.error("Please select a student");
-    return;
-  }
-
-  // ❌ Fee type not selected
-  if (!formData.feeType) {
-    toast.error("Please select fee type");
-    return;
-  }
-
-  // ❌ Invalid amount
-  if (!amount || amount <= 0) {
-    toast.error("Fee amount must be greater than 0");
-    return;
-  }
-
-  // ❌ Payment method not selected
-  if (!formData.paymentMethod) {
-    toast.error("Please select payment method");
-    return;
-  }
-
-  // ❌ Payment date not selected
-  if (!formData.paymentDate) {
-    toast.error("Please select payment date");
-    return;
-  }
-
-  try {
-    const response = await submitFeeByAdmin({
-      ...formData,
-      feeAmount: amount, // ensure number
-    });
-
-    if (response?.data?.success || response?.status === 200) {
-      toast.success("Fee submitted successfully");
-      setShowPopup(true);
+  const handleSubmit = async () => {
+    const amount = Number(formData.feeAmount);
+    if (!formData.studentId) {
+      toast.error("Please select a student");
+      return;
     }
-  } catch (error) {
-    console.error("Submit fee error:", error);
-    toast.error("Failed to submit fee");
-  }
-};
+    if (!formData.feeType) {
+      toast.error("Please select fee type");
+      return;
+    }
+    if (!amount || amount <= 0) {
+      toast.error("Fee amount must be greater than 0");
+      return;
+    }
 
+    if (!formData.paymentMethod) {
+      toast.error("Please select payment method");
+      return;
+    }
+    if (!formData.paymentDate) {
+      toast.error("Please select payment date");
+      return;
+    }
 
+    try {
+      const response = await submitFeeByAdmin({
+        ...formData,
+        recipientId: staffId,
+      });
+      if (response.data?.success) {
+        toast.success(response.data.message);
+        setShowPopup(true);
+      }
+    } catch (error) {
+      console.error("Submit fee error:", error);
+      toast.error("Failed to submit fee");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -131,9 +121,9 @@ const handleSubmit = async () => {
                 onChange={handleChange}
                 className={styles.select}
               >
-                 <option value="" disabled hidden>
-    Fee Type
-  </option>
+                <option value="" disabled hidden>
+                  Fee Type
+                </option>
                 <option value="Tuition">Tuition Fee</option>
                 <option value="Library">Library Fee</option>
                 <option value="Exam">Examination Fee</option>
@@ -163,9 +153,9 @@ const handleSubmit = async () => {
               className={styles.select}
               placeholder="kjnf"
             >
-               <option value="" disabled hidden>
-    Payment method
-  </option>
+              <option value="" disabled hidden>
+                Payment method
+              </option>
               <option value="cash">Cash</option>
               <option value="card">Card</option>
               <option value="bank">Bank Transfer</option>
@@ -209,14 +199,34 @@ const handleSubmit = async () => {
         <div className={styles.popupOverlay}>
           <div className={styles.popup}>
             <h2>✅ Payment Successful</h2>
-            <p><b>Name:</b> {formData.studentName}</p>
-            <p><b>Student ID:</b> {formData.studentId}</p>
-            <p><b>Date:</b> {formData.paymentDate}</p>
-            <p><b>Method:</b> {formData.paymentMethod}</p>
-            <p><b>Amount:</b> ₹{formData.feeAmount}</p>
+            <p>
+              <b>Name:</b> {formData.studentName}
+            </p>
+            <p>
+              <b>Student ID:</b> {formData.studentAdminId}
+            </p>
+            <p>
+              <b>Date:</b> {formData.paymentDate}
+            </p>
+            <p>
+              <b>Method:</b> {formData.paymentMethod}
+            </p>
+            <p>
+              <b>Amount:</b> ₹{formData.feeAmount}
+            </p>
 
             <button
-              onClick={() => setShowPopup(false)}
+              onClick={() => {
+                setShowPopup(false);
+                setFormData((prev) => ({
+                  ...prev,
+                  feeAmount: "",
+                  feeType: "",
+                  paymentMethod: "",
+                  paymentDate: "",
+                  notes: "",
+                }));
+              }}
               className={styles.closeBtn}
             >
               Close

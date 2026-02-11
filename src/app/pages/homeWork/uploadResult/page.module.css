@@ -1,0 +1,67 @@
+.container {
+  padding: 30px;
+}
+
+.container h2 {
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  border: 1px solid #e5e7eb;
+  padding: 10px;
+  text-align: center;
+}
+
+.table th {
+  background: #f3f4f6;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.nameCol {
+  text-align: left;
+  font-weight: 600;
+}
+
+.input {
+  width: 70px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  text-align: center;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.saveBtn {
+  padding: 12px 26px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.saveBtn:hover {
+  background: #1e4fd8;
+}

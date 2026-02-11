@@ -11,6 +11,7 @@ import {
   addFeeByAdmin,
   getStudentsByClass,
 } from "@/app/services/fees/feeServices";
+import toast from "react-hot-toast";
 
 export default function AddFee() {
   /* ================= BASIC STATES ================= */
@@ -19,8 +20,7 @@ export default function AddFee() {
   const [amount, setAmount] = useState("");
   const [remark, setRemark] = useState("");
   const [feeType, setFeeType] = useState("Tuition");
-  const [status, setStatus] = useState("");
-
+ 
   /* ================= STUDENT STATES ================= */
   const [students, setStudents] = useState([]); // ✅ ALWAYS ARRAY
   const [selected, setSelected] = useState({});
@@ -29,8 +29,7 @@ export default function AddFee() {
   /* ================= CLASS + SECTION FILTER ================= */
   async function handleClassData(data) {
     setClassInfo(data);
-    setStatus("");
-
+ 
     try {
       const response = await getStudentsByClass({
         className: data.className.value,
@@ -93,7 +92,7 @@ export default function AddFee() {
 
     const studentIds = Object.keys(selected);
     if (studentIds.length === 0) {
-      setStatus("Please select at least one student");
+      toast.error("Please select at least one student");
       return;
     }
 
@@ -108,16 +107,15 @@ export default function AddFee() {
     };
 
     try {
-      await addFeeByAdmin(payload);
-      setStatus("Fee added successfully");
-
+      const res = await addFeeByAdmin(payload); 
+      toast.success(res.data.message)
+ 
       setDueDate("");
       setAmount("");
       setRemark("");
       setFeeType("Tuition");
     } catch (err) {
-      console.error(err);
-      setStatus("Something went wrong");
+       toast.error("Something went wrong");
     }
   }
 
@@ -192,8 +190,7 @@ export default function AddFee() {
 
         <div className={styles.actions}>
           <button type="submit">Save</button>
-          <span className={styles.status}>{status}</span>
-        </div>
+         </div>
       </form>
     </main>
   );

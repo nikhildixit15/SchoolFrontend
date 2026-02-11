@@ -3,7 +3,7 @@
 import Link from "next/link";
 import ClassSecFilter from "@/app/components/classFilter/classSecFilter";
 import { useEffect, useState } from "react";
-import { getStudents, getExcleSheet } from "@/app/services/student/studentService";
+import { getStudents } from "@/app/services/student/studentService";
 import StudentTable from "@/app/components/studentTable/studentTable";
 import styles from "./page.module.css";
 
@@ -21,13 +21,6 @@ export default function StudentList() {
         if (result.data && Array.isArray(result.data)) {
           // Filter students based on exact class and section match
           const filteredStudents = result.data.filter((student) => {
-            // Log for debugging
-            console.log("Comparing:", {
-              studentClass: student.className,
-              filterClass: data.className.value,
-              studentSection: student.section,
-              filterSection: data.sectionName.value,
-            });
 
             // Strict comparison for both class and section
             const isMatch =

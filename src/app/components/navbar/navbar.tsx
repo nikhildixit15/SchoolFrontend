@@ -128,6 +128,9 @@ function MMSNavbar() {
               <NavDropdown.Item href="/pages/homeWork/viewHomeWork">
                 View HW
               </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/homeWork/uploadResult">
+                Upload Result
+              </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Fee" id="collapsible-nav-dropdown">

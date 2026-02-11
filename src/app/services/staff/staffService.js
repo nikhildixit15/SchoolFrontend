@@ -68,3 +68,14 @@ export async function getStaffAttendanceById({ staffId, month, year }) {
     year,
   });
 }
+
+export async function applyLeave({ staffId, leaveDate, message }) {
+  return await axiosClient.post("/staff/applyLeave", {
+    staffId,
+    leaveDate,
+    message,
+  });
+}
+export async function getStaffLeaves(staffId) {
+  return await axiosClient.get(`/staff/leaves/${staffId}`);
+}

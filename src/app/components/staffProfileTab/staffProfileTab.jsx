@@ -7,6 +7,7 @@ import Tabs from "react-bootstrap/Tabs";
 import MyAttendance from "../staffTakeAttendance/page";
 import StaffAttendanceCalendar from "../StaffAttendanceShow/page"; 
 import StaffSalaryPage from "../StaffSalary/page";
+import ApplyLeave from "../staffProfileLeaveApply/staffProfileLeaveapply";
 
 function StaffTabbedPage({ staff }) {
   const [key, setKey] = useState("summary");
@@ -26,6 +27,9 @@ function StaffTabbedPage({ staff }) {
       </Tab>
      <Tab eventKey="attendance" title="Attendance">
         <StaffAttendanceCalendar staffId={staff._id}></StaffAttendanceCalendar>
+      </Tab>
+     <Tab eventKey="leave" title="Apply Leave">
+        <ApplyLeave staffId={staff._id}></ApplyLeave>
       </Tab>
       {/* <Tab eventKey="message" title="Message">
         <StaffMessageList staff={staff} />

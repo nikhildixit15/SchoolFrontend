@@ -13,7 +13,7 @@ const FeeHistoryTable = ({ data }) => {
             <tr>
               <th>Date</th>
               <th>Fee Type</th>
-              <th>Paid Amount</th>
+              <th>Paid/Add Amount</th>
               <th>Payment Method</th>
               <th>Remarks</th>
               <th>Due Date</th>
@@ -40,7 +40,7 @@ const FeeHistoryTable = ({ data }) => {
                     <td data-label="Fee Type">{item.feeType}</td>
 
                     <td data-label="Paid Amount">
-                      ₹ {item.paidAmount.toLocaleString("en-IN")}
+                      ₹ {item.paidAmount || item.addAmount}
                     </td>
 
 
