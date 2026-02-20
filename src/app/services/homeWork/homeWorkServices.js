@@ -13,10 +13,19 @@ export async function getHomeWorkByClass(data) {
   if (!isMock) {
     return homeWorkList;
   }
-
   return await axiosClient.get("/homework/viewHomeWork", {
     params: data
   });
 }
+
+export async function uploadResults(data) {
+  return await axiosClient.post("/result/createResult", data);
+}
+
+export async function getResults(data) {
+  return await axiosClient.get("/result/getResult", data);
+}
+
+
 
 

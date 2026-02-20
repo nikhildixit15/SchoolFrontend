@@ -13,13 +13,21 @@ function MMSNavbar() {
     dispatch(logout()); // ✅ remove email from redux
   };
   return (
-    <Navbar collapseOnSelect expand="lg" className={`${styles.container} ${styles.navbarCustom}`}>
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      className={`${styles.container} ${styles.navbarCustom}`}
+    >
       <Container>
         <Navbar.Brand href="/pages/dashboard">BNSD School</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <NavDropdown className={styles.navLink} title="Student" id="collapsible-nav-dropdown">
+            <NavDropdown
+              className={styles.navLink}
+              title="Student"
+              id="collapsible-nav-dropdown"
+            >
               <NavDropdown.Item href="/pages/student/createStudent">
                 Create Student
               </NavDropdown.Item>
@@ -131,6 +139,9 @@ function MMSNavbar() {
               <NavDropdown.Item href="/pages/homeWork/uploadResult">
                 Upload Result
               </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/homeWork/studentResult">
+                Result
+              </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Fee" id="collapsible-nav-dropdown">
@@ -191,6 +202,9 @@ function MMSNavbar() {
               <NavDropdown.Item href="/pages/admin/editStaff">
                 Edit Staff
               </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/admin/leaveApprove">
+                Staff Leave Approved
+              </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/pages/admin/addClass">
                 Add Class/Section
@@ -206,9 +220,7 @@ function MMSNavbar() {
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={<CircleUser />}>
-              <NavDropdown.Item href="/pages/profile">
-                Profile
-              </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout} href="/">
                 Logout
               </NavDropdown.Item>

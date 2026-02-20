@@ -22,18 +22,20 @@ export default function StudentSearch({ onSelect }) {
     const delay = setTimeout(async () => {
       try {
         const res = await fetchNameWise(query);
-        console.log("uigfiuv", res)
+        console.log("uigfiuv", res);
         const flat = (res?.data || []).map((s) => ({
           _id: s._id,
           firstName: s.basicInfo?.firstName || "",
           lastName: s.basicInfo?.lastName || "",
           className: s.basicInfo?.className || "",
+          classId: s.basicInfo?.classId || "",
+          sectionId: s.basicInfo?.sectionId || "",
           section: s.basicInfo?.section || "",
-          email:s.familyInfo?.email || "",
+          email: s.familyInfo?.email || "",
           fatherName: s.familyInfo?.fatherName || "",
           userName: s.adminInfo?.userName || "",
         }));
-
+console.log("flattt", flat);
         setResults(flat);
         setShowDropdown(flat.length > 0);
       } catch (err) {
@@ -45,10 +47,10 @@ export default function StudentSearch({ onSelect }) {
   }, [query]);
 
   function handleSelect(student) {
-    onSelect(student);      // ✅ send to parent
+    onSelect(student); // ✅ send to parent
     setQuery(student.firstName + " " + student.lastName);
     setShowDropdown(false);
-    console.log("Students", student)
+    console.log("Students", student);
   }
 
   return (
@@ -65,10 +67,7 @@ export default function StudentSearch({ onSelect }) {
       />
 
       {showDropdown && (
-        <StudentDropdown
-          results={results}
-          onSelect={handleSelect}
-        />
+        <StudentDropdown results={results} onSelect={handleSelect} />
       )}
     </div>
   );

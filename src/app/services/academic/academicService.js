@@ -16,6 +16,9 @@ export async function getHolidayList() {
   return await axiosClient.get("/holidayRouter/getHoliday");
 }
 
+export async function deleteExamSchedule(id) {
+  return await axiosClient.del(`/exam/deleteExam/${id}`);
+}
 export async function deleteHoliday(id) {
   if (!isMock) {
     return { success: true }; // mock response
@@ -26,10 +29,9 @@ export async function deleteHoliday(id) {
 
 export async function deleteEvent(id) {
   if (!isMock) {
-  return { data: [] };
-
+    return { data: [] };
   }
-    return await axiosClient.del(`/event/${id}`);
+  return await axiosClient.del(`/event/${id}`);
 }
 
 export async function getEventListByMonth(data) {
@@ -39,12 +41,18 @@ export async function getEventListByMonth(data) {
   return await axiosClient.get("/eventList");
 }
 
-export async function getExamList( ) {
+export async function getExamList() {
   if (!isMock) {
     return examList;
   }
   return await axiosClient.get("/exam/getExamSheet");
 }
+export async function ExamTypeList(classId, sectionId, year) {
+  return axiosClient.get("/exam/examTypeSheet", 
+    { classId, sectionId, year }
+  );
+}
+
 
 export async function getSubjectList(data) {
   if (isMock) {
@@ -52,21 +60,21 @@ export async function getSubjectList(data) {
   }
   return await axiosClient.get("/subject");
 }
- 
+
 export async function saveStudentParticipant(data) {
   if (!isMock) {
     return [...examList, { ...data, id: examList.length }];
   }
   return await axiosClient.post("/event/addStudentParticipants", data);
 }
- 
+
 export async function saveStaffParticipant(data) {
   if (!isMock) {
     return [...examList, { ...data, id: examList.length }];
   }
   return await axiosClient.post("/event/addStaffParticipants", data);
 }
- 
+
 export async function saveAudienceParticipant(data) {
   if (!isMock) {
     return [...examList, { ...data, id: examList.length }];

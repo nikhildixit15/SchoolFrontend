@@ -117,10 +117,9 @@
 
 /* Status text */
 .statusText {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700; 
-  border-radius: 999px;
-  color: #fff;
+  border-radius: 999px;   
 }
 
 .statusText.pending {

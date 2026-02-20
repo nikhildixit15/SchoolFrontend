@@ -5,8 +5,8 @@ import styles from "./page.module.css";
 import { Calendar, Clock } from "lucide-react";
 import ClassSecFilter from "@/app/components/classFilter/classSecFilter";
 import {
-  addExamSchedule,
-  getSubjectList,
+  addExamSchedule, 
+  getSubjectByClass
 } from "@/app/services/admin/adminService";
 import toast from "react-hot-toast";
 
@@ -46,26 +46,15 @@ const ExamScheduler = () => {
     setSelectedSection(sectionObj);
     setExamSchedules({});
 
-    await loadSubjects(classObj.classId, sectionObj.sectionId);
+    await loadSubjects(classObj.classId, sectionObj.sectionName);
   };
 
   // ✅ Load subjects from backend
-  async function loadSubjects(classId, sectionId) {
-    const response = await getSubjectList();
-
-    const classDoc = response?.data?.find((cls) => cls.classId === classId);
-
-    if (!classDoc) {
-      setSubjects([]);
-      return;
-    }
-
-    const section = classDoc.sections.find(
-      (sec) => sec.sectionId === sectionId,
-    );
-
-    setSubjects(section?.subjects || []);
-  }
+  async function loadSubjects(classId, sectionName) {
+    const res = await getSubjectByClass(classId, sectionName);
+        console.log("efvne", res?.data);
+        setSubjects(res?.data.data || []);
+   }
 
   // ✅ FIXED: subjectId used as unique key
   const handleScheduleChange = (subjectId, field, value) => {

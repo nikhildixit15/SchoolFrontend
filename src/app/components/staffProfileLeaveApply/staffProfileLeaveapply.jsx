@@ -11,12 +11,10 @@ export default function ApplyLeave({ staffId }) {
   const [loading, setLoading] = useState(false);
   const [leaves, setLeaves] = useState([]);
 
-  console.log("Apply Leaves Staff Id", staffId);
-  async function loadLeaves() {
+   async function loadLeaves() {
     try {
       const res = await getStaffLeaves(staffId);
-      console.log("bufdbeueinvc", res);
-      if (res.data.success) {
+       if (res.data.success) {
         setLeaves(res.data.data);
       }
     } catch (err) {
@@ -46,7 +44,7 @@ export default function ApplyLeave({ staffId }) {
         toast.success("Leave applied successfully");
         setLeaveDate("");
         setMessage("");
-        loadLeaves(); // 🔥 refresh list
+        loadLeaves();
       }
     } catch (err) {
       console.error(err);

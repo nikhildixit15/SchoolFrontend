@@ -50,7 +50,7 @@ export default function CreateStudent() {
     if (selectedClass) {
       const sections =
         selectedClass.sections?.map((sec) => ({
-          value: sec.name,
+          value: sec._id,
           label: sec.name,
         })) || [];
       setSectionList(sections);
@@ -63,11 +63,12 @@ export default function CreateStudent() {
     setStdBasicInfo({
       ...stdBasicInfo,
       className: value.value,
+      classId:value.id
     });
     setClassValue(value);
     sectioData(value);
   }
-
+  
   function bloodGroupValueChanged(value) {
     setStdBasicInfo({
       ...stdBasicInfo,
@@ -75,12 +76,14 @@ export default function CreateStudent() {
     });
     setBloodGroupValue(value);
   }
-
+  
   function sectionValueChanged(value) {
     setStdBasicInfo({
       ...stdBasicInfo,
       section: value.value,
+      sectionId:value.id
     });
+    console.log("SectionValue",value);
     setSectionValue(value);
   }
 
@@ -159,10 +162,10 @@ export default function CreateStudent() {
     console.log("###payload", payload);
     if (isValid) {
       const response = await saveStudentInfo(payload);
-      if (response.data) {
-        toast.success("Data saved successfully");
+      if (response.data.success) {
+        toast.success(response.data.message);
       } else {
-        toast.error("Error while saving");
+        toast.error(response.data.message);
       }
     }
   }

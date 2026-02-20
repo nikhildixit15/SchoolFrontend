@@ -14,7 +14,7 @@ export default function StudentDropdown({ results, onSelect }) {
             onMouseDown={() => onSelect(s)} // ✅ FIXED
           >
             <strong>
-              {s.firstName} {s.lastName} <small> Class: {s.className}</small>
+              {s.firstName} {s.lastName} <small> Class: {s.className}({s.section})</small> 
             </strong>
             <br />
             <strong>

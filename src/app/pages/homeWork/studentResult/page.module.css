@@ -1,0 +1,198 @@
+/* Main container */
+.container {
+  min-height: 100vh;
+  background: #f4f6fb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Academic year card */
+.yearBox {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Label */
+.yearBox label {
+  font-weight: 500;
+  color: #141414;
+  font-size: 14px;
+}
+
+/* Select input */
+.select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #4f6ef7;
+  box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.15);
+}
+
+/* Space between filter and table */
+.container > * {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 12px;
+  }
+
+  .yearBox {
+    padding: 16px;
+  }
+
+  .select {
+    font-size: 13px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: 16px 10px;
+  }
+
+  .yearBox {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .yearBox label {
+    font-size: 13px;
+  }
+
+  .select {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+/* Exam select box */
+.selectBox {
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selectBox label {
+  font-weight: 600;
+  color: #333;
+}
+
+.selectBox select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+/* Heading */
+.heading {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* Table wrapper for horizontal scroll on mobile */
+.table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+/* Table header */
+.table thead {
+  background: #4f6ef7;
+  color: white;
+}
+
+.table th {
+  padding: 14px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Table body */
+.table td {
+  padding: 12px 14px;
+   text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #1f1d1d;
+}
+
+.table tbody tr:hover {
+  background: #f2f5ff;
+   transition: 0.2s ease;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .selectBox {
+    padding: 14px;
+  }
+
+  .heading {
+    font-size: 18px;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 12px;
+  }
+
+  .selectBox {
+    padding: 12px;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+}

@@ -280,3 +280,8 @@ export const trainedList=[
     id:2
   }
 ]
+
+export const academicYears = [
+  "2025-2026",
+  "2026-2027" 
+];

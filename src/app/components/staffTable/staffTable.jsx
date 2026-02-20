@@ -64,7 +64,7 @@ function StaffTable({ staffList }) {
         Download Excel
       </button>
 
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>#</th>

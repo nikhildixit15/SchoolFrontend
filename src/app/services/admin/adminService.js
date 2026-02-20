@@ -43,6 +43,12 @@ export async function getSubjectList() {
   }
   return await axiosClient.get("/subject");
 }
+export async function getSubjectByClass(classId,sectionName) {
+  if (!isMock) {
+    return subjectList;
+  }
+  return await axiosClient.get(`/subject/byClass/${classId}/${sectionName}`);
+}
 
 export async function addSubject(data) {
   if (!isMock) {
@@ -101,7 +107,7 @@ export async function staffDelete(staffId) {
 }
 
 export async function fetchNameWiseStaff(query) {
-  return axiosClient.get("/staff/fetchNameWiseStaff", {query});
+  return axiosClient.get("/staff/fetchNameWiseStaff", { query });
 }
 
 export async function addAllowance(data) {
@@ -112,6 +118,5 @@ export function getStaffSalarySingle(params) {
   return axiosClient.get("/staff/staffSalarySingle", { params });
 }
 export function paySalary(params) {
-  return axiosClient.post("/staff/paySalary",  params );
+  return axiosClient.post("/staff/paySalary", params);
 }
-

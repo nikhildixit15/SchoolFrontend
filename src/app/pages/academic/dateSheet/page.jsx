@@ -4,7 +4,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { Calendar, Clock, BookOpen } from "lucide-react";
 import toast from "react-hot-toast";
-import { getExamList } from "@/app/services/academic/academicService";
+import {
+  getExamList,
+  deleteExamSchedule,
+} from "@/app/services/academic/academicService";
 
 const ExamScheduleView = () => {
   const [loading, setLoading] = useState(true);
@@ -58,6 +61,17 @@ const ExamScheduleView = () => {
     setFilteredExams(exams);
   };
 
+ const handleDelete = async (examId) => { 
+    await deleteExamSchedule(examId); 
+    toast.success("Exam schedule deleted successfully"); 
+    setExamData((prev) => prev.filter((exam) => exam._id !== examId));
+    setFilteredExams((prev) =>
+      prev.filter((exam) => exam._id !== examId)
+    );
+  };
+ 
+
+
   if (loading) {
     return <div className={styles.loader}>Loading exam schedule...</div>;
   }
@@ -92,10 +106,16 @@ const ExamScheduleView = () => {
         {filteredExams.length > 0 &&
           filteredExams.map((exam) => (
             <div className={styles.card} key={exam._id}>
-
-              <div className={styles.examType}>
-                <strong>{exam.examType}</strong>
+              <div className={styles.examHeader}>
+                <span className={styles.examType}>{exam.examType}{" "}({exam.academicYear})</span>
+                <button
+                  className={styles.deleteBtn}
+                  onClick={() => handleDelete(exam._id)}
+                >
+                  Delete
+                </button>
               </div>
+
               <div className={styles.metaInfo}>
                 <span>
                   <strong>Class:</strong> {exam.className}

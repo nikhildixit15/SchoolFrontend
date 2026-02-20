@@ -76,6 +76,16 @@ export async function applyLeave({ staffId, leaveDate, message }) {
     message,
   });
 }
+
 export async function getStaffLeaves(staffId) {
   return await axiosClient.get(`/staff/leaves/${staffId}`);
+}
+export async function getPendingLeave() {
+  return await axiosClient.get("/staff/pendingLeave");
+}
+
+export async function updateLeaveStatus(leaveId, status) {
+  return axiosClient.put(`/staff/updateleaves/${leaveId}`, {
+    status,
+  });
 }

@@ -1,0 +1,145 @@
+.page {
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+  font-weight: 600;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  max-height: 400px;
+  border-radius: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+  text-align: center;
+}
+
+.table thead {
+  background: #f4f6f9;
+}
+
+.table th {
+  padding: 14px 12px;
+  font-size: 14px;
+  color: #222222;
+  font-weight: 600;
+  border-bottom: 2px solid #e6e6e6;
+}
+
+.table td {
+  padding: 14px 14px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #1d1d1d;
+}
+
+.table tbody tr:hover {
+  background: #fafafa;
+  transition: 0.2s ease;
+}
+
+/* Status Badge */
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.Pending {
+  background: #fff4e5;
+  color: #c9721b;
+}
+
+.Approved {
+  background: #e6f9f0;
+  color: #2a8b54;
+}
+
+.Rejected {
+  background: #fdecea;
+  color: #d93025;
+}
+
+/* Buttons */
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.approveBtn,
+.rejectBtn {
+  border: none;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-weight: 500;
+}
+
+.approveBtn {
+  background: #1f9d55;
+  color: white;
+}
+
+.rejectBtn {
+  background: #d93025;
+  color: white;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 18px;
+  color: #5f1818;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.searchWrapper {
+  margin-bottom: 20px;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 768px) {
+  .page {
+    padding: 15px;
+  }
+  .title {
+    font-size: 16px;
+  }
+  .heading {
+    font-size: 18px;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .approveBtn,
+  .rejectBtn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

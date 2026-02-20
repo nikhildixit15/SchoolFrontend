@@ -55,10 +55,18 @@
   color: #fff;
   box-shadow: 0 6px 14px rgba(79, 70, 229, 0.3);
 }
+/* Exam header container */
+.examHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* Exam type badge (left side) */
 .examType {
-  display: inline-flex;           /* width = content */
-  align-items: center;            /* vertical center */
-  justify-content: center;        /* horizontal center */
+  display: inline-flex;
+  align-items: center;
   padding: 6px 14px;
   background: #e0e4ff;
   color: #4f46e5;
@@ -66,9 +74,28 @@
   font-size: 14px;
   border-radius: 12px;
   box-shadow: 0 3px 6px rgba(79, 70, 229, 0.2);
-  margin-bottom: 12px;
-  white-space: nowrap;            /* prevent line break */
+  white-space: nowrap;
 }
+
+/* Delete button (right side) */
+.deleteBtn {
+  padding: 6px 14px;
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.deleteBtn:hover {
+  background: #dc2626;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);
+}
+
 
 /* Card for each exam schedule */
 .card {
