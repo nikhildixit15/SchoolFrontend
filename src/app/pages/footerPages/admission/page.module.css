@@ -1,0 +1,129 @@
+.admissionsPage {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #2d3436;
+  background-color: #fff;
+}
+
+/* Hero/Breadcrumb Section */
+.hero {
+  background: linear-gradient(135deg, #003366 0%, #004080 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.breadcrumb {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Content Layout */
+.container {
+  max-width: 900px;
+  margin: -3rem auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.contentCard {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.sectionHeader {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  color: #003366;
+}
+
+/* Admission Rules List */
+.processList {
+  display: grid;
+  gap: 2rem;
+}
+
+.step {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.stepNumber {
+  background: #003366;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.stepText h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+}
+
+.stepText p {
+  margin: 0;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Important Notice Box */
+.noticeBox {
+  background-color: #fff9e6;
+  border-left: 4px solid #f39c12;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  border-radius: 4px;
+}
+
+.noticeBox h4 {
+  margin-top: 0;
+  color: #856404;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.linked {
+  display: "inline-flex";
+  align-items: "center";
+  gap: "10px";
+  background-color: "#003366";
+  color: "white";
+  padding: "0.8rem 2rem";
+  border-radius: "50px";
+  text-decoration: "none";
+  font-weight: "600";
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .contentCard {
+    padding: 2rem 1.5rem;
+  }
+  .container {
+    margin-top: 1rem;
+  }
+}

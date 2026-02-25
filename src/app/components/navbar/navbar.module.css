@@ -1,18 +1,51 @@
 .container {
   background-color: var(--primary-color);
 }
- 
- .navLink > a:hover {
-  color: darkgreen !important;
-}
 
-.navLink .dropdown-item:hover {
-  color: darkgreen !important;
-}
-
-
+/* Navbar size */
 .navbarCustom {
-  --bs-navbar-brand-color: red;
-  --bs-navbar-brand-hover-color: darkred;
-  --bs-nav-link-color:green;
+  min-height: 75px;
 }
+
+/* Brand text */
+.navbarCustom :global(.navbar-brand) {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: white !important;
+}
+
+/* Nav links + dropdown title */
+.navbarCustom :global(.nav-link),
+.navbarCustom :global(.dropdown-toggle) {
+  font-size: 1.01rem;
+  color: white !important;
+}
+
+/* Hover colors */
+.navbarCustom :global(.nav-link:hover),
+.navbarCustom :global(.dropdown-toggle:hover),
+.navbarCustom :global(.navbar-brand:hover) {
+  color: rgb(255, 168, 6) !important;
+}
+
+/* Dropdown menu style */
+.navbarCustom :global(.dropdown-menu) {
+  background-color: #1f2a40;
+  border: none;
+}
+
+/* Dropdown items */
+.navbarCustom :global(.dropdown-item) {
+  color: white !important;
+}
+
+.navbarCustom :global(.dropdown-item:hover) {
+  color: #00ffcc !important;
+  background: transparent !important;
+}
+
+/* Icons */
+.navbarCustom svg {
+  color: white;
+}
+  

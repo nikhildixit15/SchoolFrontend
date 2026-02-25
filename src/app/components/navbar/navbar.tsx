@@ -23,11 +23,7 @@ function MMSNavbar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <NavDropdown
-              className={styles.navLink}
-              title="Student"
-              id="collapsible-nav-dropdown"
-            >
+            <NavDropdown title="Student" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="/pages/student/createStudent">
                 Create Student
               </NavDropdown.Item>

@@ -1,0 +1,196 @@
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  font-family: "Inter", sans-serif;
+}
+
+/* Admin Control Panel */
+.adminPanel {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 3rem;
+}
+
+.selectorGroup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.selectInput {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  font-size: 0.95rem;
+  min-width: 200px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.selectInput:focus {
+  border-color: #003366;
+}
+
+/* Upload Area */
+.uploadLabel {
+  display: block;
+  cursor: pointer;
+}
+
+.uploadBox {
+  padding: 3rem;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  text-align: center;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.uploadBox:hover {
+  border-color: #003366;
+  background: #f0f7ff;
+}
+
+.uploadIcon {
+  color: #003366;
+  width: 40px;
+  height: 40px;
+}
+
+/* Progress Tracking */
+.progressList {
+  margin-top: 1rem;
+}
+
+.progressItem {
+  background: #e2e8f0;
+  height: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.progressBar {
+  background: #003366;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* Responsive Gallery Grid */
+/* Gallery Section */
+.galleryGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.galleryItem {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.galleryItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.imageContainer {
+  position: relative;
+  width: 250px;
+  background: #f8fafc;
+  /* Fixed height for uniformity, or remove 'height' for masonry style */
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  /* Use 'cover' if you want them to fill the card perfectly */
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.cardFooter {
+  padding: 1.2rem;
+  background: white;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tagBadge {
+  background: #f1f5f9;
+  color: #003366;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.deleteIconBtn {
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.deleteIconBtn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* Lightbox/Zoom */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.zoomedImg {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 4px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 640px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+  .adminPanel {
+    padding: 1rem;
+  }
+}

@@ -1,21 +1,24 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Upload, X } from "lucide-react";
+import { Upload, X, Trash2, ImageIcon } from "lucide-react";
+import toast from "react-hot-toast";
+import styles from "./page.module.css";
 
 export default function ImageFlow() {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
-  const [zoomedImage, setZoomedImage] = useState(null); // 👈 new state for zoom
-  const [admin, setAdmin] = useState(true); // set to true for testing
+  const [zoomedImage, setZoomedImage] = useState(null);
+  const [admin, setAdmin] = useState(true);
 
-  // ✅ Fetch images on load
+  const [category, setCategory] = useState("");
+  const [type, setType] = useState("");
+
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const res = await fetch("http://localhost:8000/images");
         const data = await res.json();
-        console.log("Fetched images:", data);
         setGalleryImages(data);
       } catch (err) {
         console.error("Error fetching images:", err);
@@ -24,15 +27,26 @@ export default function ImageFlow() {
     fetchImages();
   }, []);
 
-  // ✅ Handle upload
   const handleFileUpload = async (e) => {
     const files = Array.from(e.target.files);
+    if (!category || !type) {
+      toast.error("Please select both Category and Type first");
+      return;
+    }
+
     for (const file of files) {
-      const newFile = { id: Date.now() + Math.random(), name: file.name, progress: 0 };
+      const newFile = {
+        id: Date.now() + Math.random(),
+        name: file.name,
+        progress: 0,
+      };
+
       setUploadedFiles((prev) => [...prev, newFile]);
 
       const formData = new FormData();
       formData.append("image", file);
+      formData.append("category", category);
+      formData.append("type", type);
 
       try {
         const response = await fetch("http://localhost:8000/upload", {
@@ -40,26 +54,33 @@ export default function ImageFlow() {
           body: formData,
         });
 
-        const data = await response.json(); // { url, public_id }
-        if (data.url && data.public_id) {
-          setGalleryImages((prev) => [{ url: data.url, public_id: data.public_id }, ...prev]);
+        const data = await response.json();
+
+        if (data.url) {
+          setGalleryImages((prev) => [
+            { url: data.url, public_id: data.public_id, category, type },
+            ...prev,
+          ]);
+          toast.success(`${file.name} uploaded successfully`);
         }
 
         setUploadedFiles((prev) =>
-          prev.map((f) => (f.id === newFile.id ? { ...f, progress: 100 } : f))
+          prev.map((f) => (f.id === newFile.id ? { ...f, progress: 100 } : f)),
         );
 
         setTimeout(() => {
           setUploadedFiles((prev) => prev.filter((f) => f.id !== newFile.id));
-        }, 600);
+        }, 1000);
       } catch (err) {
-        console.error("Upload failed:", err);
+        toast.error("Upload failed");
+        console.error(err);
       }
     }
   };
 
-  // ✅ Handle delete
   const handleDelete = async (file) => {
+    if (!window.confirm("Are you sure you want to delete this image?")) return;
+
     try {
       const res = await fetch("http://localhost:8000/deleteImage", {
         method: "POST",
@@ -70,280 +91,177 @@ export default function ImageFlow() {
       const data = await res.json();
       if (data.success) {
         setGalleryImages((prev) =>
-          prev.filter((img) => img.public_id !== file.public_id)
+          prev.filter((img) => img.public_id !== file.public_id),
         );
+        toast.success("Image deleted");
       }
     } catch (error) {
-      console.error("Error deleting image:", error);
+      toast.error("Delete failed");
     }
   };
 
   return (
-    <div className="imageflow">
-      <style>{`
-        /* Upload Styles */
-        .upload-list {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          margin-bottom: 24px;
-        }
-        .upload-item {
-          display: flex;
-          align-items: center;
-          background: #f9fafb;
-          border: 1px solid #e5e7eb;
-          border-radius: 8px;
-          padding: 12px 16px;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-          transition: transform 0.2s ease;
-        }
-        .upload-item:hover { transform: scale(1.01); }
-        .icon-box {
-          background: #eff6ff;
-          border-radius: 50%;
-          width: 36px;
-          height: 36px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-right: 12px;
-        }
-        .icon-box svg { color: #2563eb; }
-        .details { flex: 1; }
-        .details p {
-          font-size: 14px;
-          font-weight: 500;
-          color: #111827;
-          margin-bottom: 6px;
-        }
-        .progress-bar {
-          background: #e5e7eb;
-          height: 6px;
-          border-radius: 4px;
-          overflow: hidden;
-          width: 100%;
-        }
-        .progress-bar .fill {
-          background: linear-gradient(90deg, #2563eb, #60a5fa);
-          height: 100%;
-          border-radius: 4px;
-          transition: width 0.3s ease;
-        }
+    <div className={styles.container}>
+      {/* Admin Panel */}
+      {admin && (
+        <div className={styles.adminPanel}>
+          <h2 style={{ marginBottom: "1rem", color: "#003366" }}>
+            Admin Gallery Manager
+          </h2>
+          <div className={styles.selectorGroup}>
+            <select
+              className={styles.selectInput}
+              value={category}
+              onChange={(e) => {
+                setCategory(e.target.value);
+                setType("");
+              }}
+            >
+              <option value="">Select Category</option>
+              <option value="sports">Sports</option>
+              <option value="events">Events</option>
+            </select>
 
-        /* Upload box */
-        .upload-header h1 {
-          font-size: 24px;
-          font-weight: bold;
-          color: #111827;
-          margin-bottom: 4px;
-        }
-        .upload-header p {
-          font-size: 14px;
-          color: #6b7280;
-        }
-        .upload-box {
-          background: #fff;
-          border: 2px dashed #d1d5db;
-          border-radius: 12px;
-          text-align: center;
-          padding: 48px;
-          margin: 24px 0;
-          transition: border-color 0.3s;
-        }
-        .upload-box:hover { border-color: #3b82f6; }
-        .upload-box .icon {
-          width: 48px;
-          height: 48px;
-          background: #eff6ff;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 12px;
-        }
-        .upload-box .icon svg { width: 24px; height: 24px; color: #2563eb; }
-        .upload-btn {
-          display: inline-block;
-          background: #2563eb;
-          color: #fff;
-          padding: 8px 16px;
-          border-radius: 8px;
-          cursor: pointer;
-          font-weight: 500;
-          margin-top: 8px;
-          transition: background 0.3s;
-        }
-        .upload-btn:hover { background: #1d4ed8; }
-
-        /* Gallery Grid */
-        .gallery-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-          gap: 16px;
-        }
-        .gallery-item {
-          position: relative;
-          border-radius: 12px;
-          overflow: hidden;
-          background: #e5e7eb;
-          aspect-ratio: 1 / 1;
-          cursor: pointer;
-          transition: transform 0.2s ease;
-        }
-        .gallery-item:hover { transform: scale(1.02); }
-        .gallery-item img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        .gallery-item button {
-          position: absolute;
-          top: 8px;
-          right: 8px;
-          background: #ef4444;
-          color: white;
-          border: none;
-          border-radius: 50%;
-          padding: 4px;
-          cursor: pointer;
-          opacity: 0;
-          transition: opacity 0.2s;
-        }
-        .gallery-item:hover button { opacity: 1; }
-
-        /* === Zoom Modal === */
-        .zoom-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.85);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 1000;
-          animation: fadeIn 0.2s ease;
-        }
-        .zoom-box {
-          position: relative;
-          max-width: 90vw;
-          max-height: 90vh;
-          animation: scaleIn 0.3s ease;
-        }
-        .zoom-box img {
-          width: 100%;
-          height: auto;
-          border-radius: 12px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-          transition: transform 0.3s ease;
-        }
-        .close-btn {
-          position: absolute;
-          top: 12px;
-          right: 12px;
-          background: rgba(239, 68, 68, 0.9);
-          color: white;
-          border: none;
-          border-radius: 50%;
-          width: 36px;
-          height: 36px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-        }
-        .close-btn:hover { background: #dc2626; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes scaleIn { from { transform: scale(0.9); } to { transform: scale(1); } }
-      `}</style>
-
-      <div className="container">
-        {admin && (
-          <div>
-            <div className="upload-header">
-              <h1>Upload Your Images</h1>
-              <p>Supports: JPG, PNG, GIF up to 10MB</p>
-            </div>
-
-            <div className="upload-box">
-              <div className="icon">
-                <Upload />
-              </div>
-              <p>Drag & drop files here</p>
-              <p>or click below</p>
-              <label>
-                <input
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={handleFileUpload}
-                  style={{ display: "none" }}
-                />
-                <span className="upload-btn">Browse Files</span>
-              </label>
-            </div>
+            {category && (
+              <select
+                className={styles.selectInput}
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
+                <option value="">
+                  Select {category === "sports" ? "Sport" : "Event"}
+                </option>
+                {category === "sports" ? (
+                  <>
+                    <option value="cricket">Cricket</option>
+                    <option value="football">Football</option>
+                    <option value="hockey">Hockey</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="holi">Holi</option>
+                    <option value="diwali">Diwali</option>
+                    <option value="annual-function">Annual Function</option>
+                  </>
+                )}
+              </select>
+            )}
           </div>
-        )}
 
-        {uploadedFiles.length > 0 && (
-          <div className="upload-list">
+          <label className={styles.uploadLabel}>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleFileUpload}
+              style={{ display: "none" }}
+            />
+            <div className={styles.uploadBox}>
+              <Upload className={styles.uploadIcon} />
+              <p>
+                <strong>Click to upload</strong> or drag and drop
+              </p>
+              <span style={{ fontSize: "0.8rem", color: "#666" }}>
+                PNG, JPG or WebP up to 10MB
+              </span>
+            </div>
+          </label>
+
+          {/* Progress Section */}
+          <div className={styles.progressList}>
             {uploadedFiles.map((file) => (
-              <div key={file.id} className="upload-item">
-                <div className="icon-box">
-                  <Upload />
+              <div key={file.id} style={{ marginBottom: "10px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontSize: "0.85rem",
+                  }}
+                >
+                  <span>{file.name}</span>
+                  <span>{file.progress}%</span>
                 </div>
-                <div className="details">
-                  <p>{file.name}</p>
-                  <div className="progress-bar">
-                    <div
-                      className="fill"
-                      style={{ width: `${file.progress}%` }}
-                    ></div>
-                  </div>
+                <div className={styles.progressItem}>
+                  <div
+                    className={styles.progressBar}
+                    style={{ width: `${file.progress}%` }}
+                  />
                 </div>
               </div>
             ))}
           </div>
-        )}
-
-        {/* Gallery */}
-        <div className="gallery-header">
-          <h2>Your Gallery</h2>
         </div>
+      )}
 
-        <div className="gallery-grid">
-          {galleryImages.map((img, idx) => (
+      {/* Gallery Section */}
+      <h3 style={{ borderBottom: "2px solid #eee", paddingBottom: "10px" }}>
+        Recent Gallery
+      </h3>
+      {/* Gallery Grid */}
+      <div className={styles.galleryGrid}>
+        {galleryImages.map((img, idx) => (
+          <div key={img.public_id || idx} className={styles.galleryItem}>
+            {/* Top Image Part */}
             <div
-              key={idx}
-              className="gallery-item"
-              onClick={() => setZoomedImage(img.url)} // 👈 zoom on click
+              className={styles.imageContainer}
+              onClick={() => setZoomedImage(img.url)}
             >
-              <img src={img.url} alt={`Gallery ${idx + 1}`} />
+              <img src={img.url} alt={img.type} loading="lazy" />
+            </div>
+
+            {/* Bottom Info Part */}
+            <div className={styles.cardFooter}>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+              >
+                <span className={styles.tagBadge}>{img.type || "General"}</span>
+                <span
+                  style={{
+                    fontSize: "0.7rem",
+                    color: "#94a3b8",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {img.category}
+                </span>
+              </div>
+
               {admin && (
                 <button
+                  className={styles.deleteIconBtn}
+                  title="Delete Image"
                   onClick={(e) => {
-                    e.stopPropagation(); // prevent zoom when deleting
+                    e.stopPropagation();
                     handleDelete(img);
                   }}
                 >
-                  <X size={16} />
+                  <Trash2 size={18} />
                 </button>
               )}
             </div>
-          ))}
-        </div>
-
-        {/* Zoom Modal */}
-        {zoomedImage && (
-          <div className="zoom-overlay" onClick={() => setZoomedImage(null)}>
-            <div className="zoom-box" onClick={(e) => e.stopPropagation()}>
-              <img src={zoomedImage} alt="Zoomed" />
-              <button className="close-btn" onClick={() => setZoomedImage(null)}>
-                <X size={20} />
-              </button>
-            </div>
           </div>
-        )}
+        ))}
       </div>
+
+      {/* Lightbox Overlay */}
+      {zoomedImage && (
+        <div className={styles.lightbox} onClick={() => setZoomedImage(null)}>
+          <button
+            className={styles.closeBtn}
+            style={{
+              position: "absolute",
+              top: 30,
+              right: 30,
+              color: "white",
+              background: "none",
+              border: "none",
+            }}
+          >
+            <X size={40} />
+          </button>
+          <img src={zoomedImage} className={styles.zoomedImg} alt="Enlarged" />
+        </div>
+      )}
     </div>
   );
 }
