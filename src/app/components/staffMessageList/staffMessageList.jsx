@@ -3,8 +3,7 @@ import Table from "react-bootstrap/Table";
 import styles from "./staffMessageList.module.css";
 import { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
-import { getStaffMessagesById } from "@/app/services/message/messageService";
-
+ 
 export default function StaffMessageList({ staff }) {
   const [messageList, setMessageList] = useState([]);
 
@@ -16,8 +15,8 @@ export default function StaffMessageList({ staff }) {
   }, [staff]);
 
   async function getStaffMessages({ userName }) {
-    const result = await getStaffMessagesById({ userName });
-    setMessageList(result || []);
+    //const result = await getStaffMessagesById({ userName });
+    setMessageList( []);
   }
 
   return (

@@ -1,19 +1,19 @@
 import styles from "./staffAttendanceList.module.css";
 import { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
-import { getStaffAttendanceById } from "@/app/services/attendance/attendance";
+import { getStaffAttendanceById } from "@/app/services/staff/staffService"; 
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import MMSCalender from "../MMSCalender/MMSCalender";
 
 export default function StaffAttendanceList({ staff }) {
   const [attendanceList, setAttendanceList] = useState([]);
 
-  useEffect(() => {
-    if (staff?.adminInfo?.userName) {
-      fetchStaffAttendance({ userName: staff.adminInfo.userName });
-    }
-    // eslint-disable-next-line
-  }, [staff]);
+  // useEffect(() => {
+  //   if (staff?.adminInfo?.userName) {
+  //     fetchStaffAttendance({ userName: staff.adminInfo.userName });
+  //   }
+  //   // eslint-disable-next-line
+  // }, [staff]);
 
   async function fetchStaffAttendance({ userName }) {
     const result = await getStaffAttendanceById({ userName });
