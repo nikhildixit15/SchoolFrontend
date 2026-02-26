@@ -1,6 +1,7 @@
 "use client";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const PERIODS = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export default function TeacherDayWiseTable({ data }) {
@@ -63,6 +64,8 @@ export default function TeacherDayWiseTable({ data }) {
       })}
     </>
 =======
+=======
+>>>>>>> develop
 import { useState } from "react";
 import style from "./page.module.css";
 
@@ -138,6 +141,9 @@ export default function TeacherWiseTimeTable({ tableData }) {
           )
       )}
     </div>
+<<<<<<< HEAD
 >>>>>>> Nikhil/timeTable
+=======
+>>>>>>> develop
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import TeacherDayWiseTable from "./teacherWiseTimeTable";
@@ -9,12 +10,17 @@ import { getTeacherWiseTimeTable } from "@/app/services/timeTable/timeTableServi
 import { useState, useMemo } from "react";
 import { Search } from "lucide-react";
 >>>>>>> Nikhil/timeTable
+=======
+import { useState, useMemo } from "react";
+import { Search } from "lucide-react";
+>>>>>>> develop
 import Select from "react-select";
 import { useSelector } from "react-redux";
 import style from "./page.module.css";
 import { getTeacherWiseTimeTable } from "@/app/services/timeTable/timeTableService";
 import TeacherWiseTimeTable from "./teacherWiseTimeTable";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 export default function TeacherWise() {
   const [tableData, setTableData] = useState([]);
@@ -66,6 +72,8 @@ async function getTableData(teacherId) {
       <TeacherDayWiseTable data={tableData?.data || []} />
     </main>
 =======
+=======
+>>>>>>> develop
 export default function TeacherSchedule() {
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [timetable, setTimetable] = useState([]);
@@ -140,6 +148,9 @@ export default function TeacherSchedule() {
         )}
       </div>
     </div>
+<<<<<<< HEAD
 >>>>>>> Nikhil/timeTable
+=======
+>>>>>>> develop
   );
 }

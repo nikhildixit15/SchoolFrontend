@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { getClassOptionList, getOptionList } from "@/app/utils/optionListUtils";
 import { daysList, periodNumber } from "@/app/utils/constants";
 import { addPeriodInTimeTable } from "@/app/services/timeTable/timeTableService";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 export default function AssignedPeriods() {
   const [selectedClass, setSelectedClass] = useState(null);
@@ -25,61 +25,27 @@ export default function AssignedPeriods() {
   const [teacherOptionList, setTeacherOptionList] = useState([]);
   const [subjectOptionList, setSubjectOptionList] = useState([]);
 
-  /* ---------- Options Setup ---------- */
-
+  // Populate class, teacher, subject options from redux
   useEffect(() => {
     setClassOptionList(getClassOptionList(classes));
     setTeacherOptionList(getOptionList(teacherList));
-  }, [classes, teacherList]);
+    setSubjectOptionList(getOptionList(subjectList));
+  }, [classes, teacherList, subjectList]);
 
+  // When class changes, update section options
   useEffect(() => {
-    if (!selectedClass?.sections) {
+    if (selectedClass && selectedClass.sections) {
+      const list = selectedClass.sections.map((item) => ({
+        value: item.name,
+        label: item.name,
+        id: item._id,
+      }));
+      setSectionOptionList(list);
+    } else {
       setSectionOptionList([]);
-      setSelectedSection(null);
-      return;
     }
-
-    const sections = selectedClass.sections.map((sec) => ({
-      value: sec.name,
-      label: sec.name,
-      id: sec._id,
-    }));
-
-    setSectionOptionList(sections);
-    setSelectedSection(null);
-  }, [selectedClass]);
-
-  useEffect(() => {
-    if (!selectedClass || !selectedSection) {
-      setSubjectOptionList([]);
-      setSelectedSubject(null);
-      return;
-    }
-
-    const classData = subjectList.find(
-      (item) => item.classId === selectedClass.id
-    );
-
-    const sectionData = classData?.sections.find(
-      (sec) => sec.sectionId === selectedSection.id
-    );
-
-    if (!sectionData?.subjects) {
-      setSubjectOptionList([]);
-      return;
-    }
-
-    const subjects = sectionData.subjects.map((sub) => ({
-      value: sub._id,
-      label: sub.name,
-      id: sub._id,
-    }));
-
-    setSubjectOptionList(subjects);
-    setSelectedSubject(null);
-  }, [selectedClass, selectedSection, subjectList]);
-
-  /* ---------- Submit ---------- */
+    console.log("###periodOptionList", selectedSection);
+  }, [selectedClass, selectedSection]);
 
   function handleAddPeriod() {
     if (
@@ -93,10 +59,9 @@ export default function AssignedPeriods() {
       toast.error("Please fill all fields.");
       return;
     }
-
     const payload = {
       classId: selectedClass.id,
-      sectionId: selectedSection.id,
+      sectionId: selectedSection.id, // 👈 section ki actual _id bhejna hoga
       day: selectedDay.value,
       schedule: [
         {
@@ -106,54 +71,77 @@ export default function AssignedPeriods() {
         },
       ],
     };
-<<<<<<< HEAD
-
-=======
     console.log("Payload for adding period:", payload);
-    toast.success("Assign Period Successfully")
->>>>>>> Nikhil/timeTable
+    toast.success("Assign Period Successfully");
     addPeriodInTimeTable(payload);
   }
-
-  /* ---------- UI ---------- */
 
   return (
     <div className={styles.mainContainer}>
       <h2>Assign Periods</h2>
-
-      <SelectBlock label="Select Class" value={selectedClass} onChange={setSelectedClass} options={classOptionList} />
-      <SelectBlock label="Select Section" value={selectedSection} onChange={setSelectedSection} options={sectionOptionList} />
-      <SelectBlock label="Select Teacher" value={selectedTeacher} onChange={setSelectedTeacher} options={teacherOptionList} />
-      <SelectBlock label="Select Subject" value={selectedSubject} onChange={setSelectedSubject} options={subjectOptionList} />
-
-      <SelectBlock
-        label="Select Day"
-        value={selectedDay}
-        onChange={setSelectedDay}
-        options={daysList.map((d) => ({ value: d.dayName, label: d.dayName }))}
-      />
-
-      <SelectBlock
-        label="Select Period Number"
-        value={selectedPeriod}
-        onChange={setSelectedPeriod}
-        options={periodNumber}
-      />
-
+      <div className={styles.formRow}>
+        <label>Select Class</label>
+        <Select
+          value={selectedClass}
+          onChange={setSelectedClass}
+          options={classOptionList}
+          placeholder="Select Class"
+        />
+      </div>
+      <div className={styles.formRow}>
+        <label>Select Section</label>
+        <Select
+          value={selectedSection}
+          onChange={setSelectedSection}
+          options={sectionOptionList}
+          placeholder="Select Section"
+        />
+      </div>
+      <div className={styles.formRow}>
+        <label>Select Teacher</label>
+        <Select
+          value={selectedTeacher}
+          onChange={setSelectedTeacher}
+          options={teacherOptionList}
+          placeholder="Select Teacher"
+        />
+      </div>
+      <div className={styles.formRow}>
+        <label>Select Subject</label>
+        <Select
+          value={selectedSubject}
+          onChange={setSelectedSubject}
+          options={subjectOptionList}
+          placeholder="Select Subject"
+        />
+      </div>
+      <div className={styles.formRow}>
+        <label>Select Day</label>
+        <Select
+          value={selectedDay}
+          onChange={setSelectedDay}
+          options={daysList.map((day) => ({
+            value: day.dayName,
+            label: day.dayName,
+          }))}
+          placeholder="Select Day"
+        />
+      </div>
+      <div className={styles.formRow}>
+        <label>Select Period Number</label>
+        <Select
+          value={selectedPeriod}
+          onChange={setSelectedPeriod}
+          options={periodNumber.map((num) => ({
+            value: num.value,
+            label: num.label,
+          }))}
+          placeholder="Select Period Number"
+        />
+      </div>
       <button className={styles.saveButton} onClick={handleAddPeriod}>
         Add Period
       </button>
-    </div>
-  );
-}
-
-/* ---------- Reusable Select ---------- */
-
-function SelectBlock({ label, value, onChange, options }) {
-  return (
-    <div className={styles.formRow}>
-      <label>{label}</label>
-      <Select value={value} onChange={onChange} options={options} />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import Select from "react-select";
@@ -52,6 +53,8 @@ export default function TeacherWise() {
       )}
     </main>
 =======
+=======
+>>>>>>> develop
 import React, { useState } from "react";
 import { Search, Calendar } from "lucide-react";
 import Select from "react-select";
@@ -112,6 +115,9 @@ export default function ClassScheduleManager() {
         <DayWiseTimeTable tableData={tableData} />
       )}
     </div>
+<<<<<<< HEAD
 >>>>>>> Nikhil/timeTable
+=======
+>>>>>>> develop
   );
 }
