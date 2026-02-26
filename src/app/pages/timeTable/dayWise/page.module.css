@@ -1,20 +1,95 @@
-.description {
-  font-size: 0.85rem;
-  max-width: var(--max-width);
+.container {
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 22px;
+  color: #1f2937;
+}
+
+/* 👇 FIXED */
+.dropdown {
+  max-width: 260px;
+}
+
+.dropdown label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.dropdown select {
   width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 30px;
+}
+
+ 
+.card th {
+  background: #4f46e5;
+  color: white;
+  padding: 12px;
+  border: 1px solid #4338ca;
+}
+
+/* 👇 FIXED */
+.card input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+}
+
+.card input:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+
+.tableFixed {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.tableFixed th,
+.tableFixed td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 6px;
 }
 
 .rowItem {
+  min-height: 42px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.2;
 }
 
-.dropdownContainer {
-  flex-direction: row;
-  display: flex;
-  margin-left: 8px;
-  margin-right: 8px;
-  align-items: center;
-}
+ 
