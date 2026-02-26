@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "https://schoolerp-backend-nwmz.onrender.com";
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
   axios.defaults.headers.post["Content-Type"] =
