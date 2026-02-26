@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export', // this enables next export
   webpack: (config, { isServer }) => {
     // Add polyfill for URL.canParse for older Node.js versions
     if (!isServer) {
