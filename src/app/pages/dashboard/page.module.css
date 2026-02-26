@@ -1,6 +1,182 @@
-.description {
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  font-family: var(--font-mono);
+/* page.module.css */
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Hero Section */
+.heroGradient {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  padding: 0 1.5rem;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.heroTitle span {
+  color: #3b82f6;
+}
+
+.heroSubtitle {
+  color: #d1d5db;
+  font-size: 1.125rem;
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+}
+
+.heroButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media(min-width: 640px) {
+  .heroButtons {
+    flex-direction: row;
+  }
+}
+
+.buttonPrimary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.buttonPrimary:hover {
+  background-color: #1e40af;
+}
+
+.buttonSecondary {
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: bold;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+}
+
+.buttonSecondary:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* Stats Strip */
+.statsSection {
+  padding: 3rem 0;
+  background-color: #1e293b;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  text-align: center;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media(min-width:768px){
+  .statsGrid {
+    grid-template-columns: repeat(4,1fr);
+  }
+}
+
+.statItem h3 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.statItem p {
+  color: #9ca3af;
+}
+
+/* Academic Programs */
+.programsSection {
+  padding: 6rem 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #1e293b;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  background-color: #3b82f6;
+  border-radius: 2px;
+}
+
+.programsGrid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media(min-width:768px){
+  .programsGrid {
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+
+.programCard {
+  padding: 2rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.programCard:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+}
+
+.cardIcon {
+  width: 4rem;
+  height: 4rem;
+  background-color: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.programCard:hover .cardIcon {
+  background-color: #2563eb;
+  color: white;
 }
